@@ -1,0 +1,12 @@
+dependencies:
+- name: concourse
+  repository: file://../../charts/stable/concourse
+  version: 3.0.1
+- name: prometheus
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 7.4.5
+- name: grafana
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 1.18.0
+digest: sha256:d0f3d768bf414336d8fe5ab95827d5048394e4c4c8be08238cb5e044469ceacf
+generated: 2018-11-25T18:25:34.944963-05:00

@@ -1,0 +1,37 @@
+# Default values for shuttle.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+concourse:
+  worker:
+    replicas: 1
+  concourse:
+    web:
+      kubernetes:
+        keepNamespaces: false
+      prometheus:
+        enabled: true
+    worker:
+      baggageclaim:
+        driver: overlay
+
+prometheus:
+  enabled: true
+  nodeExporter:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  pushgateway:
+    enabled: false
+  alertmanager:
+    enabled: false
+  server:
+    persistentVolume:
+      enabled: true
+
+grafana:
+  enabled: true
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana/datasource
