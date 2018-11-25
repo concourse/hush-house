@@ -1,12 +1,11 @@
+CONCOURSE HUSH-HOUSE
+
+> A hush house is an enclosed, noise-suppressed facility used for testing aircraft systems,
+> including propulsion, mechanics, electronics, pneumatics, and others.
+
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg/512px-EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg)
 
 ```
-CONCOURSE HUSH-HOUSE
-
-        > A hush house is an enclosed, noise-suppressed facility used for testing aircraft systems,
-        > including propulsion, mechanics, electronics, pneumatics, and others.
-
-
 WHY
 
         - To have a Concourse deployment on top of k8s where the team can experiment and load-test
