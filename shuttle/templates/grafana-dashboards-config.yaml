@@ -1,8 +1,13 @@
+{{- $root := . }}
+{{- range $path, $bytes := .Files.Glob "dashboards/concourse/*.json" }}
+{{- $name := (base $path | replace ".json" "") }}
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: concourse-dashboard
+  name: concourse-dashboard-{{ $name }}
   labels:
     "grafana/dashboard": "1"
 data:
-  {{- (.Files.Glob "dashboards/concourse/overall.json").AsConfig | nindent 2 }}
+  {{- ($root.Files.Glob $path).AsConfig | nindent 2 }}
+{{- end }}

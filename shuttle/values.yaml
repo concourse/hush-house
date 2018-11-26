@@ -5,6 +5,9 @@
 concourse:
   worker:
     replicas: 1
+  postgresql:
+    metrics:
+      enabled: true
   concourse:
     web:
       kubernetes:
