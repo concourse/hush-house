@@ -35,3 +35,6 @@ grafana:
     datasources:
       enabled: true
       label: grafana/datasource
+    dashboards:
+      enabled: true
+      label: grafana/dashboard
