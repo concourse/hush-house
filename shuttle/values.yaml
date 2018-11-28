@@ -3,6 +3,9 @@
 # Declare variables to be passed into your templates.
 
 concourse:
+  web:
+    service:
+      type: LoadBalancer
   worker:
     replicas: 1
   postgresql:
@@ -10,6 +13,8 @@ concourse:
       enabled: true
   concourse:
     web:
+      externalUrl: http://hush-house.concourse-ci.org
+      bindPort: 80
       kubernetes:
         keepNamespaces: false
       prometheus:

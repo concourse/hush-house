@@ -1,1 +1,3 @@
 *.tgz
+.terraform
+gcp.json

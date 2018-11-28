@@ -1,9 +1,15 @@
 RELEASE_NAME := prod
-NAMESPACE := hush-house
-CHART_DIR := ./shuttle
+NAMESPACE    := hush-house
+CHART_DIR    := ./shuttle
 
 all:
 	@echo "Usage: install | upgrade | delete"
+
+
+terraform:
+	cd ./terraform && \
+		terraform init && \
+		terraform apply
 
 
 setup:
@@ -11,18 +17,22 @@ setup:
 	helm dependency update $(CHART_DIR)
 
 
+LOADBALANCER_IP=$(shell cd ./terraform && terraform output instance_ip)
 install: setup
 	helm install \
 		--namespace $(NAMESPACE) \
+		--set=concourse.web.service.loadBalancerIP=$(LOADBALANCER_IP) \
 		--debug \
 		--wait \
 		--name $(RELEASE_NAME) \
 		$(CHART_DIR)
 
 
+LOADBALANCER_IP=$(shell cd ./terraform && terraform output instance_ip)
 upgrade: setup
 	helm upgrade \
 		--namespace $(NAMESPACE) \
+		--set=concourse.web.service.loadBalancerIP=$(LOADBALANCER_IP) \
 		--debug \
 		--wait \
 		$(RELEASE_NAME) \
