@@ -7,7 +7,8 @@ concourse:
     service:
       type: LoadBalancer
   worker:
-    replicas: 1
+    replicas: 3
+    hardAntiAffinity: true
   postgresql:
     metrics:
       enabled: true
