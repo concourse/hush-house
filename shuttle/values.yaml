@@ -20,6 +20,12 @@ concourse:
         keepNamespaces: false
       prometheus:
         enabled: true
+      auth:
+        mainTeam:
+          github:
+            team: concourse:Pivotal
+        github:
+          enabled: true
     worker:
       baggageclaim:
         driver: overlay
@@ -40,6 +46,8 @@ prometheus:
 
 grafana:
   enabled: true
+  service:
+    type: LoadBalancer
   sidecar:
     datasources:
       enabled: true

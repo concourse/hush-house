@@ -6,33 +6,40 @@ all:
 	@echo "Usage: install | upgrade | delete"
 
 
-terraform:
-	cd ./terraform && \
-		terraform init && \
-		terraform apply
-
-
 setup:
 	helm init
+	cd ../charts/stable/concourse && helm dependency update .
 	helm dependency update $(CHART_DIR)
 
 
-LOADBALANCER_IP=$(shell cd ./terraform && terraform output instance_ip)
+WEB_LOADBALANCER_IP=$(shell cd ./terraform && terraform output web-address)
+METRICS_LOADBALANCER_IP=$(shell cd ./terraform && terraform output metrics-address)
 install: setup
 	helm install \
 		--namespace $(NAMESPACE) \
-		--set=concourse.web.service.loadBalancerIP=$(LOADBALANCER_IP) \
+		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
+		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
+		--set=concourse.secrets.githubClientId=$(GITHUB_CLIENT_ID) \
+		--set=concourse.secrets.githubClientSecret=$(GITHUB_CLIENT_SECRET) \
+		--name $(RELEASE_NAME) \
 		--debug \
 		--wait \
-		--name $(RELEASE_NAME) \
 		$(CHART_DIR)
 
 
-LOADBALANCER_IP=$(shell cd ./terraform && terraform output instance_ip)
+
+
+
+
+WEB_LOADBALANCER_IP=$(shell cd ./terraform && terraform output web-address)
+METRICS_LOADBALANCER_IP=$(shell cd ./terraform && terraform output metrics-address)
 upgrade: setup
 	helm upgrade \
 		--namespace $(NAMESPACE) \
-		--set=concourse.web.service.loadBalancerIP=$(LOADBALANCER_IP) \
+		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
+		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
+		--set=concourse.secrets.githubClientId=$(GITHUB_CLIENT_ID) \
+		--set=concourse.secrets.githubClientSecret=$(GITHUB_CLIENT_SECRET) \
 		--debug \
 		--wait \
 		$(RELEASE_NAME) \
@@ -43,12 +50,3 @@ delete:
 	helm delete \
 		--purge \
 		$(RELEASE_NAME)
-
-
-sync-grafana-dashboards:
-	grafana-sync \
-		--directory=./shuttle/dashboards/concourse \
-		--username=admin \
-		--password=$(GRAFANA_PASSWORD) \
-		pull
-
