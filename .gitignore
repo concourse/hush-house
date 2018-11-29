@@ -2,3 +2,4 @@
 .terraform
 gcp.json
 .envrc
+.values.yml
