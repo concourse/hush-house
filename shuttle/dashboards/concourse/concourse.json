@@ -15,11 +15,11 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1543192811664,
+  "iteration": 1543499501330,
   "links": [],
   "panels": [
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -27,6 +27,190 @@
         "y": 0
       },
       "id": 17,
+      "panels": [],
+      "repeat": null,
+      "title": "Overall",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 19,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "concourse_scheduling_full_duration_seconds_total",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ pipeline }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Scheduling full duration",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 20,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "concourse_scheduling_loading_duration_seconds_total",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ pipeline }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Loading versions duration",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 9,
       "panels": [
         {
           "aliasColors": {},
@@ -39,9 +223,9 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 1
+            "y": 2
           },
-          "id": 19,
+          "id": 7,
           "legend": {
             "avg": false,
             "current": false,
@@ -51,31 +235,38 @@
             "total": false,
             "values": false
           },
-          "lines": false,
+          "lines": true,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
           "percentage": false,
-          "pointradius": 2,
-          "points": true,
+          "pointradius": 5,
+          "points": false,
           "renderer": "flot",
+          "scopedVars": {
+            "atc": {
+              "selected": false,
+              "text": "prod-web-57c79d9676-cd575",
+              "value": "prod-web-57c79d9676-cd575"
+            }
+          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_scheduling_full_duration_seconds_total",
+              "expr": "concourse_db_connections{kubernetes_pod_name=~\"$atc\"}",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{ pipeline }}",
+              "legendFormat": "{{ dbname }}",
               "refId": "A"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Scheduling full duration",
+          "title": "DB Connections ($atc)",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -91,12 +282,11 @@
           },
           "yaxes": [
             {
-              "decimals": 0,
-              "format": "s",
+              "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": "0",
+              "min": null,
               "show": true
             },
             {
@@ -124,43 +314,52 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 1
+            "y": 2
           },
-          "id": 20,
+          "id": 11,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": false,
             "max": false,
             "min": false,
-            "show": true,
+            "show": false,
             "total": false,
             "values": false
           },
-          "lines": false,
+          "lines": true,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
           "percentage": false,
-          "pointradius": 2,
-          "points": true,
+          "pointradius": 5,
+          "points": false,
           "renderer": "flot",
+          "scopedVars": {
+            "atc": {
+              "selected": false,
+              "text": "prod-web-57c79d9676-cd575",
+              "value": "prod-web-57c79d9676-cd575"
+            }
+          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_scheduling_loading_duration_seconds_total",
+              "expr": "rate(container_cpu_usage_seconds_total{pod_name=~\"$atc\",container_name!=\"POD\"}[2m])",
               "format": "time_series",
+              "instant": false,
               "intervalFactor": 1,
-              "legendFormat": "{{ pipeline }}",
+              "legendFormat": "{{ pod_name }}",
               "refId": "A"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Loading versions duration",
+          "title": "CPU Usage",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -176,9 +375,8 @@
           },
           "yaxes": [
             {
-              "decimals": 0,
-              "format": "s",
-              "label": null,
+              "format": "percentunit",
+              "label": "cores",
               "logBase": 1,
               "max": null,
               "min": "0",
@@ -199,214 +397,16 @@
           }
         }
       ],
-      "repeat": null,
-      "title": "Overall",
-      "type": "row"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 9,
-      "panels": [],
       "repeat": "atc",
       "scopedVars": {
         "atc": {
           "selected": false,
-          "text": "prod-web-d7b4c6b69-jph5s",
-          "value": "prod-web-d7b4c6b69-jph5s"
+          "text": "prod-web-57c79d9676-cd575",
+          "value": "prod-web-57c79d9676-cd575"
         }
       },
       "title": "Web",
       "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 2
-      },
-      "id": 7,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "scopedVars": {
-        "atc": {
-          "selected": false,
-          "text": "prod-web-d7b4c6b69-jph5s",
-          "value": "prod-web-d7b4c6b69-jph5s"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "concourse_db_connections{kubernetes_pod_name=~\"$atc\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{ dbname }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "DB Connections ($atc)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 2
-      },
-      "id": 11,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "scopedVars": {
-        "atc": {
-          "selected": false,
-          "text": "prod-web-d7b4c6b69-jph5s",
-          "value": "prod-web-d7b4c6b69-jph5s"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "rate(container_cpu_usage_seconds_total{pod_name=~\"$atc\",container_name!=\"POD\"}[2m])",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "legendFormat": "{{ pod_name }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Usage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "cores",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "collapsed": true,
@@ -424,7 +424,7 @@
             "h": 4,
             "w": 24,
             "x": 0,
-            "y": 12
+            "y": 21
           },
           "id": 15,
           "links": [],
@@ -444,7 +444,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 16
+            "y": 25
           },
           "id": 13,
           "legend": {
@@ -483,7 +483,7 @@
           "title": "Memory usage",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -529,7 +529,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 16
+            "y": 25
           },
           "id": 3,
           "legend": {
@@ -568,7 +568,7 @@
           "title": "Volumes",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -614,7 +614,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 25
+            "y": 34
           },
           "id": 2,
           "legend": {
@@ -653,7 +653,7 @@
           "title": "Containers",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -715,20 +715,9 @@
         "label": "ATC",
         "multi": true,
         "name": "atc",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "prod-web-d7b4c6b69-jph5s",
-            "value": "prod-web-d7b4c6b69-jph5s"
-          }
-        ],
+        "options": [],
         "query": "label_values(concourse_db_connections, kubernetes_pod_name)",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
@@ -742,7 +731,9 @@
         "allValue": null,
         "current": {
           "text": "All",
-          "value": "$__all"
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "prometheus",
         "hide": 0,
@@ -750,20 +741,9 @@
         "label": "Worker",
         "multi": true,
         "name": "worker",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "prod-worker-0",
-            "value": "prod-worker-0"
-          }
-        ],
+        "options": [],
         "query": "label_values(concourse_workers_containers, worker)",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
@@ -776,7 +756,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -805,7 +785,7 @@
     ]
   },
   "timezone": "",
-  "title": "overall",
+  "title": "Concourse",
   "uid": "qxMpiDYiz",
   "version": 1
 }
