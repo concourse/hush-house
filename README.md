@@ -59,27 +59,7 @@ K8S CHEAT SHEET
                 kubectl describe nodes --namespace=$NS
 
 
-K8S ARCHITECTURE
-
-        kube-proxy
-                - Routes network traffic to load-balanced *services* in the k8s cluster.
-                - Must be present on every node in the cluster (thus, deployed as daemon
-                  set).
-
-
-        kube-dns
-                - Provides naming and discovery for the services defined in the cluster.
-                - The kubelet passes DNS to each container with the --cluster-dns=<dns-service-ip> flag.
-
-
-
-
 TODO
-	METRICS:
-		- we should probably make use of `kubernetes-pod` as a way
-		  of scraping metrics, instead of `k8s-service-endpoint` in
-		  our helm chart.
-
 	GENERAL:
 		- how to give all resources of a node to a pod?
 			nodeSelector?
