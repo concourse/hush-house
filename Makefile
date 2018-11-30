@@ -2,6 +2,7 @@ RELEASE_NAME := prod
 NAMESPACE    := hush-house
 CHART_DIR    := ./shuttle
 
+
 all:
 	@echo "Usage: upgrade | delete"
 
@@ -15,31 +16,13 @@ setup:
 WEB_LOADBALANCER_IP=$(shell cd ./terraform && terraform output web-address)
 METRICS_LOADBALANCER_IP=$(shell cd ./terraform && terraform output metrics-address)
 upgrade: setup
-	helm upgrade \
-		--namespace $(NAMESPACE) \
-		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
-		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
-		--set=concourse.secrets.githubClientId=$(GITHUB_CLIENT_ID) \
-		--set=concourse.secrets.githubClientSecret=$(GITHUB_CLIENT_SECRET) \
-		--recreate-pods \
+	helm upgrade $(HELM_FLAGS) \
 		--install \
-		--debug \
-		--wait \
-		$(RELEASE_NAME) \
-		$(CHART_DIR)
-
-
-WEB_LOADBALANCER_IP=$(shell cd ./terraform && terraform output web-address)
-METRICS_LOADBALANCER_IP=$(shell cd ./terraform && terraform output metrics-address)
-plan: setup
-	helm upgrade \
-		--namespace $(NAMESPACE) \
+		--namespace=$(NAMESPACE) \
+		--recreate-pods \
 		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
 		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
-		--set=concourse.secrets.githubClientId=$(GITHUB_CLIENT_ID) \
-		--set=concourse.secrets.githubClientSecret=$(GITHUB_CLIENT_SECRET) \
-		--debug \
-		--dry-run \
+		--values=./.values.yml \
 		--wait \
 		$(RELEASE_NAME) \
 		$(CHART_DIR)
