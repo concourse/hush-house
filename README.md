@@ -5,90 +5,49 @@
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg/512px-EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg)
 
-```
-WHY
+## k8s cheat-sheet
 
-        - To have a Concourse deployment on top of k8s where the team can experiment and load-test
-        Concourse itself in a controlled manner, without affecting the lives of those who are
-        being the CI pair of the day and/or deploying code through Prod and expecting things to
-        work.
+### Contexts
 
-        - So that people can break things without affecting others
+These are the equivalent of Concourse `target`s, storing auth, API endpoint,
+and namespace information in each of them.
 
-        - So that k8s can become a first class thing in our development cycle
+Get the current context:
 
-        - Exercise more the helm chart
+	kubectl config current-context
 
 
-K8S CHEAT SHEET
-        Contexts
-                These are the equivalent of Concourse `target`s, storing auth, API endpoint,
-                and namespace information in each of them.
+Change something in a context:
 
-                Get the current context
-
-                        kubectl config current-context
-
-                Change something in a context
-
-                        kubectl config set-context $context $something_to_change
-
-                Set the context to use
-
-                        kubectl config use-context $context
-
-        Namespace
-                A virtual segregation between resources in a single cluster.
-
-		The namespace to target is supplied via the `--namespace` flag, or having
-		a default namespace set to the context.
-
-			kubectl config set-context $context --namespace=$namespace
+	kubectl config set-context $context \
+		$something_to_change
 
 
-        Checking server and client version
+Set the context to use:
 
-                kubectl version
-
-                ps.: it's fine to diverge 2 minors.
+	kubectl config use-context $context
 
 
-        Listing worker nodes
+### Namespaces
 
-                kubectl get nodes --namespace=$NS
-                kubectl describe nodes --namespace=$NS
+A virtual segregation between resources in a single cluster.
+
+The namespace to target is supplied via the `--namespace` flag, or having
+a default namespace set to the context:
 
 
-TODO
-	GENERAL:
-		- how to give all resources of a node to a pod?
-			nodeSelector?
-		- what are tolerations?
-		- how to grow the filesystem associated w/ concourse?
-		- make use of SIGUSR1 and SIGUSR2  (https://github.com/concourse/concourse-bosh-release/commit/a3ebf6a292fd8cc79a9ae0dcc7088ae1d5018514)
-		  for worker shutdown?
-		- what does READY and LIVE mean?
-			WEB:
-				- READY:
-					* atc can take simple requests
-						* implicitly verifies if it has working
-						  connections with the DB
-						* implicitly verifies that the process can take
-						  incoming connections.
+	kubectl config set-context $context \
+		--namespace=$namespace
 
-				- LIVE:
-					* the process is up and can take incoming requests
 
-			WORKER:
-				- READY:
-					* the process is up
-					* garden & baggageclaim responds
-					* garden can create a simple container
-					* baggageclaim can create a simple volume
+### Checking the versions
 
-				- LIVE:
-					* the process is up and able to respond to
-					  requests.
-					* garden responds
-					* baggageclaim responds
-```
+	kubectl version
+
+	ps.: it's fine to diverge 2 minors.
+
+
+### Nodes
+
+	kubectl get nodes --namespace=$NS
+	kubectl describe nodes --namespace=$NS
