@@ -2,19 +2,42 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+secrets:
+  # tlsCrt:
+  # tlsKey:
+
 concourse:
-  web:
-    service:
-      type: LoadBalancer
   worker:
     replicas: 3
-    hardAntiAffinity: true
+    resources:
+      requests:
+        cpu: 1000m
+        memory: 2048Mi
+      limits:
+        cpu: 1000m
+        memory: 2048Mi
+  web:
+    replicas: 2
+    resources:
+      requests:
+        cpu: 500m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
   postgresql:
     metrics:
       enabled: true
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 250m
+      limits:
+        memory: 256Mi
+        cpu: 250m
   concourse:
     web:
-      externalUrl: http://hush-house.concourse-ci.org
+      logLevel: debug
       bindPort: 80
       kubernetes:
         keepNamespaces: false
@@ -28,7 +51,8 @@ concourse:
           enabled: true
     worker:
       baggageclaim:
-        driver: overlay
+        logLevel: debug
+        driver: naive
 
 prometheus:
   enabled: true

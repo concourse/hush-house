@@ -12,12 +12,11 @@
       }
     ]
   },
-  "description": "Performance metrics for Postgres",
+  "description": "",
   "editable": true,
   "gnetId": 455,
-  "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1543199583213,
+  "graphTooltip": 1,
+  "iteration": 1543765363322,
   "links": [],
   "panels": [
     {
@@ -35,13 +34,16 @@
       },
       "id": 15,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": false,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -57,11 +59,18 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(pg_stat_database_xact_commit{datname=~\"$db\",}[5m])) + sum(irate(pg_stat_database_xact_rollback{datname=~\"$db\"}[5m]))",
+          "expr": "sum(rate(pg_stat_database_xact_commit{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "commit",
           "refId": "A"
+        },
+        {
+          "expr": "sum(rate(pg_stat_database_xact_rollback{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "rollback",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -70,7 +79,7 @@
       "title": "QPS",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -124,16 +133,18 @@
       "isNew": true,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
+        "avg": false,
         "current": true,
         "max": true,
         "min": true,
-        "show": true,
+        "show": false,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
       "percentage": false,
@@ -146,10 +157,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pg_stat_database_numbackends{datname=~\"$db\"}",
+          "expr": "sum(pg_stat_database_numbackends{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}) by (datname)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{ kubernetes_name }} - {{ datid }}",
+          "legendFormat": "{{ datname }}",
           "refId": "A",
           "step": 240
         }
@@ -157,11 +168,11 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Number of active connections",
+      "title": "Active Connections",
       "tooltip": {
         "msResolution": false,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "cumulative"
       },
       "type": "graph",
@@ -174,11 +185,12 @@
       },
       "yaxes": [
         {
+          "decimals": 0,
           "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -187,7 +199,7 @@
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -215,12 +227,14 @@
       "isNew": true,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
-        "current": false,
+        "avg": false,
+        "current": true,
         "max": true,
         "min": true,
         "rightSide": false,
-        "show": true,
+        "show": false,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -240,7 +254,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(irate(pg_stat_database_tup_fetched{datname=~\"$db\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_tup_fetched{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -294,7 +308,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(irate(pg_stat_database_tup_returned{datname=~\"$db\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_tup_returned{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -348,7 +362,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(irate(pg_stat_database_tup_inserted{datname=~\"$db\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_tup_inserted{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -402,7 +416,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(irate(pg_stat_database_tup_updated{datname=~\"$db\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_tup_updated{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -456,7 +470,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(irate(pg_stat_database_tup_deleted{datname=~\"$db\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_tup_deleted{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -515,7 +529,7 @@
       "tooltip": {
         "msResolution": true,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "cumulative"
       },
       "type": "graph",
@@ -568,16 +582,19 @@
       "id": 3,
       "isNew": true,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": false,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
       "percentage": false,
@@ -592,7 +609,7 @@
         {
           "alias": "conflicts",
           "dsType": "prometheus",
-          "expr": "sum(rate(pg_stat_database_deadlocks{datname=~\"$db\"}[5m]))",
+          "expr": "sum(rate(pg_stat_database_deadlocks{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -644,7 +661,7 @@
         {
           "alias": "deadlocks",
           "dsType": "prometheus",
-          "expr": "sum(rate(pg_stat_database_conflicts{datname=~\"$db\"}[5m]))",
+          "expr": "sum(rate(pg_stat_database_conflicts{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -714,8 +731,9 @@
       },
       "yaxes": [
         {
+          "decimals": 0,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": 0,
@@ -727,7 +745,7 @@
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -755,12 +773,14 @@
       "isNew": true,
       "legend": {
         "alignAsTable": true,
-        "avg": true,
-        "current": false,
+        "avg": false,
+        "current": true,
         "max": true,
         "min": true,
         "rightSide": false,
-        "show": true,
+        "show": false,
+        "sort": "avg",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -780,7 +800,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "container_memory_usage_bytes{container_name!=\"POD\",container_name=\"prod-postgresql\"}",
+          "expr": "container_memory_usage_bytes{container_name=~\"$container\",namespace=~\"$namespace\"} / container_spec_memory_limit_bytes",
           "format": "time_series",
           "groupBy": [
             {
@@ -852,7 +872,102 @@
       },
       "yaxes": [
         {
-          "format": "bytes",
+          "decimals": 1,
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "id": 17,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": false,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(container_cpu_usage_seconds_total{container_name=~\"$container\",namespace=~\"$namespace\",image!=\"\"}[2m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ pod_name }}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Usage",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "percentunit",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -874,30 +989,81 @@
       }
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": ".*",
+        "allValue": "",
         "current": {
+          "tags": [],
           "text": "All",
-          "value": "$__all"
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "prometheus",
         "hide": 0,
         "includeAll": true,
-        "label": "db",
-        "multi": false,
+        "label": "Database",
+        "multi": true,
         "name": "db",
         "options": [],
-        "query": "label_values(pg_stat_database_tup_fetched{instance=~\"$host\",datname!~\"template.*|postgres\"},datname)",
+        "query": "label_values(pg_stat_database_tup_fetched, datname)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "hush-house",
+          "value": "hush-house"
+        },
+        "datasource": "prometheus",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Namespace",
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(pg_exporter_scrapes_total, kubernetes_namespace)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "prod-postgresql",
+          "value": "prod-postgresql"
+        },
+        "datasource": "prometheus",
+        "hide": 0,
+        "includeAll": false,
+        "label": "container",
+        "multi": false,
+        "name": "container",
+        "options": [],
+        "query": "label_values(pg_exporter_scrapes_total, kubernetes_name)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -938,5 +1104,5 @@
   "timezone": "browser",
   "title": "Postgres",
   "uid": "wGgaPlciz",
-  "version": 6
+  "version": 3
 }

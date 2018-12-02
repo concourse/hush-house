@@ -1,25 +1,41 @@
-RELEASE_NAME := prod
-NAMESPACE    := hush-house
-CHART_DIR    := ./shuttle
+RELEASE_NAME ?= prod
+NAMESPACE    ?= hush-house
+CHART_DIR    ?= ./shuttle
+
+WEB_LOADBALANCER_IP     = $(shell cd ./terraform && terraform output web-address)
+METRICS_LOADBALANCER_IP = $(shell cd ./terraform && terraform output metrics-address)
 
 
 all:
-	@echo "Usage: upgrade | delete"
+	@echo "Usage: deps | upgrade | delete"
 
 
-setup:
+depsk:
 	helm init
 	cd ../charts/stable/concourse && helm dependency update .
 	helm dependency update $(CHART_DIR)
 
 
-WEB_LOADBALANCER_IP=$(shell cd ./terraform && terraform output web-address)
-METRICS_LOADBALANCER_IP=$(shell cd ./terraform && terraform output metrics-address)
-upgrade: setup
+template:
+	helm template \
+		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
+		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
+		--values=./.values.yml \
+		$(CHART_DIR)
+
+
+upgrade:
+	helm diff upgrade $(HELM_FLAGS) \
+		--namespace=$(NAMESPACE) \
+		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
+		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
+		--values=./.values.yml \
+		$(RELEASE_NAME) \
+		$(CHART_DIR)
+	@echo -n "Do you want to proceed? " && read ans && [ $$ans == y ]
 	helm upgrade $(HELM_FLAGS) \
 		--install \
 		--namespace=$(NAMESPACE) \
-		--recreate-pods \
 		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
 		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
 		--values=./.values.yml \
