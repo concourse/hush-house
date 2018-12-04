@@ -8,9 +8,10 @@
 
 ## Dependencies
 
-- LastPass CLI (`lpass-cli`)
-- Terraform CLI (`terraform`)
-- Helm (`helm`)
+- [LastPass CLI (`lpass-cli`)](https://github.com/lastpass/lastpass-cli)
+- [Terraform CLI (`terraform`)](https://www.terraform.io/)
+- [Helm (`helm`)](https://helm.sh/)
+- [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
 
 
 ## k8s cheat-sheet
