@@ -1,7 +1,7 @@
 ---
 dependencies:
 - name: concourse
-  version: 3.1.0
+  version: 1337.0.0
   repository: file://../../charts/stable/concourse
 
 - name: prometheus

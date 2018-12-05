@@ -7,10 +7,10 @@ concourse:
     replicas: 3
     resources:
       requests:
-        cpu: 1000m
+        cpu: 500m
         memory: 2048Mi
       limits:
-        cpu: 1000m
+        cpu: 500m
         memory: 2048Mi
   web:
     replicas: 2
@@ -48,7 +48,7 @@ concourse:
     worker:
       baggageclaim:
         logLevel: debug
-        driver: naive
+        driver: overlay
 
 prometheus:
   enabled: true
