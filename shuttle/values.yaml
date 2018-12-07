@@ -4,14 +4,14 @@
 
 concourse:
   worker:
-    replicas: 3
+    replicas: 4
     resources:
       requests:
         cpu: 500m
-        memory: 2048Mi
+        memory: 4096Mi
       limits:
         cpu: 500m
-        memory: 2048Mi
+        memory: 4096Mi
   web:
     replicas: 2
     resources:
@@ -46,6 +46,7 @@ concourse:
         github:
           enabled: true
     worker:
+      rebalanceInterval: 10m
       baggageclaim:
         logLevel: debug
         driver: overlay
