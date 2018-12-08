@@ -26,11 +26,11 @@ concourse:
       enabled: true
     resources:
       requests:
-        memory: 256Mi
         cpu: 250m
+        memory: 512Mi
       limits:
-        memory: 256Mi
         cpu: 250m
+        memory: 512Mi
   concourse:
     web:
       logLevel: debug
