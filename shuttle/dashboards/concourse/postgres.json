@@ -16,9 +16,23 @@
   "editable": true,
   "gnetId": 455,
   "graphTooltip": 1,
-  "iteration": 1544235964151,
+  "iteration": 1544273210713,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 24,
+      "panels": [],
+      "repeat": null,
+      "title": "Application",
+      "type": "row"
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -30,7 +44,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 19,
       "legend": {
@@ -123,7 +137,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 1
       },
       "id": 13,
       "isNew": true,
@@ -216,7 +230,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 1
       },
       "id": 15,
       "legend": {
@@ -245,14 +259,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(pg_stat_database_xact_commit{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_xact_commit{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[3m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "commit",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(pg_stat_database_xact_rollback{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum(irate(pg_stat_database_xact_rollback{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[3m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "rollback",
@@ -313,7 +327,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 7
+        "y": 8
       },
       "id": 1,
       "isNew": true,
@@ -656,6 +670,19 @@
       }
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 26,
+      "panels": [],
+      "title": "Container",
+      "type": "row"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -668,8 +695,8 @@
       "gridPos": {
         "h": 7,
         "w": 8,
-        "x": 8,
-        "y": 7
+        "x": 0,
+        "y": 16
       },
       "id": 17,
       "isNew": true,
@@ -700,7 +727,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(container_cpu_usage_seconds_total{container_name=~\"$container\",namespace=~\"$namespace\",image!=\"\"}[2m])",
+          "expr": "irate(container_cpu_usage_seconds_total{container_name=~\"$container\",namespace=~\"$namespace\",image!=\"\"}[2m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{ pod_name }}",
@@ -762,8 +789,8 @@
       "gridPos": {
         "h": 7,
         "w": 8,
-        "x": 16,
-        "y": 7
+        "x": 8,
+        "y": 16
       },
       "id": 16,
       "isNew": true,
@@ -903,10 +930,10 @@
       "gridPos": {
         "h": 7,
         "w": 8,
-        "x": 0,
-        "y": 14
+        "x": 16,
+        "y": 16
       },
-      "id": 3,
+      "id": 20,
       "isNew": true,
       "legend": {
         "alignAsTable": true,
@@ -914,6 +941,7 @@
         "current": true,
         "max": true,
         "min": true,
+        "rightSide": false,
         "show": false,
         "sort": "current",
         "sortDesc": true,
@@ -934,9 +962,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "conflicts",
+          "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(rate(pg_stat_database_deadlocks{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum by (pod_name) (irate(container_network_receive_bytes_total{pod_name=~\"[[container]]-.*\",namespace=~\"$namespace\"}[2m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -953,7 +981,7 @@
             }
           ],
           "intervalFactor": 2,
-          "legendFormat": "deadlocks",
+          "legendFormat": "RX: {{ pod_name }}",
           "measurement": "postgresql",
           "policy": "default",
           "refId": "A",
@@ -962,7 +990,7 @@
             [
               {
                 "params": [
-                  "conflicts"
+                  "tup_fetched"
                 ],
                 "type": "field"
               },
@@ -971,12 +999,14 @@
                 "type": "mean"
               },
               {
-                "params": [],
-                "type": "difference"
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
               }
             ]
           ],
-          "step": 240,
+          "step": 120,
           "tags": [
             {
               "key": "host",
@@ -986,9 +1016,9 @@
           ]
         },
         {
-          "alias": "deadlocks",
+          "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "sum(rate(pg_stat_database_conflicts{datname=~\"$db\",kubernetes_namespace=~\"$namespace\"}[5m]))",
+          "expr": "sum by (pod_name) (irate(container_network_transmit_bytes_total{pod_name=~\"[[container]]-.*\",namespace=~\"$namespace\"}[2m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -1005,7 +1035,7 @@
             }
           ],
           "intervalFactor": 2,
-          "legendFormat": "conflicts",
+          "legendFormat": "TX: {{ pod_name }}",
           "measurement": "postgresql",
           "policy": "default",
           "refId": "B",
@@ -1014,7 +1044,7 @@
             [
               {
                 "params": [
-                  "deadlocks"
+                  "tup_fetched"
                 ],
                 "type": "field"
               },
@@ -1023,12 +1053,14 @@
                 "type": "mean"
               },
               {
-                "params": [],
-                "type": "difference"
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
               }
             ]
           ],
-          "step": 240,
+          "step": 120,
           "tags": [
             {
               "key": "host",
@@ -1041,11 +1073,11 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Conflicts/Deadlocks",
+      "title": "Network Utilization",
       "tooltip": {
-        "msResolution": false,
+        "msResolution": true,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "cumulative"
       },
       "type": "graph",
@@ -1059,11 +1091,349 @@
       "yaxes": [
         {
           "decimals": 0,
-          "format": "short",
-          "label": "",
+          "format": "Bps",
+          "label": null,
           "logBase": 1,
           "max": null,
-          "min": 0,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 23
+      },
+      "id": 21,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": false,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "fetched",
+          "dsType": "prometheus",
+          "expr": "sum by (pod_name) (irate(container_fs_writes_bytes_total{container_name=~\"$container\"}[2m]))",
+          "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "intervalFactor": 2,
+          "legendFormat": "TX: {{ pod_name }}",
+          "measurement": "postgresql",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "tup_fetched"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              }
+            ]
+          ],
+          "step": 120,
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=~",
+              "value": "/^$host$/"
+            }
+          ]
+        },
+        {
+          "alias": "fetched",
+          "dsType": "prometheus",
+          "expr": "sum by (pod_name) (irate(container_fs_reads_bytes_total{container_name=~\"$container\"}[2m]))",
+          "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "intervalFactor": 2,
+          "legendFormat": "RX: {{ pod_name }}",
+          "measurement": "postgresql",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "tup_fetched"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              }
+            ]
+          ],
+          "step": 120,
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=~",
+              "value": "/^$host$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "IO Utilization",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 23
+      },
+      "id": 22,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": false,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "fetched",
+          "dsType": "prometheus",
+          "expr": "1 - (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"$container\"} / kubelet_volume_stats_capacity_bytes)",
+          "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "measurement": "postgresql",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "tup_fetched"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "10s"
+                ],
+                "type": "non_negative_derivative"
+              }
+            ]
+          ],
+          "step": 120,
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=~",
+              "value": "/^$host$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Persistent Volume Utilization",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
           "show": true
         },
         {
@@ -1195,5 +1565,5 @@
   "timezone": "browser",
   "title": "Postgres",
   "uid": "wGgaPlciz",
-  "version": 4
+  "version": 5
 }
