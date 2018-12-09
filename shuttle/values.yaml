@@ -5,13 +5,16 @@
 concourse:
   worker:
     replicas: 3
+    tolerations:
+    - key: preemptible
+      operator: Exists
     resources:
       requests:
-        cpu: 2000m
-        memory: 4096Mi
+        cpu: 3000m
+        memory: 3072Mi
       limits:
-        cpu: 2000m
-        memory: 4096Mi
+        cpu: 6000m
+        memory: 3072Mi
   web:
     replicas: 2
     resources:

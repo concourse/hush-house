@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 455,
   "graphTooltip": 1,
-  "iteration": 1544273210713,
+  "iteration": 1544360840068,
   "links": [],
   "panels": [
     {
@@ -727,11 +727,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(container_cpu_usage_seconds_total{container_name=~\"$container\",namespace=~\"$namespace\",image!=\"\"}[2m])",
+          "expr": "sum by (pod_name) (irate(container_cpu_usage_seconds_total{container_name=~\"$container\",namespace=~\"$namespace\",image!=\"\"}[2m])) \n  / \n(sum by (pod_name) (container_spec_cpu_quota{container_name=~\"$container\",namespace=~\"$namespace\",image!=\"\"})/100000)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{ pod_name }}",
-          "refId": "B"
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -823,7 +823,7 @@
         {
           "alias": "fetched",
           "dsType": "prometheus",
-          "expr": "container_memory_usage_bytes{container_name=~\"$container\",namespace=~\"$namespace\"} / container_spec_memory_limit_bytes",
+          "expr": "container_memory_working_set_bytes{container_name=~\"$container\",namespace=~\"$namespace\"} / container_spec_memory_limit_bytes",
           "format": "time_series",
           "groupBy": [
             {
@@ -1565,5 +1565,5 @@
   "timezone": "browser",
   "title": "Postgres",
   "uid": "wGgaPlciz",
-  "version": 5
+  "version": 6
 }
