@@ -1,12 +1,16 @@
 {{- if .Values.grafana.enabled -}}
 {{- if .Values.prometheus.enabled -}}
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-prometheus-grafana-datasource
+  name: {{ template "shuttle.fullname" . }}-datasource-prometheus
   labels:
-    "grafana/datasource": "1"
+    app: {{ template "shuttle.name" . }}
+    chart: {{ template "shuttle.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: grafana
+    grafana/datasource: "1"
 data:
   datasource.yaml: |-
     apiVersion: 1
@@ -25,6 +29,5 @@ data:
       withCredentials:
       isDefault: true
       editable: true
-
 {{- end -}}
 {{- end -}}

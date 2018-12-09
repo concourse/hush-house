@@ -1,3 +1,4 @@
+{{- if .Values.grafana.enabled }}
 {{- $root := . }}
 {{- range $path, $bytes := .Files.Glob "dashboards/concourse/*.json" }}
 {{- $name := (base $path | replace ".json" "") }}
@@ -5,9 +6,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: concourse-dashboard-{{ $name }}
+  name: {{ template "shuttle.fullname" $root }}-dashboard-{{ $name }}
   labels:
-    "grafana/dashboard": "1"
+    app: {{ template "shuttle.name" $root }}
+    chart: {{ template "shuttle.chart" $root }}
+    release: {{ $root.Release.Name }}
+    heritage: {{ $root.Release.Service }}
+    component: grafana
+    grafana/dashboard: "1"
 data:
   {{- ($root.Files.Glob $path).AsConfig | nindent 2 }}
+{{- end }}
 {{- end }}
