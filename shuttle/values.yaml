@@ -4,13 +4,13 @@
 
 concourse:
   worker:
-    replicas: 4
+    replicas: 3
     resources:
       requests:
-        cpu: 500m
+        cpu: 2000m
         memory: 4096Mi
       limits:
-        cpu: 500m
+        cpu: 2000m
         memory: 4096Mi
   web:
     replicas: 2
