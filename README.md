@@ -1,3 +1,4 @@
+
 # HUSH-HOUSE
 
 > A hush house is an enclosed, noise-suppressed facility used for testing aircraft systems,
@@ -7,6 +8,7 @@
 
 This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org) and [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), an acceptance testing environment deployed on top of k8s.
 
+**Table of contents**
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
