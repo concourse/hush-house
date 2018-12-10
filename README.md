@@ -16,12 +16,11 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 - [Repository structure](#repository-structure)
 - [Dependencies](#dependencies)
-- [Updating hush-house](#updating-hush-house)
+- [Upgrading hush-house (pushing a new release)](#upgrading-hush-house-pushing-a-new-release)
 - [Creating your own environment](#creating-your-own-environment)
 - [k8s cheat-sheet](#k8s-cheat-sheet)
   - [Contexts](#contexts)
   - [Namespaces](#namespaces)
-  - [Checking the versions](#checking-the-versions)
   - [Nodes](#nodes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -61,6 +60,9 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 │				# deployment and surrounding services
 │				# (prometheus+grafana)
 │
+├── .values.yaml 		# Helm values for `shuttle` that contain
+│				# sensitive information (credentials).
+│
 └── terraform			# Mutates the IAAS to provision static
     ├── backend.tf		# IPs for the load-balancers used for
     ├── gcp.json		# `web` and `grafana`, as well as update
@@ -86,14 +88,14 @@ Note.: if you're creating your own environment based of it and not using the pro
 To update the release of [hush-house.concourse-ci.org](https://hus-house.concourse-ci.org), make sure you have the dependencies list under [#dependencies](#dependencies) met, then run the following commands:
 
 ```sh
-# Retrieves the necessary credentials from lpass.
+# Retrieve the necessary credentials from lpass.
 make creds
 
-# Updates the local filesystem with the dependencies (other
+# Update the local filesystem with the dependencies (other
 # charts) of the hush-house deployment.
 make helm-deps
 
-# Compares the desired state as specified in `./.values.yaml`,
+# Compare the desired state as specified in `./.values.yaml`,
 # variables from `terraform` and `./shuttle/values.yaml` against
 # the current state in the k8s cluster.
 #
@@ -107,7 +109,22 @@ ps.: all `make` target are described in `make help`.
 
 ## Creating your own environment
 
-TODO
+To create a separate environment of your own, run `helm` with a set of values that satisfy your needs against the `shuffle` chart.
+
+For instance:
+
+```sh
+export ENV_NAME=dev
+
+helm upgrade \
+	--install \
+	--namespace $ENV_NAME \
+	--set=concourse.worker.replicas=1 \
+	$ENV_NAME
+	./shuffle
+```
+
+By the end, the execution will tell you how to get the necessary credentials and get the service exposed (or, run `helm status $ENV_NAME` to see those again).
 
 
 ## k8s cheat-sheet
@@ -116,8 +133,7 @@ Here's a quick cheat-sheet that might help you get started with `kubectl` if you
 
 ### Contexts
 
-These are the equivalent of Concourse `target`s, storing auth, API endpoint,
-and namespace information in each of them.
+These are the equivalent of Concourse `target`s, storing auth, API endpoint, and namespace information in each of them.
 
 - Get the current context:
 
@@ -145,21 +161,14 @@ kubectl config use-context $context
 
 A virtual segregation between resources in a single cluster.
 
-The namespace to target is supplied via the `--namespace` flag, or having
-a default namespace set to the context.
+It's common to have environments associated with namespaces such that their resources get isolated too. In this scenario, you can think of namespaces as BOSH deployments - they're all managed by the same director, but they get their instances and other resources isolated from each other.
 
-
-### Checking the versions
-
-```sh
-kubectl version
-```
-
-*ps.: it's fine to diverge 2 minors.*
+The namespace to target is supplied via the `--namespace` flag, or having a default namespace set to the context (see [#contexts](#contexts)).
 
 
 ### Nodes
 
+Similar to `bosh vms`, it's possible to gather the list of instances that compose our cluster.
 
 - Retrieve the list of all registered k8s nodes:
 
@@ -167,8 +176,7 @@ kubectl version
 kubectl get nodes
 ```
 
-
-- Describe a particular node:
+- Describe (get events and extra information of) a particular node:
 
 ```sh
 kubectl describe node $node_name
