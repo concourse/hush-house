@@ -30,7 +30,9 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 ```sh
 .
-├── Makefile
+├── Makefile 			# Definition of the make targets
+│				# to deploy/upgrade hush-house.
+│
 ├── shuttle 			# Chart that unites Concourse
 │   │				# and some other useful charts
 │   ├── Chart.yaml              # that compose `hush-house`.
