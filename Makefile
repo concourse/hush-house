@@ -39,7 +39,6 @@ creds:
 
 
 helm-deps:
-	cd ../charts/stable/concourse && helm dependency update .
 	helm dependency update $(CHART_DIR)
 
 

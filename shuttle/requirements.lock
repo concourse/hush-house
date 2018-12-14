@@ -1,6 +1,6 @@
 dependencies:
 - name: concourse
-  repository: file://../../charts/stable/concourse
+  repository: https://raw.githubusercontent.com/concourse/charts/gh-pages/
   version: 1337.0.0
 - name: prometheus
   repository: https://kubernetes-charts.storage.googleapis.com/
@@ -8,5 +8,5 @@ dependencies:
 - name: grafana
   repository: https://kubernetes-charts.storage.googleapis.com/
   version: 1.18.0
-digest: sha256:5284c9fc0759581ff65e9a4803032992b57a5eeffa51adef5f92f4de70e27adf
-generated: 2018-12-04T16:17:18.100029-05:00
+digest: sha256:7a9a45ebcd6c86eeea15a002cac199246e4a811f385b8e126035f76f84e472ff
+generated: 2018-12-14T11:25:52.407161-05:00
