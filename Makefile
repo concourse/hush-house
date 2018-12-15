@@ -35,6 +35,12 @@ creds:
 	lpass show hush-house-gcp-key --notes > ./terraform/gcp.json
 
 
+populate-k8s-secrets:
+	kubectl create secret generic values-b64 \
+		--namespace=$(RELEASE_NAME)-main \
+		--from-literal="value=$(shell cat ./.values.yml | base64)"
+
+
 helm-deps:
 	helm dependency update $(CHART_DIR)
 

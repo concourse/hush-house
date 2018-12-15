@@ -31,11 +31,16 @@ jobs:
         - -c
         - -e
         - |
-          apk add --update make
+          apk add --update make curl
+          mkdir -p ~/.kube
+
           echo '((values-b64))' | base64 -d > ./.values.yml
+          echo '((kube-config-b64))' | base64 -d > ~/.kube/config
 
           helm init --client-only
+          helm repo remove local
           helm repo add concourse https://raw.githubusercontent.com/concourse/charts/gh-pages
+          helm plugin install https://github.com/databus23/helm-diff --version master
 
           make helm-deps
-          make template
+          echo "n" | make upgrade
