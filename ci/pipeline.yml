@@ -1,5 +1,5 @@
 resources:
-- name: hush-house-repo
+- name: hush-house
   type: git
   source:
     uri: https://((github-token))@github.com/cirocosta/hush-house
@@ -9,21 +9,28 @@ resources:
   source:
     repository: cirocosta/charts-maintenance
 
+- name: charts-repository
+  type: git
+  source:
+    uri: https://((github-token))@github.com/concourse/charts
+    branch: gh-pages
+
 
 jobs:
 - name: deploy
   plan:
   - aggregate:
-    - get: hush-house-repo
-      trigger: true
     - get: maintenance-image
+    - get: charts-repository
+      trigger: true
+    - get: hush-house
       trigger: true
   - task: run
     image: maintenance-image
     config:
       platform: linux
       inputs:
-      - name: hush-house-repo
+      - name: hush-house
         path: .
       run:
         path: /bin/bash
@@ -43,4 +50,4 @@ jobs:
           helm plugin install https://github.com/databus23/helm-diff --version master
 
           make helm-deps
-          echo "n" | make upgrade
+          echo "y" | make upgrade
