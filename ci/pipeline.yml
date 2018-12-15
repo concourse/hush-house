@@ -41,8 +41,8 @@ jobs:
           apk add --update make curl
           mkdir -p ~/.kube
 
-          echo '((values-b64))' | base64 -d > ./.values.yml
-          echo '((kube-config-b64))' | base64 -d > ~/.kube/config
+          echo '((values-b64))' | base64 -d >./.values.yml
+          echo '((kube-config-b64))' | base64 -d >~/.kube/config
 
           helm init --client-only
           helm repo remove local
@@ -50,4 +50,4 @@ jobs:
           helm plugin install https://github.com/databus23/helm-diff --version master
 
           make helm-deps
-          echo "y" | make upgrade
+          make diff && echo "No changes!" || [[ $? == "2" ]] && make upgrade
