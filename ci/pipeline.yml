@@ -32,5 +32,10 @@ jobs:
         - -e
         - |
           apk add --update make
-          echo '((values-b64))' | base64 -D > ./.values.yml
+          echo '((values-b64))' | base64 -d > ./.values.yml
+
+          helm init --client-only
+          helm repo add concourse https://raw.githubusercontent.com/concourse/charts/gh-pages
+
+          make helm-deps
           make template
