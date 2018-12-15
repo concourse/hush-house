@@ -50,4 +50,4 @@ jobs:
           helm plugin install https://github.com/databus23/helm-diff --version master
 
           make helm-deps
-          make diff && echo "No changes!" || [[ $? == "2" ]] && make upgrade
+          make diff && echo "No changes!" || { [[ $? == "2" ]] && make upgrade ; }
