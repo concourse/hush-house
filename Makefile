@@ -2,9 +2,6 @@ RELEASE_NAME ?= prod
 NAMESPACE    ?= hush-house
 CHART_DIR    ?= ./shuttle
 
-WEB_LOADBALANCER_IP     = $(shell cd ./terraform && terraform output web-address)
-METRICS_LOADBALANCER_IP = $(shell cd ./terraform && terraform output metrics-address)
-
 
 define HELP
 USAGE
@@ -43,18 +40,12 @@ helm-deps:
 
 
 template:
-	helm template \
-		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
-		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
-		--values=./.values.yml \
-		$(CHART_DIR)
+	helm template --values=./.values.yml $(CHART_DIR)
 
 
 upgrade:
 	helm diff upgrade $(HELM_FLAGS) \
 		--namespace=$(NAMESPACE) \
-		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
-		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
 		--values=./.values.yml \
 		$(RELEASE_NAME) \
 		$(CHART_DIR)
@@ -62,8 +53,6 @@ upgrade:
 	helm upgrade $(HELM_FLAGS) \
 		--install \
 		--namespace=$(NAMESPACE) \
-		--set=concourse.web.service.loadBalancerIP=$(WEB_LOADBALANCER_IP) \
-		--set=grafana.service.loadBalancerIP=$(METRICS_LOADBALANCER_IP) \
 		--values=./.values.yml \
 		--wait \
 		$(RELEASE_NAME) \

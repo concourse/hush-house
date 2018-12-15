@@ -1,0 +1,36 @@
+resources:
+- name: hush-house-repo
+  type: git
+  source:
+    uri: https://((github-token))@github.com/cirocosta/hush-house
+
+- name: maintenance-image
+  type: registry-image
+  source:
+    repository: cirocosta/charts-maintenance
+
+
+jobs:
+- name: deploy
+  plan:
+  - aggregate:
+    - get: hush-house-repo
+      trigger: true
+    - get: maintenance-image
+      trigger: true
+  - task: run
+    image: maintenance-image
+    config:
+      platform: linux
+      inputs:
+      - name: hush-house-repo
+        path: .
+      run:
+        path: /bin/bash
+        args:
+        - -c
+        - -e
+        - |
+          apk add --update make
+          echo '((values-b64))' | base64 -D > ./.values.yml
+          make template
