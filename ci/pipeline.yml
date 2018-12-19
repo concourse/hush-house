@@ -61,4 +61,4 @@ jobs:
           export HELM_FLAGS=--set=concourse.imageDigest=$(cat ./concourse-image/digest)
 
           make helm-deps
-          make diff && echo "No changes!" || { [[ $? == "2" ]] && make upgrade ; }
+          make diff && echo "No changes!" || { [[ $? == "2" ]] && echo "y" | make upgrade ; }
