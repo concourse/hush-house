@@ -79,6 +79,7 @@ Below, a list of all of the dependencies needed to upgrade the `hush-house` envi
 - [Terraform CLI (`terraform`)](https://www.terraform.io/)
 - [Helm (`helm`)](https://helm.sh/)
 - [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
+- A K8S cluster that you have access to.
 
 Note.: if you're creating your own environment based of it and not using the provided Makefile, you'll only need `helm`.
 
@@ -105,6 +106,20 @@ make upgrade
 ```
 
 ps.: all `make` target are described in `make help`.
+
+pps.: `shuttle` (the chart that hush-house uses to glue Concourse with other charts) by default will use the `ssd` storage class for Prometheus and Postgres, but that's not a storage class that comes installed by default in GKE. To create it in your cluster, make sure you apply the following:
+
+```yml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ssd
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+```
 
 
 ## Creating your own environment
