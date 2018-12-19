@@ -34,7 +34,6 @@ jobs:
     - get: hush-house
       trigger: true
   - task: run
-    attempts: 2
     image: maintenance-image
     config:
       platform: linux
