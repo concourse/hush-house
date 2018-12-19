@@ -4,7 +4,7 @@
 
 concourse:
   worker:
-    replicas: 3
+    replicas: 1
     tolerations:
     - key: preemptible
       operator: Exists
@@ -27,6 +27,8 @@ concourse:
   postgresql:
     metrics:
       enabled: true
+    persistence:
+      storageClass: ssd
     resources:
       requests:
         cpu: 250m
@@ -67,6 +69,7 @@ prometheus:
   server:
     persistentVolume:
       enabled: true
+      storageClass: ssd
 
 grafana:
   enabled: true

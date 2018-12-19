@@ -1,4 +1,4 @@
-RELEASE_NAME ?= prod
+RELEASE_NAME ?= hush-house
 NAMESPACE    ?= hush-house
 CHART_DIR    ?= ./shuttle
 HELM_FLAGS   ?=
