@@ -1,6 +1,7 @@
 RELEASE_NAME ?= prod
 NAMESPACE    ?= hush-house
 CHART_DIR    ?= ./shuttle
+HELM_FLAGS   ?=
 
 
 define HELP
@@ -71,7 +72,10 @@ helm-deps:
 
 
 template:
-	helm template --values=./.values.yml $(CHART_DIR)
+	helm template \
+	  --values=./.values.yml \
+	  $(HELM_FLAGS) \
+	  $(CHART_DIR)
 
 
 diff:
@@ -79,6 +83,7 @@ diff:
 		--namespace=$(NAMESPACE) \
 		--detailed-exitcode \
 		--values=./.values.yml \
+		$(HELM_FLAGS) \
 		$(RELEASE_NAME) \
 		$(CHART_DIR)
 
@@ -92,6 +97,7 @@ upgrade:
 		--namespace=$(NAMESPACE) \
 		--values=./.values.yml \
 		--wait \
+		$(HELM_FLAGS) \
 		$(RELEASE_NAME) \
 		$(CHART_DIR)
 

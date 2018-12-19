@@ -4,6 +4,11 @@ resources:
   source:
     uri: https://((github-token))@github.com/cirocosta/hush-house
 
+- name: concourse-image
+  type: registry-image
+  source:
+    repository: concourse/dev
+
 - name: maintenance-image
   type: registry-image
   source:
@@ -21,6 +26,9 @@ jobs:
   plan:
   - aggregate:
     - get: maintenance-image
+    - get: concourse-image
+      params: {format: oci}
+      trigger: true
     - get: charts-repository
       trigger: true
     - get: hush-house
@@ -32,6 +40,7 @@ jobs:
       inputs:
       - name: hush-house
         path: .
+      - name: concourse-image
       run:
         path: /bin/bash
         args:
@@ -48,6 +57,8 @@ jobs:
           helm repo remove local
           helm repo add concourse https://raw.githubusercontent.com/concourse/charts/gh-pages
           helm plugin install https://github.com/databus23/helm-diff --version master
+
+          export HELM_FLAGS=--set=imageDigest=$(cat ./concourse-image/digest)
 
           make helm-deps
           make diff && echo "No changes!" || { [[ $? == "2" ]] && make upgrade ; }
