@@ -196,3 +196,47 @@ kubectl get nodes
 ```sh
 kubectl describe node $node_name
 ```
+
+### Kubernetes for credential management
+
+Just like you can tie Vault or CredHub to your Concourse instances in order to have secrets suport, you can also make use of Kubernetes secret for that, with some specialties:
+
+- Can't make use of `_`  in the names (a limitation from k8s secrets)
+
+For instance, the Secret `something_a` is invalid:
+
+```
+metadata.name: 
+  Invalid value: "something_a": 
+    a DNS-1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', 
+    and must start and end with an alphanumeric character (e.g. 'example.com', regex used 
+    for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+```
+
+- Names must not be longer than `63` characters
+
+- for interpolating ((mything)): 
+
+```
+kubectl create generic mything \
+  --from-literal=value=$value \
+  --namespace $prefix$team 
+```
+
+- for interpolating nested structures ((mything.foo)):
+
+```
+kubectl create generic mything \
+  --from-literal=foo=$foo \
+  --namespace $prefix$team 
+```
+
+- roles necessary for `web` to be able to consume those secrets
+
+TODO
+  
+- For k8s there's no "per-pipeline" secret setting
+
+- should we include k8s creds health?
+
+TODO
