@@ -58,7 +58,7 @@ jobs:
           helm repo add concourse https://raw.githubusercontent.com/concourse/charts/gh-pages
           helm plugin install https://github.com/databus23/helm-diff --version master
 
-          export HELM_FLAGS=--set=imageDigest=$(cat ./concourse-image/digest)
+          export HELM_FLAGS=--set=concourse.imageDigest=$(cat ./concourse-image/digest)
 
           make helm-deps
           make diff && echo "No changes!" || { [[ $? == "2" ]] && make upgrade ; }
