@@ -59,7 +59,10 @@ concourse:
 prometheus:
   enabled: true
   nodeExporter:
-    enabled: false
+    enabled: true
+    tolerations:
+    - key: preemptible
+      operator: Exists
   kubeStateMetrics:
     enabled: false
   pushgateway:
