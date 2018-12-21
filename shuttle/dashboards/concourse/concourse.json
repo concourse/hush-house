@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1544286223868,
+  "iteration": 1545423873210,
   "links": [
     {
       "icon": "info",
@@ -46,7 +46,7 @@
     {
       "content": "The Concourse metrics are separated in three categories:\n\n1. **Overall**: not specific to a particular instance, represents the internal work that Concourse as a service performs;\n2. **Web**: per-ATC statistics for throubleshooting ATC problems on both container and application level; and\n3. **Workers**: per-worker container-level statistics.\n\nRegardless of the section you're looking at, you should expect:\n\n- Each panel contains a description associated with it - hover over the `i` icon on the top left of each panel to know more about the metric being kept track of;\n- A threshold that identifies what is considered *good* behavior for such telemetry (if none, see the panel description)",
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 1
@@ -556,7 +556,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 8
+            "y": 18
           },
           "id": 7,
           "legend": {
@@ -646,7 +646,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 8
+            "y": 18
           },
           "id": 11,
           "legend": {
@@ -733,7 +733,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 8
+            "y": 18
           },
           "id": 29,
           "legend": {
@@ -821,7 +821,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 15
+            "y": 25
           },
           "id": 32,
           "legend": {
@@ -916,7 +916,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 15
+            "y": 25
           },
           "id": 33,
           "legend": {
@@ -1003,7 +1003,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 15
+            "y": 25
           },
           "id": 36,
           "legend": {
@@ -1089,7 +1089,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 22
+            "y": 32
           },
           "id": 37,
           "legend": {
@@ -1175,7 +1175,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 22
+            "y": 32
           },
           "id": 38,
           "legend": {
@@ -1276,7 +1276,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 10
+            "y": 19
           },
           "id": 13,
           "legend": {
@@ -1364,7 +1364,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 10
+            "y": 19
           },
           "id": 3,
           "legend": {
@@ -1450,7 +1450,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 10
+            "y": 19
           },
           "id": 2,
           "legend": {
@@ -1536,7 +1536,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 17
+            "y": 26
           },
           "id": 30,
           "legend": {
@@ -1631,7 +1631,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 17
+            "y": 26
           },
           "id": 31,
           "legend": {
@@ -1719,7 +1719,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 17
+            "y": 26
           },
           "id": 39,
           "legend": {
@@ -1777,7 +1777,95 @@
               "format": "percentunit",
               "label": "",
               "logBase": 1,
+              "max": "1.2",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
               "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "decimals": null,
+          "description": "",
+          "fill": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 33
+          },
+          "id": 46,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": false,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(\n  kube_pod_container_info{pod=~\"$worker\"}\n) \n   * on (kubernetes_node) group_left(device)\n(\n    1 - (node_filesystem_avail_bytes{mountpoint=\"/etc/hostname\"}  / node_filesystem_size_bytes)\n)",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ pod }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Machine disk usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "percentunit",
+              "label": null,
+              "logBase": 1,
+              "max": "1",
               "min": "0",
               "show": true
             },
@@ -1836,7 +1924,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -1918,5 +2005,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 8
+  "version": 1
 }
