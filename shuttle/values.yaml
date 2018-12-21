@@ -64,7 +64,7 @@ prometheus:
     - key: preemptible
       operator: Exists
   kubeStateMetrics:
-    enabled: false
+    enabled: true
   pushgateway:
     enabled: false
   alertmanager:
