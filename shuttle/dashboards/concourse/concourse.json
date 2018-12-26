@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1545832745737,
+  "iteration": 1545833823916,
   "links": [
     {
       "icon": "info",
@@ -251,7 +251,7 @@
           },
           "yaxes": [
             {
-              "decimals": 2,
+              "decimals": 3,
               "format": "s",
               "label": null,
               "logBase": 1,
@@ -377,37 +377,54 @@
             "alignAsTable": true,
             "avg": false,
             "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
             "max": true,
             "min": true,
             "show": false,
+            "sort": "current",
+            "sortDesc": true,
             "total": false,
             "values": true
           },
-          "lines": true,
+          "lines": false,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
           "percentage": false,
-          "pointradius": 5,
-          "points": false,
+          "pointradius": 1,
+          "points": true,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "/^errored:.*/",
+              "color": "#bf1b00"
+            },
+            {
+              "alias": "/^succeeded:.*/",
+              "color": "#629e51"
+            },
+            {
+              "alias": "/^failed:.*/",
+              "color": "#cca300"
+            }
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg by (pipeline, status) (concourse_builds_finished{kubernetes_namespace=~\"$namespace\"})",
+              "expr": "sum by (status, pipeline) (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{ pipeline }} ({{ status }})",
+              "legendFormat": "{{ status }}: {{ pipeline }}",
               "refId": "A"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Total builds",
+          "title": "Build per minute",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -423,11 +440,12 @@
           },
           "yaxes": [
             {
+              "decimals": 1,
               "format": "short",
-              "label": null,
+              "label": "",
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -457,42 +475,46 @@
             "x": 8,
             "y": 18
           },
-          "id": 26,
+          "id": 49,
           "legend": {
             "alignAsTable": true,
             "avg": false,
             "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
             "max": true,
             "min": true,
             "show": false,
+            "sort": "current",
+            "sortDesc": true,
             "total": false,
             "values": true
           },
-          "lines": true,
+          "lines": false,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
           "percentage": false,
-          "pointradius": 5,
-          "points": false,
+          "pointradius": 1,
+          "points": true,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
-          "steppedLine": true,
+          "stack": true,
+          "steppedLine": false,
           "targets": [
             {
-              "expr": "avg by (team, pipeline) (concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\"})",
+              "expr": "sum by (pipeline) (rate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{ team }} {{ pipeline }}",
+              "legendFormat": "{{ pipeline }}",
               "refId": "A"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Resource checks",
+          "title": "Resource checks per minute",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -508,9 +530,9 @@
           },
           "yaxes": [
             {
-              "decimals": 0,
+              "decimals": 1,
               "format": "short",
-              "label": null,
+              "label": "",
               "logBase": 1,
               "max": null,
               "min": "0",
@@ -549,6 +571,7 @@
             "avg": false,
             "current": true,
             "hideEmpty": true,
+            "hideZero": false,
             "max": true,
             "min": true,
             "show": false,
@@ -595,11 +618,12 @@
           },
           "yaxes": [
             {
+              "decimals": null,
               "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -2091,5 +2115,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 2
+  "version": 3
 }
