@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1545833823916,
+  "iteration": 1545951611157,
   "links": [
     {
       "icon": "info",
@@ -225,7 +225,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(concourse_scheduling_loading_duration_seconds_total{kubernetes_namespace=~\"$namespace\"}[10m])",
+              "expr": "rate(concourse_scheduling_loading_duration_seconds_total{kubernetes_namespace=~\"$namespace\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ pipeline }} ({{ kubernetes_pod_name }})",
@@ -578,13 +578,13 @@
             "total": false,
             "values": true
           },
-          "lines": true,
+          "lines": false,
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
           "percentage": false,
-          "pointradius": 5,
-          "points": false,
+          "pointradius": 1,
+          "points": true,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
@@ -592,9 +592,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum by(pipeline, team,le)(rate(concourse_builds_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\"}[10m])))",
+              "expr": "histogram_quantile(0.99, sum by(pipeline, team,le)(rate(concourse_builds_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\"}[3m])))",
               "format": "time_series",
-              "intervalFactor": 1,
+              "intervalFactor": 2,
               "legendFormat": "{{team}}: {{ pipeline }}",
               "refId": "A"
             }
@@ -618,9 +618,99 @@
           },
           "yaxes": [
             {
-              "decimals": null,
+              "decimals": 1,
               "format": "s",
               "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fill": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 26
+          },
+          "id": 50,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": true,
+            "min": true,
+            "show": false,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 1,
+          "points": true,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum by (pipeline) (rate(concourse_scheduling_total{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ pipeline }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Schedulings per minute",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "short",
+              "label": "",
               "logBase": 1,
               "max": null,
               "min": "0",
@@ -2115,5 +2205,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 3
+  "version": 4
 }
