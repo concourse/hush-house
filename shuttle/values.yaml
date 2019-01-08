@@ -70,6 +70,7 @@ prometheus:
   alertmanager:
     enabled: false
   server:
+    enabled: false
     persistentVolume:
       enabled: true
       size: 30Gi
