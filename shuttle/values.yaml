@@ -72,6 +72,7 @@ prometheus:
   server:
     persistentVolume:
       enabled: true
+      size: 30Gi
       storageClass: ssd
 
 grafana:
