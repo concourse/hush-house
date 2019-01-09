@@ -57,7 +57,7 @@ concourse:
         driver: overlay
 
 prometheus:
-  enabled: true
+  enabled: false
   nodeExporter:
     enabled: true
     tolerations:
@@ -70,7 +70,6 @@ prometheus:
   alertmanager:
     enabled: false
   server:
-    enabled: false
     persistentVolume:
       enabled: true
       size: 30Gi
