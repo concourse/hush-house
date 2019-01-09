@@ -23,6 +23,7 @@ resources:
 
 jobs:
 - name: deploy
+  serial: true
   plan:
   - aggregate:
     - get: maintenance-image
