@@ -5,7 +5,7 @@ dependencies:
   repository: https://raw.githubusercontent.com/concourse/charts/gh-pages/
 
 - name: prometheus
-  version: 7.4.5
+  version: 8.4.2
   repository: https://kubernetes-charts.storage.googleapis.com/
   condition: prometheus.enabled
 

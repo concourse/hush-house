@@ -57,7 +57,7 @@ concourse:
         driver: overlay
 
 prometheus:
-  enabled: false
+  enabled: true
   nodeExporter:
     enabled: true
     tolerations:
