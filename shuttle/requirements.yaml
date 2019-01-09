@@ -10,6 +10,6 @@ dependencies:
   condition: prometheus.enabled
 
 - name: grafana
-  version: 1.18.0
+  version: 1.22.1
   repository: https://kubernetes-charts.storage.googleapis.com/
   condition: grafana.enabled
