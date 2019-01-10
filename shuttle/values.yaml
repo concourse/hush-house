@@ -4,7 +4,7 @@
 
 concourse:
   worker:
-    replicas: 3
+    replicas: 2
     tolerations:
     - key: preemptible
       operator: Exists
