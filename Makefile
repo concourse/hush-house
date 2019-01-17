@@ -96,6 +96,7 @@ upgrade:
 		--install \
 		--namespace=$(NAMESPACE) \
 		--values=./.values.yml \
+		--timeout=600 \
 		--wait \
 		$(HELM_FLAGS) \
 		$(RELEASE_NAME) \
