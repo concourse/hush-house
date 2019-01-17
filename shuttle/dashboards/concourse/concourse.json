@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1546380168535,
+  "iteration": 1547728810914,
   "links": [
     {
       "icon": "info",
@@ -118,13 +118,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 1,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 9
+            "y": 11
           },
           "id": 28,
           "legend": {
@@ -163,6 +162,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "q95 response times",
           "tooltip": {
@@ -207,14 +207,13 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
           "fill": 1,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 9
+            "y": 11
           },
           "id": 20,
           "legend": {
@@ -250,6 +249,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Loading versions duration",
           "tooltip": {
@@ -294,13 +294,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 1,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 9
+            "y": 11
           },
           "id": 19,
           "legend": {
@@ -336,6 +335,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Full scheduling duration",
           "tooltip": {
@@ -380,13 +380,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 17
+            "y": 19
           },
           "id": 24,
           "legend": {
@@ -439,6 +438,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Build per minute",
           "tooltip": {
@@ -483,13 +483,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 17
+            "y": 19
           },
           "id": 49,
           "legend": {
@@ -529,6 +528,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Resource checks per minute",
           "tooltip": {
@@ -573,13 +573,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 17
+            "y": 19
           },
           "id": 48,
           "legend": {
@@ -617,6 +616,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "q99 build finish times",
           "tooltip": {
@@ -661,13 +661,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 25
+            "y": 27
           },
           "id": 50,
           "legend": {
@@ -707,6 +706,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Schedulings per minute",
           "tooltip": {
@@ -766,13 +766,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 10
+            "y": 12
           },
           "id": 7,
           "legend": {
@@ -811,6 +810,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "DB Connections",
           "tooltip": {
@@ -856,13 +856,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 10
+            "y": 12
           },
           "id": 11,
           "legend": {
@@ -899,6 +898,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "CPU Usage",
           "tooltip": {
@@ -943,13 +943,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 10
+            "y": 12
           },
           "id": 29,
           "legend": {
@@ -987,6 +986,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Memory usage (RSS)",
           "tooltip": {
@@ -1031,13 +1031,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 17
+            "y": 19
           },
           "id": 32,
           "legend": {
@@ -1082,6 +1081,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Network RX/TX",
           "tooltip": {
@@ -1126,13 +1126,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 17
+            "y": 19
           },
           "id": 33,
           "legend": {
@@ -1169,6 +1168,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Goroutines",
           "tooltip": {
@@ -1213,13 +1213,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 17
+            "y": 19
           },
           "id": 36,
           "legend": {
@@ -1255,6 +1254,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Open files",
           "tooltip": {
@@ -1299,13 +1299,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 24
+            "y": 26
           },
           "id": 37,
           "legend": {
@@ -1341,6 +1340,7 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "SQL QPS",
           "tooltip": {
@@ -1385,13 +1385,12 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "fill": 0,
           "gridPos": {
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 24
+            "y": 26
           },
           "id": 38,
           "legend": {
@@ -1427,8 +1426,95 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "HTTP 500 Count",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 26
+          },
+          "id": 52,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": false,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": true,
+          "targets": [
+            {
+              "expr": "concourse_locks_held{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ kubernetes_pod_name }} - {{ type }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Locks held",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -2114,11 +2200,11 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "hush-house",
           "value": "hush-house"
         },
         "datasource": "prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -2139,12 +2225,14 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "All",
           "value": [
             "$__all"
           ]
         },
         "datasource": "prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": true,
         "label": "ATC",
@@ -2171,6 +2259,7 @@
           ]
         },
         "datasource": "prometheus",
+        "definition": "",
         "hide": 0,
         "includeAll": true,
         "label": "Worker",
@@ -2222,5 +2311,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 5
+  "version": 1
 }
