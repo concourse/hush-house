@@ -41,7 +41,7 @@ concourse:
       logLevel: debug
       bindPort: 80
       kubernetes:
-        keepNamespaces: false
+        keepNamespaces: true
       prometheus:
         enabled: true
       auth:
