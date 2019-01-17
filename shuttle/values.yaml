@@ -29,6 +29,7 @@ concourse:
       enabled: true
     persistence:
       storageClass: ssd
+      size: 20Gi
     resources:
       requests:
         cpu: 250m
