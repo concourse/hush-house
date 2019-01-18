@@ -45,6 +45,8 @@ concourse:
         keepNamespaces: true
       prometheus:
         enabled: true
+      metrics:
+        captureErrorMetrics: true
       auth:
         mainTeam:
           github:
