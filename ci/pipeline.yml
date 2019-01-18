@@ -7,7 +7,7 @@ resources:
 - name: concourse-image
   type: registry-image
   source:
-    repository: concourse/dev
+    repository: concourse/concourse-rc
 
 - name: maintenance-image
   type: registry-image
