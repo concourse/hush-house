@@ -1,0 +1,32 @@
+Take off!
+
+  {{- if .Values.grafana.enabled }}
+
+  * Grab the Grafana credentials:
+
+    User:
+      kubectl get \
+        --namespace {{ .Release.Namespace }} \
+        secrets {{ .Release.Name }}-grafana \
+        -o 'jsonpath={.data.admin-user}' | base64 -D
+
+    Password:
+      kubectl get \
+        --namespace {{ .Release.Namespace }} \
+        secrets {{ .Release.Name }}-grafana \
+        -o 'jsonpath={.data.admin-password}' | base64 -D
+
+  {{- end -}}
+
+  {{- if .Values.prometheus.enabled }}
+
+  * Access Prometheus via a local proxy:
+
+      kubectl port-forward \
+        --namespace {{ .Release.Namespace }} \
+        service/{{ .Release.Name }}-grafana \
+	:80
+
+  {{- end }}
+
+

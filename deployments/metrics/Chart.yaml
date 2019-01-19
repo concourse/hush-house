@@ -1,0 +1,8 @@
+name: metrics
+apiVersion: v1
+version: 0.1.0
+appVersion: 0.0.1
+description: Metrics for Concourse k8s deployments
+maintainers:
+- name: cirocosta
+  email: cscosta@pivotal.io

@@ -1,0 +1,54 @@
+prometheus:
+  enabled: true
+  nodeExporter:
+    enabled: true
+    tolerations:
+    - key: preemptible
+      operator: Exists
+  kubeStateMetrics:
+    enabled: true
+  pushgateway:
+    enabled: false
+  alertmanager:
+    enabled: false
+  server:
+    persistentVolume:
+      enabled: true
+      size: 30Gi
+      storageClass: ssd
+
+grafana:
+  enabled: true
+  livenessProbe:
+    httpGet:
+      scheme: HTTPS
+  readinessProbe:
+    httpGet:
+      scheme: HTTPS
+  extraSecretMounts:
+  - name: metrics-tls
+    mountPath: /tls
+    secretName: metrics-tls
+    readOnly: true
+  grafana.ini:
+    server:
+      protocol: https
+      domain: metrics-hush-house.concourse-ci.org
+      root_url: https://metrics-hush-house.concourse-ci.org
+      cert_file: /tls/cert
+      cert_key: /tls/key
+    users:
+      auto_assign_organization_role: Editor
+    auth.anonymous:
+      enabled: true
+  service:
+    loadBalancerIP: 35.184.147.37
+    port: 443
+    type: LoadBalancer
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana/datasource
+    dashboards:
+      enabled: true
+      label: grafana/dashboard
