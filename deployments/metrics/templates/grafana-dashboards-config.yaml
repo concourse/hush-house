@@ -13,7 +13,7 @@ metadata:
     release: {{ $root.Release.Name }}
     heritage: {{ $root.Release.Service }}
     component: grafana
-    {{ grafana.sidecar.dashboards.label }}: "1"
+    {{ $root.Values.grafana.sidecar.dashboards.label }}: "1"
 data:
   {{- ($root.Files.Glob $path).AsConfig | nindent 2 }}
 {{- end }}

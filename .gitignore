@@ -3,3 +3,4 @@
 gcp.json
 .envrc
 .values.yml
+.values.yaml

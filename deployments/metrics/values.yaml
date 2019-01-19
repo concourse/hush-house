@@ -1,3 +1,14 @@
+# Configuration for serving the metrics dashboards
+# with TLS enabled.
+tls:
+  enabled: true
+  ## Certificate
+  # cert:
+  ## Private key
+  # key:
+
+
+# Configuration for the prometheus dependency.
 prometheus:
   enabled: true
   nodeExporter:
@@ -17,6 +28,7 @@ prometheus:
       size: 30Gi
       storageClass: ssd
 
+# Configuration for the Grafana dependency.
 grafana:
   enabled: true
   livenessProbe:

@@ -3,11 +3,21 @@ HELM_FLAGS   ?=
 
 creds-%:
 	cd ./$* && \
-		lpass show hush-house-values-$* > ./.values.yml
+		lpass show hush-house-values-$* > ./.values.yaml
 
 
-helm-deps-%:
-	helm dependency update .
+template-%:
+	cd ./$* && \
+		helm template \
+		--name=$* \
+		--values=./.values.yaml \
+		$(HELM_FLAGS) \
+		.
+
+
+deps-%:
+	cd ./$* && \
+		helm dependency update .
 
 
 upgrade-%: helm-deps-%
@@ -15,8 +25,8 @@ upgrade-%: helm-deps-%
 		helm upgrade \
 			--install \
 			--namespace=$* \
-			--values=./.values.yml \
 			--timeout=600 \
+			--values=./.values.yaml \
 			--wait \
 			$(HELM_FLAGS) \
 			$* \

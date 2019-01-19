@@ -10,7 +10,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
     component: grafana
-    {{ grafana.sidecar.datasources.label }}: "1"
+    {{ .Values.grafana.sidecar.datasources.label }}: "1"
 data:
   datasource.yaml: |-
     apiVersion: 1
