@@ -6,6 +6,15 @@ creds-%:
 		lpass show hush-house-values-$* > ./.values.yaml
 
 
+save-creds-%:
+	cd ./$* && \
+		cat ./.values.yaml | \
+			lpass edit \
+				--sync=now \
+				--non-interactive \
+				hush-house-values-$*
+
+
 template-%:
 	cd ./$* && \
 		helm template \
@@ -15,14 +24,22 @@ template-%:
 		.
 
 
-deps-%:
+diff-%:
 	cd ./$* && \
-		helm dependency update .
+		helm diff upgrade \
+			--tls \
+			--namespace=$* \
+			--detailed-exitcode \
+			--values=./.values.yml \
+			$(HELM_FLAGS) \
+			$* \
+			.
 
 
-upgrade-%: helm-deps-%
+upgrade-%: deps-%
 	cd ./$* && \
 		helm upgrade \
+			--tls \
 			--install \
 			--namespace=$* \
 			--timeout=600 \
@@ -31,3 +48,10 @@ upgrade-%: helm-deps-%
 			$(HELM_FLAGS) \
 			$* \
 			.
+
+
+deps-%:
+	cd ./$* && \
+		helm dependency update .
+
+

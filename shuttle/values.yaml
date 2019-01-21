@@ -60,7 +60,7 @@ concourse:
         driver: overlay
 
 prometheus:
-  enabled: true
+  enabled: false
   nodeExporter:
     enabled: true
     tolerations:
@@ -79,7 +79,7 @@ prometheus:
       storageClass: ssd
 
 grafana:
-  enabled: true
+  enabled: false
   service:
     type: LoadBalancer
   sidecar:

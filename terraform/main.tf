@@ -1,41 +1,48 @@
-provider "google" {
-  credentials = "gcp.json"
-  project     = "cf-concourse-production"
-  region      = "us-central1"
+module "web-address" {
+  source = "./address"
+
+  dns-zone  = "${var.dns-zone}"
+  subdomain = "hush-house"
 }
 
-data "google_dns_managed_zone" "concourse-ci-org" {
-  name = "concourse-ci-org"
+module "metrics-address" {
+  source = "./address"
+
+  dns-zone  = "${var.dns-zone}"
+  subdomain = "metrics-hush-house"
 }
 
-resource "google_compute_address" "web" {
-  name = "k8s-hush-house-web"
-}
+module "cluster" {
+  source = "./cluster"
 
-resource "google_compute_address" "metrics" {
-  name = "k8s-hush-house-metrics"
-}
+  name   = "hush-house-test"
+  zone   = "${var.zone}"
+  region = "${var.region}"
 
-resource "google_dns_record_set" "web" {
-  name = "hush-house.${data.google_dns_managed_zone.concourse-ci-org.dns_name}"
-  type = "A"
-  ttl  = 300
-
-  managed_zone = "${data.google_dns_managed_zone.concourse-ci-org.name}"
-
-  rrdatas = [
-    "${google_compute_address.web.address}",
+  node-pools = [
+    {
+      name         = "preemptible"
+      min          = 1
+      max          = 3
+      local-ssds   = 1
+      machine-type = "n1-standard-8"
+      image        = "COS"
+      disk-size    = "15"
+      disk-type    = "pd-ssd"
+      auto-upgrade = false
+      preemptible  = true
+      version      = "1.11.6-gke.2"
+    },
   ]
 }
 
-resource "google_dns_record_set" "metrics" {
-  name = "metrics-hush-house.${data.google_dns_managed_zone.concourse-ci-org.dns_name}"
-  type = "A"
-  ttl  = 300
+module "database" {
+  source = "./database"
 
-  managed_zone = "${data.google_dns_managed_zone.concourse-ci-org.name}"
-
-  rrdatas = [
-    "${google_compute_address.metrics.address}",
-  ]
+  name      = "hush-house-test"
+  cpus      = "4"
+  memory_mb = "5120"
+  region    = "${var.region}"
+  zone      = "${var.zone}"
+  vpc-uri   = "${module.cluster.vpc-uri}"
 }

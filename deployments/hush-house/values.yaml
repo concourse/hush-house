@@ -1,0 +1,57 @@
+concourse:
+  worker:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 3000m
+        memory: 3072Mi
+      limits:
+        cpu: 6000m
+        memory: 3072Mi
+  web:
+    replicas: 2
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 35.202.14.65
+    resources:
+      requests:
+        cpu: 500m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
+  postgresql:
+    enabled: false
+  concourse:
+    web:
+      tls:
+        enabled: true
+        bindPort: 443
+      externalUrl: https://hush-house.concourse-ci.org
+      auth:
+        mainTeam:
+          localUser: admin
+      encryption:
+        enabled: true
+      logLevel: debug
+      bindPort: 80
+      kubernetes:
+        keepNamespaces: true
+      prometheus:
+        enabled: true
+      metrics:
+        captureErrorMetrics: true
+      auth:
+        mainTeam:
+          github:
+            team: concourse:Pivotal
+        github:
+          enabled: true
+      postgres:
+        host: 10.99.0.3
+        database: atc
+    worker:
+      rebalanceInterval: 10m
+      baggageclaim:
+        logLevel: debug
+        driver: overlay
