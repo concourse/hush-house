@@ -36,7 +36,7 @@ diff-%:
 			.
 
 
-upgrade-%: deps-%
+deploy-%: deps-%
 	cd ./$* && \
 		helm upgrade \
 			--tls \

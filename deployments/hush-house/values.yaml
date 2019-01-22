@@ -1,4 +1,9 @@
+postgresql:
+  enabled: false
+
 concourse:
+  postgresql:
+    enabled: false
   worker:
     replicas: 1
     resources:
@@ -20,8 +25,6 @@ concourse:
       limits:
         cpu: 500m
         memory: 256Mi
-  postgresql:
-    enabled: false
   concourse:
     web:
       tls:
