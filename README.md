@@ -83,6 +83,40 @@ Below, a list of all of the dependencies needed to upgrade the `hush-house` envi
 
 Note.: if you're creating your own environment based of it and not using the provided Makefile, you'll only need `helm`.
 
+## Gathering acccess to the cluster
+
+
+0.      Install the dependencies
+
+```sh
+brew cask install google-cloud-sdk
+brew install kubernetes-cli
+brew install kubernetes-helm
+```
+
+
+1.      Configure GCloud
+
+```sh
+gcloud config set project cf-concourse-production
+gcloud config set compute/zone us-central1-a
+gcloud auth login
+```
+
+
+2.      Retrieve the k8s credentials for the cluster
+
+```sh
+gcloud container clusters get-credentials cluster-1
+```
+
+
+3.      Initialize Helm locally
+
+```sh
+helm init --client-only
+```
+
 
 ## Upgrading hush-house (pushing a new release)
 
@@ -206,21 +240,21 @@ Just like you can tie Vault or CredHub to your Concourse instances in order to h
 For instance, the Secret `something_a` is invalid:
 
 ```
-metadata.name: 
-  Invalid value: "something_a": 
-    a DNS-1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', 
-    and must start and end with an alphanumeric character (e.g. 'example.com', regex used 
+metadata.name:
+  Invalid value: "something_a":
+    a DNS-1123 subdomain must consist of lower case alphanumeric characters, '-' or '.',
+    and must start and end with an alphanumeric character (e.g. 'example.com', regex used
     for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
 ```
 
 - Names must not be longer than `63` characters
 
-- for interpolating ((mything)): 
+- for interpolating ((mything)):
 
 ```
 kubectl create generic mything \
   --from-literal=value=$value \
-  --namespace $prefix$team 
+  --namespace $prefix$team
 ```
 
 - for interpolating nested structures ((mything.foo)):
@@ -228,13 +262,13 @@ kubectl create generic mything \
 ```
 kubectl create generic mything \
   --from-literal=foo=$foo \
-  --namespace $prefix$team 
+  --namespace $prefix$team
 ```
 
 - roles necessary for `web` to be able to consume those secrets
 
 TODO
-  
+
 - For k8s there's no "per-pipeline" secret setting
 
 - should we include k8s creds health?
