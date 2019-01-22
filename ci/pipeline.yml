@@ -21,6 +21,8 @@ resources:
     branch: gh-pages
 
 
+# TODO - automatically generate this from the list
+#        of possible environments
 jobs:
 - name: deploy
   serial: true
@@ -45,8 +47,7 @@ jobs:
       run:
         path: /bin/bash
         args:
-        - -c
-        - -e
+        - -ce
         - |
           apk add --update make curl
           mkdir -p ~/.kube
