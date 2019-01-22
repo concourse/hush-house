@@ -3,11 +3,7 @@ resources:
   type: git
   source:
     uri: https://((github-token))@github.com/cirocosta/hush-house
-
-- name: concourse-image
-  type: registry-image
-  source:
-    repository: concourse/concourse-rc
+    branch: new-deployments
 
 - name: maintenance-image
   type: registry-image
@@ -21,46 +17,65 @@ resources:
     branch: gh-pages
 
 
-# TODO - automatically generate this from the list
-#        of possible environments
 jobs:
 - name: deploy
   serial: true
   plan:
   - aggregate:
     - get: maintenance-image
-    - get: concourse-image
-      params: {format: oci}
-      trigger: true
     - get: charts-repository
       trigger: true
     - get: hush-house
       trigger: true
+    - task: helm-values
+      config:
+        platform: linux
+        image_resource:
+          type: registry-image
+          source: { repository: busybox }
+        outputs:
+        - name: helm-values
+        run:
+          path: /bin/sh
+          args:
+          - -cex
+          - "echo '((hush-house-values-b64))' | base64 -d > ./helm-values/.values.yaml"
   - task: run
     image: maintenance-image
     config:
       platform: linux
       inputs:
-      - name: hush-house
-        path: .
-      - name: concourse-image
+      - { name: hush-house }
+      - { name: helm-values }
+      params:
+        DEPLOYMENT: hush-house
       run:
         path: /bin/bash
         args:
-        - -ce
+        - -cex
         - |
           apk add --update make curl
-          mkdir -p ~/.kube
 
-          echo '((values-b64))' | base64 -d >./.values.yml
+          # deployment credentials setup
+          cat ./helm-values/.values.yaml > ./hush-house/deployments/$DEPLOYMENT/.values.yaml
+
+          # kubectl credential setup
+          mkdir -p ~/.kube
           echo '((kube-config-b64))' | base64 -d >~/.kube/config
 
+          # kubectl setup
           helm init --client-only
+          echo '((helm-ca-cert-b64))' | base64 -d > $(helm home)/ca.pem
+          echo '((helm-cert-b64))' | base64 -d > $(helm home)/cert.pem
+          echo '((helm-key-b64))' | base64 -d > $(helm home)/key.pem
+
+
+
           helm repo remove local
           helm repo add concourse https://raw.githubusercontent.com/concourse/charts/gh-pages
           helm plugin install https://github.com/databus23/helm-diff --version master
 
-          export HELM_FLAGS=--set=concourse.imageDigest=$(cat ./concourse-image/digest)
-
-          make helm-deps
-          make diff && echo "No changes!" || { [[ $? == "2" ]] && echo "y" | make upgrade; }
+          cd ./hush-house/deployments
+          make diff-$DEPLOYMENT && \
+            echo "No changes!" || \
+            { [[ $? == "2" ]] && echo "y" | make deploy-$DEPLOYMENT; }

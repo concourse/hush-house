@@ -1,6 +1,12 @@
 HELM_FLAGS   ?=
 
 
+hush-house-creds-secrets-%:
+	kubectl create secret generic $*-values-b64 \
+		--namespace=hush-house-main \
+		--from-literal="value=$(shell cat ./$*/.values.yaml | base64)"
+
+
 creds-%:
 	cd ./$* && \
 		lpass show hush-house-values-$* > ./.values.yaml
