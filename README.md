@@ -202,6 +202,21 @@ cd ./deployments && \
 	make hush-house-creds-secrets-bananas
 ```
 
+With that set, `hush-house` is ready to have the deployment going. You can eithe trigger the deployment from your own machine if you have Helm already set up, or make a PR to `hush-house` so that the pipeline will do it for you.
+
+Once the process is completed, you should be able to see your resources under the deployment namespace:
+
+
+```
+kubectl  get pods --namespace=bananas
+NAME                                  READY   STATUS    RESTARTS   AGE
+bananas-postgresql-7f779c5c96-c8f4v   1/1     Running   0          2m
+bananas-web-78db545cc9-xrzd9          1/1     Running   1          2m
+bananas-worker-78f6cddccb-brvm9       1/1     Running   0          2m
+bananas-worker-78f6cddccb-qd6zn       1/1     Running   0          2m
+bananas-worker-78f6cddccb-xv7p5       1/1     Running   0          2m
+```
+
 
 ## k8s cheat-sheet
 
