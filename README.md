@@ -16,8 +16,8 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 - [Repository structure](#repository-structure)
 - [Dependencies](#dependencies)
-- [Upgrading hush-house (pushing a new release)](#upgrading-hush-house-pushing-a-new-release)
-- [Creating your own environment](#creating-your-own-environment)
+- [Gathering access to the cluster](#gathering-access-to-the-cluster)
+- [Creating your own deployment](#creating-your-own-deployment)
 - [k8s cheat-sheet](#k8s-cheat-sheet)
   - [Contexts](#contexts)
   - [Namespaces](#namespaces)
@@ -75,8 +75,6 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 ## Dependencies
 
-Below, a list of all of the dependencies needed to upgrade the `hush-house` environment.
-
 - [LastPass CLI (`lpass-cli`)](https://github.com/lastpass/lastpass-cli)
 - [Terraform CLI (`terraform`)](https://www.terraform.io/)
 - [Helm (`helm`)](https://helm.sh/)
@@ -86,7 +84,7 @@ Below, a list of all of the dependencies needed to upgrade the `hush-house` envi
 ps.: if you're creating your own environment based on an existing k8s cluster, you'll probably only need `helm`.
 
 
-## Gathering acccess to the k8s cluster
+## Gathering acccess to the cluster
 
 
 0. Install the dependencies
