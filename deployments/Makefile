@@ -30,7 +30,7 @@ template-%:
 		.
 
 
-diff-%:
+diff-%: deps-%
 	cd ./$* && \
 		helm diff upgrade \
 			--tls \

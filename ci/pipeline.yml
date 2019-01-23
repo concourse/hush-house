@@ -3,7 +3,6 @@ resources:
   type: git
   source:
     uri: https://((github-token))@github.com/cirocosta/hush-house
-    branch: new-deployments
 
 - name: maintenance-image
   type: registry-image
