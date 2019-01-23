@@ -9,9 +9,6 @@
                      "get": "maintenance-image"
                   },
                   {
-                     "get": "charts-repository"
-                  },
-                  {
                      "get": "hush-house",
                      "resource": "deployment-hush-house",
                      "trigger": true
@@ -62,9 +59,6 @@
                      "get": "maintenance-image"
                   },
                   {
-                     "get": "charts-repository"
-                  },
-                  {
                      "get": "hush-house",
                      "resource": "deployment-bananas",
                      "trigger": true
@@ -113,9 +107,6 @@
                "aggregate": [
                   {
                      "get": "maintenance-image"
-                  },
-                  {
-                     "get": "charts-repository"
                   },
                   {
                      "get": "hush-house",
@@ -182,14 +173,6 @@
          "source": {
             "path": "deployments/metrics",
             "uri": "https://((github-token))@github.com/cirocosta/hush-house"
-         },
-         "type": "git"
-      },
-      {
-         "name": "charts-repository",
-         "source": {
-            "branch": "gh-pages",
-            "uri": "https://((github-token))@github.com/concourse/charts"
          },
          "type": "git"
       },

@@ -19,9 +19,6 @@ local deploymentsJobs = [{
           get: 'maintenance-image',
         },
         {
-          get: 'charts-repository',
-        },
-        {
           get: 'hush-house',
           resource: 'deployment-' + deployment,
           trigger: true,
@@ -65,14 +62,6 @@ local deploymentsJobs = [{
 
 {
   resources: deploymentsResources + [
-    {
-      name: 'charts-repository',
-      type: 'git',
-      source: {
-        branch: 'gh-pages',
-        uri: 'https://((github-token))@github.com/concourse/charts',
-      },
-    },
     {
       name: 'maintenance-image',
       type: 'registry-image',
