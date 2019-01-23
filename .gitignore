@@ -8,3 +8,4 @@ gcp.json
 helm/*.pem
 helm/*.srl
 deployments.json
+deploy.json
