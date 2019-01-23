@@ -21,16 +21,7 @@ save-creds-%:
 				hush-house-values-$*
 
 
-template-%: | ensure-creds-file-exists-% deps-%
-	cd ./$* && \
-		helm template \
-		--name=$* \
-		--values=./.values.yaml \
-		$(HELM_FLAGS) \
-		.
-
-
-diff-%: | ensure-creds-file-exists deps-%
+diff-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
 		helm diff upgrade \
 			--tls \
@@ -42,7 +33,17 @@ diff-%: | ensure-creds-file-exists deps-%
 			.
 
 
-deploy-%: | ensure-creds-file-exists deps-%
+template-%: | ensure-creds-file-exists-% deps-%
+	cd ./$* && \
+		helm template \
+		--name=$* \
+		--values=./.values.yaml \
+		$(HELM_FLAGS) \
+		.
+
+
+
+deploy-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
 		helm upgrade \
 			--tls \
