@@ -54,7 +54,7 @@ local deploymentsJobs = [{
     },
     {
       task: 'run',
-      file: 'hush-house/ci/helm-deploy.yml',
+      file: 'hush-house/ci/tasks/helm-deploy.yml',
       params: {
         DEPLOYMENT: deployment,
       },

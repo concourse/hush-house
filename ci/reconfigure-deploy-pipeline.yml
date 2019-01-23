@@ -1,0 +1,65 @@
+resource_types:
+- name: concourse-pipeline
+  type: registry-image
+  source:
+    repository: cirocosta/concourse-pipeline-resource
+
+
+resources:
+- name: hush-house
+  type: git
+  source:
+    uri: https://((github-token))@github.com/cirocosta/hush-house
+
+- name: alpine
+  type: registry-image
+  source:
+    repository: alpine
+
+- name: deploy-pipeline
+  type: concourse-pipeline
+  source:
+    target: https://hush-house.concourse-ci.org
+    teams:
+    - name: main
+      username: admin
+      password: ((admin-password))
+
+
+jobs:
+- name: set-pipeline
+  plan:
+  - aggregate:
+    - get: hush-house
+      trigger: true
+    - get: alpine
+  - task: generate
+    image: alpine
+    config:
+      platform: linux
+      inputs: [{ name: hush-house, path: ./ }]
+      outputs: [{ name: result, path: ./ }]
+      caches: [{ path: ./jsonnet }]
+      run:
+        path: /bin/sh
+        args:
+        - -ce
+        - |
+          export PATH=$PATH:$(realpath ./jsonnet)
+
+          apk add --update make jq git libstdc++
+
+          if [ ! -x "$(command -v jsonnet)" ]; then
+            apk add g++
+            git clone https://github.com/google/jsonnet ./jsonnet
+            make -C ./jsonnet -j6
+          fi
+
+          make
+  - put: deploy-pipeline
+    inputs: [ result ]
+    params:
+      pipelines:
+      - name: deploy
+        team: main
+        config_file: ./result/ci/deploy.json
