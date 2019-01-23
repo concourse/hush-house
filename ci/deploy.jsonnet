@@ -4,7 +4,7 @@ local deploymentsResources = [{
   name: 'deployment-' + deployment,
   type: 'git',
   source: {
-    uri: 'https://github.com/cirocosta/hush-house',
+    uri: 'https://((github-token))@github.com/cirocosta/hush-house',
     path: 'deployments/' + deployment,
   },
 } for deployment in deployments];

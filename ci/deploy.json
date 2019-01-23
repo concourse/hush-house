@@ -112,7 +112,7 @@
          "name": "deployment-metrics",
          "source": {
             "path": "deployments/metrics",
-            "uri": "https://github.com/cirocosta/hush-house"
+            "uri": "https://((github-token))@github.com/cirocosta/hush-house"
          },
          "type": "git"
       },
@@ -120,7 +120,7 @@
          "name": "deployment-hush-house",
          "source": {
             "path": "deployments/hush-house",
-            "uri": "https://github.com/cirocosta/hush-house"
+            "uri": "https://((github-token))@github.com/cirocosta/hush-house"
          },
          "type": "git"
       },

@@ -8,7 +8,7 @@ params:
 run:
   path: /bin/bash
   args:
-  - -cex
+  - -ce
   - |
     apk add --update make curl
 
