@@ -1,0 +1,143 @@
+{
+   "jobs": [
+      {
+         "name": "deploy-metrics",
+         "plan": [
+            {
+               "aggregate": [
+                  {
+                     "get": "maintenance-image"
+                  },
+                  {
+                     "get": "charts-repository"
+                  },
+                  {
+                     "get": "hush-house",
+                     "resource": "deployment-metrics",
+                     "trigger": true
+                  },
+                  {
+                     "config": {
+                        "image_resource": {
+                           "source": {
+                              "repository": "busybox"
+                           },
+                           "type": "registry-image"
+                        },
+                        "outputs": [
+                           {
+                              "name": "helm-values"
+                           }
+                        ],
+                        "platform": "linux",
+                        "run": {
+                           "args": [
+                              "-ce",
+                              "echo '((metrics-values-b64))' | base64 -d > ./helm-values/.values.yaml"
+                           ],
+                           "path": "/bin/sh"
+                        }
+                     },
+                     "task": "helm-values"
+                  }
+               ]
+            },
+            {
+               "file": "hush-house/ci/helm-deploy.yml",
+               "image": "maintenance-image",
+               "params": {
+                  "DEPLOYMENT": "metrics"
+               },
+               "task": "run"
+            }
+         ],
+         "serial": true
+      },
+      {
+         "name": "deploy-hush-house",
+         "plan": [
+            {
+               "aggregate": [
+                  {
+                     "get": "maintenance-image"
+                  },
+                  {
+                     "get": "charts-repository"
+                  },
+                  {
+                     "get": "hush-house",
+                     "resource": "deployment-hush-house",
+                     "trigger": true
+                  },
+                  {
+                     "config": {
+                        "image_resource": {
+                           "source": {
+                              "repository": "busybox"
+                           },
+                           "type": "registry-image"
+                        },
+                        "outputs": [
+                           {
+                              "name": "helm-values"
+                           }
+                        ],
+                        "platform": "linux",
+                        "run": {
+                           "args": [
+                              "-ce",
+                              "echo '((hush-house-values-b64))' | base64 -d > ./helm-values/.values.yaml"
+                           ],
+                           "path": "/bin/sh"
+                        }
+                     },
+                     "task": "helm-values"
+                  }
+               ]
+            },
+            {
+               "file": "hush-house/ci/helm-deploy.yml",
+               "image": "maintenance-image",
+               "params": {
+                  "DEPLOYMENT": "hush-house"
+               },
+               "task": "run"
+            }
+         ],
+         "serial": true
+      }
+   ],
+   "resources": [
+      {
+         "name": "deployment-metrics",
+         "source": {
+            "path": "deployments/metrics",
+            "uri": "https://github.com/cirocosta/hush-house"
+         },
+         "type": "git"
+      },
+      {
+         "name": "deployment-hush-house",
+         "source": {
+            "path": "deployments/hush-house",
+            "uri": "https://github.com/cirocosta/hush-house"
+         },
+         "type": "git"
+      },
+      {
+         "name": "charts-repository",
+         "source": {
+            "branch": "gh-pages",
+            "uri": "https://((github-token))@github.com/concourse/charts"
+         },
+         "type": "git"
+      },
+      {
+         "name": "maintenance-image",
+         "source": {
+            "repository": "cirocosta/charts-maintenance"
+         },
+         "type": "registry-image"
+      }
+   ]
+}
