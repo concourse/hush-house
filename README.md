@@ -126,32 +126,76 @@ lpass show helm-key > $(helm home)/key.pem
 
 ## Creating your own deployment
 
-To create a new deployment of your own:
+To create a new deployment of your own, a Chart under `./deployments` needs to be created (given that every deployment corresponds to releasing a custom Chart).
+
+Here's an example of how that can be done:
 
 
-1. get into the `./deployments` directory and create a Helm chart named after your desired deployment name:
-
-```sh
-# Get inside ./deployments
-cd ./deployments
-
-# Create a chart there.
-# For instance, for a deployment named `bananas`
-helm create bananas
-```
-
-2. Create a `.values.yaml` file to hold credentials:
+1. Populate the repository with metadata about the deployment
 
 ```sh
-# Get into the directory
-cd ./bananas
+# Create a chart directory under `./deployments`
+# For instance, for a deployment named `bananas`:
+mkdir ./deployments/bananas
 
-# Create a `.values.yaml` file
-echo "---" > ./.values.yaml
+# Create a `Chart.yaml` file with some info about it
+echo '---
+name: bananas
+version: 0.0.1
+description: a test deployment!
+maintainers:
+- name: ciro
+' > ./deployments/bananas/Chart.yaml
 ```
 
-*(yes, this step is required given that `make` targets rely on `.values.yaml` existing)*
 
+2. Add the concourse release candidate as a dependency
+
+```sh
+echo '---
+dependencies:
+- name: concourse
+  version: 1338.0.0
+  repository: https://raw.githubusercontent.com/concourse/charts/gh-pages/
+' > ./deployments/bananas/Chart.yaml
+```
+
+
+3. Create the `values.yaml` file with public configurations
+
+```sh
+echo '---
+concourse:
+  worker:
+    replicas: 3
+  concourse:
+    web:
+      prometheus:
+        enabled: true
+' > ./deployments/bananas/values.yaml
+```
+
+
+4. *(optional)* Create the `.values.yaml` file with the credentials
+
+
+```sh
+echo '---
+concourse:
+  secrets:
+    localUsers: test:something
+' > ./deployments/bananas/.values.yaml
+```
+
+
+5. *(if you have credentials)* Populate the `hush-house-main` namespace with your credentials
+
+Having `kubectl` configured with access to `hush-house-main`:
+
+```sh
+cd ./deployments && \
+	make hush-house-creds-secrets-bananas
+```
 
 
 ## k8s cheat-sheet
