@@ -21,7 +21,7 @@ save-creds-%:
 				hush-house-values-$*
 
 
-template-%:
+template-%: deps-%
 	cd ./$* && \
 		helm template \
 		--name=$* \

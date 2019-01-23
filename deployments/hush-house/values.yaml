@@ -31,9 +31,6 @@ concourse:
         enabled: true
         bindPort: 443
       externalUrl: https://hush-house.concourse-ci.org
-      auth:
-        mainTeam:
-          localUser: admin
       encryption:
         enabled: true
       logLevel: debug
@@ -46,6 +43,7 @@ concourse:
         captureErrorMetrics: true
       auth:
         mainTeam:
+          localUser: admin
           github:
             team: concourse:Pivotal
         github:
