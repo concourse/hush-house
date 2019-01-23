@@ -21,7 +21,7 @@ save-creds-%:
 				hush-house-values-$*
 
 
-template-%: deps-%
+template-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
 		helm template \
 		--name=$* \
@@ -30,7 +30,7 @@ template-%: deps-%
 		.
 
 
-diff-%: deps-%
+diff-%: | ensure-creds-file-exists deps-%
 	cd ./$* && \
 		helm diff upgrade \
 			--tls \
@@ -42,7 +42,7 @@ diff-%: deps-%
 			.
 
 
-deploy-%: deps-%
+deploy-%: | ensure-creds-file-exists deps-%
 	cd ./$* && \
 		helm upgrade \
 			--tls \
@@ -61,3 +61,10 @@ deps-%:
 		helm dependency update .
 
 
+ensure-creds-file-exists-%:
+	@test -f ./$*/.values.yaml || \
+		{ \
+			echo "ERROR: $* misses credentials"; \
+			echo "Make sure 'deployments/$*/.values.yaml' exists"; \
+			exit 1; \
+		}
