@@ -1,4 +1,4 @@
-all: ci/deploy.json
+pipeline: ci/deploy.json
 
 ci/deploy.json: ci/deploy.jsonnet ci/deployments.json
 	jsonnet \
