@@ -5,7 +5,7 @@
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg/512px-EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg)
 
-This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org) and [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), an acceptance testing environment deployed on top of k8s.
+This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org), [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), and any other K8S deployments using the `hush-house` Kubernetes cluster.
 
 
 **Table of contents**
@@ -29,45 +29,47 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 ```sh
 .
-├── Makefile 			# Definition of the make targets
-│				# to deploy/upgrade hush-house.
+├── ci				# Concourse pipelines and tasks designed to keep
+│				# the environment continuously up to date.
 │
-├── shuttle 			# Chart that unites Concourse
-│   │				# and some other useful charts
-│   ├── Chart.yaml              # that compose `hush-house`.
+├── deployments			# Directory that contains all deployments that
+│   │				# exist in the k8s cluster. Each deployment directory
+│   │				# is packaged as a Helm chart and deployment as a
+│   │				# Helm release with the corresponding directory name.
 │   │
-│   ├── charts			# Downloaded chart dependencies
-│   │   ├── concourse-...tgz
-│   │   ├── grafana-1....tgz
-│   │   └── prometheus...tgz
+│   ├── Makefile		# Targets to manage the helm releases (to be used by
+│   │				# the pipelines and tasks.
 │   │
-│   ├── dashboards		# Definition of the dashboards
-│   │   └── concourse		# used by `metrics-hush-house`.
-│   │       ├── concourse.json
-│   │       └── postgres.json
-│   │
-│   ├── requirements.yaml 	# Description of the dependencies
-│   ├── requirements.lock	# (other charts)
-│   │
-│   ├── templates		# Templated `yaml` files that form
-│   │   ├── NOTES.txt           # k8s resources that are used by
-│   │   ├── _helpers.tpl        # the deployed components.
-│   │   ├── grafana-dashboards-config.yaml
-│   │   ├── grafana-datasource-config.yaml
-│   │   └── tls-secret.yaml
-│   │
-│   └── values.yaml		# Default values for a full concourse
-│				# deployment and surrounding services
-│				# (prometheus+grafana)
+│   ├── hush-house		# A deployment (`hush-house.concourse-ci.org`).
+│   │   ├── README.md		# The deployment's description.
+│   │   ├── Chart.yaml		# Metadata about the deployment.
+│   │   ├── templates		# K8S resouces and notes to be templated from the values
+│   │   │			# specified (.values.yaml + values.yaml)
+│   │   ├── requirements.yaml	# Versioned dependencies of this chart.
+│   │   ├── values.yaml		# Public values.
+│   │   └── .values.yaml	# Private values (credentials)
+│   │
+│   └── metrics			# Antother deployment (`metrics-hush-house.concourse-ci.org`)
+│	...
+│       └── values.yaml
+│ 
+├── helm			# Scripts to automate the provisioning of Helm and its
+│				# server-side component (tiller)
 │
-├── .values.yaml 		# Helm values for `shuttle` that contain
-│				# sensitive information (credentials).
+├── Makefile			# TODO
 │
-└── terraform			# Mutates the IAAS to provision static
-    ├── backend.tf		# IPs for the load-balancers used for
-    ├── gcp.json		# `web` and `grafana`, as well as update
-    ├── main.tf			# the DNS entries for the environment.
-    └── outputs.tf
+└── terraform			# Terraform files for bringing up the K8S cluster and other
+    │				# configuring other infrastructure components necessary
+    │				# for the deployments (addresses + cloudsql).
+    │
+    ├── main.tf			# Entrypoint that makes use of modules to set up the IaaS
+    │				# resources.
+    │
+    ├── address			# Module to create addresses ...
+    ├── cluster			# Module for creating GKE clusters w/ node pools
+    │   └── vpc			# Module for setting up the VPC of the cluster
+    └── database		# Module for setting up CloudSQL
+
 ```
 
 
@@ -79,23 +81,17 @@ Below, a list of all of the dependencies needed to upgrade the `hush-house` envi
 - [Terraform CLI (`terraform`)](https://www.terraform.io/)
 - [Helm (`helm`)](https://helm.sh/)
 - [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
-- A K8S cluster that you have access to.
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/)
 
-Note.: if you're creating your own environment based of it and not using the provided Makefile, you'll only need `helm`.
-
-## Gathering acccess to the cluster
+ps.: if you're creating your own environment based on an existing k8s cluster, you'll probably only need `helm`.
 
 
-0.      Install the dependencies
-
-```sh
-brew cask install google-cloud-sdk
-brew install kubernetes-cli
-brew install kubernetes-helm
-```
+## Gathering acccess to the k8s cluster
 
 
-1.      Configure GCloud
+0. Install the dependencies
+
+1. Configure access to the Google cloud project
 
 ```sh
 gcloud config set project cf-concourse-production
@@ -104,90 +100,73 @@ gcloud auth login
 ```
 
 
-2.      Retrieve the k8s credentials for the cluster
+2. Retrieve the k8s credentials for the cluster
 
 ```sh
-gcloud container clusters get-credentials cluster-1
+gcloud container clusters get-credentials hush-house
 ```
 
 
-3.      Initialize Helm locally
+3. Initialize the Helm local configuration
 
 ```sh
 helm init --client-only
 ```
 
 
-## Upgrading hush-house (pushing a new release)
+4. Retrieve the Helm TLS certificates and the CA certificate
 
-To update the release of [hush-house.concourse-ci.org](https://hus-house.concourse-ci.org), make sure you have the dependencies list under [#dependencies](#dependencies) met, then run the following commands:
 
 ```sh
-# Retrieve the necessary credentials from lpass.
-make creds
-
-# Update the local filesystem with the dependencies (other
-# charts) of the hush-house deployment.
-make helm-deps
-
-# Compare the desired state as specified in `./.values.yaml`,
-# variables from `terraform` and `./shuttle/values.yaml` against
-# the current state in the k8s cluster.
-#
-# It'll display the differences and then ask for confirmation
-# to proceed with the deploy.
-make upgrade
-```
-
-ps.: all `make` target are described in `make help`.
-
-pps.: `shuttle` (the chart that hush-house uses to glue Concourse with other charts) by default will use the `ssd` storage class for Prometheus and Postgres, but that's not a storage class that comes installed by default in GKE. To create it in your cluster, make sure you apply the following:
-
-```yml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ssd
-provisioner: kubernetes.io/gce-pd
-parameters:
-  type: pd-ssd
-reclaimPolicy: Delete
-volumeBindingMode: Immediate
+lpass show helm-ca-cert > $(helm home)/ca.pem
+lpass show helm-cert > $(helm home)/cert.pem
+lpass show helm-key > $(helm home)/key.pem
 ```
 
 
-## Creating your own environment
+## Creating your own deployment
 
-To create a separate environment of your own, run `helm` with a set of values that satisfy your needs against the `shuffle` chart.
+To create a new deployment of your own:
 
-For instance:
+
+1. get into the `./deployments` directory and create a Helm chart named after your desired deployment name:
 
 ```sh
-export ENV_NAME=dev
+# Get inside ./deployments
+cd ./deployments
 
-helm upgrade \
-	--install \
-	--namespace $ENV_NAME \
-	--set=concourse.worker.replicas=1 \
-	$ENV_NAME
-	./shuffle
+# Create a chart there.
+# For instance, for a deployment named `bananas`
+helm create bananas
 ```
 
-By the end, the execution will tell you how to get the necessary credentials and get the service exposed (or, run `helm status $ENV_NAME` to see those again).
+2. Create a `.values.yaml` file to hold credentials:
+
+```sh
+# Get into the directory
+cd ./bananas
+
+# Create a `.values.yaml` file
+echo "---" > ./.values.yaml
+```
+
+*(yes, this step is required given that `make` targets rely on `.values.yaml` existing)*
+
 
 
 ## k8s cheat-sheet
 
 Here's a quick cheat-sheet that might help you get started with `kubectl` if you've never used it before.
 
+
 ### Contexts
 
 These are the equivalent of Concourse `target`s, storing auth, API endpoint, and namespace information in each of them.
 
-- Get the current context:
+- Get all configured contexts:
 
 ```sh
-kubectl config current-context
+kubectl config get-contexts
 ```
 
 
