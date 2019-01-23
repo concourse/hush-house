@@ -136,7 +136,12 @@ Here's an example of how that can be done:
 # For instance, for a deployment named `bananas`:
 mkdir ./deployments/bananas
 
-# Create a `Chart.yaml` file with some info about it
+
+# Create the required files
+touch ./deployments/{Chart.yaml,requirements.yaml,values.yaml,.values.yaml}
+
+
+# Populate `Chart.yaml` file with some info about it
 echo '---
 name: bananas
 version: 0.0.1
@@ -174,7 +179,7 @@ concourse:
 ```
 
 
-4. *(optional)* Create the `.values.yaml` file with the credentials
+4. Populate the `.values.yaml` file with the credentials
 
 
 ```sh
@@ -185,8 +190,10 @@ concourse:
 ' > ./deployments/bananas/.values.yaml
 ```
 
+*ps.: this can be left blank*
 
-5. *(if you have credentials)* Populate the `hush-house-main` namespace with your credentials
+
+5. Populate the `hush-house-main` namespace with your credentials
 
 Having `kubectl` configured with access to `hush-house-main`:
 

@@ -54,6 +54,59 @@
          "serial": true
       },
       {
+         "name": "deploy-bananas",
+         "plan": [
+            {
+               "aggregate": [
+                  {
+                     "get": "maintenance-image"
+                  },
+                  {
+                     "get": "charts-repository"
+                  },
+                  {
+                     "get": "hush-house",
+                     "resource": "deployment-bananas",
+                     "trigger": true
+                  },
+                  {
+                     "config": {
+                        "image_resource": {
+                           "source": {
+                              "repository": "busybox"
+                           },
+                           "type": "registry-image"
+                        },
+                        "outputs": [
+                           {
+                              "name": "helm-values"
+                           }
+                        ],
+                        "platform": "linux",
+                        "run": {
+                           "args": [
+                              "-ce",
+                              "echo '((bananas-values-b64))' | base64 -d > ./helm-values/.values.yaml"
+                           ],
+                           "path": "/bin/sh"
+                        }
+                     },
+                     "task": "helm-values"
+                  }
+               ]
+            },
+            {
+               "file": "hush-house/ci/tasks/helm-deploy.yml",
+               "image": "maintenance-image",
+               "params": {
+                  "DEPLOYMENT": "bananas"
+               },
+               "task": "run"
+            }
+         ],
+         "serial": true
+      },
+      {
          "name": "deploy-metrics",
          "plan": [
             {
@@ -112,6 +165,14 @@
          "name": "deployment-hush-house",
          "source": {
             "path": "deployments/hush-house",
+            "uri": "https://((github-token))@github.com/cirocosta/hush-house"
+         },
+         "type": "git"
+      },
+      {
+         "name": "deployment-bananas",
+         "source": {
+            "path": "deployments/bananas",
             "uri": "https://((github-token))@github.com/cirocosta/hush-house"
          },
          "type": "git"
