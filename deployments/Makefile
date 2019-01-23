@@ -36,7 +36,7 @@ diff-%:
 			--tls \
 			--namespace=$* \
 			--detailed-exitcode \
-			--values=./.values.yml \
+			--values=./.values.yaml \
 			$(HELM_FLAGS) \
 			$* \
 			.
