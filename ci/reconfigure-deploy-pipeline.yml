@@ -38,7 +38,7 @@ jobs:
     config:
       platform: linux
       inputs: [{ name: hush-house, path: ./ }]
-      outputs: [{ name: result, path: ./ }]
+      outputs: [{ name: result }]
       caches: [{ path: ./jsonnet }]
       run:
         path: /bin/sh
@@ -55,11 +55,12 @@ jobs:
             make -C ./jsonnet -j6
           fi
 
-          make
+          make pipeline
+          cp ./ci/deploy.json ./result/deploy.json
   - put: deploy-pipeline
     inputs: [ result ]
     params:
       pipelines:
       - name: deploy
         team: main
-        config_file: ./result/ci/deploy.json
+        config_file: ./result/deploy.json

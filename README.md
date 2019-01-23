@@ -160,7 +160,7 @@ dependencies:
 - name: concourse
   version: 1338.0.0
   repository: https://raw.githubusercontent.com/concourse/charts/gh-pages/
-' > ./deployments/bananas/Chart.yaml
+' > ./deployments/bananas/requirements.yaml
 ```
 
 

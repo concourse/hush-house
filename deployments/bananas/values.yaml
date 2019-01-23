@@ -1,0 +1,9 @@
+---
+concourse:
+  worker:
+    replicas: 3
+  concourse:
+    web:
+      prometheus:
+        enabled: true
+
