@@ -5,7 +5,7 @@ local deploymentsResources = [{
   type: 'git',
   source: {
     uri: 'https://((github-token))@github.com/cirocosta/hush-house',
-    path: 'deployments/' + deployment + '/',
+    paths: ['deployments/' + deployment + '/'],
   },
 } for deployment in deployments];
 
