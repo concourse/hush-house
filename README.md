@@ -6,15 +6,16 @@
 
 <br />
 
-> A hush house is an enclosed, noise-suppressed facility used for testing aircraft systems,
+> A **hush house** is an enclosed, noise-suppressed facility used for testing aircraft systems,
 > including propulsion, mechanics, electronics, pneumatics, and others.
 
 
 <br />
 
----
 
-This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org), [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), and any other K8S deployments using the `hush-house` Kubernetes cluster.
+This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org), [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), and any other [Kubernetes (K8S)](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) deployments using the `hush-house` Kubernetes cluster available in the shared Concourse [Google Cloud](https://cloud.google.com/) account.
+
+<br />
 
 
 **Table of contents**
@@ -90,7 +91,7 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 - [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/)
 
-ps.: if you're creating your own environment based on an existing k8s cluster, you'll probably only need `helm`.
+*ps.: if you're creating your own environment based on an existing k8s cluster, you'll probably only need `helm`.*
 
 
 ## Gathering acccess to the cluster
@@ -317,12 +318,3 @@ kubectl create generic mything \
   --namespace $prefix$team
 ```
 
-- roles necessary for `web` to be able to consume those secrets
-
-TODO
-
-- For k8s there's no "per-pipeline" secret setting
-
-- should we include k8s creds health?
-
-TODO
