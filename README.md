@@ -1,9 +1,18 @@
 # HUSH-HOUSE
 
+<br />
+
+<img align="left" width="296" height="222" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg/512px-EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg">
+
+<br />
+
 > A hush house is an enclosed, noise-suppressed facility used for testing aircraft systems,
 > including propulsion, mechanics, electronics, pneumatics, and others.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg/512px-EM_NELLIS_HUSH_HOUSE_%282786461516%29.jpg)
+
+<br />
+
+---
 
 This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org), [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), and any other K8S deployments using the `hush-house` Kubernetes cluster.
 
