@@ -32,6 +32,7 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
   - [Contexts](#contexts)
   - [Namespaces](#namespaces)
   - [Nodes](#nodes)
+  - [Kubernetes for credential management](#kubernetes-for-credential-management)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

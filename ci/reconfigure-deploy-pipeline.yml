@@ -55,7 +55,7 @@ jobs:
             make -C ./jsonnet -j6
           fi
 
-          make pipeline
+          make deploy-pipeline
           cp ./ci/deploy.json ./result/deploy.json
   - put: deploy-pipeline
     inputs: [ result ]

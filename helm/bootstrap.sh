@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Prepares the k8s cluster to host a Tiller components
+# that should be communicated with only through TLS
+# connections.
+
 set -o errexit
 set -o nounset
 
@@ -27,11 +31,18 @@ helm init \
 	--upgrade
 
 
+
+# TODO - probably move this to the root Makefile to something
+# 	 like `make helm-creds`?
 cp ca.cert.pem $(helm home)/ca.pem
 cp helm.cert.pem $(helm home)/cert.pem
 cp helm.key.pem $(helm home)/key.pem
 
 
+# TODO - lol, this should not be here
+# 	 > should be moved to something like a
+# 	 > terraform provisioner that would be
+# 	 > trigger right after creating the cluster.
 kubectl apply -f - <<YAML
 apiVersion: storage.k8s.io/v1
 kind: StorageClass

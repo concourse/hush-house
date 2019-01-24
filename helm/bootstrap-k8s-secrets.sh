@@ -1,8 +1,20 @@
 #!/bin/bash
 
+# Bootstraps the necessary HELM secrets in the
+# k8s cluster unde the `hush-house-main` namespace
+# where the `hush-house` deployment can fetch secrets
+# from.
+#
+# This is needed so that the `deploy` pipeline[1] can
+# make use of Helm with `--tls`.
+#
+# [1]: https://hush-house.concourse-ci.org/teams/main/pipelines/deploy
+#
+
 set -o errexit
 set -o nounset
 set -o pipefail
+
 
 kubectl create secret generic helm-ca-cert-b64 \
 	--namespace=hush-house-main \

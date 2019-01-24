@@ -1,4 +1,10 @@
-pipeline: ci/deploy.json
+# Generates the `deploy` pipeline [1] based on the
+# `jsonnet` file under `ci`.
+#
+# [1]: https://hush-house.concourse-ci.org/teams/main/pipelines/deploy
+#
+deploy-pipeline: ci/deploy.json
+
 
 ci/deploy.json: ci/deployments.json
 	jsonnet \
