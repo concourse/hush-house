@@ -27,20 +27,6 @@ concourse:
         memory: 256Mi
   concourse:
     web:
-      tls:
-        enabled: true
-        bindPort: 443
-      externalUrl: https://hush-house.concourse-ci.org
-      encryption:
-        enabled: true
-      logLevel: debug
-      bindPort: 80
-      kubernetes:
-        keepNamespaces: true
-      prometheus:
-        enabled: true
-      metrics:
-        captureErrorMetrics: true
       auth:
         mainTeam:
           localUser: admin
@@ -48,11 +34,17 @@ concourse:
             team: concourse:Pivotal
         github:
           enabled: true
+      bindPort: 80
+      encryption: { enabled: true }
+      externalUrl: https://hush-house.concourse-ci.org
+      kubernetes: { keepNamespaces: true }
+      logLevel: debug
+      metrics: { captureErrorMetrics: true }
+      prometheus: { enabled: true }
       postgres:
         host: 10.99.0.3
         database: atc
+      tls: { enabled: true, bindPort: 443 }
     worker:
       rebalanceInterval: 10m
-      baggageclaim:
-        logLevel: debug
-        driver: overlay
+      baggageclaim: { driver: overlay }

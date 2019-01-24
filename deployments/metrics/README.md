@@ -7,6 +7,8 @@ It's composed of two dependent charts:
 - [prometheus](https://github.com/helm/charts/blob/master/stable/prometheus/README.md); and
 - [grafana](https://github.com/helm/charts/blob/master/stable/grafana/README.md).
 
+And a publicly accessible URL for dashboards: https://metrics-hush-house.concourse-ci.org/dashboards
+
 
 ## Prometheus
 
