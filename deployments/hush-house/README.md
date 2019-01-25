@@ -120,3 +120,5 @@ You can add a reference to the new key as follows:
 ### Accessing worker containers debug endpoints (pprof)
 
 Just like in web, but for worker pods - see [Accessing web containers debug endpoints](#accessing-web-containers-debug-endpoints).
+
+Note: capturing profiles and gorutine dumps to be consumed by `swirly` should work the same way as for `web`.
