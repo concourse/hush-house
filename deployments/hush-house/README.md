@@ -33,6 +33,46 @@ kubectl port-forward \
 Now, access it via your loopback address on the right port: http://127.0.0.1:8079
 
 
+#### Generating goroutine dumps to be consumed by swirly
+
+To generate a goroutine dump that is compatible with [swirly](https://github.com/vito/swirly):
+
+1. Have the debug endpoint forwarded to 127.0.0.1
+
+(see section above)
+
+2. Retrieve the goroutine dump
+
+```sh
+curl -SL http://localhost:8079/debug/pprof/goroutine?debug=2 > /tmp/dump
+```
+
+3. Put the dump in the [`swirly` webpage](https://vito.github.io/swirly).
+
+
+#### Retrieving and visualizing profiles
+
+0. Install the dependencies
+
+The default visualization of the profiles rely on few tools from the [`graphviz`](https://www.graphviz.org/) suite.
+
+1. Have the debug endpoint forwarded to 127.0.0.1;
+
+2. Capture a profile letting the Go runtime do it for 30 seconds
+
+```sh
+# This request will block for 30seconds before retrieving the profile data.
+curl -SL \
+	-o /tmp/profile \
+	'http://127.0.0.1:8079/debug/pprof/profile?seconds=30'
+
+# Opens
+go tool pprof -http=:8080 /tmp/profile.
+```
+
+3. Access the profile through the web page available at [`127.0.0.1:8080`](http://127.0.0.1:8080) (your default browser should open automatically).
+
+
 ## Workers
 
 The workers managed by this deployment are ephemeral by nature and must be used for tasks that are suitable for workloads that can be interrupted.
