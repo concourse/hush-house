@@ -2,6 +2,7 @@ postgresql:
   enabled: false
 
 concourse:
+  imagePullPolicy: Always
   postgresql:
     enabled: false
   worker:
