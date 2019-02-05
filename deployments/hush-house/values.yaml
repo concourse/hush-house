@@ -6,10 +6,10 @@ concourse:
   postgresql:
     enabled: false
   worker:
-    replicas: 1
+    replicas: 3
     resources:
       requests:
-        cpu: 3000m
+        cpu: 1500m
         memory: 3072Mi
       limits:
         cpu: 6000m
@@ -47,5 +47,5 @@ concourse:
         database: atc
       tls: { enabled: true, bindPort: 443 }
     worker:
-      rebalanceInterval: 10m
+      rebalanceInterval: 5m
       baggageclaim: { driver: overlay }
