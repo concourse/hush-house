@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Bootstraps the necessary HELM secrets in the
-# k8s cluster unde the `hush-house-main` namespace
+# k8s cluster under the `hush-house-main` namespace
 # where the `hush-house` deployment can fetch secrets
 # from.
 #

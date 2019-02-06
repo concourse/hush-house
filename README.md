@@ -169,10 +169,14 @@ maintainers:
 echo '---
 dependencies:
 - name: concourse
-  version: 1338.0.0
+  version: 0.0.15
   repository: https://raw.githubusercontent.com/concourse/charts/gh-pages/
 ' > ./deployments/bananas/requirements.yaml
 ```
+
+ps.: the version can be retrieved from [concourse/charts](https://github.com/concourse/charts/tree/gh-pages).
+
+pps.: the upstream version of the Chart could be used too! See [`helm/charts`](https://github.com/helm/charts) for instructions.
 
 
 3. Create the `values.yaml` file with public configurations
@@ -190,7 +194,7 @@ concourse:
 ```
 
 
-4. Populate the `.values.yaml` file with the credentials
+4. Populate the `.values.yaml` file with credentials
 
 
 ```sh
@@ -206,14 +210,14 @@ concourse:
 
 5. Populate the `hush-house-main` namespace with your credentials
 
-Having `kubectl` configured with access to `hush-house-main`:
+Having `kubectl` configured (see [*gathering access to the cluster*](#gathering-access-to-the-cluster)) with access to `hush-house-main`, create the secret using the `hush-house-creds-secrets-$DEPLOYMENT` target from [`./deployments/Makefile`](./deployments/Makefile):
 
 ```sh
 cd ./deployments && \
 	make hush-house-creds-secrets-bananas
 ```
 
-With that set, `hush-house` is ready to have the deployment going. You can eithe trigger the deployment from your own machine if you have Helm already set up, or make a PR to `hush-house` so that the pipeline will do it for you.
+With that set, `hush-house` is ready to have the deployment going. You can either trigger the deployment from your own machine if you have Helm already set up, or make a PR to `hush-house` so that the pipeline does it all for you.
 
 Once the process is completed, you should be able to see your resources under the deployment namespace:
 
