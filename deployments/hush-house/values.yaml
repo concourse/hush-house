@@ -2,7 +2,7 @@ postgresql:
   enabled: false
 
 concourse:
-  imageDigest: sha256:3ef09b184499236f30651997deb4b9d7fe678c936529a5d431cb659e3d1c08f8
+  imageDigest: sha256:67b6673dd8693e8140f9a80bc191d74d0b13a770cd698fa97e12e2bdc83a48a7
   postgresql:
     enabled: false
   worker:
