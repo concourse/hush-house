@@ -9,7 +9,7 @@ hush-house-creds-secrets-%: ensure-creds-file-exists-% deps-%
 
 creds-%:
 	cd ./$* && \
-		lpass show hush-house-values-$* > ./.values.yaml
+		lpass show --notes hush-house-values-$* > ./.values.yaml
 
 
 save-creds-%:

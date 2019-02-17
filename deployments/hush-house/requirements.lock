@@ -1,6 +1,6 @@
 dependencies:
 - name: concourse
   repository: https://raw.githubusercontent.com/concourse/charts/gh-pages/
-  version: 1338.0.0
-digest: sha256:718f8f98692daee3716574c8c774271bccb79fd25db4e9951b5e9b48867ea3d0
-generated: 2019-01-21T20:34:20.916109-05:00
+  version: 0.0.37
+digest: sha256:5363819ac194c2a070a572d371dc4769fdd334aaf9b3922bfed964a0290fc55a
+generated: 2019-02-16T21:49:52.697789-05:00
