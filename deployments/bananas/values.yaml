@@ -8,6 +8,7 @@ concourse:
       prometheus.io/port: "9391"
   concourse:
     web:
+      enableGlobalResources: true
       kubernetes:
         enabled: false
       prometheus:
