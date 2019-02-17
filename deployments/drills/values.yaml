@@ -1,4 +1,0 @@
----
-concourse:
-  worker:
-    replicas: 1
