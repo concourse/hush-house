@@ -26,8 +26,9 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 - [Repository structure](#repository-structure)
 - [Dependencies](#dependencies)
-- [Gathering access to the cluster](#gathering-access-to-the-cluster)
+- [Gathering acccess to the cluster](#gathering-acccess-to-the-cluster)
 - [Creating your own deployment](#creating-your-own-deployment)
+  - [Visualizing metrics from your deployment](#visualizing-metrics-from-your-deployment)
 - [k8s cheat-sheet](#k8s-cheat-sheet)
   - [Contexts](#contexts)
   - [Namespaces](#namespaces)
@@ -231,6 +232,26 @@ bananas-worker-78f6cddccb-brvm9       1/1     Running   0          2m
 bananas-worker-78f6cddccb-qd6zn       1/1     Running   0          2m
 bananas-worker-78f6cddccb-xv7p5       1/1     Running   0          2m
 ```
+
+### Visualizing metrics from your deployment
+
+When using the Concourse Helm chart, metrics get scrapped and graphed by default under https://metrics-hush-house.concourse-ci.org if [Prometheus](https://prometheus.io) integration is enabled.
+
+To do so, make sure you have `concourse.web.prometheus.enabled` set to `true` and the `prometheus.io` annotations added to `concourse.web`:
+
+```yaml
+concourse:
+  web:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9391"
+  concourse:
+    web:
+      prometheus:
+        enabled: true
+```
+
+With that set, head to the `Concourse` dashboard under the metrics address provided above and change the `Namespace` dropdown to the one corresponding to the name of your deployment.
 
 
 ## k8s cheat-sheet
