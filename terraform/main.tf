@@ -24,14 +24,14 @@ module "cluster" {
       name         = "preemptible"
       min          = 1
       max          = 3
-      local-ssds   = 1
+      local-ssds   = 0
       machine-type = "n1-standard-8"
       image        = "COS"
-      disk-size    = "15"
+      disk-size    = "50"
       disk-type    = "pd-ssd"
       auto-upgrade = false
       preemptible  = true
-      version      = "1.11.6-gke.2"
+      version      = "1.11.6-gke.6"
     },
   ]
 }

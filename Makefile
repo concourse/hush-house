@@ -13,6 +13,13 @@ deploy-pipeline: ci/deploy.json
 helm-creds: helm-creds-tls-ca helm-creds-tls-helm helm-creds-tls-tiller
 
 
+# Retrieves the credentials necessary for running terraform
+# commands under the `./terraform` directory.
+gcp-key:
+	lpass show hush-house-gcp-key --note > \
+		./terraform/gcp.json
+
+
 # Copies the Helm TLS credentials obtained by `helm-creds`
 # into helm's home directory so that `--tls` makes use of
 # those when connecting.
