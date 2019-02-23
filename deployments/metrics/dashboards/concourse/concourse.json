@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1547901273851,
+  "iteration": 1550929080087,
   "links": [
     {
       "icon": "info",
@@ -745,6 +745,94 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 8,
+            "y": 27
+          },
+          "id": 53,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": true,
+            "min": true,
+            "show": false,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": true,
+          "targets": [
+            {
+              "expr": "sum by (message) (rate(concourse_error_logs{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[3m]))",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ message }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Error rate (/s)",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "repeat": null,
@@ -771,7 +859,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 3
+            "y": 12
           },
           "id": 7,
           "legend": {
@@ -861,7 +949,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 3
+            "y": 12
           },
           "id": 11,
           "legend": {
@@ -948,7 +1036,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 3
+            "y": 12
           },
           "id": 29,
           "legend": {
@@ -1036,7 +1124,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 10
+            "y": 19
           },
           "id": 32,
           "legend": {
@@ -1131,7 +1219,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 10
+            "y": 19
           },
           "id": 33,
           "legend": {
@@ -1218,7 +1306,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 10
+            "y": 19
           },
           "id": 36,
           "legend": {
@@ -1304,7 +1392,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 17
+            "y": 26
           },
           "id": 37,
           "legend": {
@@ -1390,7 +1478,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 17
+            "y": 26
           },
           "id": 38,
           "legend": {
@@ -1476,7 +1564,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 17
+            "y": 26
           },
           "id": 52,
           "legend": {
@@ -1515,94 +1603,6 @@
           "timeRegions": [],
           "timeShift": null,
           "title": "Locks held",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "fill": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 0,
-            "y": 24
-          },
-          "id": 53,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": true,
-            "min": true,
-            "show": false,
-            "total": false,
-            "values": true
-          },
-          "lines": false,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 1,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": true,
-          "targets": [
-            {
-              "expr": "concourse_error_logs{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ kubernetes_pod_name }} - {{ message }}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Error logs",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -2340,7 +2340,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -2399,5 +2398,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 2
+  "version": 1
 }
