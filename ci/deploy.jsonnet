@@ -6,7 +6,12 @@ local deploymentsResources = [{
   type: 'git',
   source: {
     uri: 'https://((github-token))@github.com/cirocosta/hush-house',
-    paths: ['deployments/' + deployment.name + '/'],
+    paths: [
+      if deployment.withCreds then
+        'deployments/with-creds/' + deployment.name + '/'
+      else
+        'deployments/without-creds/' + deployment.name + '/',
+    ],
   },
 } for deployment in deployments];
 
