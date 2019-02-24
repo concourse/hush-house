@@ -7,5 +7,4 @@ gcp.json
 .values.yaml
 helm/*.pem
 helm/*.srl
-deployments.json
-deploy.json
+ci/*.json

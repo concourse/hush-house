@@ -39,14 +39,25 @@ helm-creds-tls-%:
 
 
 
-ci/deploy.json: ci/deployments.json
+ci/deploy.json: ci/deployments-with-creds.json ci/deployments-without-creds.json
 	jsonnet \
-		--ext-code 'deployments=$(shell cat ci/deployments.json)' \
+		--ext-code 'deployments-with-creds=$(shell cat ci/deployments-with-creds.json)' \
+		--ext-code 'deployments-without-creds=$(shell cat ci/deployments-without-creds.json)' \
 		./ci/deploy.jsonnet > $@
-
-
-ci/deployments.json:
-	find ./deployments -type d -mindepth 1 -maxdepth 1 | \
-		cut -d '/' -f3  | \
-		jq -RscM '. / "\n" - [""]' > $@
 .PHONY: ci/deployments.json
+
+
+ci/deployments-without-creds.json:
+	find ./deployments/without-creds -type d -mindepth 1 -maxdepth 1  | \
+		cut -d '/' -f4  | \
+		jq -RscM '. / "\n" - [""]' | \
+		jq '[{"name":.[], "withCreds": false}]' > $@
+.PHONY: ci/deployments-without-creds.json
+
+ci/deployments-with-creds.json:
+	find ./deployments/with-creds -type d -mindepth 1 -maxdepth 1  | \
+		cut -d '/' -f4  | \
+		jq -RscM '. / "\n" - [""]' | \
+		jq '[{"name":.[], "withCreds": true}]' > $@
+.PHONY: ci/deployments-with-creds.json
+
