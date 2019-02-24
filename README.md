@@ -28,6 +28,8 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 - [Dependencies](#dependencies)
 - [Gathering acccess to the cluster](#gathering-acccess-to-the-cluster)
 - [Creating your own deployment](#creating-your-own-deployment)
+  - [Without any credentials setup](#without-any-credentials-setup)
+  - [With credentials](#with-credentials)
   - [Visualizing metrics from your deployment](#visualizing-metrics-from-your-deployment)
 - [k8s cheat-sheet](#k8s-cheat-sheet)
   - [Contexts](#contexts)
@@ -44,31 +46,37 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 ├── ci				# Concourse pipelines and tasks designed to keep
 │				# the environment continuously up to date.
 │
-├── deployments			# Directory that contains all deployments that
-│   │				# exist in the k8s cluster. Each deployment directory
-│   │				# is packaged as a Helm chart and deployment as a
-│   │				# Helm release with the corresponding directory name.
+│
+├── deployments 		# Where you can find all deployments that get
+│   │				# continuously deployed by `hush-house` when changes
+│   │				# to configurations in this repository are made.
 │   │
-│   ├── Makefile		# Targets to manage the helm releases (to be used by
-│   │				# the pipelines and tasks.
 │   │
-│   ├── hush-house		# A deployment (`hush-house.concourse-ci.org`).
-│   │   ├── README.md		# The deployment's description.
-│   │   ├── Chart.yaml		# Metadata about the deployment.
-│   │   ├── templates		# K8S resouces and notes to be templated from the values
-│   │   │			# specified (.values.yaml + values.yaml)
-│   │   ├── requirements.yaml	# Versioned dependencies of this chart.
-│   │   ├── values.yaml		# Public values.
-│   │   └── .values.yaml	# Private values (credentials)
-│   │
-│   └── metrics			# Antother deployment (`metrics-hush-house.concourse-ci.org`)
-│	...
-│       └── values.yaml
+│   ├── with-creds		# Deployments that require credentials that do not exist
+│   │   │			# in this repository (as they're not public)
+│   │   │
+│   │   ├── Makefile		# Scripting related to the deployments
+│   │   │
+│   │   ├── hush-house		# The `hush-house` deployment itself
+│   │   └── metrics		# The `metrics` deployment
+│   │
+│   │
+│   │
+│   └── without-creds		# Deployments that require NO credentials, i.e., that rely
+│       │			# solely on public values from this repository.
+│       │
+│       ├── Makefile		# Scripting related to the deployments.
+│       │
+│       └── bananas		# Fully functioning example deployment.
+│
 │ 
 ├── helm			# Scripts to automate the provisioning of Helm and its
 │				# server-side component (tiller)
 │
-├── Makefile			# TODO
+│
+├── Makefile			# General scripting for getting access to the cluster and
+│				# setting up the pipelines.
+│
 │
 └── terraform			# Terraform files for bringing up the K8S cluster and other
     │				# configuring other infrastructure components necessary
@@ -88,10 +96,16 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 ## Dependencies
 
 - [LastPass CLI (`lpass-cli`)](https://github.com/lastpass/lastpass-cli)
+  - `brew install lastpass-cli`
 - [Terraform CLI (`terraform`)](https://www.terraform.io/)
+  - `brew install terraform`
 - [Helm (`helm`)](https://helm.sh/)
+  - `brew install kubernetes-cli`
+  - `brew install kubernetes-helm`
 - [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
+  - `helm plugin install https://github.com/databus23/helm-diff --version master`
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/)
+  - `brew cask install google-cloud-sdk`
 
 *ps.: if you're creating your own environment based on an existing k8s cluster, you'll probably only need `helm`.*
 
@@ -101,7 +115,7 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 
 0. Install the dependencies
 
-1. Configure access to the Google cloud project
+1. Configure access to the Google Cloud project
 
 ```sh
 gcloud config set project cf-concourse-production
@@ -128,9 +142,11 @@ helm init --client-only
 
 
 ```sh
-lpass show helm-ca-cert > $(helm home)/ca.pem
-lpass show helm-cert > $(helm home)/cert.pem
-lpass show helm-key > $(helm home)/key.pem
+# fetch the creds to lpass
+make helm-creds
+
+# copy the credentials to $HELM_HOME
+make helm-set-client-creds
 ```
 
 
@@ -138,19 +154,29 @@ lpass show helm-key > $(helm home)/key.pem
 
 To create a new deployment of your own, a Chart under `./deployments` needs to be created (given that every deployment corresponds to releasing a custom Chart).
 
-Here's an example of how that can be done:
+There are two possible types of deployments we can create:
+
+1. without any credentials setup, and
+2. with credentials.
 
 
-1. Populate the repository with metadata about the deployment
+### Without any credentials setup
+
+*tl;dr: copy the `./deployments/without-creds/bananas` directory and change `bananas` to the name of the deployment you want.*
+
+0. Create a directory under `./deployments/without-creds`, and get there:
 
 ```sh
-# Create a chart directory under `./deployments`
-# For instance, for a deployment named `bananas`:
-mkdir ./deployments/bananas
+mkdir ./deployments/without-creds/bananas
+cd ./deployments/without-creds/bananas
+```
 
 
+1. Populate the repository with the required files for a Helm Chart, as well as metadata about itself (`Chart.yaml`):
+
+```sh
 # Create the required files
-touch ./deployments/{Chart.yaml,requirements.yaml,values.yaml,.values.yaml}
+touch ./{Chart.yaml,requirements.yaml,values.yaml}
 
 
 # Populate `Chart.yaml` file with some info about it
@@ -160,7 +186,7 @@ version: 0.0.1
 description: a test deployment!
 maintainers:
 - name: ciro
-' > ./deployments/bananas/Chart.yaml
+' > ./Chart.yaml
 ```
 
 
@@ -180,7 +206,30 @@ ps.: the version can be retrieved from [concourse/charts](https://github.com/con
 pps.: the upstream version of the Chart could be used too! See [`helm/charts`](https://github.com/helm/charts) for instructions.
 
 
-3. Create the `values.yaml` file with public configurations
+With that set, `hush-house` is ready to have the deployment going.
+
+You can either trigger the deployment from your own machine if you have Helm already set up, or make a PR to `hush-house` so that the pipeline does it all for you.
+
+Once the process is completed, you should be able to see your resources under the deployment namespace:
+
+
+```
+kubectl  get pods --namespace=bananas
+NAME                                  READY   STATUS    RESTARTS   AGE
+bananas-postgresql-7f779c5c96-c8f4v   1/1     Running   0          2m
+bananas-web-78db545cc9-xrzd9          1/1     Running   1          2m
+bananas-worker-78f6cddccb-brvm9       1/1     Running   0          2m
+bananas-worker-78f6cddccb-qd6zn       1/1     Running   0          2m
+bananas-worker-78f6cddccb-xv7p5       1/1     Running   0          2m
+```
+
+
+### With credentials
+
+A deployment that requires credentials that can't be publicly shared involve all of the steps above, including some few more. Once those steps were finish, proceed with the following  :
+
+
+1. Create the `values.yaml` file with public configurations
 
 ```sh
 echo '---
@@ -195,7 +244,7 @@ concourse:
 ```
 
 
-4. Populate the `.values.yaml` file with credentials
+2. Populate the `.values.yaml` file with credentials
 
 
 ```sh
@@ -209,29 +258,16 @@ concourse:
 *ps.: this can be left blank*
 
 
-5. Populate the `hush-house-main` namespace with your credentials
+3. Populate the `hush-house-main` namespace with your credentials
 
-Having `kubectl` configured (see [*gathering access to the cluster*](#gathering-access-to-the-cluster)) with access to `hush-house-main`, create the secret using the `hush-house-creds-secrets-$DEPLOYMENT` target from [`./deployments/Makefile`](./deployments/Makefile):
+Having `kubectl` configured (see [*gathering access to the cluster*](#gathering-access-to-the-cluster)) with access to `hush-house-main`, create the secret using the `hush-house-creds-secrets-$DEPLOYMENT` target from [`./deployments/with-creds/Makefile`](./deployments/with-creds/Makefile):
 
 ```sh
-cd ./deployments && \
-	make hush-house-creds-secrets-bananas
+# go back to `./deployments/with-creds`
+cd ..
+make hush-house-creds-secrets-bananas
 ```
 
-With that set, `hush-house` is ready to have the deployment going. You can either trigger the deployment from your own machine if you have Helm already set up, or make a PR to `hush-house` so that the pipeline does it all for you.
-
-Once the process is completed, you should be able to see your resources under the deployment namespace:
-
-
-```
-kubectl  get pods --namespace=bananas
-NAME                                  READY   STATUS    RESTARTS   AGE
-bananas-postgresql-7f779c5c96-c8f4v   1/1     Running   0          2m
-bananas-web-78db545cc9-xrzd9          1/1     Running   1          2m
-bananas-worker-78f6cddccb-brvm9       1/1     Running   0          2m
-bananas-worker-78f6cddccb-qd6zn       1/1     Running   0          2m
-bananas-worker-78f6cddccb-xv7p5       1/1     Running   0          2m
-```
 
 ### Visualizing metrics from your deployment
 
