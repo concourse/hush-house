@@ -1,6 +1,10 @@
 ---
 platform: linux
 
+image_resource:
+  type: registry-image
+  source: { repository: ubuntu, tag: bionic }
+
 inputs:
 - { name: hush-house }
 - { name: helm-values, optional: true }
@@ -14,7 +18,16 @@ run:
   args:
   - -ce
   - |
-    apk add --update make curl
+    # install dependencies
+    apt update && apt install -y make curl
+
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+    touch /etc/apt/sources.list.d/kubernetes.list
+    echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
+    apt-get update
+    apt-get install --no-install-recommends -y kubectl
+
+    curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 
 
     # kubectl credential setup

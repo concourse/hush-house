@@ -22,7 +22,7 @@ local deploymentsJobs = [{
   plan: [
     {
       aggregate: [
-        { get: 'maintenance-image' },
+        { get: 'image' },
         {
           get: 'hush-house',
           resource: 'deployment-' + deployment.name,
@@ -55,7 +55,7 @@ local deploymentsJobs = [{
         DEPLOYMENT: deployment.name,
         DEPLOYMENT_TYPE: (if deployment.withCreds then 'with-creds' else 'without-creds'),
       },
-      image: 'maintenance-image',
+      image: 'image',
     },
   ],
 } for deployment in deployments];
@@ -63,10 +63,11 @@ local deploymentsJobs = [{
 {
   resources: deploymentsResources + [
     {
-      name: 'maintenance-image',
+      name: 'image',
       type: 'registry-image',
       source: {
-        repository: 'cirocosta/charts-maintenance',
+        repository: 'ubuntu',
+        tag: 'bionic',
       },
     },
   ],
