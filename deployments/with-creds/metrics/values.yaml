@@ -26,7 +26,13 @@ prometheus:
           - matchExpressions:
             - key: cloud.google.com/gke-preemptible
               operator: DoesNotExist
-
+  serverFiles:
+    rules:
+      groups:
+      - name: node-exporter-rules
+        rules:
+        - record: node:node_num_cpu:sum
+          expr: count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode)
   server:
     persistentVolume:
       enabled: true
