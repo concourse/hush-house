@@ -11,7 +11,7 @@ local deploymentsResources = [{
         'deployments/with-creds/' + deployment.name + '/'
       else
         'deployments/without-creds/' + deployment.name + '/',
-    ],
+    ] + ['ci/'],
   },
 } for deployment in deployments];
 
