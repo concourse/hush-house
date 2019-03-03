@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 4,
-  "iteration": 1551360267077,
+  "id": 1,
+  "iteration": 1551644125414,
   "links": [],
   "panels": [
     {
@@ -95,7 +95,7 @@
             "h": 3,
             "w": 4,
             "x": 0,
-            "y": 8
+            "y": 2
           },
           "id": 6,
           "interval": null,
@@ -175,7 +175,7 @@
             "h": 3,
             "w": 4,
             "x": 4,
-            "y": 8
+            "y": 2
           },
           "id": 2,
           "interval": null,
@@ -256,7 +256,7 @@
             "h": 3,
             "w": 4,
             "x": 8,
-            "y": 8
+            "y": 2
           },
           "id": 3,
           "interval": null,
@@ -337,7 +337,7 @@
             "h": 3,
             "w": 4,
             "x": 12,
-            "y": 8
+            "y": 2
           },
           "id": 4,
           "interval": null,
@@ -418,7 +418,7 @@
             "h": 3,
             "w": 4,
             "x": 16,
-            "y": 8
+            "y": 2
           },
           "id": 13,
           "interval": null,
@@ -499,7 +499,7 @@
             "h": 3,
             "w": 4,
             "x": 20,
-            "y": 8
+            "y": 2
           },
           "id": 12,
           "interval": null,
@@ -555,6 +555,168 @@
               "op": "=",
               "text": "N/A",
               "value": ""
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "decimals": 1,
+          "format": "percentunit",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 0,
+            "y": 5
+          },
+          "id": 33,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(0,0,0,0)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "sum(kube_pod_container_resource_requests{node=~\"$node\",resource=\"cpu\"}) \n  / \nsum(kube_node_status_allocatable{node=~\"$node\",resource=\"cpu\"})",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "title": "CPU Requested",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "50%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "decimals": 1,
+          "format": "percentunit",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 4,
+            "y": 5
+          },
+          "id": 34,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(0,0,0,0)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "sum(kube_pod_container_resource_requests{node=~\"$node\",resource=\"memory\"}) \n  / \nsum(kube_node_status_allocatable{node=~\"$node\",resource=\"memory\"})",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "title": "Memory requested",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "50%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
             }
           ],
           "valueName": "current"
@@ -1237,8 +1399,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "gke-hush-house-test-preemptible-887f6c66-nt0p",
-          "value": "gke-hush-house-test-preemptible-887f6c66-nt0p"
+          "tags": [],
+          "text": "gke-hush-house-test-preemptible-1-be9c9304-rs20",
+          "value": "gke-hush-house-test-preemptible-1-be9c9304-rs20"
         },
         "datasource": "prometheus",
         "definition": "label_values(kube_node_info, node)",
@@ -1294,5 +1457,5 @@
   "timezone": "",
   "title": "Node",
   "uid": "C8wJ9x9iz",
-  "version": 4
+  "version": 1
 }
