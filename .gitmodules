@@ -1,0 +1,3 @@
+[submodule "cluster-bootstrap/storage/sig-storage-local-static-provisioner"]
+	path = cluster-bootstrap/storage/sig-storage-local-static-provisioner
+	url = https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner

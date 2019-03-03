@@ -21,17 +21,17 @@ module "cluster" {
 
   node-pools = [
     {
-      name         = "preemptible"
-      min          = 1
+      name         = "preemptible-1"
+      min          = 0
       max          = 3
-      local-ssds   = 0
+      local-ssds   = 1
       machine-type = "n1-standard-8"
       image        = "COS"
       disk-size    = "50"
       disk-type    = "pd-ssd"
       auto-upgrade = false
       preemptible  = true
-      version      = "1.11.6-gke.6"
+      version      = "1.12.5-gke.5"
     },
   ]
 }

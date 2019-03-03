@@ -27,20 +27,8 @@ kubectl patch deploy \
 helm init \
 	--service-account tiller \
 	--tiller-tls \
-	--tiller-tls-cert ./tiller.cert.pem \
-	--tiller-tls-key ./tiller.key.pem \
-	--tls-ca-cert ca.cert.pem \
+	--tiller-tls-cert ../helm/tiller.cert.pem \
+	--tiller-tls-key ../helm/tiller.key.pem \
+	--tls-ca-cert ../helm/ca.cert.pem \
 	--tiller-tls-verify \
 	--upgrade
-
-# TODO - move this to a Terraform provisioner or something similar
-kubectl apply -f - <<YAML
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ssd
-provisioner: kubernetes.io/gce-pd
-parameters:
-  type: pd-ssd
-YAML
-

@@ -104,4 +104,9 @@ resource "google_container_node_pool" "main" {
       "monitoring",
     ]
   }
+
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }

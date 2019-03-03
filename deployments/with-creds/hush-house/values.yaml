@@ -2,20 +2,37 @@ postgresql:
   enabled: false
 
 concourse:
-  imageDigest: sha256:efe8b40c44bad2435dc574c937e71d334e57c22b9a001da4273b8752e7cbdf73
+  image: concourse/concourse-rc
+  imageDigest: sha256:f5d76c5ac97ed2a8f5994cfd240bc46c734a46a382a61422b43d74712df0898f
+
   postgresql:
     enabled: false
+
+  persistence:
+    worker:
+      storageClass: local-scsi
+
   worker:
-    replicas: 3
+    nodeSelector: { cloud.google.com/gke-local-ssd: "true" }
+    hardAntiAffinity: true
+    replicas: 1
     resources:
       requests:
-        cpu: 1500m
-        memory: 3072Mi
+        cpu: 3000m
+        memory: 16384Mi
       limits:
-        cpu: 6000m
-        memory: 3072Mi
+        cpu: 7000m
+        memory: 16384Mi
+
   web:
     replicas: 2
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: cloud.google.com/gke-preemptible
+              operator: DoesNotExist
     service:
       type: LoadBalancer
       loadBalancerIP: 35.202.14.65
@@ -26,6 +43,7 @@ concourse:
       limits:
         cpu: 500m
         memory: 512Mi
+
   concourse:
     web:
       auth:

@@ -15,7 +15,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-
 kubectl create secret generic helm-ca-cert-b64 \
 	--namespace=hush-house-main \
 	--from-literal="value=$(cat ./ca.cert.pem | base64)"
