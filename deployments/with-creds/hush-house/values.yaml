@@ -66,5 +66,6 @@ concourse:
         database: atc
       tls: { enabled: true, bindPort: 443 }
     worker:
+      ephemeral: true
       rebalanceInterval: 5m
       baggageclaim: { driver: overlay }
