@@ -15,17 +15,17 @@ concourse:
   worker:
     nodeSelector: { cloud.google.com/gke-local-ssd: "true" }
     hardAntiAffinity: true
-    replicas: 1
+    replicas: 2
     resources:
       requests:
-        cpu: 3000m
-        memory: 16384Mi
+        cpu: 5000m
+        memory: 22528Mi
       limits:
-        cpu: 7000m
-        memory: 16384Mi
+        cpu: 8000m
+        memory: 22528Mi
 
   web:
-    replicas: 2
+    replicas: 3
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -54,6 +54,7 @@ concourse:
         github:
           enabled: true
       bindPort: 80
+      containerPlacementStrategy: fewest-build-containers
       enableGlobalResources: true
       encryption: { enabled: true }
       externalUrl: https://hush-house.concourse-ci.org

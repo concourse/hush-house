@@ -49,7 +49,7 @@ deploy-%: | ensure-creds-file-exists-% deps-%
 			--tls \
 			--install \
 			--namespace=$* \
-			--timeout=600 \
+			--timeout=900 \
 			--values=./.values.yaml \
 			--wait \
 			$(HELM_FLAGS) \
