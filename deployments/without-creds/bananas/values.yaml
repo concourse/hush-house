@@ -3,10 +3,6 @@ concourse:
   persistence: { enabled: false }
   worker:
     replicas: 1
-  web:
-    annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "9391"
   concourse:
     web:
       enableGlobalResources: true
