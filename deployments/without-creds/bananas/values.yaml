@@ -1,7 +1,8 @@
 ---
 concourse:
+  persistence: { enabled: false }
   worker:
-    replicas: 3
+    replicas: 1
   web:
     annotations:
       prometheus.io/scrape: "true"
@@ -9,7 +10,6 @@ concourse:
   concourse:
     web:
       enableGlobalResources: true
-      kubernetes:
-        enabled: false
-      prometheus:
-        enabled: true
+      ephemeral: true
+      kubernetes: { enabled: false }
+      prometheus: { enabled: true }

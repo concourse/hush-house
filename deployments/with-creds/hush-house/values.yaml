@@ -26,6 +26,9 @@ concourse:
 
   web:
     replicas: 2
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9391"
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
