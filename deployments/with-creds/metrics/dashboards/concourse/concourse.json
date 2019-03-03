@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1550929080087,
+  "iteration": 1551633928080,
   "links": [
     {
       "icon": "info",
@@ -153,7 +153,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum by(route,le)(rate(concourse_http_responses_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\"}[10m])))",
+              "expr": "histogram_quantile(0.95, sum by(route,le)(rate(concourse_http_responses_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[10m])))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ route }}",
@@ -240,7 +240,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max by (pipeline) (rate(concourse_scheduling_loading_duration_seconds_total{kubernetes_namespace=~\"$namespace\"}[5m]))",
+              "expr": "max by (pipeline) (rate(concourse_scheduling_loading_duration_seconds_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m]))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ pipeline }}",
@@ -326,8 +326,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max by (pipeline) (rate(concourse_scheduling_full_duration_seconds_total{kubernetes_namespace=~\"$namespace\"}[5m]))",
+              "expr": "max by (pipeline) (rate(concourse_scheduling_full_duration_seconds_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m]))",
               "format": "time_series",
+              "instant": false,
               "intervalFactor": 2,
               "legendFormat": "{{ pipeline }}",
               "refId": "A"
@@ -429,7 +430,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (status, pipeline) (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
+              "expr": "sum by (status, pipeline) (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ status }}: {{ pipeline }}",
@@ -519,7 +520,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pipeline) (rate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
+              "expr": "sum by (pipeline) (rate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ pipeline }}",
@@ -607,7 +608,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum by(pipeline, team,le)(rate(concourse_builds_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\"}[3m])))",
+              "expr": "histogram_quantile(0.99, sum by(pipeline, team,le)(rate(concourse_builds_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[3m])))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{team}}: {{ pipeline }}",
@@ -697,7 +698,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pipeline) (rate(concourse_scheduling_total{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
+              "expr": "sum by (pipeline) (rate(concourse_scheduling_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ pipeline }}",
@@ -785,7 +786,7 @@
           "steppedLine": true,
           "targets": [
             {
-              "expr": "sum by (message) (rate(concourse_error_logs{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[3m]))",
+              "expr": "sum by (message) (rate(concourse_error_logs{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m]))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ message }}",
@@ -812,7 +813,7 @@
           },
           "yaxes": [
             {
-              "decimals": 0,
+              "decimals": 1,
               "format": "short",
               "label": "",
               "logBase": 1,
@@ -1780,7 +1781,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_workers_volumes{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"}",
+              "expr": "concourse_workers_volumes{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ worker }}",
@@ -1866,7 +1867,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_workers_containers{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"}",
+              "expr": "concourse_workers_containers{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\", job=\"kubernetes-pods\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ worker }}",
@@ -1954,14 +1955,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pod_name) (irate(container_network_receive_bytes_total{pod_name=~\"$worker\",image!=\"\"}[2m]))",
+              "expr": "sum by (pod_name) (irate(container_network_receive_bytes_total{pod_name=~\"$worker\",image!=\"\"}[2m])) * 8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "RX: {{ pod_name }}",
               "refId": "A"
             },
             {
-              "expr": "sum by (pod_name) (irate(container_network_transmit_bytes_total{pod_name=~\"$worker\",image!=\"\"}[2m]))",
+              "expr": "sum by (pod_name) (irate(container_network_transmit_bytes_total{pod_name=~\"$worker\",image!=\"\"}[2m])) * 8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "TX: {{ pod_name }}",
@@ -1989,7 +1990,7 @@
           "yaxes": [
             {
               "decimals": 0,
-              "format": "Bps",
+              "format": "bps",
               "label": "",
               "logBase": 1,
               "max": null,
@@ -2049,7 +2050,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pod_name,device) (irate(container_fs_writes_bytes_total{pod_name=~\"$worker\"}[2m]))",
+              "expr": "sum by (pod_name,device) (irate(container_fs_writes_bytes_total{pod_name=~\"$worker\"}[2m])) * 8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ pod_name }}",
@@ -2077,7 +2078,7 @@
           "yaxes": [
             {
               "decimals": 1,
-              "format": "Bps",
+              "format": "bps",
               "label": "",
               "logBase": 1,
               "max": null,
@@ -2191,7 +2192,7 @@
           "dashLength": 10,
           "dashes": false,
           "decimals": null,
-          "description": "",
+          "description": "[Persistent Volume][pv] disk utilization as seen by the [Kubelet][kubelet] in the node that runs the Concourse worker [pod][pod].\n\n[pod]: https://kubernetes.io/docs/concepts/workloads/pods/pod/\n\n[pv]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/\n\n[kubelet]: https://kubernetes.io/docs/concepts/overview/components/#kubelet",
           "fill": 0,
           "gridPos": {
             "h": 7,
@@ -2224,10 +2225,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "(\n  kube_pod_container_info{pod=~\"$worker\"}\n) \n   * on (kubernetes_node) group_left(device)\n(\n    1 - (node_filesystem_avail_bytes{mountpoint=\"/\"}  / node_filesystem_size_bytes)\n)",
+              "expr": "1 - (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"concourse-work-dir-hush-house-worker-0\"} /kubelet_volume_stats_capacity_bytes)",
               "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{ pod }}",
+              "intervalFactor": 2,
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2235,7 +2236,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Machine disk usage",
+          "title": "PV Disk Usage",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -2253,7 +2254,7 @@
             {
               "decimals": 1,
               "format": "percentunit",
-              "label": null,
+              "label": "",
               "logBase": 1,
               "max": "1",
               "min": "0",
