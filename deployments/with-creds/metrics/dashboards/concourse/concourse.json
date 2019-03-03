@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1551633928080,
+  "iteration": 1551642384427,
   "links": [
     {
       "icon": "info",
@@ -153,7 +153,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum by(route,le)(rate(concourse_http_responses_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[10m])))",
+              "expr": "histogram_quantile(0.99, sum by(route,le)(rate(concourse_http_responses_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\"}[10m])))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ route }}",
@@ -164,7 +164,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "q95 response times",
+          "title": "q99 response times",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -240,10 +240,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max by (pipeline) (rate(concourse_scheduling_loading_duration_seconds_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m]))",
+              "expr": "max by (team, pipeline) (rate(concourse_scheduling_loading_duration_seconds_total{kubernetes_namespace=~\"$namespace\"}[5m]))",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{ pipeline }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -326,11 +326,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max by (pipeline) (rate(concourse_scheduling_full_duration_seconds_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m]))",
+              "expr": "max by (team, pipeline) (rate(concourse_scheduling_full_duration_seconds_total{kubernetes_namespace=~\"$namespace\"}[5m]))",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 2,
-              "legendFormat": "{{ pipeline }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -430,7 +430,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (status, pipeline) (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m])) * 60 > 0",
+              "expr": "sum by (status, pipeline) (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ status }}: {{ pipeline }}",
@@ -520,10 +520,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pipeline) (rate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m])) * 60 > 0",
+              "expr": "sum by (team,pipeline) (rate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{ pipeline }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -608,10 +608,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum by(pipeline, team,le)(rate(concourse_builds_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[3m])))",
+              "expr": "histogram_quantile(0.999, sum by(pipeline,team,le)(rate(concourse_builds_duration_seconds_bucket{kubernetes_namespace=~\"$namespace\"}[3m])))",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{team}}: {{ pipeline }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -619,7 +619,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "q99 build finish times",
+          "title": "q999 build finish times",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -698,10 +698,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pipeline) (rate(concourse_scheduling_total{kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m])) * 60 > 0",
+              "expr": "sum by (team, pipeline) (rate(concourse_scheduling_total{kubernetes_namespace=~\"$namespace\"}[5m])) * 60 > 0",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{ pipeline }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -754,7 +754,7 @@
           "dashes": false,
           "fill": 0,
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 8,
             "x": 8,
             "y": 27
@@ -786,7 +786,7 @@
           "steppedLine": true,
           "targets": [
             {
-              "expr": "sum by (message) (rate(concourse_error_logs{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\",job=\"kubernetes-pods\"}[5m]))",
+              "expr": "sum by (message) (rate(concourse_error_logs{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[5m]))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ message }}",
@@ -1066,7 +1066,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "container_memory_working_set_bytes{pod_name=~\"$atc\",container_name!=\"POD\",container_name!=\"\",namespace=~\"$namespace\"} / container_spec_memory_limit_bytes",
+              "expr": "container_memory_working_set_bytes{pod_name=~\"$atc\",container_name!=\"POD\",container_name!=\"\",namespace=~\"$namespace\"} \n  / \ncontainer_spec_memory_limit_bytes",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ pod_name }}",
@@ -1781,7 +1781,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_workers_volumes{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\", job=\"kubernetes-pods\"}",
+              "expr": "concourse_workers_volumes{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ worker }}",
@@ -1867,7 +1867,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_workers_containers{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\", job=\"kubernetes-pods\"}",
+              "expr": "concourse_workers_containers{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ worker }}",
@@ -2399,5 +2399,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 1
+  "version": 2
 }
