@@ -1,5 +1,6 @@
----
 concourse:
+  image: concourse/concourse-rc
+  imageTag: latest
   persistence: { enabled: false }
   worker:
     replicas: 1
