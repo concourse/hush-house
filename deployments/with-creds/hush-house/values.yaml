@@ -15,13 +15,18 @@ concourse:
   worker:
     nodeSelector: { cloud.google.com/gke-local-ssd: "true" }
     hardAntiAffinity: true
-    replicas: 2
+    replicas: 3
+    env:
+      - name: CONCOURSE_GARDEN_NETWORK_POOL
+        value: "10.254.0.0/16"
+      - name: CONCOURSE_GARDEN_MAX_CONTAINERS
+        value: "2000"
     resources:
       requests:
         cpu: 5000m
         memory: 22528Mi
       limits:
-        cpu: 8000m
+        cpu: 7000m
         memory: 22528Mi
 
   web:

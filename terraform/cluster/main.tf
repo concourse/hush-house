@@ -75,10 +75,7 @@ resource "google_container_node_pool" "main" {
   cluster = "${google_container_cluster.main.name}"
   name    = "${lookup(var.node-pools[count.index], "name")}"
 
-  autoscaling {
-    min_node_count = "${lookup(var.node-pools[count.index], "min")}"
-    max_node_count = "${lookup(var.node-pools[count.index], "max")}"
-  }
+  node_count = "${lookup(var.node-pools[count.index], "node_count")}"
 
   management {
     auto_repair  = true
@@ -95,6 +92,10 @@ resource "google_container_node_pool" "main" {
 
     workload_metadata_config {
       node_metadata = "SECURE"
+    }
+
+    metadata {
+      disable-legacy-endpoints = "true"
     }
 
     oauth_scopes = [

@@ -22,8 +22,7 @@ module "cluster" {
   node-pools = [
     {
       name         = "preemptible-1"
-      min          = 0
-      max          = 3
+      node_count   = 3
       local-ssds   = 1
       machine-type = "n1-standard-8"
       image        = "COS"

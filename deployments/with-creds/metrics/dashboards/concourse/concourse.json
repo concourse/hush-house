@@ -17,7 +17,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1551642384427,
+  "id": 3,
+  "iteration": 1551722280911,
   "links": [
     {
       "icon": "info",
@@ -426,7 +427,7 @@
             }
           ],
           "spaceLength": 10,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -694,7 +695,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -1154,14 +1155,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (pod_name) (irate(container_network_receive_bytes_total{pod_name=~\"$atc\",namespace=~\"$namespace\",image!=\"\"}[2m]))",
+              "expr": "sum by (pod_name) (irate(container_network_receive_bytes_total{pod_name=~\"$atc\",namespace=~\"$namespace\",image!=\"\"}[2m])) * 8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "RX: {{ pod_name }}",
               "refId": "A"
             },
             {
-              "expr": "sum by (pod_name) (irate(container_network_transmit_bytes_total{pod_name=~\"$atc\",namespace=~\"$namespace\",image!=\"\"}[2m]))",
+              "expr": "sum by (pod_name) (irate(container_network_transmit_bytes_total{pod_name=~\"$atc\",namespace=~\"$namespace\",image!=\"\"}[2m])) * 8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "TX: {{ pod_name }}",
@@ -1189,7 +1190,7 @@
           "yaxes": [
             {
               "decimals": 0,
-              "format": "Bps",
+              "format": "bps",
               "label": "",
               "logBase": 1,
               "max": null,
@@ -1781,7 +1782,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_workers_volumes{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"}",
+              "expr": "avg by (worker) (concourse_workers_volumes{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"})",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ worker }}",
@@ -1867,7 +1868,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "concourse_workers_containers{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"}",
+              "expr": "avg by (worker) (concourse_workers_containers{worker=~\"$worker\",kubernetes_namespace=~\"$namespace\"})",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{ worker }}",
@@ -2225,10 +2226,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "1 - (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"concourse-work-dir-hush-house-worker-0\"} /kubelet_volume_stats_capacity_bytes)",
+              "expr": "1 - (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"concourse-work-dir-($worker)\"} / kubelet_volume_stats_capacity_bytes)",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "",
+              "legendFormat": "{{ persistentvolumeclaim }}",
               "refId": "A"
             }
           ],
@@ -2341,6 +2342,7 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -2399,5 +2401,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 2
+  "version": 3
 }
