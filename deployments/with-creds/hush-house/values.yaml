@@ -15,6 +15,9 @@ concourse:
 
   worker:
     replicas: 4
+    livenessProbe:
+      periodSeconds: 20
+      timeoutSeconds: 10
     nodeSelector: { cloud.google.com/gke-nodepool: workers-1 }
     hardAntiAffinity: true
     env:
@@ -80,3 +83,4 @@ concourse:
       ephemeral: false
       rebalanceInterval: 30m
       baggageclaim: { driver: overlay }
+      healthcheckTimeout: 10s
