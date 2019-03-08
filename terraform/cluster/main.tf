@@ -21,24 +21,13 @@ resource "google_container_cluster" "main" {
   network    = "${module.vpc.name}"
   subnetwork = "${module.vpc.subnet-name}"
 
-  min_master_version = "1.11.6-gke.2"
   initial_node_count = 3
+
+  min_master_version = "1.11.6-gke.2"
 
   ip_allocation_policy {
     cluster_secondary_range_name  = "${module.vpc.pods-range-name}"
     services_secondary_range_name = "${module.vpc.services-range-name}"
-  }
-
-  node_config {
-    oauth_scopes = [
-      "compute-rw",
-      "storage-ro",
-      "logging-write",
-      "monitoring",
-    ]
-
-    disk_type    = "pd-ssd"
-    disk_size_gb = "15"
   }
 
   addons_config {
@@ -76,6 +65,11 @@ resource "google_container_node_pool" "main" {
   name    = "${lookup(var.node-pools[count.index], "name")}"
 
   node_count = "${lookup(var.node-pools[count.index], "node_count")}"
+
+  autoscaling {
+    min_node_count = "${lookup(var.node-pools[count.index], "min")}"
+    max_node_count = "${lookup(var.node-pools[count.index], "max")}"
+  }
 
   management {
     auto_repair  = true

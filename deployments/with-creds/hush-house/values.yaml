@@ -2,20 +2,21 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse-rc
-  imageDigest: sha256:f5d76c5ac97ed2a8f5994cfd240bc46c734a46a382a61422b43d74712df0898f
+  image: concourse/concourse
+  imageTag: 5.0.0
 
   postgresql:
     enabled: false
 
   persistence:
     worker:
-      storageClass: local-scsi
+      storageClass: ssd
+      size: 350Gi
 
   worker:
-    nodeSelector: { cloud.google.com/gke-local-ssd: "true" }
+    replicas: 4
+    nodeSelector: { cloud.google.com/gke-nodepool: workers-1 }
     hardAntiAffinity: true
-    replicas: 3
     env:
       - name: CONCOURSE_GARDEN_NETWORK_POOL
         value: "10.254.0.0/16"
@@ -24,30 +25,34 @@ concourse:
     resources:
       requests:
         cpu: 5000m
-        memory: 22528Mi
+        memory: 20Gi
       limits:
         cpu: 7000m
-        memory: 22528Mi
+        memory: 20Gi
 
   web:
-    replicas: 3
+    replicas: 2
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: cloud.google.com/gke-preemptible
-              operator: DoesNotExist
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app: hush-house-web
+                release: hush-house
     service:
       type: LoadBalancer
       loadBalancerIP: 35.202.14.65
     resources:
       requests:
-        cpu: 500m
-        memory: 512Mi
+        cpu: 750m
+        memory: 1Gi
       limits:
-        cpu: 500m
-        memory: 512Mi
+        cpu: 750m
+        memory: 1Gi
 
   concourse:
     web:
@@ -72,6 +77,6 @@ concourse:
         database: atc
       tls: { enabled: true, bindPort: 443 }
     worker:
-      ephemeral: true
-      rebalanceInterval: 5m
+      ephemeral: false
+      rebalanceInterval: 30m
       baggageclaim: { driver: overlay }

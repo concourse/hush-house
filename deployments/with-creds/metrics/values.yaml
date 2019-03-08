@@ -20,7 +20,7 @@ prometheus:
   alertmanager:
     enabled: true
     affinity:
-      nodeAffinity: &affinityToNonEphemeral
+      nodeAffinity: &affinityToNonPreemptible
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
@@ -109,7 +109,14 @@ prometheus:
       size: 30Gi
       storageClass: ssd
     affinity:
-      nodeAffinity: *affinityToNonEphemeral
+      nodeAffinity: *affinityToNonPreemptible
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 1000m
+        memory: 1Gi
 
 
 # Configuration for the Grafana dependency.
