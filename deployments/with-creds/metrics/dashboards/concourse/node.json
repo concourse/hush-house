@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 1,
-  "iteration": 1551644125414,
+  "iteration": 1552233305125,
   "links": [],
   "panels": [
     {
@@ -95,7 +94,7 @@
             "h": 3,
             "w": 4,
             "x": 0,
-            "y": 2
+            "y": 8
           },
           "id": 6,
           "interval": null,
@@ -175,7 +174,7 @@
             "h": 3,
             "w": 4,
             "x": 4,
-            "y": 2
+            "y": 8
           },
           "id": 2,
           "interval": null,
@@ -256,7 +255,7 @@
             "h": 3,
             "w": 4,
             "x": 8,
-            "y": 2
+            "y": 8
           },
           "id": 3,
           "interval": null,
@@ -337,7 +336,7 @@
             "h": 3,
             "w": 4,
             "x": 12,
-            "y": 2
+            "y": 8
           },
           "id": 4,
           "interval": null,
@@ -418,7 +417,7 @@
             "h": 3,
             "w": 4,
             "x": 16,
-            "y": 2
+            "y": 8
           },
           "id": 13,
           "interval": null,
@@ -499,7 +498,7 @@
             "h": 3,
             "w": 4,
             "x": 20,
-            "y": 2
+            "y": 8
           },
           "id": 12,
           "interval": null,
@@ -581,7 +580,7 @@
             "h": 4,
             "w": 4,
             "x": 0,
-            "y": 5
+            "y": 11
           },
           "id": 33,
           "interval": null,
@@ -662,7 +661,7 @@
             "h": 4,
             "w": 4,
             "x": 4,
-            "y": 5
+            "y": 11
           },
           "id": 34,
           "interval": null,
@@ -745,99 +744,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 9
-          },
-          "id": 11,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "irate(node_disk_read_bytes_total{kubernetes_node=~\"$node\"}[3m])*8",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "rx {{ device }}",
-              "refId": "A"
-            },
-            {
-              "expr": "irate(node_disk_written_bytes_total{kubernetes_node=~\"$node\"}[3m])*8",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "tx {{ device }}",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Disk throughput",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "bps",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "fill": 1,
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 8,
-            "y": 9
+            "y": 16
           },
           "id": 9,
           "legend": {
@@ -850,14 +757,19 @@
             "values": false
           },
           "lines": true,
-          "linewidth": 1,
+          "linewidth": 0,
           "links": [],
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "total",
+              "linewidth": 1
+            }
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -865,9 +777,32 @@
             {
               "expr": "1 - (avg(irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"idle\"}[3m])))",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "Utilization",
+              "legendFormat": "total",
               "refId": "A"
+            },
+            {
+              "expr": "avg(irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"user\"}[3m]))",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "user",
+              "refId": "B"
+            },
+            {
+              "expr": "avg(irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"system\"}[3m]))",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "system",
+              "refId": "C"
+            },
+            {
+              "expr": "avg(irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"iowait\"}[3m]))",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "iowait",
+              "refId": "D"
             }
           ],
           "thresholds": [],
@@ -877,7 +812,7 @@
           "title": "CPU Utilization",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -896,183 +831,6 @@
               "logBase": 1,
               "max": "1",
               "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "fill": 1,
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 16,
-            "y": 9
-          },
-          "id": 14,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "irate(node_network_receive_bytes_total{kubernetes_node=~\"$node\",device=\"eth0\"}[3m])*8",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "rx {{ device }}",
-              "refId": "A"
-            },
-            {
-              "expr": "irate(node_network_transmit_bytes_total{kubernetes_node=~\"$node\",device=\"eth0\"}[3m])*8",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "tx {{ device }}",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Network throughput",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "bps",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "fill": 1,
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 0,
-            "y": 16
-          },
-          "id": 8,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "1 - node_memory_MemAvailable_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "available",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Memory Utilization",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 1,
-              "format": "percentunit",
-              "label": "",
-              "logBase": 1,
-              "max": "1",
-              "min": null,
               "show": true
             },
             {
@@ -1173,6 +931,320 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 16
+          },
+          "id": 14,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_network_receive_bytes_total{kubernetes_node=~\"$node\",device=\"eth0\"}[3m])*8",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "rx",
+              "refId": "A"
+            },
+            {
+              "expr": "irate(node_network_transmit_bytes_total{kubernetes_node=~\"$node\",device=\"eth0\"}[3m])*8",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "tx",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Network throughput",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "bps",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 23
+          },
+          "id": 8,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 0,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "available",
+              "linewidth": 1
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_memory_MemAvailable_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "available",
+              "refId": "A"
+            },
+            {
+              "expr": "node_memory_Cached_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "cached",
+              "refId": "B"
+            },
+            {
+              "expr": "node_memory_Active_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "active",
+              "refId": "C"
+            },
+            {
+              "expr": "node_memory_Buffers_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "buffers",
+              "refId": "D"
+            },
+            {
+              "expr": "node_memory_Slab_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "slab",
+              "refId": "E"
+            },
+            {
+              "expr": "node_memory_KernelStack_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "kernel stack",
+              "refId": "F"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory Utilization",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "percentunit",
+              "label": "",
+              "logBase": 1,
+              "max": "1",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 23
+          },
+          "id": 11,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/^tx .*/",
+              "transform": "negative-Y"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_disk_read_bytes_total{kubernetes_node=~\"$node\"}[3m])*8",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "rx {{ device }}",
+              "refId": "A"
+            },
+            {
+              "expr": "irate(node_disk_written_bytes_total{kubernetes_node=~\"$node\"}[3m])*8",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "tx {{ device }}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Disk throughput",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "bps",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Utilization",
@@ -1198,7 +1270,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 4
+            "y": 31
           },
           "id": 10,
           "legend": {
@@ -1297,7 +1369,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 4
+            "y": 31
           },
           "id": 29,
           "legend": {
@@ -1371,6 +1443,98 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 31
+          },
+          "id": 35,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "rate(node_disk_write_time_seconds_total{kubernetes_node=~\"$node\"}[3m]) * -1",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "write {{ device }}",
+              "refId": "A"
+            },
+            {
+              "expr": "rate(node_disk_read_time_seconds_total{kubernetes_node=~\"$node\"}[3m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "read {{ device }}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Write vs Read times",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "s",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Saturation",
@@ -1400,8 +1564,8 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "gke-hush-house-test-preemptible-1-be9c9304-rs20",
-          "value": "gke-hush-house-test-preemptible-1-be9c9304-rs20"
+          "text": "gke-hush-house-test-workers-1-46b1d860-65mf",
+          "value": "gke-hush-house-test-workers-1-46b1d860-65mf"
         },
         "datasource": "prometheus",
         "definition": "label_values(kube_node_info, node)",
@@ -1416,6 +1580,31 @@
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "workers-1",
+          "value": "workers-1"
+        },
+        "datasource": "prometheus",
+        "definition": "label_values(kube_node_labels{node=\"$node\"}, label_cloud_google_com_gke_nodepool)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Pool",
+        "multi": false,
+        "name": "pool",
+        "options": [],
+        "query": "label_values(kube_node_labels{node=\"$node\"}, label_cloud_google_com_gke_nodepool)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
