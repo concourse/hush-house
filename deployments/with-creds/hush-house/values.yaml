@@ -29,10 +29,10 @@ concourse:
     resources:
       requests:
         cpu: 5000m
-        memory: 20Gi
+        memory: 23Gi
       limits:
         cpu: 7000m
-        memory: 20Gi
+        memory: 23Gi
 
   web:
     replicas: 2
