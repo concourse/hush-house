@@ -160,6 +160,31 @@ There are two possible types of deployments we can create:
 2. with credentials.
 
 
+## SSHing into the Kubernetes node VM
+
+As the worker nodes created by worker pools declared in [the main Terraform file](./terraform/main.tf) are just regular GCP instances, these can be accessed using the regular ways of accessing VMs through `gcloud`.
+
+
+```sh
+# The name of the instance can be retrieved from the
+# command that lists nodes connected to the k8s cluster:
+# - `kubectl get nodes`.
+NODE_NAME="gke-hush-house-test-workers-1-46b1d860-65mf"
+
+
+# Use `gcloud` to facilitate the process of getting the
+# right credentials set up for SSHing into the machine.
+#
+# ps.: you must have `gcloud` credentials set up before
+#      proceeding - check out the section `Gathering acccess to the cluster`
+#      in this README file.
+gcloud compute \
+	ssh \
+	--zone us-central1-a \
+	$NODE_NAME
+```
+
+
 ### Without any credentials setup
 
 *tl;dr: copy the `./deployments/without-creds/bananas` directory and change `bananas` to the name of the deployment you want.*
