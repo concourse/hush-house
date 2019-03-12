@@ -68,7 +68,7 @@ concourse:
         github:
           enabled: true
       bindPort: 80
-      containerPlacementStrategy: fewest-build-containers
+      containerPlacementStrategy: random
       enableGlobalResources: true
       encryption: { enabled: true }
       externalUrl: https://hush-house.concourse-ci.org
