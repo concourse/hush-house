@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 4,
-  "iteration": 1552250208838,
+  "iteration": 1552486491450,
   "links": [],
   "panels": [
     {
@@ -745,7 +745,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 10
+            "y": 9
           },
           "id": 9,
           "legend": {
@@ -858,7 +858,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 10
+            "y": 9
           },
           "id": 15,
           "legend": {
@@ -943,7 +943,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 10
+            "y": 9
           },
           "id": 14,
           "legend": {
@@ -1035,7 +1035,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 17
+            "y": 16
           },
           "id": 8,
           "legend": {
@@ -1160,7 +1160,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 17
+            "y": 16
           },
           "id": 37,
           "legend": {
@@ -1245,7 +1245,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 17
+            "y": 16
           },
           "id": 11,
           "legend": {
@@ -1331,6 +1331,103 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 23
+          },
+          "id": 38,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/^tx .*/",
+              "transform": "negative-Y"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_disk_reads_completed_total{kubernetes_node=\"$node\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "rx {{ device }}",
+              "refId": "A"
+            },
+            {
+              "expr": "irate(node_disk_writes_completed_total{kubernetes_node=\"$node\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "tx {{ device }}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Completed IOPS",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Utilization",
@@ -1356,7 +1453,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 31
+            "y": 4
           },
           "id": 10,
           "legend": {
@@ -1455,7 +1552,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 31
+            "y": 4
           },
           "id": 29,
           "legend": {
@@ -1540,7 +1637,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 31
+            "y": 4
           },
           "id": 35,
           "legend": {
@@ -1649,8 +1746,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "gke-hush-house-test-workers-1-46b1d860-65mf",
-          "value": "gke-hush-house-test-workers-1-46b1d860-65mf"
+          "selected": false,
+          "text": "gke-hush-house-test-workers-1-46b1d860-jvdp",
+          "value": "gke-hush-house-test-workers-1-46b1d860-jvdp"
         },
         "datasource": "prometheus",
         "definition": "label_values(kube_node_info, node)",
@@ -1731,5 +1829,5 @@
   "timezone": "",
   "title": "Node",
   "uid": "C8wJ9x9iz",
-  "version": 2
+  "version": 3
 }
