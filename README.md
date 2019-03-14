@@ -127,7 +127,7 @@ gcloud auth login
 2. Retrieve the k8s credentials for the cluster
 
 ```sh
-gcloud container clusters get-credentials hush-house
+gcloud container clusters get-credentials hush-house-test
 ```
 
 
