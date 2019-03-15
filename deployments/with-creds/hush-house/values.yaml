@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse-rc
-  imageTag: 5.0.1-rc.6
+  image: concourse/concourse
+  imageTag: 5.0.0
 
   postgresql:
     enabled: false
