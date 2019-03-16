@@ -17,8 +17,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 3,
-  "iteration": 1551722280911,
+  "id": 2,
+  "iteration": 1552736479414,
   "links": [
     {
       "icon": "info",
@@ -815,6 +815,92 @@
           "yaxes": [
             {
               "decimals": 1,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 27
+          },
+          "id": 54,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": false,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": true,
+          "targets": [
+            {
+              "expr": "avg by (state) (concourse_workers_registered{kubernetes_pod_name=~\"$atc\"})",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": " {{ state }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Workers state",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
               "format": "short",
               "label": "",
               "logBase": 1,
@@ -1667,7 +1753,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 13
+            "y": 37
           },
           "id": 13,
           "legend": {
@@ -1755,7 +1841,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 13
+            "y": 37
           },
           "id": 3,
           "legend": {
@@ -1841,7 +1927,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 13
+            "y": 37
           },
           "id": 2,
           "legend": {
@@ -1927,7 +2013,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 20
+            "y": 44
           },
           "id": 30,
           "legend": {
@@ -2022,7 +2108,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 20
+            "y": 44
           },
           "id": 31,
           "legend": {
@@ -2110,7 +2196,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 20
+            "y": 44
           },
           "id": 39,
           "legend": {
@@ -2199,7 +2285,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 27
+            "y": 51
           },
           "id": 46,
           "legend": {
@@ -2342,7 +2428,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -2401,5 +2486,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 3
+  "version": 1
 }
