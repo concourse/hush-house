@@ -49,3 +49,8 @@ resource "google_sql_user" "user" {
   instance = "${google_sql_database_instance.main.name}"
   password = "${random_string.password.result}"
 }
+
+resource "google_sql_ssl_cert" "cert" {
+  common_name = "atc"
+  instance    = "${google_sql_database_instance.main.name}"
+}
