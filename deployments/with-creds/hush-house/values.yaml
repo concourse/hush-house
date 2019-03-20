@@ -28,11 +28,11 @@ concourse:
       value: "2000"
     resources:
       requests:
-        cpu: 5000m
-        memory: 23Gi
+        cpu: 14000m
+        memory: 29Gi
       limits:
-        cpu: 7000m
-        memory: 23Gi
+        cpu: 15000m
+        memory: 29Gi
 
   web:
     replicas: 2
@@ -52,10 +52,10 @@ concourse:
       loadBalancerIP: 35.202.234.135
     resources:
       requests:
-        cpu: 750m
+        cpu: 1000m
         memory: 1Gi
       limits:
-        cpu: 750m
+        cpu: 1000m
         memory: 1Gi
 
   concourse:
