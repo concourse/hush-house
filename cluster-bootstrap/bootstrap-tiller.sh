@@ -19,11 +19,6 @@ kubectl create clusterrolebinding \
 	--clusterrole=cluster-admin \
 	--serviceaccount=kube-system:tiller
 
-kubectl patch deploy \
-	tiller-deploy \
-	--namespace kube-system \
-	-p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-
 helm init \
 	--service-account tiller \
 	--tiller-tls \

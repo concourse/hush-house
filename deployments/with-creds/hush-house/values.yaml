@@ -76,7 +76,7 @@ concourse:
       metrics: { captureErrorMetrics: true }
       prometheus: { enabled: true }
       postgres:
-        host: 10.99.0.3
+        host: 173.255.117.168
         database: atc
       tls: { enabled: true, bindPort: 443 }
     worker:

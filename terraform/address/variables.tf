@@ -7,4 +7,3 @@ variable "subdomain" {
   description = "Subdomain under the DNS zone to register"
   type        = "string"
 }
-

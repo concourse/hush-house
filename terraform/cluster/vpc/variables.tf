@@ -15,7 +15,7 @@ variable "pods-cidr" {
 }
 
 variable "pods-range-name" {
-  default = "pods-range"
+  default     = "pods-range"
   description = "TODO"
 }
 
@@ -24,6 +24,6 @@ variable "services-cidr" {
 }
 
 variable "services-range-name" {
-  default = "services-range"
+  default     = "services-range"
   description = "TODO"
 }

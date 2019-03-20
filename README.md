@@ -127,7 +127,7 @@ gcloud auth login
 2. Retrieve the k8s credentials for the cluster
 
 ```sh
-gcloud container clusters get-credentials hush-house-test
+gcloud container clusters get-credentials hush-house
 ```
 
 
@@ -403,5 +403,58 @@ kubectl create generic mything \
 kubectl create generic mything \
   --from-literal=foo=$foo \
   --namespace $prefix$team
+```
+
+
+## Bootstrapping the cluster
+
+Creating the `hush-house` cluster on GKE from the ground up requires:
+
+1. having GCP credentials,
+2. applying the Terraform definition under `./terraform`, then
+3. creating few objects in the Kubernetes cluster.
+
+Below you find instructions to how to do those steps.
+
+### Getting the GCP credentials
+
+Access to the GCP credentials for `hush-house` can be granted through a GCP JSON key stored in LastPass.
+
+The `Makefile` at the root of this repository contains a target for retrieving that key and placing it at the right place:
+
+```sh
+make creds
+```
+
+### Applying the Terraform
+
+With the credential obtained, we can follow up creating the underlying resources in the IaaS (GCP), using the defitnions under the `./terraform` directory.
+
+```sh
+cd ./terraform
+terraform apply
+```
+
+
+### Creating the base Kubernetes objects
+
+A fully working `hush-house` Kubernetes clusters requires few components: a Tiller deployment (the server-side compoennt of Helm), and a custom `StorageClass` (so we can create PersistentVolumeClaims based of SSD storage).
+
+
+To configure Tiller, first get the Helm certificates and keys from LastPass and then run the script that bootstraps it.
+
+*Note.: the script is meant to be run with the current working directory pointing to `cluster-bootstrap`.*
+
+```sh
+make helm-creds
+cd ./cluster-bootstrap
+./bootstrap-tiller.sh
+```
+
+To finish the bootstrapping, we now need to create the StorageClass. From the root of this repository, run the following:
+
+```sh
+cd ./cluster-bootstrap/storage
+./ssd-storage-class.sh
 ```
 

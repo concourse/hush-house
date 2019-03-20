@@ -15,5 +15,5 @@ variable "region" {
 
 variable "node-pools" {
   description = "TODO"
-  type = "list"
+  type        = "list"
 }

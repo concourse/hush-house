@@ -17,4 +17,3 @@ output "services-range-name" {
 output "uri" {
   value = "${google_compute_network.main.self_link}"
 }
-

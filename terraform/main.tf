@@ -15,18 +15,18 @@ module "metrics-address" {
 module "cluster" {
   source = "./cluster"
 
-  name   = "hush-house-test"
+  name   = "hush-house"
   zone   = "${var.zone}"
   region = "${var.region}"
 
   node-pools = [
     {
       name         = "generic-1"
-      min = 1
-      node_count   = 3
-      max = 5
+      min          = 1
+      node_count   = 1
+      max          = 5
       local-ssds   = 0
-      machine-type = "n1-standard-2"
+      machine-type = "n1-standard-4"
       image        = "COS"
       disk-size    = "50"
       disk-type    = "pd-ssd"
@@ -36,11 +36,11 @@ module "cluster" {
     },
     {
       name         = "workers-1"
-      min = 1
-      node_count   = 4
-      max = 10
+      min          = 1
+      node_count   = 1
+      max          = 10
       local-ssds   = 0
-      machine-type = "n1-standard-8"
+      machine-type = "custom-16-32768"
       image        = "COS"
       disk-size    = "50"
       disk-type    = "pd-ssd"
@@ -54,10 +54,9 @@ module "cluster" {
 module "database" {
   source = "./database"
 
-  name      = "hush-house-test"
+  name      = "hush-house"
   cpus      = "4"
   memory_mb = "5120"
   region    = "${var.region}"
   zone      = "${var.zone}"
-  vpc-uri   = "${module.cluster.vpc-uri}"
 }

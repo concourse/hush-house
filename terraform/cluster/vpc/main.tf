@@ -49,7 +49,7 @@ resource "google_compute_firewall" "internal-ingress" {
 
 resource "google_compute_firewall" "external-ingress" {
   name      = "${var.name}-external"
-  network   = "${var.name}"
+  network   = "${google_compute_network.main.name}"
   direction = "INGRESS"
 
   allow {
