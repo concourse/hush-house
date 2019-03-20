@@ -150,7 +150,7 @@ grafana:
     auth.anonymous:
       enabled: true
   service:
-    loadBalancerIP: 35.202.234.135
+    loadBalancerIP: 35.202.14.65
     port: 443
     type: LoadBalancer
   sidecar:

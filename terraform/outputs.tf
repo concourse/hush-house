@@ -22,3 +22,11 @@ output "hush-house-database-private-key" {
   sensitive = true
   value     = "${module.database.private-key}"
 }
+
+output "hush-house-address" {
+  value = "${module.web-address.address}"
+}
+
+output "metrics-hush-house-address" {
+  value = "${module.metrics-address.address}"
+}

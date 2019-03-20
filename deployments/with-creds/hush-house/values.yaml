@@ -49,7 +49,7 @@ concourse:
                 release: hush-house
     service:
       type: LoadBalancer
-      loadBalancerIP: 35.202.14.65
+      loadBalancerIP: 35.202.234.135
     resources:
       requests:
         cpu: 750m
