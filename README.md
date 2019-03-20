@@ -28,6 +28,7 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
 - [Dependencies](#dependencies)
 - [Gathering acccess to the cluster](#gathering-acccess-to-the-cluster)
 - [Creating your own deployment](#creating-your-own-deployment)
+- [SSHing into the Kubernetes node VM](#sshing-into-the-kubernetes-node-vm)
   - [Without any credentials setup](#without-any-credentials-setup)
   - [With credentials](#with-credentials)
   - [Visualizing metrics from your deployment](#visualizing-metrics-from-your-deployment)
@@ -36,6 +37,10 @@ This repository contains the configuration of [hush-house.concourse-ci.org](http
   - [Namespaces](#namespaces)
   - [Nodes](#nodes)
   - [Kubernetes for credential management](#kubernetes-for-credential-management)
+- [Bootstrapping the cluster](#bootstrapping-the-cluster)
+  - [Getting the GCP credentials](#getting-the-gcp-credentials)
+  - [Applying the Terraform](#applying-the-terraform)
+  - [Creating the base Kubernetes objects](#creating-the-base-kubernetes-objects)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
