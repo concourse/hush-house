@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse-rc
-  imageTag: 5.0.1-rc.15
+  image: concourse/concourse
+  imageTag: 5.0.0
 
   postgresql:
     enabled: false
@@ -78,6 +78,7 @@ concourse:
       postgres:
         host: 173.255.117.168
         database: atc
+        sslmode: verify-ca
       tls: { enabled: true, bindPort: 443 }
     worker:
       ephemeral: false

@@ -37,7 +37,7 @@ module "cluster" {
     {
       name         = "workers-1"
       min          = 1
-      node_count   = 1
+      node_count   = 4
       max          = 10
       local-ssds   = 0
       machine-type = "custom-16-32768"

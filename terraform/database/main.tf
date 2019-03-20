@@ -17,6 +17,13 @@ resource "google_sql_database_instance" "main" {
     ip_configuration {
       ipv4_enabled = "true"
       require_ssl  = "true"
+
+      authorized_networks = [
+        {
+          name  = "all"
+          value = "0.0.0.0/0"
+        },
+      ]
     }
 
     backup_configuration {
