@@ -27,9 +27,6 @@ concourse:
     - name: CONCOURSE_GARDEN_MAX_CONTAINERS
       value: "2000"
     resources:
-      requests:
-        cpu: 14000m
-        memory: 29Gi
       limits:
         cpu: 15000m
         memory: 29Gi
