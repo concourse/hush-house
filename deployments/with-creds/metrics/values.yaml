@@ -1,14 +1,14 @@
-# Configuration for serving the metrics dashboards
-# with TLS enabled.
+## Configuration for serving the metrics dashboards
+## with TLS enabled.
+##
 tls:
   enabled: true
-  ## Certificate
-  # cert:
-  ## Private key
-  # key:
+  cert:
+  key:
 
 
-# Configuration for the prometheus dependency.
+## Configuration for the prometheus dependency.
+##
 prometheus:
   enabled: true
   nodeExporter:
@@ -124,7 +124,8 @@ prometheus:
         memory: 4Gi
 
 
-# Configuration for the Grafana dependency.
+## Configuration for the Grafana dependency.
+##
 grafana:
   enabled: true
   livenessProbe:
@@ -154,9 +155,20 @@ grafana:
     port: 443
     type: LoadBalancer
   sidecar:
-    datasources:
-      enabled: true
-      label: grafana/datasource
     dashboards:
       enabled: true
       label: grafana/dashboard
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: prometheus
+        type: prometheus
+        access: proxy
+        url: http://metrics-prometheus-server
+        isDefault: true
+      - name: stackdriver
+        type: stackdriver
+        access: proxy
+        jsonData:
+          authenticationType: gce
