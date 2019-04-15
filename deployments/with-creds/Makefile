@@ -30,6 +30,7 @@ diff-%: | ensure-creds-file-exists-% deps-%
 			--namespace=$* \
 			--detailed-exitcode \
 			--values=./.values.yaml \
+			--set=concourse.web.annotations.time=`date +%s` \
 			$(HELM_FLAGS) \
 			$* \
 			.
@@ -40,6 +41,7 @@ template-%: | ensure-creds-file-exists-% deps-%
 		helm template \
 		--name=$* \
 		--values=./.values.yaml \
+		--set=concourse.web.annotations.time=`date +%s` \
 		$(HELM_FLAGS) \
 		.
 
@@ -52,6 +54,7 @@ deploy-%: | ensure-creds-file-exists-% deps-%
 			--namespace=$* \
 			--timeout=900 \
 			--values=./.values.yaml \
+			--set=concourse.web.annotations.time=\"`date +%s`\" \
 			--wait \
 			$(HELM_FLAGS) \
 			$* \
