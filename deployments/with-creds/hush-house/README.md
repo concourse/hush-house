@@ -12,6 +12,7 @@ It relies solely on the release-candidate version of the Concourse chart ([conco
 - [Web](#web)
 - [Workers](#workers)
   - [Adding external workers](#adding-external-workers)
+- [Deploying](#deploying)
 - [Metrics](#metrics)
 - [Logs](#logs)
 - [Accessing debug endpoints](#accessing-debug-endpoints)
@@ -75,6 +76,10 @@ You can add a reference to the new key as follows:
 ```
 
 *(yes, this will get better soon)*
+
+## Deploying
+
+To deploy hush-house, run `make deploy-hush-house`. If you want to force a rolling update (recreate all pods), say after updating secrets, then increment the `rollingUpdate` annotation declared in `values.yaml` for whichever component (web/worker) that you need to update.
 
 
 ## Metrics
