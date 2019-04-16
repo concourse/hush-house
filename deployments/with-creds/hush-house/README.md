@@ -1,6 +1,6 @@
 # hush-house
 
-The `hush-house` deployment is responsible for the Concourse environment running under the publicly accessible URL https://hush-house.concourse-ci.org.
+The `hush-house` deployment is responsible for the Concourse environment running under the publicly accessible URL https://hush-house.pivotal.io.
 
 It relies solely on the release-candidate version of the Concourse chart ([concourse/charts](https://github.com/concourse/charts/tree/gh-pages)), and Kubernetes (k8s) objects (`ConfigMap`s) created by Helm templating files under [`./templates`](./templates).
 

@@ -68,7 +68,7 @@ concourse:
       containerPlacementStrategy: random
       enableGlobalResources: true
       encryption: { enabled: true }
-      externalUrl: https://hush-house.concourse-ci.org
+      externalUrl: https://hush-house.pivotal.io
       kubernetes: { keepNamespaces: true }
       metrics: { captureErrorMetrics: true }
       prometheus: { enabled: true }
