@@ -71,3 +71,4 @@ Given that all of the state lives under [`./dashboards`](./dashboards) and in-pl
 
 Once a revision gets created, the `ConfigMap` update will be noticed by a [sidecar](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/) container under the Grafana pod and update the instance to catch up with the update.
 
+NOTE: There's an intermittent [bug](https://github.com/helm/helm/issues/3785) with helm not correctly calculating the patch for configMaps. You'll have to delete the configMap for the dashboard you want to update before running `make deploy-metrics`. If grafana still doesn't show your changes then delete the grafana pod and let k8s controller bring it back.
