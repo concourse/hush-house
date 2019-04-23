@@ -8,7 +8,7 @@
 # This is needed so that the `deploy` pipeline[1] can
 # make use of Helm with `--tls`.
 #
-# [1]: https://hush-house.concourse-ci.org/teams/main/pipelines/deploy
+# [1]: https://hush-house.pivotal.io/teams/main/pipelines/deploy
 #
 
 set -o errexit

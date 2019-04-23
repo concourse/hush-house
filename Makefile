@@ -3,7 +3,7 @@ HELM_HOME ?= $(shell helm home)
 # Generates the `deploy` pipeline [1] based on the
 # `jsonnet` file under `ci`.
 #
-# [1]: https://hush-house.concourse-ci.org/teams/main/pipelines/deploy
+# [1]: https://hush-house.pivotal.io/teams/main/pipelines/deploy
 #
 deploy-pipeline: ci/deploy.json
 

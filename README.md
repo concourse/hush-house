@@ -13,7 +13,7 @@
 <br />
 
 
-This repository contains the configuration of [hush-house.concourse-ci.org](https://hush-house.concourse-ci.org), [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), and any other [Kubernetes (K8S)](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) deployments using the `hush-house` Kubernetes cluster available in the shared Concourse [Google Cloud](https://cloud.google.com/) account.
+This repository contains the configuration of [hush-house.pivotal.io](https://hush-house.pivotal.io), [metrics-hush-house.concourse-ci.org](https://metrics-hush-house.concourse-ci.org), and any other [Kubernetes (K8S)](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) deployments using the `hush-house` Kubernetes cluster available in the shared Concourse [Google Cloud](https://cloud.google.com/) account.
 
 <br />
 

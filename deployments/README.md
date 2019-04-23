@@ -1,6 +1,6 @@
 # Deployments
 
-Here's where you can find all of the deployments that are picked up by `hush-house` to deploy in the `hush-house` cluster using the [`deploy` pipeline](https://hush-house.concourse-ci.org/teams/main/pipelines/deploy).
+Here's where you can find all of the deployments that are picked up by `hush-house` to deploy in the `hush-house` cluster using the [`deploy` pipeline](https://hush-house.pivotal.io/teams/main/pipelines/deploy).
 
 Each deployment directory is meant to be a [Helm Chart](https://github.com/helm/helm/blob/master/docs/charts.md), supposed to be continuously deployed in the form of releases.
 

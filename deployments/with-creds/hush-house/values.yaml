@@ -14,8 +14,10 @@ concourse:
       size: 500Gi
 
   worker:
+    annotations:
+      rollingUpdate: "1"
     replicas: 4
-    terminationGracePeriodSeconds: 6000
+    terminationGracePeriodSeconds: 10000
     livenessProbe:
       periodSeconds: 60
       timeoutSeconds: 30
@@ -32,6 +34,8 @@ concourse:
         memory: 29Gi
 
   web:
+    annotations:
+      rollingUpdate: "1"
     replicas: 2
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
@@ -68,7 +72,7 @@ concourse:
       containerPlacementStrategy: random
       enableGlobalResources: true
       encryption: { enabled: true }
-      externalUrl: https://hush-house.concourse-ci.org
+      externalUrl: https://hush-house.pivotal.io
       kubernetes: { keepNamespaces: true }
       metrics: { captureErrorMetrics: true }
       prometheus: { enabled: true }

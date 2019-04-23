@@ -44,7 +44,6 @@ template-%: | ensure-creds-file-exists-% deps-%
 		.
 
 
-
 deploy-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
 		helm upgrade \
