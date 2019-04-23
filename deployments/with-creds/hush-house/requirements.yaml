@@ -1,5 +1,5 @@
 ---
 dependencies:
 - name: concourse
-  version: 5.1.2
+  version: 5.2.3
   repository: https://kubernetes-charts.storage.googleapis.com/
