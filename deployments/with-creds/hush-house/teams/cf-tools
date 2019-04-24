@@ -4,5 +4,5 @@ roles:
   - name: owner
     github:
       teams:
-        - 'cloudfoundry-incubator:cf-notifications'
+        - 'pivotal:strabo'
         - 'concourse:pivotal'
