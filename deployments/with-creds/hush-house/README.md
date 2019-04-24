@@ -9,6 +9,7 @@ It relies solely on the release-candidate version of the Concourse chart ([conco
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [Configuring teams](#configuring-teams)
 - [Web](#web)
 - [Workers](#workers)
   - [Adding external workers](#adding-external-workers)
