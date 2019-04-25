@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 3,
-  "iteration": 1556156618120,
+  "iteration": 1556225950854,
   "links": [],
   "panels": [
     {
@@ -95,7 +95,7 @@
             "h": 3,
             "w": 4,
             "x": 0,
-            "y": 8
+            "y": 10
           },
           "id": 6,
           "interval": null,
@@ -175,7 +175,7 @@
             "h": 3,
             "w": 4,
             "x": 4,
-            "y": 8
+            "y": 10
           },
           "id": 2,
           "interval": null,
@@ -256,7 +256,7 @@
             "h": 3,
             "w": 4,
             "x": 8,
-            "y": 8
+            "y": 10
           },
           "id": 3,
           "interval": null,
@@ -337,7 +337,7 @@
             "h": 3,
             "w": 4,
             "x": 12,
-            "y": 8
+            "y": 10
           },
           "id": 4,
           "interval": null,
@@ -418,7 +418,7 @@
             "h": 3,
             "w": 4,
             "x": 16,
-            "y": 8
+            "y": 10
           },
           "id": 13,
           "interval": null,
@@ -499,7 +499,7 @@
             "h": 3,
             "w": 4,
             "x": 20,
-            "y": 8
+            "y": 10
           },
           "id": 12,
           "interval": null,
@@ -581,7 +581,7 @@
             "h": 4,
             "w": 4,
             "x": 0,
-            "y": 11
+            "y": 13
           },
           "id": 33,
           "interval": null,
@@ -662,7 +662,7 @@
             "h": 4,
             "w": 4,
             "x": 4,
-            "y": 11
+            "y": 13
           },
           "id": 34,
           "interval": null,
@@ -1055,7 +1055,7 @@
             "x": 0,
             "y": 16
           },
-          "id": 35,
+          "id": 8,
           "legend": {
             "avg": false,
             "current": false,
@@ -1066,7 +1066,7 @@
             "values": false
           },
           "lines": true,
-          "linewidth": 1,
+          "linewidth": 0,
           "links": [],
           "nullPointMode": "null",
           "paceLength": 10,
@@ -1074,31 +1074,64 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "available",
+              "linewidth": 1
+            }
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_disk_write_time_seconds_total{kubernetes_node=~\"$node\"}[3m]) * -1",
+              "expr": "node_memory_MemAvailable_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "write {{ device }}",
+              "legendFormat": "available",
               "refId": "A"
             },
             {
-              "expr": "rate(node_disk_read_time_seconds_total{kubernetes_node=~\"$node\"}[3m])",
+              "expr": "node_memory_Cached_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "read {{ device }}",
+              "legendFormat": "cached",
               "refId": "B"
+            },
+            {
+              "expr": "node_memory_Active_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "active",
+              "refId": "C"
+            },
+            {
+              "expr": "node_memory_Buffers_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "buffers",
+              "refId": "D"
+            },
+            {
+              "expr": "node_memory_Slab_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "slab",
+              "refId": "E"
+            },
+            {
+              "expr": "node_memory_KernelStack_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "kernel stack",
+              "refId": "F"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Write vs Read times",
+          "title": "Memory Utilization",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1115,11 +1148,11 @@
           "yaxes": [
             {
               "decimals": 1,
-              "format": "s",
+              "format": "percentunit",
               "label": "",
               "logBase": 1,
-              "max": null,
-              "min": null,
+              "max": "1",
+              "min": "0",
               "show": true
             },
             {
@@ -1338,18 +1371,19 @@
             "x": 0,
             "y": 23
           },
-          "id": 8,
+          "id": 39,
           "legend": {
+            "alignAsTable": true,
             "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "current": true,
+            "max": true,
+            "min": true,
             "show": false,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 0,
+          "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
           "paceLength": 10,
@@ -1359,8 +1393,8 @@
           "renderer": "flot",
           "seriesOverrides": [
             {
-              "alias": "available",
-              "linewidth": 1
+              "alias": "/^tx .*/",
+              "transform": "negative-Y"
             }
           ],
           "spaceLength": 10,
@@ -1368,53 +1402,25 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_MemAvailable_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "expr": "node_procs_blocked{kubernetes_node=~\"$node\"}",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "available",
+              "legendFormat": "blocked",
               "refId": "A"
             },
             {
-              "expr": "node_memory_Cached_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
+              "expr": "node_procs_running{kubernetes_node=~\"$node\"}",
               "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "cached",
+              "intervalFactor": 1,
+              "legendFormat": "running",
               "refId": "B"
-            },
-            {
-              "expr": "node_memory_Active_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "active",
-              "refId": "C"
-            },
-            {
-              "expr": "node_memory_Buffers_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "buffers",
-              "refId": "D"
-            },
-            {
-              "expr": "node_memory_Slab_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "slab",
-              "refId": "E"
-            },
-            {
-              "expr": "node_memory_KernelStack_bytes{kubernetes_node=~\"$node\"} / node_memory_MemTotal_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "kernel stack",
-              "refId": "F"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Memory Utilization",
+          "title": "Processes state",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1431,10 +1437,10 @@
           "yaxes": [
             {
               "decimals": 1,
-              "format": "percentunit",
+              "format": "short",
               "label": "",
               "logBase": 1,
-              "max": "1",
+              "max": null,
               "min": null,
               "show": true
             },
@@ -1635,16 +1641,15 @@
             "x": 0,
             "y": 30
           },
-          "id": 39,
+          "id": 42,
           "legend": {
-            "alignAsTable": true,
             "avg": false,
-            "current": true,
-            "max": true,
-            "min": true,
+            "current": false,
+            "max": false,
+            "min": false,
             "show": false,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 1,
@@ -1655,36 +1660,24 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/^tx .*/",
-              "transform": "negative-Y"
-            }
-          ],
+          "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_procs_blocked{kubernetes_node=~\"$node\"}",
+              "expr": "irate(node_context_switches_total{kubernetes_node=~\"$node\"}[3m])",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "blocked",
+              "legendFormat": "",
               "refId": "A"
-            },
-            {
-              "expr": "node_procs_running{kubernetes_node=~\"$node\"}",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "running",
-              "refId": "B"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Processes state",
+          "title": "Context switches",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1701,8 +1694,8 @@
           "yaxes": [
             {
               "decimals": 1,
-              "format": "short",
-              "label": "",
+              "format": "ops",
+              "label": "per-second",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -1841,6 +1834,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
+          "datasource": "stackdriver",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -1848,7 +1842,7 @@
             "x": 8,
             "y": 38
           },
-          "id": 42,
+          "id": 44,
           "legend": {
             "avg": false,
             "current": false,
@@ -1862,9 +1856,8 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
-          "paceLength": 10,
           "percentage": false,
-          "pointradius": 5,
+          "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
@@ -1873,21 +1866,333 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_context_switches_total{kubernetes_node=~\"$node\"}[3m])",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "",
-              "refId": "A"
+              "aliasBy": "tx",
+              "alignOptions": [
+                {
+                  "expanded": true,
+                  "label": "Alignment options",
+                  "options": [
+                    {
+                      "label": "delta",
+                      "metricKinds": [
+                        "CUMULATIVE",
+                        "DELTA"
+                      ],
+                      "text": "delta",
+                      "value": "ALIGN_DELTA",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "rate",
+                      "metricKinds": [
+                        "CUMULATIVE",
+                        "DELTA"
+                      ],
+                      "text": "rate",
+                      "value": "ALIGN_RATE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "min",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "min",
+                      "value": "ALIGN_MIN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "max",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "max",
+                      "value": "ALIGN_MAX",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "mean",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "mean",
+                      "value": "ALIGN_MEAN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "count",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "count",
+                      "value": "ALIGN_COUNT",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "sum",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "sum",
+                      "value": "ALIGN_SUM",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "stddev",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "stddev",
+                      "value": "ALIGN_STDDEV",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "percent change",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "percent change",
+                      "value": "ALIGN_PERCENT_CHANGE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "alignmentPeriod": "stackdriver-auto",
+              "crossSeriesReducer": "REDUCE_MEAN",
+              "defaultProject": "loading project...",
+              "filters": [
+                "metric.label.instance_name",
+                "=",
+                "gke-hush-house-workers-1-332140f7-2p43"
+              ],
+              "groupBys": [],
+              "lastQuery": "aggregation.alignmentPeriod=+300s&aggregation.crossSeriesReducer=REDUCE_MEAN&aggregation.perSeriesAligner=ALIGN_DELTA&filter=metric.type=\"compute.googleapis.com/instance/disk/throttled_write_bytes_count\"+metric.label.instance_name=\"gke-hush-house-workers-1-332140f7-2p43\"&interval.endTime=2019-04-25T21:06:11Z&interval.startTime=2019-04-24T21:06:11Z&view=FULL",
+              "lastQueryError": "",
+              "metricKind": "DELTA",
+              "metricType": "compute.googleapis.com/instance/disk/throttled_write_ops_count",
+              "perSeriesAligner": "ALIGN_DELTA",
+              "refId": "A",
+              "service": "",
+              "unit": "1",
+              "usedAlignmentPeriod": 300,
+              "valueType": "INT64"
+            },
+            {
+              "aliasBy": "rx",
+              "alignOptions": [
+                {
+                  "expanded": true,
+                  "label": "Alignment options",
+                  "options": [
+                    {
+                      "label": "delta",
+                      "metricKinds": [
+                        "CUMULATIVE",
+                        "DELTA"
+                      ],
+                      "text": "delta",
+                      "value": "ALIGN_DELTA",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "rate",
+                      "metricKinds": [
+                        "CUMULATIVE",
+                        "DELTA"
+                      ],
+                      "text": "rate",
+                      "value": "ALIGN_RATE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "min",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "min",
+                      "value": "ALIGN_MIN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "max",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "max",
+                      "value": "ALIGN_MAX",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "mean",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "mean",
+                      "value": "ALIGN_MEAN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "count",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "count",
+                      "value": "ALIGN_COUNT",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "sum",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "sum",
+                      "value": "ALIGN_SUM",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "stddev",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "stddev",
+                      "value": "ALIGN_STDDEV",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "percent change",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "percent change",
+                      "value": "ALIGN_PERCENT_CHANGE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "alignmentPeriod": "stackdriver-auto",
+              "crossSeriesReducer": "REDUCE_MEAN",
+              "defaultProject": "loading project...",
+              "filters": [
+                "metric.label.instance_name",
+                "=",
+                "gke-hush-house-workers-1-332140f7-2p43"
+              ],
+              "groupBys": [],
+              "hide": false,
+              "lastQuery": "aggregation.alignmentPeriod=+300s&aggregation.crossSeriesReducer=REDUCE_MEAN&aggregation.perSeriesAligner=ALIGN_DELTA&filter=metric.type=\"compute.googleapis.com/instance/disk/throttled_read_ops_count\"+metric.label.instance_name=\"gke-hush-house-workers-1-332140f7-2p43\"&interval.endTime=2019-04-25T21:05:15Z&interval.startTime=2019-04-24T21:05:15Z&view=FULL",
+              "lastQueryError": "",
+              "metricKind": "DELTA",
+              "metricType": "compute.googleapis.com/instance/disk/throttled_read_ops_count",
+              "perSeriesAligner": "ALIGN_DELTA",
+              "refId": "B",
+              "service": "",
+              "unit": "1",
+              "usedAlignmentPeriod": 300,
+              "valueType": "INT64"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Context switches",
+          "title": "Throttled Disk Operations",
           "tooltip": {
             "shared": true,
-            "sort": 2,
+            "sort": 0,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1900,9 +2205,8 @@
           },
           "yaxes": [
             {
-              "decimals": 1,
-              "format": "ops",
-              "label": "per-second",
+              "format": "none",
+              "label": null,
               "logBase": 1,
               "max": null,
               "min": null,
@@ -1971,6 +2275,20 @@
               "intervalFactor": 2,
               "legendFormat": "out",
               "refId": "A"
+            },
+            {
+              "expr": "irate(node_vmstat_pgfault{kubernetes_node=~\"$node\"}[3m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "pgfault",
+              "refId": "B"
+            },
+            {
+              "expr": "irate(node_vmstat_pgmajfault{kubernetes_node=~\"$node\"}[3m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "pgmajfault",
+              "refId": "D"
             }
           ],
           "thresholds": [],
@@ -2100,6 +2418,99 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 8,
+            "y": 45
+          },
+          "id": 35,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "paceLength": 10,
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "rate(node_disk_write_time_seconds_total{kubernetes_node=~\"$node\"}[3m]) * -1",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "write {{ device }}",
+              "refId": "A"
+            },
+            {
+              "expr": "rate(node_disk_read_time_seconds_total{kubernetes_node=~\"$node\"}[3m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "read {{ device }}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Write vs Read times",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "s",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Saturation",
@@ -2128,7 +2539,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "gke-hush-house-workers-1-332140f7-2p43",
           "value": "gke-hush-house-workers-1-332140f7-2p43"
         },
