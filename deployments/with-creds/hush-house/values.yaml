@@ -14,7 +14,7 @@ concourse:
     annotations:
       rollingUpdate: "1"
     replicas: 4
-    terminationGracePeriodSeconds: 10000
+    terminationGracePeriodSeconds: 3600
     livenessProbe:
       periodSeconds: 60
       timeoutSeconds: 30
@@ -81,5 +81,5 @@ concourse:
     worker:
       ephemeral: false
       rebalanceInterval: 1h
-      baggageclaim: { driver: overlay }
+      baggageclaim: { driver: detect }
       healthcheckTimeout: 25s

@@ -14,18 +14,14 @@ prometheus:
   nodeExporter:
     enabled: true
   kubeStateMetrics:
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     enabled: true
   pushgateway:
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     enabled: false
   alertmanager:
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     enabled: true
-    affinity:
-      nodeAffinity: &affinityToNonPreemptible
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: cloud.google.com/gke-preemptible
-              operator: DoesNotExist
   serverFiles:
     prometheus.yml:
       scrape_configs:
@@ -109,12 +105,11 @@ prometheus:
         - record: node:node_num_cpu:sum
           expr: count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode)
   server:
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     persistentVolume:
       enabled: true
       size: 30Gi
       storageClass: ssd
-    affinity:
-      nodeAffinity: *affinityToNonPreemptible
     resources:
       limits:
         cpu: 1500m
@@ -127,6 +122,7 @@ prometheus:
 ## Configuration for the Grafana dependency.
 ##
 grafana:
+  nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
   enabled: true
   livenessProbe:
     httpGet:

@@ -7,12 +7,20 @@ resource "google_sql_database_instance" "main" {
   region           = "${var.region}"
   database_version = "POSTGRES_9_6"
 
+
   settings {
     availability_type = "ZONAL"
     disk_autoresize   = true
     disk_size         = "10"
     disk_type         = "PD_SSD"
     tier              = "db-custom-${var.cpus}-${var.memory_mb}"
+
+    database_flags = [
+      {
+          name = "log_min_duration_statement"
+          value = "-1"
+      }
+    ]
 
     ip_configuration {
       ipv4_enabled = "true"

@@ -23,7 +23,7 @@ module "cluster" {
     {
       name         = "generic-1"
       min          = 1
-      node_count   = 1
+      node_count   = 2
       max          = 5
       local-ssds   = 0
       machine-type = "n1-standard-4"
@@ -41,7 +41,7 @@ module "cluster" {
       max          = 10
       local-ssds   = 0
       machine-type = "custom-16-32768"
-      image        = "COS"
+      image        = "UBUNTU"
       disk-size    = "50"
       disk-type    = "pd-ssd"
       auto-upgrade = false
