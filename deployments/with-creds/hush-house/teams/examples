@@ -1,6 +1,0 @@
-# vim: set syntax=yaml:
-
-roles:
-  - name: owner
-    github:
-      teams: [ 'concourse:pivotal' ]

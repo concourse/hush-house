@@ -9,7 +9,6 @@ It relies solely on the release-candidate version of the Concourse chart ([conco
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Configuring teams](#configuring-teams)
 - [Web](#web)
 - [Workers](#workers)
   - [Adding external workers](#adding-external-workers)
@@ -21,32 +20,6 @@ It relies solely on the release-candidate version of the Concourse chart ([conco
   - [Retrieving and visualizing profiles](#retrieving-and-visualizing-profiles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## Configuring teams
-
-Every team configuration lives under the [`./teams`](./teams) directory.
-
-There you'll find on a per-team basis, files named after their corresponding team names - for instance, the `mycoolteam` team would have a file named `mycoolteam`.
-
-The contents of those `yaml` files are exactly the contents that goes into `fly set-team -c <config_file>` (see [Setting user roles](https://concourse-ci.org/managing-teams.html#setting-roles)).
-
-To have all of the teams set up:
-
-1. have the `hh` target configured with the `main` team:
-
-```sh
-fly --target hh login \
-  --team-name=main \
-  --concourse-url=https://hush-house.pivotal.io
-```
-
-2. Run the script that sets all teams:
-
-**WARNING** - this WILL NOT ask for a confirmation before running.
-
-```sh
-make set-teams
-```
 
 
 ## Web

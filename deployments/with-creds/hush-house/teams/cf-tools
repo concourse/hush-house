@@ -1,8 +1,0 @@
-# vim: set syntax=yaml:
-
-roles:
-  - name: owner
-    github:
-      teams:
-        - 'pivotal:strabo'
-        - 'concourse:pivotal'
