@@ -15,11 +15,12 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 7,
-  "iteration": 1553298666907,
+  "id": 1,
+  "iteration": 1556593264738,
   "links": [],
   "panels": [
     {
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -27,731 +28,736 @@
         "y": 0
       },
       "id": 11,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "stackdriver",
+          "fill": 0,
+          "gridPos": {
+            "h": 4,
+            "w": 8,
+            "x": 0,
+            "y": 1
+          },
+          "id": 13,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "paceLength": 10,
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aliasBy": "{{  resource.label.database_id }}",
+              "alignOptions": [
+                {
+                  "expanded": true,
+                  "label": "Alignment options",
+                  "options": [
+                    {
+                      "label": "interpolate",
+                      "metricKinds": [
+                        "GAUGE"
+                      ],
+                      "text": "interpolate",
+                      "value": "ALIGN_INTERPOLATE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "next older",
+                      "metricKinds": [
+                        "GAUGE"
+                      ],
+                      "text": "next older",
+                      "value": "ALIGN_NEXT_OLDER",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION",
+                        "STRING",
+                        "VALUE_TYPE_UNSPECIFIED",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "min",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "min",
+                      "value": "ALIGN_MIN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "max",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "max",
+                      "value": "ALIGN_MAX",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "mean",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "mean",
+                      "value": "ALIGN_MEAN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "count",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "count",
+                      "value": "ALIGN_COUNT",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "sum",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "sum",
+                      "value": "ALIGN_SUM",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "stddev",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "stddev",
+                      "value": "ALIGN_STDDEV",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "percent change",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "percent change",
+                      "value": "ALIGN_PERCENT_CHANGE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "alignmentPeriod": "stackdriver-auto",
+              "crossSeriesReducer": "REDUCE_NONE",
+              "defaultProject": "loading project...",
+              "filters": [
+                "resource.label.database_id",
+                "=~",
+                "$instance"
+              ],
+              "groupBys": [],
+              "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/reserved_cores\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-23T00:30:04Z&interval.startTime=2019-03-22T21:30:04Z&view=FULL",
+              "lastQueryError": "",
+              "metricKind": "GAUGE",
+              "metricType": "cloudsql.googleapis.com/database/cpu/reserved_cores",
+              "perSeriesAligner": "ALIGN_INTERPOLATE",
+              "refId": "A",
+              "service": "",
+              "unit": "1",
+              "usedAlignmentPeriod": 60,
+              "valueType": "DOUBLE"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": false,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "Cores",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "stackdriver",
+          "fill": 0,
+          "gridPos": {
+            "h": 4,
+            "w": 8,
+            "x": 8,
+            "y": 1
+          },
+          "id": 14,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "paceLength": 10,
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aliasBy": "{{  resource.label.database_id }}",
+              "alignOptions": [
+                {
+                  "expanded": true,
+                  "label": "Alignment options",
+                  "options": [
+                    {
+                      "label": "interpolate",
+                      "metricKinds": [
+                        "GAUGE"
+                      ],
+                      "text": "interpolate",
+                      "value": "ALIGN_INTERPOLATE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "next older",
+                      "metricKinds": [
+                        "GAUGE"
+                      ],
+                      "text": "next older",
+                      "value": "ALIGN_NEXT_OLDER",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION",
+                        "STRING",
+                        "VALUE_TYPE_UNSPECIFIED",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "min",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "min",
+                      "value": "ALIGN_MIN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "max",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "max",
+                      "value": "ALIGN_MAX",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "mean",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "mean",
+                      "value": "ALIGN_MEAN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "count",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "count",
+                      "value": "ALIGN_COUNT",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "sum",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "sum",
+                      "value": "ALIGN_SUM",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "stddev",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "stddev",
+                      "value": "ALIGN_STDDEV",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "percent change",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "percent change",
+                      "value": "ALIGN_PERCENT_CHANGE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "alignmentPeriod": "stackdriver-auto",
+              "crossSeriesReducer": "REDUCE_NONE",
+              "defaultProject": "loading project...",
+              "filters": [
+                "resource.label.database_id",
+                "=~",
+                "$instance"
+              ],
+              "groupBys": [],
+              "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/reserved_cores\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-23T00:30:04Z&interval.startTime=2019-03-22T21:30:04Z&view=FULL",
+              "lastQueryError": "",
+              "metricKind": "GAUGE",
+              "metricType": "cloudsql.googleapis.com/database/memory/quota",
+              "perSeriesAligner": "ALIGN_INTERPOLATE",
+              "refId": "A",
+              "service": "",
+              "unit": "By",
+              "usedAlignmentPeriod": 60,
+              "valueType": "INT64"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": false,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "bytes",
+              "label": "Cores",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "stackdriver",
+          "fill": 0,
+          "gridPos": {
+            "h": 4,
+            "w": 8,
+            "x": 16,
+            "y": 1
+          },
+          "id": 15,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "paceLength": 10,
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aliasBy": "{{  resource.label.database_id }}",
+              "alignOptions": [
+                {
+                  "expanded": true,
+                  "label": "Alignment options",
+                  "options": [
+                    {
+                      "label": "interpolate",
+                      "metricKinds": [
+                        "GAUGE"
+                      ],
+                      "text": "interpolate",
+                      "value": "ALIGN_INTERPOLATE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "next older",
+                      "metricKinds": [
+                        "GAUGE"
+                      ],
+                      "text": "next older",
+                      "value": "ALIGN_NEXT_OLDER",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION",
+                        "STRING",
+                        "VALUE_TYPE_UNSPECIFIED",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "min",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "min",
+                      "value": "ALIGN_MIN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "max",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "max",
+                      "value": "ALIGN_MAX",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "mean",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "mean",
+                      "value": "ALIGN_MEAN",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "count",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "count",
+                      "value": "ALIGN_COUNT",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "BOOL"
+                      ]
+                    },
+                    {
+                      "label": "sum",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "sum",
+                      "value": "ALIGN_SUM",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY",
+                        "DISTRIBUTION"
+                      ]
+                    },
+                    {
+                      "label": "stddev",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "stddev",
+                      "value": "ALIGN_STDDEV",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    },
+                    {
+                      "label": "percent change",
+                      "metricKinds": [
+                        "GAUGE",
+                        "DELTA"
+                      ],
+                      "text": "percent change",
+                      "value": "ALIGN_PERCENT_CHANGE",
+                      "valueTypes": [
+                        "INT64",
+                        "DOUBLE",
+                        "MONEY"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "alignmentPeriod": "stackdriver-auto",
+              "crossSeriesReducer": "REDUCE_NONE",
+              "defaultProject": "loading project...",
+              "filters": [
+                "resource.label.database_id",
+                "=~",
+                "$instance"
+              ],
+              "groupBys": [],
+              "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/reserved_cores\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-23T00:30:04Z&interval.startTime=2019-03-22T21:30:04Z&view=FULL",
+              "lastQueryError": "",
+              "metricKind": "GAUGE",
+              "metricType": "cloudsql.googleapis.com/database/disk/quota",
+              "perSeriesAligner": "ALIGN_INTERPOLATE",
+              "refId": "A",
+              "service": "",
+              "unit": "By",
+              "usedAlignmentPeriod": 60,
+              "valueType": "INT64"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Storage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": false,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "bytes",
+              "label": "Cores",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "Info",
       "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "stackdriver",
-      "fill": 0,
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 0,
-        "y": 1
-      },
-      "id": 13,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "paceLength": 10,
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aliasBy": "{{  resource.label.database_id }}",
-          "alignOptions": [
-            {
-              "expanded": true,
-              "label": "Alignment options",
-              "options": [
-                {
-                  "label": "interpolate",
-                  "metricKinds": [
-                    "GAUGE"
-                  ],
-                  "text": "interpolate",
-                  "value": "ALIGN_INTERPOLATE",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "next older",
-                  "metricKinds": [
-                    "GAUGE"
-                  ],
-                  "text": "next older",
-                  "value": "ALIGN_NEXT_OLDER",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "DISTRIBUTION",
-                    "STRING",
-                    "VALUE_TYPE_UNSPECIFIED",
-                    "BOOL"
-                  ]
-                },
-                {
-                  "label": "min",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "min",
-                  "value": "ALIGN_MIN",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "max",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "max",
-                  "value": "ALIGN_MAX",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "mean",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "mean",
-                  "value": "ALIGN_MEAN",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "count",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "count",
-                  "value": "ALIGN_COUNT",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "BOOL"
-                  ]
-                },
-                {
-                  "label": "sum",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "sum",
-                  "value": "ALIGN_SUM",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "DISTRIBUTION"
-                  ]
-                },
-                {
-                  "label": "stddev",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "stddev",
-                  "value": "ALIGN_STDDEV",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "percent change",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "percent change",
-                  "value": "ALIGN_PERCENT_CHANGE",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                }
-              ]
-            }
-          ],
-          "alignmentPeriod": "stackdriver-auto",
-          "crossSeriesReducer": "REDUCE_NONE",
-          "defaultProject": "loading project...",
-          "filters": [
-            "resource.label.database_id",
-            "=~",
-            "$instance"
-          ],
-          "groupBys": [],
-          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/reserved_cores\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-23T00:30:04Z&interval.startTime=2019-03-22T21:30:04Z&view=FULL",
-          "lastQueryError": "",
-          "metricKind": "GAUGE",
-          "metricType": "cloudsql.googleapis.com/database/cpu/reserved_cores",
-          "perSeriesAligner": "ALIGN_INTERPOLATE",
-          "refId": "A",
-          "service": "",
-          "unit": "1",
-          "usedAlignmentPeriod": 60,
-          "valueType": "DOUBLE"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "CPU",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": false,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": "Cores",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "stackdriver",
-      "fill": 0,
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 8,
-        "y": 1
-      },
-      "id": 14,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "paceLength": 10,
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aliasBy": "{{  resource.label.database_id }}",
-          "alignOptions": [
-            {
-              "expanded": true,
-              "label": "Alignment options",
-              "options": [
-                {
-                  "label": "interpolate",
-                  "metricKinds": [
-                    "GAUGE"
-                  ],
-                  "text": "interpolate",
-                  "value": "ALIGN_INTERPOLATE",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "next older",
-                  "metricKinds": [
-                    "GAUGE"
-                  ],
-                  "text": "next older",
-                  "value": "ALIGN_NEXT_OLDER",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "DISTRIBUTION",
-                    "STRING",
-                    "VALUE_TYPE_UNSPECIFIED",
-                    "BOOL"
-                  ]
-                },
-                {
-                  "label": "min",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "min",
-                  "value": "ALIGN_MIN",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "max",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "max",
-                  "value": "ALIGN_MAX",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "mean",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "mean",
-                  "value": "ALIGN_MEAN",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "count",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "count",
-                  "value": "ALIGN_COUNT",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "BOOL"
-                  ]
-                },
-                {
-                  "label": "sum",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "sum",
-                  "value": "ALIGN_SUM",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "DISTRIBUTION"
-                  ]
-                },
-                {
-                  "label": "stddev",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "stddev",
-                  "value": "ALIGN_STDDEV",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "percent change",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "percent change",
-                  "value": "ALIGN_PERCENT_CHANGE",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                }
-              ]
-            }
-          ],
-          "alignmentPeriod": "stackdriver-auto",
-          "crossSeriesReducer": "REDUCE_NONE",
-          "defaultProject": "loading project...",
-          "filters": [
-            "resource.label.database_id",
-            "=~",
-            "$instance"
-          ],
-          "groupBys": [],
-          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/reserved_cores\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-23T00:30:04Z&interval.startTime=2019-03-22T21:30:04Z&view=FULL",
-          "lastQueryError": "",
-          "metricKind": "GAUGE",
-          "metricType": "cloudsql.googleapis.com/database/memory/quota",
-          "perSeriesAligner": "ALIGN_INTERPOLATE",
-          "refId": "A",
-          "service": "",
-          "unit": "By",
-          "usedAlignmentPeriod": 60,
-          "valueType": "INT64"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Memory",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": false,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "bytes",
-          "label": "Cores",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "stackdriver",
-      "fill": 0,
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "id": 15,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "paceLength": 10,
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aliasBy": "{{  resource.label.database_id }}",
-          "alignOptions": [
-            {
-              "expanded": true,
-              "label": "Alignment options",
-              "options": [
-                {
-                  "label": "interpolate",
-                  "metricKinds": [
-                    "GAUGE"
-                  ],
-                  "text": "interpolate",
-                  "value": "ALIGN_INTERPOLATE",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "next older",
-                  "metricKinds": [
-                    "GAUGE"
-                  ],
-                  "text": "next older",
-                  "value": "ALIGN_NEXT_OLDER",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "DISTRIBUTION",
-                    "STRING",
-                    "VALUE_TYPE_UNSPECIFIED",
-                    "BOOL"
-                  ]
-                },
-                {
-                  "label": "min",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "min",
-                  "value": "ALIGN_MIN",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "max",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "max",
-                  "value": "ALIGN_MAX",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "mean",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "mean",
-                  "value": "ALIGN_MEAN",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "count",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "count",
-                  "value": "ALIGN_COUNT",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "BOOL"
-                  ]
-                },
-                {
-                  "label": "sum",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "sum",
-                  "value": "ALIGN_SUM",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY",
-                    "DISTRIBUTION"
-                  ]
-                },
-                {
-                  "label": "stddev",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "stddev",
-                  "value": "ALIGN_STDDEV",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                },
-                {
-                  "label": "percent change",
-                  "metricKinds": [
-                    "GAUGE",
-                    "DELTA"
-                  ],
-                  "text": "percent change",
-                  "value": "ALIGN_PERCENT_CHANGE",
-                  "valueTypes": [
-                    "INT64",
-                    "DOUBLE",
-                    "MONEY"
-                  ]
-                }
-              ]
-            }
-          ],
-          "alignmentPeriod": "stackdriver-auto",
-          "crossSeriesReducer": "REDUCE_NONE",
-          "defaultProject": "loading project...",
-          "filters": [
-            "resource.label.database_id",
-            "=~",
-            "$instance"
-          ],
-          "groupBys": [],
-          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/reserved_cores\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-23T00:30:04Z&interval.startTime=2019-03-22T21:30:04Z&view=FULL",
-          "lastQueryError": "",
-          "metricKind": "GAUGE",
-          "metricType": "cloudsql.googleapis.com/database/disk/quota",
-          "perSeriesAligner": "ALIGN_INTERPOLATE",
-          "refId": "A",
-          "service": "",
-          "unit": "By",
-          "usedAlignmentPeriod": 60,
-          "valueType": "INT64"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Storage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": false,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "bytes",
-          "label": "Cores",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "collapsed": false,
@@ -759,7 +765,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 1
       },
       "id": 9,
       "panels": [],
@@ -777,7 +783,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 6
+        "y": 2
       },
       "id": 2,
       "legend": {
@@ -806,6 +812,7 @@
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -1016,6 +1023,40 @@
       }
     },
     {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.85
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "B",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "DB Disk Utilization",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1026,7 +1067,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 2
       },
       "id": 3,
       "legend": {
@@ -1055,6 +1096,7 @@
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -1209,7 +1251,7 @@
           "groupBys": [
             "resource.label.database_id"
           ],
-          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_SUM&aggregation.groupByFields=resource.label.database_id&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/disk/utilization\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-22T23:51:35Z&interval.startTime=2019-03-22T17:51:35Z&view=FULL",
+          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.groupByFields=resource.label.database_id&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/disk/utilization\"+resource.label.database_id=monitoring.regex.full_match(\"cf-concourse-production:hush-house-.*\")&interval.endTime=2019-04-30T03:06:42Z&interval.startTime=2019-04-30T00:06:42Z&view=FULL",
           "lastQueryError": "",
           "metricKind": "GAUGE",
           "metricType": "cloudsql.googleapis.com/database/disk/utilization",
@@ -1219,9 +1261,180 @@
           "unit": "1",
           "usedAlignmentPeriod": 60,
           "valueType": "DOUBLE"
+        },
+        {
+          "aliasBy": "{{resource.label.database_id}}",
+          "alignOptions": [
+            {
+              "expanded": true,
+              "label": "Alignment options",
+              "options": [
+                {
+                  "label": "interpolate",
+                  "metricKinds": [
+                    "GAUGE"
+                  ],
+                  "text": "interpolate",
+                  "value": "ALIGN_INTERPOLATE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "next older",
+                  "metricKinds": [
+                    "GAUGE"
+                  ],
+                  "text": "next older",
+                  "value": "ALIGN_NEXT_OLDER",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION",
+                    "STRING",
+                    "VALUE_TYPE_UNSPECIFIED",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "min",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "min",
+                  "value": "ALIGN_MIN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "max",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "max",
+                  "value": "ALIGN_MAX",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "mean",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "mean",
+                  "value": "ALIGN_MEAN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "count",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "count",
+                  "value": "ALIGN_COUNT",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "sum",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "sum",
+                  "value": "ALIGN_SUM",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION"
+                  ]
+                },
+                {
+                  "label": "stddev",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "stddev",
+                  "value": "ALIGN_STDDEV",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "percent change",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "percent change",
+                  "value": "ALIGN_PERCENT_CHANGE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                }
+              ]
+            }
+          ],
+          "alignmentPeriod": "grafana-auto",
+          "crossSeriesReducer": "REDUCE_NONE",
+          "defaultProject": "loading project...",
+          "filters": [
+            "resource.label.database_id",
+            "=~",
+            "cf-concourse-production:hush-house-.*"
+          ],
+          "groupBys": [
+            "resource.label.database_id"
+          ],
+          "hide": true,
+          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.groupByFields=resource.label.database_id&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/disk/utilization\"+resource.label.database_id=monitoring.regex.full_match(\"cf-concourse-production:hush-house-.*\")&interval.endTime=2019-04-30T03:06:42Z&interval.startTime=2019-04-30T00:06:42Z&view=FULL",
+          "lastQueryError": "",
+          "metricKind": "GAUGE",
+          "metricType": "cloudsql.googleapis.com/database/disk/utilization",
+          "perSeriesAligner": "ALIGN_INTERPOLATE",
+          "refId": "B",
+          "service": "",
+          "unit": "1",
+          "usedAlignmentPeriod": 60,
+          "valueType": "DOUBLE"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.85
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -1265,6 +1478,40 @@
       }
     },
     {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.85
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "B",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "DB CPU Utilization",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1275,7 +1522,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 10
       },
       "id": 5,
       "legend": {
@@ -1304,6 +1551,7 @@
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -1468,9 +1716,180 @@
           "unit": "1",
           "usedAlignmentPeriod": 60,
           "valueType": "DOUBLE"
+        },
+        {
+          "aliasBy": "{{resource.label.database_id}}",
+          "alignOptions": [
+            {
+              "expanded": true,
+              "label": "Alignment options",
+              "options": [
+                {
+                  "label": "interpolate",
+                  "metricKinds": [
+                    "GAUGE"
+                  ],
+                  "text": "interpolate",
+                  "value": "ALIGN_INTERPOLATE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "next older",
+                  "metricKinds": [
+                    "GAUGE"
+                  ],
+                  "text": "next older",
+                  "value": "ALIGN_NEXT_OLDER",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION",
+                    "STRING",
+                    "VALUE_TYPE_UNSPECIFIED",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "min",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "min",
+                  "value": "ALIGN_MIN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "max",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "max",
+                  "value": "ALIGN_MAX",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "mean",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "mean",
+                  "value": "ALIGN_MEAN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "count",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "count",
+                  "value": "ALIGN_COUNT",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "sum",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "sum",
+                  "value": "ALIGN_SUM",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION"
+                  ]
+                },
+                {
+                  "label": "stddev",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "stddev",
+                  "value": "ALIGN_STDDEV",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "percent change",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "percent change",
+                  "value": "ALIGN_PERCENT_CHANGE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                }
+              ]
+            }
+          ],
+          "alignmentPeriod": "grafana-auto",
+          "crossSeriesReducer": "REDUCE_NONE",
+          "defaultProject": "loading project...",
+          "filters": [
+            "resource.label.database_id",
+            "=~",
+            "cf-concourse-production:hush-house-.*"
+          ],
+          "groupBys": [
+            "resource.label.database_id"
+          ],
+          "hide": true,
+          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.groupByFields=resource.label.database_id&aggregation.perSeriesAligner=ALIGN_DELTA&filter=metric.type=\"cloudsql.googleapis.com/database/cpu/usage_time\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-22T23:54:53Z&interval.startTime=2019-03-22T17:54:53Z&view=FULL",
+          "lastQueryError": "",
+          "metricKind": "GAUGE",
+          "metricType": "cloudsql.googleapis.com/database/cpu/utilization",
+          "perSeriesAligner": "ALIGN_INTERPOLATE",
+          "refId": "B",
+          "service": "",
+          "unit": "1",
+          "usedAlignmentPeriod": 60,
+          "valueType": "DOUBLE"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.85
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -1514,6 +1933,40 @@
       }
     },
     {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.85
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "B",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "max"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "DB Memory Utilization",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1524,7 +1977,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 10
       },
       "id": 4,
       "legend": {
@@ -1553,6 +2006,7 @@
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -1707,6 +2161,7 @@
           "groupBys": [
             "resource.label.database_id"
           ],
+          "hide": false,
           "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_SUM&aggregation.groupByFields=resource.label.database_id&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/disk/utilization\"+resource.label.database_id=monitoring.regex.full_match(\"(cf-concourse-production:hush-house-2d048f06|cf-concourse-production:wings)\")&interval.endTime=2019-03-22T23:51:35Z&interval.startTime=2019-03-22T17:51:35Z&view=FULL",
           "lastQueryError": "",
           "metricKind": "GAUGE",
@@ -1717,9 +2172,178 @@
           "unit": "1",
           "usedAlignmentPeriod": 60,
           "valueType": "DOUBLE"
+        },
+        {
+          "aliasBy": "{{resource.label.database_id}}",
+          "alignOptions": [
+            {
+              "expanded": true,
+              "label": "Alignment options",
+              "options": [
+                {
+                  "label": "interpolate",
+                  "metricKinds": [
+                    "GAUGE"
+                  ],
+                  "text": "interpolate",
+                  "value": "ALIGN_INTERPOLATE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "next older",
+                  "metricKinds": [
+                    "GAUGE"
+                  ],
+                  "text": "next older",
+                  "value": "ALIGN_NEXT_OLDER",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION",
+                    "STRING",
+                    "VALUE_TYPE_UNSPECIFIED",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "min",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "min",
+                  "value": "ALIGN_MIN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "max",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "max",
+                  "value": "ALIGN_MAX",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "mean",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "mean",
+                  "value": "ALIGN_MEAN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "count",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "count",
+                  "value": "ALIGN_COUNT",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "sum",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "sum",
+                  "value": "ALIGN_SUM",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION"
+                  ]
+                },
+                {
+                  "label": "stddev",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "stddev",
+                  "value": "ALIGN_STDDEV",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "percent change",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "percent change",
+                  "value": "ALIGN_PERCENT_CHANGE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                }
+              ]
+            }
+          ],
+          "alignmentPeriod": "grafana-auto",
+          "crossSeriesReducer": "REDUCE_NONE",
+          "defaultProject": "loading project...",
+          "filters": [
+            "resource.label.database_id",
+            "=~",
+            "cf-concourse-production:hush-house-.*"
+          ],
+          "groupBys": [],
+          "hide": true,
+          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_NONE&aggregation.groupByFields=resource.label.database_id&aggregation.perSeriesAligner=ALIGN_INTERPOLATE&filter=metric.type=\"cloudsql.googleapis.com/database/memory/utilization\"+resource.label.database_id=\"cf-concourse-production:hush-house-2d048f06\"&interval.endTime=2019-04-30T03:01:41Z&interval.startTime=2019-04-30T00:01:41Z&view=FULL",
+          "lastQueryError": "",
+          "metricKind": "GAUGE",
+          "metricType": "cloudsql.googleapis.com/database/memory/utilization",
+          "perSeriesAligner": "ALIGN_INTERPOLATE",
+          "refId": "B",
+          "service": "",
+          "unit": "1",
+          "usedAlignmentPeriod": 60,
+          "valueType": "DOUBLE"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0.85
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -1773,7 +2397,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 18
       },
       "id": 6,
       "legend": {
@@ -1802,6 +2426,7 @@
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -2022,7 +2647,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 18
       },
       "hideTimeOverride": false,
       "id": 7,
@@ -2061,6 +2686,7 @@
           "color": "#C0D8FF"
         }
       ],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -2443,9 +3069,9 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "All",
+          "text": "cf-concourse-production:hush-house-2d048f06",
           "value": [
-            "$__all"
+            "cf-concourse-production:hush-house-2d048f06"
           ]
         },
         "datasource": "stackdriver",
@@ -2506,5 +3132,5 @@
   "timezone": "",
   "title": "CloudSQL",
   "uid": "CfckRP3mz",
-  "version": 4
+  "version": 1
 }
