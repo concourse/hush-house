@@ -1,8 +1,0 @@
-# vim: set syntax=yaml:
-
-roles:
-  - name: owner
-    github:
-      teams:
-        - 'cloudfoundry-incubator:cf-notifications'
-        - 'concourse:pivotal'
