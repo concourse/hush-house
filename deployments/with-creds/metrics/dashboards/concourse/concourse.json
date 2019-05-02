@@ -18,7 +18,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 2,
-  "iteration": 1556800509203,
+  "iteration": 1556808063954,
   "links": [
     {
       "icon": "info",
@@ -517,7 +517,12 @@
       "pointradius": 1,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "/^avg.*/",
+          "dashes": true
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -525,9 +530,18 @@
         {
           "expr": "sum by (kubernetes_pod_name) (irate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\"}[3m]))",
           "format": "time_series",
+          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "{{ kubernetes_pod_name }}",
           "refId": "A"
+        },
+        {
+          "expr": "sum (rate(concourse_resource_checks_total{kubernetes_namespace=~\"$namespace\"}[24h]))\n  /\ncount(count by (kubernetes_pod_name) (concourse_resource_checks_total))",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "avg (24h)",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -2600,5 +2614,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 4
+  "version": 5
 }
