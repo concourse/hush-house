@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 4,
-  "iteration": 1556756018328,
+  "iteration": 1556810567263,
   "links": [],
   "panels": [
     {
@@ -279,7 +279,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "1 - (avg by (kubernetes_node) (irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"idle\"}[5m])))",
+          "expr": "1 - (min by (kubernetes_node) (irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"idle\"}[5m])))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ kubernetes_node }}",
@@ -514,7 +514,7 @@
         "x": 16,
         "y": 12
       },
-      "id": 15,
+      "id": 17,
       "legend": {
         "avg": false,
         "current": false,
@@ -538,7 +538,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(\n  sum by (kubernetes_node) (irate(node_disk_read_bytes_total{kubernetes_node=~\"$node\"}[5m]))\n    +\n  sum by (kubernetes_node) (irate(node_disk_written_bytes_total{kubernetes_node=~\"$node\"}[5m]))\n) * 8",
+          "expr": "max by (kubernetes_node) (irate(node_cpu_seconds_total{kubernetes_node=~\"$node\",mode=\"iowait\"}[5m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ kubernetes_node }}",
@@ -549,10 +549,10 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk Throughput",
+      "title": "CPU iowait",
       "tooltip": {
         "shared": true,
-        "sort": 2,
+        "sort": 0,
         "value_type": "individual"
       },
       "transparent": true,
@@ -567,10 +567,10 @@
       "yaxes": [
         {
           "decimals": 1,
-          "format": "bps",
+          "format": "percentunit",
           "label": "",
           "logBase": 1,
-          "max": null,
+          "max": "1",
           "min": "0",
           "show": true
         },
@@ -674,6 +674,92 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 19
+      },
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(\n  sum by (kubernetes_node) (irate(node_disk_read_bytes_total{kubernetes_node=~\"$node\"}[5m]))\n    +\n  sum by (kubernetes_node) (irate(node_disk_written_bytes_total{kubernetes_node=~\"$node\"}[5m]))\n) * 8",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{ kubernetes_node }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk Throughput",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "bps",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "1m",
@@ -685,6 +771,7 @@
       {
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "workers-1",
           "value": [
             "workers-1"
@@ -771,5 +858,5 @@
   "timezone": "",
   "title": "Node Pools",
   "uid": "ciQwjPCmk",
-  "version": 2
+  "version": 3
 }
