@@ -18,7 +18,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 2,
-  "iteration": 1556593897208,
+  "iteration": 1556800509203,
   "links": [
     {
       "icon": "info",
@@ -1861,7 +1861,7 @@
               "refId": "A"
             },
             {
-              "expr": "container_memory_working_set_bytes{pod_name=~\"hush-house-worker-.*\",container_name!=\"POD\",container_name!=\"\",namespace=\"hush-house\"} \n  / \ncontainer_spec_memory_limit_bytes",
+              "expr": "container_memory_working_set_bytes{pod_name=~\"worker-worker-.*\",container_name!=\"POD\",container_name!=\"\",namespace=\"worker\"} \n  / \ncontainer_spec_memory_limit_bytes",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 2,
@@ -2330,7 +2330,7 @@
               "refId": "A"
             },
             {
-              "expr": "1 - (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"concourse-work-dir-(hush-house-worker-[0-9]+)\"} / kubelet_volume_stats_capacity_bytes)",
+              "expr": "1 - (kubelet_volume_stats_available_bytes{persistentvolumeclaim=~\"concourse-work-dir-(worker-worker-[0-9]+)\"} / kubelet_volume_stats_capacity_bytes)",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 1,
@@ -2498,7 +2498,7 @@
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
-        "multi": false,
+        "multi": true,
         "name": "namespace",
         "options": [],
         "query": "label_values(concourse_db_connections, kubernetes_namespace)",
@@ -2600,5 +2600,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 3
+  "version": 4
 }

@@ -13,7 +13,7 @@ concourse:
   worker:
     annotations:
       rollingUpdate: "1"
-    replicas: 4
+    replicas: 0
     terminationGracePeriodSeconds: 3600
     livenessProbe:
       periodSeconds: 60
@@ -29,6 +29,9 @@ concourse:
       limits:
         cpu: 15000m
         memory: 29Gi
+      requests:
+        cpu: 10000m
+        memory: 25Gi
 
   web:
     annotations:
