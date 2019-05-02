@@ -24,7 +24,7 @@ output "hush-house-database-private-key" {
 }
 
 output "hush-house-address" {
-  value = "${module.web-address.address}"
+  value = "${google_compute_address.hush-house.address}"
 }
 
 output "metrics-hush-house-address" {

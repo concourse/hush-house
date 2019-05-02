@@ -1,8 +1,5 @@
-module "web-address" {
-  source = "./address"
-
-  dns-zone  = "${var.dns-zone}"
-  subdomain = "hush-house"
+resource "google_compute_address" "hush-house" {
+  name = "hush-house"
 }
 
 module "metrics-address" {
