@@ -18,7 +18,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 2,
-  "iteration": 1556808063954,
+  "iteration": 1556809781378,
   "links": [
     {
       "icon": "info",
@@ -75,7 +75,7 @@
       "type": "text"
     },
     {
-      "content": "At this moment, the environments accessible here are being maintained by the Concourse for PCF team in Toronto.\n\nYou can reach us at the `concourse-pcf` Slack channel.",
+      "content": "At this moment, the environments accessible here are being maintained by the Concourse for PCF team in Toronto.\n\nYou can reach us at the `concourse-hush-house` Slack channel.",
       "gridPos": {
         "h": 4,
         "w": 12,
@@ -427,6 +427,16 @@
         {
           "alias": "failed",
           "color": "#FADE2A"
+        },
+        {
+          "alias": "/^avg success.*/",
+          "color": "rgba(0, 255, 56, 0.36)",
+          "dashes": true
+        },
+        {
+          "alias": "/^avg failure.*/",
+          "color": "rgba(255, 245, 0, 0.45)",
+          "dashes": true
         }
       ],
       "spaceLength": 10,
@@ -434,11 +444,25 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (status) (rate(concourse_builds_finished{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[3m]))",
+          "expr": "sum by (status) (irate(concourse_builds_finished{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[3m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ status }}",
           "refId": "A"
+        },
+        {
+          "expr": "sum (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\",status=\"succeeded\"}[24h]))",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "avg success (24h)",
+          "refId": "B"
+        },
+        {
+          "expr": "sum (rate(concourse_builds_finished{kubernetes_namespace=~\"$namespace\",status=\"failed\"}[24h]))",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "avg failure (24h)",
+          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -448,7 +472,7 @@
       "title": "Builds /s",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -520,6 +544,7 @@
       "seriesOverrides": [
         {
           "alias": "/^avg.*/",
+          "color": "rgba(0, 255, 117, 0.35)",
           "dashes": true
         }
       ],
@@ -709,7 +734,13 @@
       "pointradius": 1,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [
+        {
+          "alias": "/^avg.*/",
+          "color": "rgba(0, 255, 87, 0.33)",
+          "dashes": true
+        }
+      ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -720,6 +751,13 @@
           "intervalFactor": 2,
           "legendFormat": "{{ kubernetes_pod_name }}",
           "refId": "A"
+        },
+        {
+          "expr": "sum (rate(concourse_scheduling_total{kubernetes_namespace=~\"$namespace\"}[24h]))\n  /\ncount(count by (kubernetes_pod_name) (concourse_resource_checks_total))",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "avg (24h)",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -2583,7 +2621,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -2614,5 +2652,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 5
+  "version": 6
 }
