@@ -11,15 +11,11 @@ tls:
 ##
 prometheus:
   enabled: true
+  pushgateway: { enabled: false }
+  alertmanager: { enabled: false }
   nodeExporter:
     enabled: true
   kubeStateMetrics:
-    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
-    enabled: true
-  pushgateway:
-    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
-    enabled: false
-  alertmanager:
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     enabled: true
   serverFiles:
