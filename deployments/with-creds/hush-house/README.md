@@ -11,7 +11,7 @@ It relies solely on the [official Concourse chart](https://github.com/helm/chart
 
 - [Web](#web)
 - [Workers](#workers)
-  - [Adding external workers](#adding-external-workers)
+  - [External workers](#external-workers)
 - [Deploying](#deploying)
 - [Metrics](#metrics)
 - [Logs](#logs)
