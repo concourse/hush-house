@@ -1,6 +1,5 @@
 output "hush-house-database-ip" {
-  sensitive = true
-  value     = "${module.database.ip}"
+  value = "${module.database.ip}"
 }
 
 output "hush-house-database-ca-cert" {

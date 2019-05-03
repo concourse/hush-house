@@ -1,3 +1,11 @@
+# A piece of randomization that gets consumed by the
+# `google_sql_database_instance` resources.
+#
+# This is needed in order to facilitate creating and recreating instances
+# without waiting for the whole period that GCP requires to name reusal.
+#
+#
+#
 resource "random_id" "instance-name" {
   byte_length = 4
 }
@@ -6,7 +14,6 @@ resource "google_sql_database_instance" "main" {
   name             = "${var.name}-${random_id.instance-name.hex}"
   region           = "${var.region}"
   database_version = "POSTGRES_9_6"
-
 
   settings {
     availability_type = "ZONAL"
@@ -17,9 +24,9 @@ resource "google_sql_database_instance" "main" {
 
     database_flags = [
       {
-          name = "log_min_duration_statement"
-          value = "-1"
-      }
+        name  = "log_min_duration_statement"
+        value = "-1"
+      },
     ]
 
     ip_configuration {

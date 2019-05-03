@@ -12,6 +12,9 @@ provider "google" {
   region      = "${var.region}"
 }
 
+# `google-beta` provides us access to GCP's beta APIs.
+# This is particularly needed for GKE-related operations.
+#
 provider "google-beta" {
   credentials = "gcp.json"
   project     = "${var.project}"

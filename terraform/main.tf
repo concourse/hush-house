@@ -1,7 +1,15 @@
+# Reserved IP address for the `web` instances.
+#
+# This is needed so that we can have a static IP that `hush-house.pivotal.io`
+# can point.
+#
 resource "google_compute_address" "hush-house" {
   name = "hush-house"
 }
 
+# Reserves an address for `metrics-hush-house.concourse-ci.org` and ties it
+# to the given domain.
+#
 module "metrics-address" {
   source = "./address"
 
@@ -9,6 +17,8 @@ module "metrics-address" {
   subdomain = "metrics-hush-house"
 }
 
+# Instantiates the GKE Kubernetes cluster.
+#
 module "cluster" {
   source = "./cluster"
 
@@ -18,7 +28,10 @@ module "cluster" {
 
   node-pools = [
     {
-      name         = "generic-1"
+      # The pool to be used by non-worker.
+      #
+      name = "generic-1"
+
       min          = 1
       node_count   = 2
       max          = 5
@@ -32,7 +45,10 @@ module "cluster" {
       version      = "1.12.5-gke.5"
     },
     {
-      name         = "workers-1"
+      # The pool to be exclusively used by `hush-house` Concourse workers
+      #
+      name = "workers-1"
+
       min          = 1
       node_count   = 4
       max          = 10
@@ -48,6 +64,9 @@ module "cluster" {
   ]
 }
 
+# Creates the CloudSQL Postgres database to be used by the `hush-house`
+# Concourse deployment.
+#
 module "database" {
   source = "./database"
 

@@ -1,24 +1,24 @@
 variable "name" {
   default     = ""
-  description = "TODO"
+  description = "The name of the CloudSQL instance to create (ps.: a random ID is appended to this name)"
 }
 
 variable "memory_mb" {
   default     = ""
-  description = "TODO"
+  description = "Number of MBs to assign to the CloudSQL instance."
 }
 
 variable "cpus" {
   default     = ""
-  description = "TODO"
+  description = "Number of CPUs to assign to the CloudSQL instance."
 }
 
 variable "zone" {
   default     = ""
-  description = "TODO"
+  description = "The zone where this instance is supposed to be created at (e.g., us-central1-a)k"
 }
 
 variable "region" {
   default     = ""
-  description = "TODO"
+  description = "The region where the instance is supposed to be created at (e.g., us-central1)"
 }

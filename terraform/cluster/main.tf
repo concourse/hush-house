@@ -15,8 +15,8 @@ resource "random_string" "password" {
 }
 
 resource "google_container_cluster" "main" {
-  name = "${var.name}"
-  zone = "${var.zone}"
+  name     = "${var.name}"
+  location = "${var.zone}"
 
   network    = "${module.vpc.name}"
   subnetwork = "${module.vpc.subnet-name}"
@@ -64,9 +64,9 @@ resource "google_container_node_pool" "main" {
   provider = "google-beta"
   count    = "${length(var.node-pools)}"
 
-  zone    = "${var.zone}"
-  cluster = "${google_container_cluster.main.name}"
-  name    = "${lookup(var.node-pools[count.index], "name")}"
+  location = "${var.zone}"
+  cluster  = "${google_container_cluster.main.name}"
+  name     = "${lookup(var.node-pools[count.index], "name")}"
 
   node_count = "${lookup(var.node-pools[count.index], "node_count")}"
 
