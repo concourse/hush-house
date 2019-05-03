@@ -2,6 +2,9 @@ postgresql:
   enabled: false
 
 concourse:
+  secrets:
+    teamAuthorizedKeys: []
+
   postgresql:
     enabled: false
 

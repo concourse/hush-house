@@ -1,8 +1,8 @@
 # hush-house
 
-The `hush-house` deployment is responsible for the Concourse environment running under the publicly accessible URL https://hush-house.pivotal.io.
+The `hush-house` deployment corresponds to the `web` part of the Concourse installation running under the publicly accessible URL https://hush-house.pivotal.io.
 
-It relies solely on the release-candidate version of the Concourse chart ([concourse/charts](https://github.com/concourse/charts/tree/gh-pages)), and Kubernetes (k8s) objects (`ConfigMap`s) created by Helm templating files under [`./templates`](./templates).
+It relies solely on the [official Concourse chart](https://github.com/helm/charts/tree/master/stable/concourse).
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -36,50 +36,40 @@ See the [Terraform directory](/terraform) for information about the instantiatio
 
 ## Workers
 
-The workers managed by this deployment are ephemeral by nature and must be used for tasks that are suitable for workloads that can be interrupted.
-
-For workloads that don't fit the description above, external workers need to be plugged in (see [Adding external workers](#adding-external-workers)).
+The generic pool of workers live under a separate deployment - see [worker](../worker/README.md).
 
 
-### Adding external workers
+### External workers
 
-External workers can be authorized by having the public side of their SSH keys to the web instances.
+External workers can be authorized to join the cluster by having the public side of their SSH keys to the web instances.
 
-To do so, two steps need to be followed:
+To do so, append an object with your team name and public key to the `teamAuthorizedKeys` list in the [`values.yaml`](./values.yaml) file in this directory.
 
-1. Add the public key to the [`team-authorized-keys` directory](./team-authorized-keys) in a file named `$TEAM_NAME.pub`. If the file already exists, add the key to the end of the file (in a new line).
+For instance, considering the following empty list:
 
-```sh
-# Assuming you're using MacOS and the key is on the
-# clipboard, append to the file (it'll create a new
-# file if it doesn't exist).
-pbpaste >> ./team-authorized-keys/myteam.pub
+```yaml
+concourse:
+  secrets:
+    teamAuthorizedKeys: []
 ```
 
-2. (if there are no existing keys for the team already) Update [the public `values.yaml`](./values.yaml)'s file section regarding `teamAuthorizedKeys`, adding to the field the name of the team followed by a `:` and the location of the file in the instance.
+With your team-specific public key:
 
-For instance, assuming that we want to add a key for the team `myteam` but previously there was only a key reference for `main`:
 
-```sh
-# ...
-      tsa:
-        teamAuthorizedKeys: main:/team-authorized-keys/main.pub
+```yaml
+concourse:
+  secrets:
+    teamAuthorizedKeys:
+      - team: myteam
+        key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYBQ9fG6IML+...'
 ```
 
-You can add a reference to the new key as follows:
-
-
-```sh
-# ...
-      tsa:
-        teamAuthorizedKeys: main:/team-authorized-keys/main.pub,myteam:/team-authorized-keys/myteam.pub
-```
-
-*(yes, this will get better soon)*
 
 ## Deploying
 
-To deploy hush-house, run `make deploy-hush-house`. If you want to force a rolling update (recreate all pods), say after updating secrets, then increment the `rollingUpdate` annotation declared in `values.yaml` for whichever component (web/worker) that you need to update.
+To deploy hush-house, run `make deploy-hush-house`.
+
+If you want to force a rolling update (recreate all pods), say after updating secrets, increment the `rollingUpdate` annotation declared in [`values.yaml`](./values.yaml).
 
 
 ## Metrics
