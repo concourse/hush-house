@@ -1,0 +1,30 @@
+image:
+  repository: busybox
+  tag: latest
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+resources:
+  limits:
+    cpu: 50m
+    memory: 20Mi
+  requests:
+    cpu: 50m
+    memory: 20Mi
+
+nodeSelector:
+  cloud.google.com/gke-nodepool: workers-1
+
+affinity: {}
+
+# A list of `sysctl` values to configure.
+# For instance:
+#
+#   sysctl: [ "vm.min_free_kbytes=7852" ]
+#
+# Note: at least one value must be configured.
+#
+sysctl:
+  - vm.min_free_kbytes=1000000
