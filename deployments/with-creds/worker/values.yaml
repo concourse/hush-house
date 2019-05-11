@@ -2,6 +2,9 @@ postgresql:
   enabled: false
 
 concourse:
+  image: concourse/concourse-rc
+  imageDigest: sha256:771a00b03aa1ced101e3cdc35f1176b1a905e253818b5266261324ae31b7d6f6
+
   postgresql:
     enabled: false
 
@@ -27,7 +30,7 @@ concourse:
     - name: CONCOURSE_GARDEN_NETWORK_POOL
       value: "10.254.0.0/16"
     - name: CONCOURSE_GARDEN_MAX_CONTAINERS
-      value: "2000"
+      value: "500"
     resources:
       limits:
         cpu: 15000m
