@@ -108,11 +108,11 @@ prometheus:
       storageClass: ssd
     resources:
       limits:
-        cpu: 1500m
-        memory: 4Gi
+        cpu: 2000m
+        memory: 8Gi
       requests:
-        cpu: 1500m
-        memory: 4Gi
+        cpu: 2000m
+        memory: 8Gi
 
 
 ## Configuration for the Grafana dependency.
