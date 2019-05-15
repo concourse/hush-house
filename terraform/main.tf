@@ -54,7 +54,7 @@ module "cluster" {
       max          = 10
       local-ssds   = 0
       machine-type = "custom-16-32768"
-      image        = "UBUNTU"
+      image        = "COS"
       disk-size    = "50"
       disk-type    = "pd-ssd"
       auto-upgrade = false
