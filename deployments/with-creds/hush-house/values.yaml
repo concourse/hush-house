@@ -2,6 +2,9 @@ postgresql:
   enabled: false
 
 concourse:
+  image: concourse/concourse-rc
+  imageDigest: sha256:aa8905900816657f20bf84abde58dd298e9c4df34486ba83faec2b25271617b8
+
   secrets:
     teamAuthorizedKeys: []
 

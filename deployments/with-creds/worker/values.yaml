@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageDigest: sha256:771a00b03aa1ced101e3cdc35f1176b1a905e253818b5266261324ae31b7d6f6
+  imageDigest: sha256:aa8905900816657f20bf84abde58dd298e9c4df34486ba83faec2b25271617b8
 
   postgresql:
     enabled: false
@@ -31,6 +31,8 @@ concourse:
       value: "10.254.0.0/16"
     - name: CONCOURSE_GARDEN_MAX_CONTAINERS
       value: "500"
+    - name: CONCOURSE_GARDEN_DENY_NETWORK
+      value: "169.254.169.254/32"
     resources:
       limits:
         cpu: 15000m
