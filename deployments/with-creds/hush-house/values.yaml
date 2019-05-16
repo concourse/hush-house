@@ -75,18 +75,29 @@ concourse:
         github:
           enabled: true
       bindPort: 80
+      clusterName: hush-house
       containerPlacementStrategy: random
+      defaultDaysToRetainBuildLogs: 30
+      enableBuildAuditing: true
+      enableContainerAuditing: true
       enableGlobalResources: true
+      enableJobAuditing: true
+      enablePipelineAuditing: true
+      enableResourceAuditing: true
+      enableSystemAuditing: true
+      enableTeamAuditing: true
+      enableVolumeAuditing: true
+      enableWorkerAuditing: true
       encryption: { enabled: true }
       externalUrl: https://hush-house.pivotal.io
       kubernetes: { keepNamespaces: true }
       metrics: { captureErrorMetrics: true }
       prometheus: { enabled: true }
+      tls: { enabled: true, bindPort: 443 }
       postgres:
         host: 173.255.117.168
         database: atc
         sslmode: verify-ca
-      tls: { enabled: true, bindPort: 443 }
     worker:
       ephemeral: false
       rebalanceInterval: 1h
