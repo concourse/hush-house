@@ -27,11 +27,13 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
 - [Repository structure](#repository-structure)
 - [Dependencies](#dependencies)
 - [Gathering acccess to the cluster](#gathering-acccess-to-the-cluster)
-- [Creating your own deployment](#creating-your-own-deployment)
-- [SSHing into the Kubernetes node VM](#sshing-into-the-kubernetes-node-vm)
+- [IaaS](#iaas)
+- [Deployments](#deployments)
+  - [Creating a new deployment](#creating-a-new-deployment)
   - [Without any credentials setup](#without-any-credentials-setup)
   - [With credentials](#with-credentials)
   - [Visualizing metrics from your deployment](#visualizing-metrics-from-your-deployment)
+- [SSHing into the Kubernetes node VM](#sshing-into-the-kubernetes-node-vm)
 - [k8s cheat-sheet](#k8s-cheat-sheet)
   - [Contexts](#contexts)
   - [Namespaces](#namespaces)
@@ -62,8 +64,9 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
 │   │   │
 │   │   ├── Makefile		# Scripting related to the deployments
 │   │   │
-│   │   ├── hush-house		# The `hush-house` deployment itself
-│   │   └── metrics		# The `metrics` deployment
+│   │   ├── hush-house  # The web nodes of the `hush-house` Concourse deployment
+│   │   ├── worker		  # The deployment of the kgeneric pool of workers that connect to `hush-house`
+│   │   └── metrics		  # The `metrics` deployment
 │   │
 │   │
 │   │
@@ -117,8 +120,7 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
 
 ## Gathering acccess to the cluster
 
-
-0. Install the dependencies
+0. Install the [dependencies](#dependencies)
 
 1. Configure access to the Google Cloud project
 
@@ -138,6 +140,8 @@ gcloud container clusters get-credentials hush-house
 
 3. Initialize the Helm local configuration
 
+Note.: this is only needed if you've never initialized `helm` locally.
+
 ```sh
 helm init --client-only
 ```
@@ -155,9 +159,28 @@ make helm-set-client-creds
 ```
 
 
-## Creating your own deployment
+## IaaS
 
-To create a new deployment of your own, a Chart under `./deployments` needs to be created (given that every deployment corresponds to releasing a custom Chart).
+As `hush-house` is a complete environment for deploying Concourse and any other Helm charts, it requires few infrastructure pieces to be in place.
+
+All of that is provisioned using [`terraform`](https://terraform.io), having its configuration under the [`./terraform` directory](./terraform).
+
+**Make sure you DON'T change the IaaS parameters in the Google Cloud Console** - modifications *MUST* be made through `terraform`.
+
+
+
+## Deployments
+
+In the `hush-house` cluster, there are currently a few Helm charts deployments running.
+
+As mentioned in the [repository structure section](#repository-structure), these all live under [`./deployments`](./deployments).
+
+Check the [`deployments` README](./deployments/README.md) to know more about them.
+
+
+### Creating a new deployment
+
+To create a new deployment of your own, a Chart under `./deployments/(with|without)-crekds` needs to be created (given that every deployment corresponds to releasing a custom Chart).
 
 There are two possible types of deployments we can create:
 
@@ -165,29 +188,6 @@ There are two possible types of deployments we can create:
 2. with credentials.
 
 
-## SSHing into the Kubernetes node VM
-
-As the worker nodes created by worker pools declared in [the main Terraform file](./terraform/main.tf) are just regular GCP instances, these can be accessed using the regular ways of accessing VMs through `gcloud`.
-
-
-```sh
-# The name of the instance can be retrieved from the
-# command that lists nodes connected to the k8s cluster:
-# - `kubectl get nodes`.
-NODE_NAME="gke-hush-house-test-workers-1-46b1d860-65mf"
-
-
-# Use `gcloud` to facilitate the process of getting the
-# right credentials set up for SSHing into the machine.
-#
-# ps.: you must have `gcloud` credentials set up before
-#      proceeding - check out the section `Gathering acccess to the cluster`
-#      in this README file.
-gcloud compute \
-	ssh \
-	--zone us-central1-a \
-	$NODE_NAME
-```
 
 
 ### Without any credentials setup
@@ -319,6 +319,30 @@ concourse:
 
 With that set, head to the `Concourse` dashboard under the metrics address provided above and change the `Namespace` dropdown to the one corresponding to the name of your deployment.
 
+
+## SSHing into the Kubernetes node VM
+
+As the worker nodes created by worker pools declared in [the main Terraform file](./terraform/main.tf) are just regular GCP instances, these can be accessed using the regular ways of accessing VMs through `gcloud`.
+
+
+```sh
+# The name of the instance can be retrieved from the
+# command that lists nodes connected to the k8s cluster:
+# - `kubectl get nodes`.
+NODE_NAME="gke-hush-house-test-workers-1-46b1d860-65mf"
+
+
+# Use `gcloud` to facilitate the process of getting the
+# right credentials set up for SSHing into the machine.
+#
+# ps.: you must have `gcloud` credentials set up before
+#      proceeding - check out the section `Gathering acccess to the cluster`
+#      in this README file.
+gcloud compute \
+	ssh \
+	--zone us-central1-a \
+	$NODE_NAME
+```
 
 ## k8s cheat-sheet
 

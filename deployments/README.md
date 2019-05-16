@@ -6,9 +6,16 @@ Each deployment directory is meant to be a [Helm Chart](https://github.com/helm/
 
 For more information about each deployment, jump to the corresponding directory's README:
 
-- [metrics](./with-creds/metrics/README.md)
-- [hush-house](./with-creds/hush-house/README.md)
-- [bananas](./without-creds/bananas/README.md)
+- Concourse installation
+  - [hush-house](./with-creds/hush-house/README.md)
+  - [worker](./with-creds/worker/README.md)
+
+- Infrastructure
+  - [metrics](./with-creds/metrics/README.md)
+  - [sysctl](./without-creds/worker/README.md)
+
+- Samples
+  - [bananas](./without-creds/bananas/README.md)
 
 
 ## Directory structure
