@@ -17,8 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 2,
-  "iteration": 1556809781378,
+  "iteration": 1558180667167,
   "links": [
     {
       "icon": "info",
@@ -866,7 +865,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Error rate (/s)",
+      "title": "Web error rate (/s)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -905,6 +904,240 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "stackdriver",
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 27
+      },
+      "id": 58,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aliasBy": "{{ metric.label.action }}",
+          "alignOptions": [
+            {
+              "expanded": true,
+              "label": "Alignment options",
+              "options": [
+                {
+                  "label": "delta",
+                  "metricKinds": [
+                    "CUMULATIVE",
+                    "DELTA"
+                  ],
+                  "text": "delta",
+                  "value": "ALIGN_DELTA",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION"
+                  ]
+                },
+                {
+                  "label": "rate",
+                  "metricKinds": [
+                    "CUMULATIVE",
+                    "DELTA"
+                  ],
+                  "text": "rate",
+                  "value": "ALIGN_RATE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "min",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "min",
+                  "value": "ALIGN_MIN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "max",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "max",
+                  "value": "ALIGN_MAX",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "mean",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "mean",
+                  "value": "ALIGN_MEAN",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "count",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "count",
+                  "value": "ALIGN_COUNT",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "BOOL"
+                  ]
+                },
+                {
+                  "label": "sum",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "sum",
+                  "value": "ALIGN_SUM",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY",
+                    "DISTRIBUTION"
+                  ]
+                },
+                {
+                  "label": "stddev",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "stddev",
+                  "value": "ALIGN_STDDEV",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                },
+                {
+                  "label": "percent change",
+                  "metricKinds": [
+                    "GAUGE",
+                    "DELTA"
+                  ],
+                  "text": "percent change",
+                  "value": "ALIGN_PERCENT_CHANGE",
+                  "valueTypes": [
+                    "INT64",
+                    "DOUBLE",
+                    "MONEY"
+                  ]
+                }
+              ]
+            }
+          ],
+          "alignmentPeriod": "stackdriver-auto",
+          "crossSeriesReducer": "REDUCE_MEAN",
+          "defaultProject": "loading project...",
+          "filters": [],
+          "groupBys": [
+            "metric.label.action"
+          ],
+          "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_MEAN&aggregation.groupByFields=metric.label.action&aggregation.perSeriesAligner=ALIGN_DELTA&filter=metric.type=\"logging.googleapis.com/user/worker-errors\"&interval.endTime=2019-05-18T12:02:01Z&interval.startTime=2019-05-18T06:02:01Z&view=FULL",
+          "lastQueryError": "",
+          "metricKind": "DELTA",
+          "metricType": "logging.googleapis.com/user/worker-errors",
+          "perSeriesAligner": "ALIGN_DELTA",
+          "refId": "A",
+          "service": "",
+          "usedAlignmentPeriod": 60,
+          "valueType": "INT64"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Worker errors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "collapsed": true,
       "gridPos": {
         "h": 1,
@@ -924,7 +1157,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 36
+            "y": 27
           },
           "id": 32,
           "legend": {
@@ -1053,7 +1286,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 36
+            "y": 27
           },
           "id": 11,
           "legend": {
@@ -1191,7 +1424,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 36
+            "y": 27
           },
           "id": 29,
           "legend": {
@@ -1296,7 +1529,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 43
+            "y": 34
           },
           "id": 37,
           "legend": {
@@ -1382,7 +1615,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 43
+            "y": 34
           },
           "id": 33,
           "legend": {
@@ -1469,7 +1702,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 43
+            "y": 34
           },
           "id": 36,
           "legend": {
@@ -1555,7 +1788,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 50
+            "y": 41
           },
           "id": 7,
           "legend": {
@@ -1654,7 +1887,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 50
+            "y": 41
           },
           "id": 38,
           "legend": {
@@ -1740,7 +1973,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 50
+            "y": 41
           },
           "id": 52,
           "legend": {
@@ -1875,7 +2108,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 37
+            "y": 28
           },
           "id": 13,
           "legend": {
@@ -1905,7 +2138,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "container_memory_working_set_bytes{pod_name=~\"$worker\",container_name!=\"POD\",container_name!=\"\",namespace=~\"$namespace\"} \n  / \ncontainer_spec_memory_limit_bytes",
+              "expr": "container_memory_working_set_bytes{pod_name=~\"$worker\",container_name!=\"POD\",container_name!=\"\"} \n  / \ncontainer_spec_memory_limit_bytes",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1913,7 +2146,7 @@
               "refId": "A"
             },
             {
-              "expr": "container_memory_working_set_bytes{pod_name=~\"worker-worker-.*\",container_name!=\"POD\",container_name!=\"\",namespace=\"worker\"} \n  / \ncontainer_spec_memory_limit_bytes",
+              "expr": "container_memory_working_set_bytes{pod_name=~\"worker-worker-.*\",container_name!=\"POD\",container_name!=\"\"} \n  / \ncontainer_spec_memory_limit_bytes",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 2,
@@ -1981,7 +2214,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 37
+            "y": 28
           },
           "id": 3,
           "legend": {
@@ -2107,7 +2340,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 37
+            "y": 28
           },
           "id": 2,
           "legend": {
@@ -2209,7 +2442,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 44
+            "y": 35
           },
           "id": 30,
           "legend": {
@@ -2346,7 +2579,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 44
+            "y": 35
           },
           "id": 46,
           "legend": {
@@ -2449,7 +2682,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 44
+            "y": 35
           },
           "id": 39,
           "legend": {
@@ -2621,7 +2854,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -2652,5 +2885,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 6
+  "version": 1
 }
