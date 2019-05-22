@@ -992,7 +992,7 @@
           "description": "",
           "fill": 0,
           "gridPos": {
-            "h": 14,
+            "h": 16,
             "w": 12,
             "x": 0,
             "y": 23
@@ -1079,7 +1079,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "description": "inserts + updates + deletions",
+          "description": "Rows inserted + updated + deleted",
           "fill": 0,
           "gridPos": {
             "h": 8,
@@ -1208,7 +1208,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Reads /s",
+          "title": "Rows fetched /s",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -1254,8 +1254,8 @@
           "description": "",
           "fill": 0,
           "gridPos": {
-            "h": 7,
-            "w": 12,
+            "h": 8,
+            "w": 6,
             "x": 12,
             "y": 31
           },
@@ -1331,13 +1331,99 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "description": "Indexed + not indexed",
+          "fill": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 6,
+            "x": 18,
+            "y": 31
+          },
+          "id": 24,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum by (table) (irate(flight_recorder_pg_table_stat{statistic=\"seq_scan\"}[3m])) \n  + \nsum by (table) (irate(flight_recorder_pg_table_stat{statistic=\"idx_scan\"}[3m]))",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ table }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Scans /s",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": false,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ops",
+              "label": null,
+              "logBase": 2,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "PostgreSQL",
       "type": "row"
     }
   ],
-  "refresh": "1m",
+  "refresh": "5m",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
