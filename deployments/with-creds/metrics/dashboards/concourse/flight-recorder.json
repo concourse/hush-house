@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 7,
+  "id": 6,
   "links": [],
   "panels": [
     {
@@ -50,7 +50,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
+        "w": 6,
         "x": 0,
         "y": 1
       },
@@ -71,6 +71,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -133,8 +134,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 8,
+        "w": 6,
+        "x": 6,
         "y": 1
       },
       "id": 8,
@@ -154,6 +155,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -216,8 +218,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 16,
+        "w": 6,
+        "x": 12,
         "y": 1
       },
       "id": 10,
@@ -237,6 +239,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -281,6 +284,115 @@
       "valueName": "current"
     },
     {
+      "aliasColors": {},
+      "bars": true,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 26,
+      "interval": "",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "hideZero": false,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pluginVersion": "6.2.0",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "succeeded",
+          "color": "#73BF69"
+        },
+        {
+          "alias": "errored",
+          "color": "#FADE2A"
+        },
+        {
+          "alias": "failed",
+          "color": "#F2495C"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum by (status) (increase(flight_recorder_builds{status!~\"(started|pending|)\"}[1h]))",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 2,
+          "legendFormat": "{{ status }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Builds (last hour)",
+      "tooltip": {
+        "shared": false,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "series",
+        "name": null,
+        "show": true,
+        "values": [
+          "total"
+        ]
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -317,6 +429,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -402,6 +515,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -487,6 +601,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -572,13 +687,14 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -593,7 +709,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "pending builds",
+      "title": "pending builds (stacked)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -658,6 +774,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -743,6 +860,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -828,6 +946,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -890,7 +1009,7 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "fill": 0,
@@ -910,10 +1029,11 @@
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 2,
       "points": false,
@@ -924,7 +1044,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "delta(flight_recorder_builds{status=\"errored\"}[5m]) > 0",
+          "expr": "increase(flight_recorder_builds{status=\"errored\"}[1h]) > 0",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ team }} {{ pipeline }}",
@@ -935,7 +1055,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "errored builds",
+      "title": "builds errored (last hour)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -995,7 +1115,7 @@
             "h": 16,
             "w": 12,
             "x": 0,
-            "y": 23
+            "y": 31
           },
           "id": 18,
           "legend": {
@@ -1015,6 +1135,7 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {},
           "percentage": false,
           "pointradius": 2,
           "points": false,
@@ -1085,7 +1206,7 @@
             "h": 8,
             "w": 6,
             "x": 12,
-            "y": 23
+            "y": 31
           },
           "id": 16,
           "legend": {
@@ -1101,6 +1222,7 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {},
           "percentage": false,
           "pointradius": 2,
           "points": false,
@@ -1171,7 +1293,7 @@
             "h": 8,
             "w": 6,
             "x": 18,
-            "y": 23
+            "y": 31
           },
           "id": 15,
           "legend": {
@@ -1187,6 +1309,7 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {},
           "percentage": false,
           "pointradius": 2,
           "points": false,
@@ -1257,7 +1380,7 @@
             "h": 8,
             "w": 6,
             "x": 12,
-            "y": 31
+            "y": 39
           },
           "id": 17,
           "legend": {
@@ -1273,6 +1396,7 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {},
           "percentage": false,
           "pointradius": 2,
           "points": false,
@@ -1343,7 +1467,7 @@
             "h": 8,
             "w": 6,
             "x": 18,
-            "y": 31
+            "y": 39
           },
           "id": 24,
           "legend": {
@@ -1359,6 +1483,7 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {},
           "percentage": false,
           "pointradius": 2,
           "points": false,
