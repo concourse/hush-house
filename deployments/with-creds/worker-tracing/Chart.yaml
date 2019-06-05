@@ -1,0 +1,8 @@
+name: worker-tracing
+apiVersion: v1
+version: 0.0.1
+appVersion: 0.0.1
+description: The deployment of a modified hush-house worker with tracing enabled
+maintainers:
+- name: cirocosta
+  email: cscosta@pivotal.io
