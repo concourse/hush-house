@@ -50,7 +50,7 @@ module "cluster" {
       name = "workers-1"
 
       min          = 1
-      node_count   = 5
+      node_count   = 6
       max          = 10
       local-ssds   = 0
       machine-type = "custom-16-32768"
@@ -70,9 +70,10 @@ module "cluster" {
 module "database" {
   source = "./database"
 
-  name      = "hush-house"
-  cpus      = "4"
-  memory_mb = "5120"
-  region    = "${var.region}"
-  zone      = "${var.zone}"
+  name         = "hush-house"
+  cpus         = "4"
+  disk_size_gb = "15"
+  memory_mb    = "5120"
+  region       = "${var.region}"
+  zone         = "${var.zone}"
 }

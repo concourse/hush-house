@@ -15,10 +15,15 @@ variable "cpus" {
 
 variable "zone" {
   default     = ""
-  description = "The zone where this instance is supposed to be created at (e.g., us-central1-a)k"
+  description = "The zone where this instance is supposed to be created at (e.g., us-central1-a)"
 }
 
 variable "region" {
   default     = ""
   description = "The region where the instance is supposed to be created at (e.g., us-central1)"
+}
+
+variable "disk_size_gb" {
+  default     = ""
+  description = "The disk size in GB's (e.g. 10)"
 }
