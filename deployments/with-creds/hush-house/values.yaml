@@ -6,40 +6,15 @@ concourse:
   imageDigest: sha256:aa8905900816657f20bf84abde58dd298e9c4df34486ba83faec2b25271617b8
 
   secrets:
-    teamAuthorizedKeys: [
-      { team: 'PE', key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxDLZSaslFwRI4C4Z2xsmxg8Keb7Ap9WWl2frsnedz67B+szm5ElIiF38K34zJKtryonCkW2irP4qg1zOuOPWETd/8IngEMVQIAOjExlm5iW/DZ7oN0g5cGZv3BH0sv2pJLjVfw4Rgl/BAi5FeHIBYuZv5+7VqPEfDSFHDn7S80Ge7eO5mkMUme6aZGB8HGjW2Zq8mSW1q1gvovZpo5cHV3XrQeQViGtuh0jv7xV4ZZRmom/alQGt9L6hSyf5EoDLIsXNmVbICka/j5MoCUsosR3b5qHOQmQb9pWwBh+d79n10qoTxDIVleFMqE1zUMj3ZJceJYbAsLBkbi90uKK0N' }
-    ]
+    teamAuthorizedKeys:
+      - team: PE
+        key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxDLZSaslFwRI4C4Z2xsmxg8Keb7Ap9WWl2frsnedz67B+szm5ElIiF38K34zJKtryonCkW2irP4qg1zOuOPWETd/8IngEMVQIAOjExlm5iW/DZ7oN0g5cGZv3BH0sv2pJLjVfw4Rgl/BAi5FeHIBYuZv5+7VqPEfDSFHDn7S80Ge7eO5mkMUme6aZGB8HGjW2Zq8mSW1q1gvovZpo5cHV3XrQeQViGtuh0jv7xV4ZZRmom/alQGt9L6hSyf5EoDLIsXNmVbICka/j5MoCUsosR3b5qHOQmQb9pWwBh+d79n10qoTxDIVleFMqE1zUMj3ZJceJYbAsLBkbi90uKK0N'
 
   postgresql:
     enabled: false
 
-  persistence:
-    worker:
-      storageClass: ssd
-      size: 500Gi
-
   worker:
-    annotations:
-      rollingUpdate: "1"
-    replicas: 0
-    terminationGracePeriodSeconds: 3600
-    livenessProbe:
-      periodSeconds: 60
-      timeoutSeconds: 30
-    nodeSelector: { cloud.google.com/gke-nodepool: workers-1 }
-    hardAntiAffinity: true
-    env:
-    - name: CONCOURSE_GARDEN_NETWORK_POOL
-      value: "10.254.0.0/16"
-    - name: CONCOURSE_GARDEN_MAX_CONTAINERS
-      value: "2000"
-    resources:
-      limits:
-        cpu: 15000m
-        memory: 29Gi
-      requests:
-        cpu: 10000m
-        memory: 25Gi
+    enabled: false
 
   web:
     annotations:
@@ -100,8 +75,3 @@ concourse:
         host: 173.255.117.168
         database: atc
         sslmode: verify-ca
-    worker:
-      ephemeral: false
-      rebalanceInterval: 1h
-      baggageclaim: { driver: detect }
-      healthcheckTimeout: 25s
