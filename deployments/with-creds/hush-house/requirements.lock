@@ -1,6 +1,6 @@
 dependencies:
 - name: concourse
   repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 6.2.2
-digest: sha256:ae4d809876b7de6e17541cb50bfa05a2b10b0e543cf05eaf0a3ce7ed22fc4519
-generated: "2019-06-10T08:35:43.576584-04:00"
+  version: 6.3.0
+digest: sha256:83099f66fc3ec1a490f5c04423dde443c88525f3059961c7b70fd7a324c1920d
+generated: 2019-06-11T11:47:15.017677-04:00

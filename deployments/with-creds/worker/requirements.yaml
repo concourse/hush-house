@@ -1,5 +1,5 @@
 ---
 dependencies:
 - name: concourse
-  version: 0.0.678
-  repository: https://raw.githubusercontent.com/concourse/charts/gh-pages
+  version: 6.3.0
+  repository: https://kubernetes-charts.storage.googleapis.com/

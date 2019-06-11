@@ -1,6 +1,6 @@
 dependencies:
 - name: concourse
-  repository: https://raw.githubusercontent.com/concourse/charts/gh-pages
-  version: 0.0.678
-digest: sha256:3d19ee0fa899da3d6ce242e59465b780e6ffa795e9f77e7e0a3e8e48a4b877f3
-generated: 2019-05-11T08:51:24.500178-04:00
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 6.3.0
+digest: sha256:83099f66fc3ec1a490f5c04423dde443c88525f3059961c7b70fd7a324c1920d
+generated: 2019-06-11T12:04:15.854589-04:00

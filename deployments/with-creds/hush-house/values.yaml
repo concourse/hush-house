@@ -2,13 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse-rc
-  imageDigest: sha256:aa8905900816657f20bf84abde58dd298e9c4df34486ba83faec2b25271617b8
-
-  secrets:
-    teamAuthorizedKeys:
-      - team: PE
-        key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxDLZSaslFwRI4C4Z2xsmxg8Keb7Ap9WWl2frsnedz67B+szm5ElIiF38K34zJKtryonCkW2irP4qg1zOuOPWETd/8IngEMVQIAOjExlm5iW/DZ7oN0g5cGZv3BH0sv2pJLjVfw4Rgl/BAi5FeHIBYuZv5+7VqPEfDSFHDn7S80Ge7eO5mkMUme6aZGB8HGjW2Zq8mSW1q1gvovZpo5cHV3XrQeQViGtuh0jv7xV4ZZRmom/alQGt9L6hSyf5EoDLIsXNmVbICka/j5MoCUsosR3b5qHOQmQb9pWwBh+d79n10qoTxDIVleFMqE1zUMj3ZJceJYbAsLBkbi90uKK0N'
+  image: concourse/concourse
+  imageDigest: sha256:df37aa611cc0f75fdd400665a0c422211974cbfe09d3cca6311cc90b17a079e2
 
   postgresql:
     enabled: false
