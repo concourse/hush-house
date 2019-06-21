@@ -27,10 +27,9 @@ tolerations: []
 affinity: {}
 
 slirunner:
-  concourseUrl:
+  concourseUrl: https://hush-house.pivotal.io
   interval:
   prefix:
-  team:
 
 secrets:
   username:

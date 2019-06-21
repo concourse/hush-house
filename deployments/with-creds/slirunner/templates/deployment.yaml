@@ -20,84 +20,32 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      volumes:
-        - name: fly-home
-          emptyDir: {}
-        - name: secrets
-          secret:
-            secretName: {{ include "slirunner.fullname" . }}
-            defaultMode: 0400
-            items:
-              - key: username
-                path: username
-              - key: password
-                path: password
-      initContainers:
-        - name: init-login
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: HOME
-              value: /fly-home
-          volumeMounts:
-            - mountPath: /fly-home
-              name: fly-home
-            - mountPath: /secrets
-              name: secrets
-              readOnly: true
-          command:
-            - /bin/bash
-            - -ce
-            - |
-              fly -t target login \
-                --username $(cat /secrets/username) \
-                --password $(cat /secrets/password) \
-                --team-name {{ required "team must be specified" .Values.slirunner.team }} \
-                --concourse-url {{ required "concourse url must be specified" .Values.slirunner.concourseUrl }}
       containers:
-        - name: periodic-login
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: HOME
-              value: /fly-home
-          volumeMounts:
-            - mountPath: /fly-home
-              name: fly-home
-            - mountPath: /secrets
-              name: secrets
-              readOnly: true
-          command:
-            - /bin/bash
-            - -ce
-            - |
-              while true; do
-                fly -t target login \
-                  --username $(cat /secrets/username) \
-                  --password $(cat /secrets/password) \
-                  --team-name {{ required "team must be specified" .Values.slirunner.team }} \
-                  --concourse-url {{ required "concourse url must be specified" .Values.slirunner.concourseUrl }}
-                sleep 1h
-              done
         - name: slirunner
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: HOME
-              value: /fly-home
+            - name: SR_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "slirunner.fullname" . }}
+                  key: username
+            - name: SR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "slirunner.fullname" . }}
+                  key: password
           command:
             - slirunner
             - start
             - --target=target
+            - --concourse-url={{ required "concourseUrl must be specified" .Values.slirunner.concourseUrl }}
             {{- if .Values.slirunner.prefix }}
             - --prefix={{ .Values.slirunner.prefix }}
             {{- end }}
             {{- if .Values.slirunner.interval }}
             - --interval={{ .Values.slirunner.interval }}
             {{- end }}
-          volumeMounts:
-            - mountPath: /fly-home
-              name: fly-home
           ports:
             - name: http
               containerPort: 9001
