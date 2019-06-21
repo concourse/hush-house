@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse-rc
-  imageDigest: sha256:ee9b8a628f526548f7c0e6da3e49652b3e30c7f754d4cc46c60f283bcd189a7e
+  image: concourse/concourse
+  imageDigest: sha256:df37aa611cc0f75fdd400665a0c422211974cbfe09d3cca6311cc90b17a079e2
 
   postgresql:
     enabled: false
@@ -31,10 +31,10 @@ concourse:
       loadBalancerIP: 35.202.234.135
     resources:
       requests:
-        cpu: 3
+        cpu: 1
         memory: 1Gi
       limits:
-        cpu: 3
+        cpu: 1
         memory: 1Gi
 
   concourse:
