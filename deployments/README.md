@@ -9,10 +9,12 @@ For more information about each deployment, jump to the corresponding directory'
 - Concourse installation
   - [hush-house](./with-creds/hush-house/README.md)
   - [worker](./with-creds/worker/README.md)
+  - [worker-tracing](./with-creds/worker-tracing/README.md)
 
 - Infrastructure
   - [metrics](./with-creds/metrics/README.md)
   - [sysctl](./without-creds/worker/README.md)
+  - [slirunner](./with-creds/slirunner/README.md)
 
 - Samples
   - [bananas](./without-creds/bananas/README.md)
@@ -81,15 +83,5 @@ Such deployment type is intended for those that require having some form of secr
 When `hush-house` goes for performing your deployment, it first gathers the secret `.values.yaml` file from a Kubernetes secret under `hush-house-main` named `((${deployment}-values-b64))`, puts that as a `.values.yaml` file under your deployment directory and then goes on with `helm upgrade`.
 
 For that reason, this directory requires a secret to be set in the k8s cluster in the right namespace prior to the `hush-house` deployment.
-
-
-
-
-
-
-
-
-
-
 
 
