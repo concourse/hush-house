@@ -48,7 +48,7 @@ concourse:
       baggageclaim: { driver: detect }
       healthcheckTimeout: 25s
       tsa:
-        host: 'hush-house-web.hush-house.svc.cluster.local'
+        hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']
 
   secrets:
     hostKeyPub: |-
