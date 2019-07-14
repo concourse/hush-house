@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: cirocosta/concourse-gdn
-  imageTag: tracing
+  image: concourse/concourse
+  imageDigest: sha256:df37aa611cc0f75fdd400665a0c422211974cbfe09d3cca6311cc90b17a079e2
 
   postgresql:
     enabled: false
@@ -24,7 +24,7 @@ concourse:
     livenessProbe:
       periodSeconds: 60
       timeoutSeconds: 30
-    nodeSelector: { cloud.google.com/gke-nodepool: workers-1 }
+    nodeSelector: { cloud.google.com/gke-nodepool: workers-2 }
     hardAntiAffinity: true
     env:
     - name: CONCOURSE_GARDEN_NETWORK_POOL
@@ -33,8 +33,6 @@ concourse:
       value: "500"
     - name: CONCOURSE_GARDEN_DENY_NETWORK
       value: "169.254.169.254/32"
-    - name: CONCOURSE_GARDEN_TRACING_ENDPOINT
-      value: "http://simplest-collector.jaeger.svc.cluster.local:14268/api/traces"
     resources:
       limits:
         cpu: 15
@@ -46,10 +44,11 @@ concourse:
     worker:
       ephemeral: false
       rebalanceInterval: 1h
-      baggageclaim: { driver: detect }
+      baggageclaim: { driver: overlay }
+      tag: ubuntu
       healthcheckTimeout: 25s
       tsa:
-        host: 'hush-house-web.hush-house.svc.cluster.local'
+        hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']
 
   secrets:
     hostKeyPub: |-
