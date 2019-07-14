@@ -45,7 +45,6 @@ concourse:
       ephemeral: false
       rebalanceInterval: 1h
       baggageclaim: { driver: overlay }
-      tag: ubuntu
       healthcheckTimeout: 25s
       tsa:
         hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']
