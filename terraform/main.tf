@@ -61,6 +61,24 @@ module "cluster" {
       preemptible  = false
       version      = "1.12.5-gke.5"
     },
+    {
+      # Just like the `worker-1`, but leveraging UBUNTU to test out rootless
+      # containers.
+      #
+      name = "workers-2"
+
+      min          = 1
+      node_count   = 1
+      max          = 10
+      local-ssds   = 0
+      machine-type = "custom-16-32768"
+      image        = "UBUNTU"
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      auto-upgrade = false
+      preemptible  = false
+      version      = "1.13.6-gke.13"
+    },
   ]
 }
 
