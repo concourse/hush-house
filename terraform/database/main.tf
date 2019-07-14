@@ -22,23 +22,19 @@ resource "google_sql_database_instance" "main" {
     disk_type         = "PD_SSD"
     tier              = "db-custom-${var.cpus}-${var.memory_mb}"
 
-    database_flags = [
-      {
-        name  = "log_min_duration_statement"
-        value = "-1"
-      },
-    ]
+    database_flags {
+      name  = "log_min_duration_statement"
+      value = "-1"
+    }
 
     ip_configuration {
       ipv4_enabled = "true"
       require_ssl  = "true"
 
-      authorized_networks = [
-        {
-          name  = "all"
-          value = "0.0.0.0/0"
-        },
-      ]
+      authorized_networks {
+        name  = "all"
+        value = "0.0.0.0/0"
+      }
     }
 
     backup_configuration {

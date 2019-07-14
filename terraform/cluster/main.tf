@@ -92,7 +92,7 @@ resource "google_container_node_pool" "main" {
       node_metadata = "SECURE"
     }
 
-    metadata {
+    metadata = {
       disable-legacy-endpoints = "true"
     }
 
