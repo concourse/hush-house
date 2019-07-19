@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 6,
+  "iteration": 1563559470974,
   "links": [],
   "panels": [
     {
@@ -339,7 +339,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (status) (increase(flight_recorder_builds{status!~\"(started|pending|)\"}[1h]))",
+          "expr": "sum by (status) (increase(flight_recorder_builds{status!~\"(started|pending|)\"}[$period]))",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -352,7 +352,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Builds (last hour)",
+      "title": "Builds (last $period)",
       "tooltip": {
         "shared": false,
         "sort": 2,
@@ -662,6 +662,40 @@
       }
     },
     {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "1m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "30m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "stalled workers alert",
+        "noDataState": "ok",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -673,7 +707,7 @@
         "x": 18,
         "y": 10
       },
-      "id": 12,
+      "id": 27,
       "legend": {
         "avg": false,
         "current": false,
@@ -694,22 +728,30 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "flight_recorder_builds{status=\"pending\"}",
+          "expr": "flight_recorder_workers{state=\"stalled\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{ team }} {{ pipeline }}",
+          "legendFormat": "{{ state }}",
           "refId": "A"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 1
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "pending builds (stacked)",
+      "title": "stalled workers",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -882,7 +924,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "put & get & task containers",
+      "title": "build containers",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -922,7 +964,7 @@
     },
     {
       "aliasColors": {},
-      "bars": true,
+      "bars": false,
       "dashLength": 10,
       "dashes": false,
       "fill": 0,
@@ -932,17 +974,17 @@
         "x": 12,
         "y": 16
       },
-      "id": 14,
+      "id": 12,
       "legend": {
         "avg": false,
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
-      "lines": false,
+      "lines": true,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
@@ -957,7 +999,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "flight_recorder_builds{status=\"started\"}",
+          "expr": "flight_recorder_builds{status=\"pending\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ team }} {{ pipeline }}",
@@ -968,7 +1010,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "started builds (stacked)",
+      "title": "pending builds (stacked)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -1044,7 +1086,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(flight_recorder_builds{status=\"errored\"}[1h]) > 0",
+          "expr": "increase(flight_recorder_builds{status=\"errored\"}[$period]) > 0",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ team }} {{ pipeline }}",
@@ -1055,7 +1097,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "builds errored (last hour)",
+      "title": "builds errored (last $period)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -1553,7 +1595,77 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "tags": [],
+          "text": "1h",
+          "value": "1h"
+        },
+        "hide": 0,
+        "label": "Period",
+        "name": "period",
+        "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": true,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      }
+    ]
   },
   "time": {
     "from": "now-3h",

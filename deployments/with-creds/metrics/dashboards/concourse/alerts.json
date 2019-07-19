@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 8,
   "links": [],
   "panels": [
     {
@@ -33,6 +32,7 @@
       "links": [],
       "nameFilter": "Worker",
       "onlyAlertsOnDashboard": false,
+      "options": {},
       "show": "current",
       "sortOrder": 3,
       "stateFilter": [],
@@ -57,6 +57,32 @@
       "links": [],
       "nameFilter": "Web",
       "onlyAlertsOnDashboard": false,
+      "options": {},
+      "show": "current",
+      "sortOrder": 3,
+      "stateFilter": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transparent": true,
+      "type": "alertlist"
+    },
+    {
+      "dashboardFilter": "",
+      "dashboardTags": [],
+      "folderId": null,
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 5,
+      "limit": "30",
+      "links": [],
+      "nameFilter": "Web",
+      "onlyAlertsOnDashboard": false,
+      "options": {},
       "show": "current",
       "sortOrder": 3,
       "stateFilter": [],
@@ -74,13 +100,14 @@
         "h": 11,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 3
       },
       "id": 4,
       "limit": "30",
       "links": [],
-      "nameFilter": "DB",
+      "nameFilter": "SLI",
       "onlyAlertsOnDashboard": false,
+      "options": {},
       "show": "current",
       "sortOrder": 3,
       "stateFilter": [],
@@ -130,5 +157,5 @@
   "timezone": "",
   "title": "Alerts",
   "uid": "O7MnP8zZz",
-  "version": 4
+  "version": 1
 }
