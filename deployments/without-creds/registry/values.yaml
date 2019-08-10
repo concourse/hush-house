@@ -1,0 +1,13 @@
+docker-registry:
+  nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+  persistence:
+    enabled: true
+    size: 100Gi
+    storageClass: ssd
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 1
+      memory: 1Gi

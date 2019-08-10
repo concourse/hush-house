@@ -1,0 +1,5 @@
+---
+dependencies:
+- name: docker-registry
+  version: 1.8.1
+  repository: https://kubernetes-charts.storage.googleapis.com/
