@@ -5,6 +5,11 @@ concourse:
   image: concourse/concourse
   imageDigest: sha256:86e86e1c7b49a25a022b8ddbebef4846c05a4662c13be0045d0c5c976afad8dd
 
+  secrets:
+    teamAuthorizedKeys:
+    - team: diego
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD7+mFCllkoCMJTyiduXBVlvR/vC+kLnQbh7RG6t6RyaPZCFZTOV2Mmm9cY5anTOHa4IUDTux4Kf/qNksNIZ4P2YjeT/sSeNODR//WqxrdoEbiTPIOmbyn00w0nHkoE6pJvnPXvOZp0ks0MPjw/qyKKMaKb3N8wuHNI3eXfIHDuDr2oKG6/SJKkYAmBLcWTRDDRA+Bbs57ytFpwr3vhWdyVfMDCwIGk6RO9EOFbsVH9ysSvYpMBc97tm6a8DHGbexKoV+Da2C+U9IUX88NYAQ/kSSc8Cmv4JgnXrM4sQaMc/zxfJhOjKEh6OIRBySR4YUk6LlV9Khz+82zcRbIeP71f'
+
   postgresql:
     enabled: false
 
