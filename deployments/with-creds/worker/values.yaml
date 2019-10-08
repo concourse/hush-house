@@ -23,7 +23,7 @@ concourse:
     terminationGracePeriodSeconds: 3600
     livenessProbe:
       periodSeconds: 60
-      timeoutSeconds: 30
+      timeoutSeconds: 45
     nodeSelector: { cloud.google.com/gke-nodepool: workers-1 }
     hardAntiAffinity: true
     env:
@@ -46,7 +46,7 @@ concourse:
       ephemeral: false
       rebalanceInterval: 1h
       baggageclaim: { driver: detect }
-      healthcheckTimeout: 25s
+      healthcheckTimeout: 40s
       tsa:
         hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']
 

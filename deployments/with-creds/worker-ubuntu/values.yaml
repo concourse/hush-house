@@ -19,11 +19,11 @@ concourse:
   worker:
     annotations:
       rollingUpdate: "2"
-    replicas: 1
+    replicas: 2
     terminationGracePeriodSeconds: 3600
     livenessProbe:
       periodSeconds: 60
-      timeoutSeconds: 30
+      timeoutSeconds: 45
     nodeSelector: { cloud.google.com/gke-nodepool: workers-2 }
     hardAntiAffinity: true
     env:
@@ -45,7 +45,7 @@ concourse:
       ephemeral: false
       rebalanceInterval: 1h
       baggageclaim: { driver: overlay }
-      healthcheckTimeout: 25s
+      healthcheckTimeout: 40s
       tsa:
         hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']
 
