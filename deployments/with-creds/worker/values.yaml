@@ -18,7 +18,7 @@ concourse:
 
   worker:
     annotations:
-      rollingUpdate: "2"
+      rollingUpdate: "3"
     replicas: 5
     terminationGracePeriodSeconds: 3600
     livenessProbe:
