@@ -8,7 +8,7 @@ concourse:
   secrets:
     teamAuthorizedKeys:
     - team: diego
-      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD7+mFCllkoCMJTyiduXBVlvR/vC+kLnQbh7RG6t6RyaPZCFZTOV2Mmm9cY5anTOHa4IUDTux4Kf/qNksNIZ4P2YjeT/sSeNODR//WqxrdoEbiTPIOmbyn00w0nHkoE6pJvnPXvOZp0ks0MPjw/qyKKMaKb3N8wuHNI3eXfIHDuDr2oKG6/SJKkYAmBLcWTRDDRA+Bbs57ytFpwr3vhWdyVfMDCwIGk6RO9EOFbsVH9ysSvYpMBc97tm6a8DHGbexKoV+Da2C+U9IUX88NYAQ/kSSc8Cmv4JgnXrM4sQaMc/zxfJhOjKEh6OIRBySR4YUk6LlV9Khz+82zcRbIeP71f'
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCf8Dd5PmIbfM7WodkOeE8gkbWv6J9dOofMXcGW6MI6JwvCBZne/LxmyFNZYpr0VniFUjUxB/juT/Qmp0r3WhMDh/s4hcAE+AtkE4FPFUUgoNiAd+Lo69dc1rK/1bAafn8dgOse45t/vn7+cA0f89ygbxAtPOIPMjFVU2S32R7ocuUCRrniT558XvLso0bETqJhzLTM8TjYgl61SyjZR/Ew8rG2LM4sBI9a4dA7LLdHv7AW+5ci/a4VW7sIV4tdhzszGbA3SrRvnm/RMGpZCVd8+2uHd78rNmackQhd+Hgln4e9c8ZsVV1hBcwkEbHtLE/iW6uuILR62dVmmWXfY6Mt'
 
   postgresql:
     enabled: false
