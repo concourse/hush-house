@@ -1,8 +1,0 @@
-name: worker
-apiVersion: v1
-version: 0.0.1
-appVersion: 0.0.1
-description: The deployment of hush-house workers
-maintainers:
-- name: cirocosta
-  email: cscosta@pivotal.io

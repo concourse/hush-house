@@ -26,60 +26,37 @@ module "cluster" {
   zone   = "${var.zone}"
   region = "${var.region}"
 
-  node-pools = [
-    {
-      # The pool to be used by non-worker.
-      #
-      name = "generic-1"
+  node-pools = {
 
-      min          = 1
-      node_count   = 2
-      max          = 5
+    "generic-1" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      image        = "COS"
       local-ssds   = 0
       machine-type = "n1-standard-4"
-      image        = "COS"
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
-      auto-upgrade = false
+      max          = 5
+      min          = 1
+      node_count   = 3
       preemptible  = false
       version      = "1.12.5-gke.5"
     },
-    {
-      # The pool to be exclusively used by `hush-house` Concourse workers
-      #
-      name = "workers-1"
 
-      min          = 1
-      node_count   = 6
-      max          = 10
-      local-ssds   = 0
-      machine-type = "custom-16-32768"
+    "workers-3" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
       image        = "COS"
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
-      auto-upgrade = false
-      preemptible  = false
-      version      = "1.12.5-gke.5"
-    },
-    {
-      # Just like the `worker-1`, but leveraging UBUNTU to test out rootless
-      # containers.
-      #
-      name = "workers-2"
-
-      min          = 1
-      node_count   = 1
-      max          = 10
       local-ssds   = 0
-      machine-type = "custom-16-32768"
-      image        = "UBUNTU"
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
-      auto-upgrade = false
+      machine-type = "custom-8-16384"
+      max          = 20
+      min          = 1
+      node_count   = 15
       preemptible  = false
-      version      = "1.13.6-gke.13"
+      version      = "1.14.7-gke.14 "
     },
-  ]
+
+  }
 }
 
 # Creates the CloudSQL Postgres database to be used by the `hush-house`
@@ -90,7 +67,7 @@ module "database" {
 
   name         = "hush-house"
   cpus         = "4"
-  disk_size_gb = "15"
+  disk_size_gb = "20"
   memory_mb    = "5120"
   region       = "${var.region}"
   zone         = "${var.zone}"

@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageDigest: sha256:38cb311fac63c09dee250c888c7488b1aba964404bdcc268e02ad916af509bc9
+  imageDigest: sha256:e93a0149e3efe9186e403a188066c93a96ea2f223b24d49952275b63dc3e2c4d
 
   postgresql:
     enabled: false
@@ -11,20 +11,21 @@ concourse:
   persistence:
     worker:
       storageClass: ssd
-      size: 1000Gi
+      size: 750Gi
 
   web:
     enabled: false
 
   worker:
+    replicas: 15
     annotations:
-      rollingUpdate: "3"
-    replicas: 5
+      manual-update-revision: "1"
     terminationGracePeriodSeconds: 3600
     livenessProbe:
       periodSeconds: 60
+      failureThreshold: 10
       timeoutSeconds: 45
-    nodeSelector: { cloud.google.com/gke-nodepool: workers-1 }
+    nodeSelector: { cloud.google.com/gke-nodepool: workers-3 }
     hardAntiAffinity: true
     env:
     - name: CONCOURSE_GARDEN_NETWORK_POOL
@@ -34,18 +35,13 @@ concourse:
     - name: CONCOURSE_GARDEN_DENY_NETWORK
       value: "169.254.169.254/32"
     resources:
-      limits:
-        cpu: 15000m
-        memory: 29Gi
-      requests:
-        cpu: 10000m
-        memory: 25Gi
+      limits:   { cpu: 7500m, memory: 14Gi }
+      requests: { cpu: 0m,    memory: 0Gi  }
 
   concourse:
     worker:
-      ephemeral: false
-      rebalanceInterval: 1h
-      baggageclaim: { driver: detect }
+      rebalanceInterval: 2h
+      baggageclaim: { driver: overlay }
       healthcheckTimeout: 40s
       tsa:
         hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']

@@ -62,31 +62,31 @@ resource "google_container_cluster" "main" {
 
 resource "google_container_node_pool" "main" {
   provider = "google-beta"
-  count    = "${length(var.node-pools)}"
+  for_each = "${var.node-pools}"
 
   location = "${var.zone}"
   cluster  = "${google_container_cluster.main.name}"
-  name     = "${lookup(var.node-pools[count.index], "name")}"
+  name     = "${each.key}"
 
-  node_count = "${lookup(var.node-pools[count.index], "node_count")}"
+  node_count = "${each.value.node_count}"
 
   autoscaling {
-    min_node_count = "${lookup(var.node-pools[count.index], "min")}"
-    max_node_count = "${lookup(var.node-pools[count.index], "max")}"
+    min_node_count = "${each.value.min}"
+    max_node_count = "${each.value.max}"
   }
 
   management {
     auto_repair  = true
-    auto_upgrade = "${lookup(var.node-pools[count.index], "auto-upgrade")}"
+    auto_upgrade = "${each.value.auto-upgrade}"
   }
 
   node_config {
-    preemptible     = "${lookup(var.node-pools[count.index], "preemptible")}"
-    machine_type    = "${lookup(var.node-pools[count.index], "machine-type")}"
-    local_ssd_count = "${lookup(var.node-pools[count.index], "local-ssds")}"
-    disk_size_gb    = "${lookup(var.node-pools[count.index], "disk-size")}"
-    disk_type       = "${lookup(var.node-pools[count.index], "disk-type")}"
-    image_type      = "${lookup(var.node-pools[count.index], "image")}"
+    preemptible     = "${each.value.preemptible}"
+    machine_type    = "${each.value.machine-type}"
+    local_ssd_count = "${each.value.local-ssds}"
+    disk_size_gb    = "${each.value.disk-size}"
+    disk_type       = "${each.value.disk-type}"
+    image_type      = "${each.value.image}"
 
     workload_metadata_config {
       node_metadata = "SECURE"

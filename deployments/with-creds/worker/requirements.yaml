@@ -1,5 +1,0 @@
----
-dependencies:
-- name: concourse
-  version: 8.2.7
-  repository: https://kubernetes-charts.storage.googleapis.com/

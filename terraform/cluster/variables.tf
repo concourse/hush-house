@@ -15,5 +15,4 @@ variable "region" {
 
 variable "node-pools" {
   description = "A list of node pool configurations to create and assign to the cluster."
-  type        = "list"
 }
