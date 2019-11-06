@@ -66,7 +66,7 @@ module "cluster" {
       version      = "1.14.7-gke.14 "
     },
 
-     "prod-workers" = {
+     "ci-workers" = {
       auto-upgrade = false
       disk-size    = "50"
       disk-type    = "pd-ssd"
