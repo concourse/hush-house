@@ -66,6 +66,20 @@ module "cluster" {
       version      = "1.14.7-gke.14 "
     },
 
+     "prod-workers" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      image        = "COS"
+      local-ssds   = 0
+      machine-type = "custom-8-16384"
+      max          = 10
+      min          = 1
+      node_count   = 8
+      preemptible  = false
+      version      = "1.14.7-gke.14 "
+    },
+
   }
 }
 
