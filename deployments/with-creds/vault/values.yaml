@@ -1,0 +1,3 @@
+vault:
+  server:
+    nodeSelector: 'cloud.google.com/gke-nodepool: generic-1'

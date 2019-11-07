@@ -1,0 +1,4 @@
+dependencies:
+- name: vault
+  version: 0.1.2
+  repository: file://charts/vault-helm

@@ -58,9 +58,13 @@ deploy-%: | ensure-creds-file-exists-% deps-%
 			.
 
 
+
+# TODO deps w/ local file?
+#
 deps-%:
-	cd ./$* && \
-		helm dependency update .
+	echo "hehe deps"
+	# cd ./$* && \
+	# 	helm dependency update .
 
 
 ensure-creds-file-exists-%:
