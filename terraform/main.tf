@@ -7,6 +7,16 @@ resource "google_compute_address" "hush-house" {
   name = "hush-house"
 }
 
+# Reserves an address for `nci.concourse-ci.org` and ties it
+# to the given domain.
+#
+module "concourse-nci-address" {
+  source = "./address"
+
+  dns-zone  = "${var.dns-zone}"
+  subdomain = "nci"
+}
+
 # Reserves an address for `metrics-hush-house.concourse-ci.org` and ties it
 # to the given domain.
 #
@@ -56,6 +66,20 @@ module "cluster" {
       version      = "1.14.7-gke.14 "
     },
 
+     "ci-workers" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      image        = "COS"
+      local-ssds   = 0
+      machine-type = "custom-8-16384"
+      max          = 10
+      min          = 1
+      node_count   = 8
+      preemptible  = false
+      version      = "1.14.7-gke.14 "
+    },
+
   }
 }
 
@@ -66,6 +90,20 @@ module "database" {
   source = "./database"
 
   name         = "hush-house"
+  cpus         = "4"
+  disk_size_gb = "20"
+  memory_mb    = "5120"
+  region       = "${var.region}"
+  zone         = "${var.zone}"
+}
+
+# Creates the CloudSQL Postgres database to be used by the `ci`
+# Concourse deployment.
+#
+module "ci-database" {
+  source = "./database"
+
+  name         = "ci"
   cpus         = "4"
   disk_size_gb = "20"
   memory_mb    = "5120"

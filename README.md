@@ -452,7 +452,7 @@ Access to the GCP credentials for `hush-house` can be granted through a GCP JSON
 The `Makefile` at the root of this repository contains a target for retrieving that key and placing it at the right place:
 
 ```sh
-make creds
+make gcp-key
 ```
 
 ### Applying the Terraform

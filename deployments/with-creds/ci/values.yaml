@@ -1,0 +1,100 @@
+postgresql:
+  enabled: false
+
+concourse:
+  image: concourse/concourse
+  imageDigest: sha256:e93a0149e3efe9186e403a188066c93a96ea2f223b24d49952275b63dc3e2c4d
+
+  postgresql:
+    enabled: false
+
+  web:
+    annotations:
+      rollingUpdate: "1"
+    replicas: 2
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app: ci-web
+                release: ci
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 34.68.37.70
+    resources:
+      requests:
+        cpu: 1500m
+        memory: 1Gi
+      limits:
+        cpu: 1500m
+        memory: 1Gi
+
+  worker:
+    replicas: 8
+    annotations:
+      manual-update-revision: "1"
+    terminationGracePeriodSeconds: 3600
+    livenessProbe:
+      periodSeconds: 60
+      failureThreshold: 10
+      timeoutSeconds: 45
+    nodeSelector: { cloud.google.com/gke-nodepool: ci-workers }
+    hardAntiAffinity: true
+    env:
+    - name: CONCOURSE_GARDEN_NETWORK_POOL
+      value: "10.254.0.0/16"
+    - name: CONCOURSE_GARDEN_MAX_CONTAINERS
+      value: "500"
+    - name: CONCOURSE_GARDEN_DENY_NETWORK
+      value: "169.254.169.254/32"
+    resources:
+      limits:   { cpu: 7500m, memory: 14Gi }
+      requests: { cpu: 0m,    memory: 0Gi  }
+
+  concourse:
+    web:
+      auth:
+        mainTeam:
+          localUser: admin
+          github:
+            team: concourse:Pivotal
+        github:
+          enabled: true
+      bindPort: 80
+      clusterName: ci-house
+      containerPlacementStrategy: limit-active-tasks
+      maxActiveTasksPerWorker: 5
+      defaultDaysToRetainBuildLogs: 30
+      enableLidar: true
+      enableBuildAuditing: true
+      enableContainerAuditing: true
+      enableGlobalResources: true
+      enableJobAuditing: true
+      enablePipelineAuditing: true
+      enableResourceAuditing: true
+      enableSystemAuditing: true
+      enableTeamAuditing: true
+      enableVolumeAuditing: true
+      enableWorkerAuditing: true
+      encryption: { enabled: true }
+      externalUrl: https://nci.pivotal.io
+      kubernetes: { keepNamespaces: true }
+      metrics: { captureErrorMetrics: true }
+      prometheus: { enabled: true }
+      tls: { enabled: true, bindPort: 443 }
+      postgres:
+        host: 34.69.204.254
+        database: atc
+        sslmode: verify-ca
+
+    worker:
+      rebalanceInterval: 2h
+      baggageclaim: { driver: overlay }
+      healthcheckTimeout: 40s
+      tsa:
+        hosts: ['ci-web.hush-house.svc.cluster.local:2222']
