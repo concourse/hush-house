@@ -49,11 +49,9 @@ deploy-%: | ensure-creds-file-exists-% deps-%
 			.
 
 
-
-# TODO deps w/ local file?
-#
 deps-%:
 	cd ./$* && \
+		grep 'file://' requirements.yaml || \
 		helm dependency update .
 
 

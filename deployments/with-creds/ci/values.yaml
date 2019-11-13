@@ -10,7 +10,7 @@ concourse:
 
   web:
     annotations:
-      rollingUpdate: "1"
+      rollingUpdate: "3"
     replicas: 2
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
@@ -83,14 +83,18 @@ concourse:
       enableWorkerAuditing: true
       encryption: { enabled: true }
       externalUrl: https://nci.concourse-ci.org
-      kubernetes: { keepNamespaces: true }
+      kubernetes:
+        keepNamespaces: false
+        enabled: false
+        createTeamNamespaces: false
       metrics: { captureErrorMetrics: true }
       prometheus: { enabled: true }
       vault:
         enabled: true
-        url: http://vault.vault.svc.cluster.local:8200
+        url: https://vault.vault.svc.cluster.local:8200
         sharedPath: shared
         authBackend: "cert"
+        useCaCert: true
       tls: { enabled: true, bindPort: 443 }
       postgres:
         host: 34.69.204.254
