@@ -34,6 +34,11 @@ concourse:
         cpu: 1500m
         memory: 1Gi
 
+  persistence:
+    worker:
+      storageClass: ssd
+      size: 750Gi
+
   worker:
     replicas: 8
     annotations:
