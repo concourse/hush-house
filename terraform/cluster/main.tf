@@ -38,10 +38,6 @@ resource "google_container_cluster" "main" {
     horizontal_pod_autoscaling {
       disabled = false
     }
-
-    kubernetes_dashboard {
-      disabled = false
-    }
   }
 
   master_auth {
