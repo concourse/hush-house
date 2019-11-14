@@ -56,7 +56,7 @@ module "cluster" {
       auto-upgrade = false
       disk-size    = "50"
       disk-type    = "pd-ssd"
-      image        = "COS"
+      image        = "ubuntu"
       local-ssds   = 0
       machine-type = "custom-8-16384"
       max          = 20
