@@ -9,7 +9,9 @@ concourse:
     teamAuthorizedKeys:
     - team: diego
       key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCf8Dd5PmIbfM7WodkOeE8gkbWv6J9dOofMXcGW6MI6JwvCBZne/LxmyFNZYpr0VniFUjUxB/juT/Qmp0r3WhMDh/s4hcAE+AtkE4FPFUUgoNiAd+Lo69dc1rK/1bAafn8dgOse45t/vn7+cA0f89ygbxAtPOIPMjFVU2S32R7ocuUCRrniT558XvLso0bETqJhzLTM8TjYgl61SyjZR/Ew8rG2LM4sBI9a4dA7LLdHv7AW+5ci/a4VW7sIV4tdhzszGbA3SrRvnm/RMGpZCVd8+2uHd78rNmackQhd+Hgln4e9c8ZsVV1hBcwkEbHtLE/iW6uuILR62dVmmWXfY6Mt'
-
+    - team: toolsmiths
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXHxnupNtmDSiVtMsABr9I2Bt48MTbOazBzUr0+VMEYq4sPuEG4pVUnzrGr57UmYpDdDl/o+G7l7pws9DV3aUmcXZuWkP3ujRXefeNO7srumy60AqGK6Wor+L97b55vjPXsQz6YwrblAmgMuIN2MO2c8gijR6a0/yzSG4FLv+4njeK4XI62mgNtkF536Ms+9zyekcTkR0BeO4mg4ebicM5KTIyjzkpCe6S/Sjccaxpl1OkcQ9291TTFFGz6IZbtgF/CwmdJIEudWvSEwRLZOVqSW2PEuQ98MHk+KIQcze/GJszAmhBa9HfaYcf5vt+yR8e+KIxMeZASNlZge9t0p//'
+      
   postgresql:
     enabled: false
 
