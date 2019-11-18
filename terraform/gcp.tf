@@ -4,6 +4,10 @@ terraform {
     bucket      = "concourse-hush-house"
     prefix      = "terraform-k8s/state"
   }
+  required_providers {
+    google = "~> 2"
+    google-beta = "~> 2"
+  }
 }
 
 provider "google" {
