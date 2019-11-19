@@ -19,7 +19,7 @@ concourse:
   web:
     annotations:
       rollingUpdate: "1"
-    replicas: 2
+    replicas: 3
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
