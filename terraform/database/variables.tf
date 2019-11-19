@@ -27,3 +27,8 @@ variable "disk_size_gb" {
   default     = ""
   description = "The disk size in GB's (e.g. 10)"
 }
+
+variable "max_connections" {
+  default     = ""
+  description = "The max number of connections allowed by postgres"
+}

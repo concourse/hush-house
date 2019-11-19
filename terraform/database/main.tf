@@ -27,6 +27,11 @@ resource "google_sql_database_instance" "main" {
       value = "-1"
     }
 
+    database_flags {
+      name  = "max_connections"
+      value = "${var.max_connections}"
+    }
+
     ip_configuration {
       ipv4_enabled = "true"
       require_ssl  = "true"

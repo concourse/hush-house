@@ -89,12 +89,13 @@ module "cluster" {
 module "database" {
   source = "./database"
 
-  name         = "hush-house"
-  cpus         = "4"
-  disk_size_gb = "25"
-  memory_mb    = "5120"
-  region       = "${var.region}"
-  zone         = "${var.zone}"
+  name            = "hush-house"
+  cpus            = "4"
+  disk_size_gb    = "25"
+  memory_mb       = "5120"
+  region          = "${var.region}"
+  zone            = "${var.zone}"
+  max_connections = "300"
 }
 
 # Creates the CloudSQL Postgres database to be used by the `ci`
@@ -103,10 +104,11 @@ module "database" {
 module "ci-database" {
   source = "./database"
 
-  name         = "ci"
-  cpus         = "4"
-  disk_size_gb = "20"
-  memory_mb    = "5120"
-  region       = "${var.region}"
-  zone         = "${var.zone}"
+  name            = "ci"
+  cpus            = "4"
+  disk_size_gb    = "20"
+  memory_mb       = "5120"
+  region          = "${var.region}"
+  zone            = "${var.zone}"
+  max_connections = "100"
 }
