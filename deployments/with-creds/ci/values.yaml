@@ -110,5 +110,3 @@ concourse:
       rebalanceInterval: 2h
       baggageclaim: { driver: overlay }
       healthcheckTimeout: 40s
-      tsa:
-        hosts: ['ci-web.hush-house.svc.cluster.local:2222']

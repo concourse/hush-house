@@ -38,6 +38,10 @@ resource "google_container_cluster" "main" {
     horizontal_pod_autoscaling {
       disabled = false
     }
+
+    network_policy_config {
+      disabled = false
+    }
   }
 
   master_auth {
@@ -53,6 +57,11 @@ resource "google_container_cluster" "main" {
     daily_maintenance_window {
       start_time = "03:00"
     }
+  }
+
+  network_policy {
+    provider = "CALICO"
+    enabled = true
   }
 }
 
