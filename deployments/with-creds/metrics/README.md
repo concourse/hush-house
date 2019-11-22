@@ -1,13 +1,16 @@
 # Metrics
 
-The `metrics` deployment consists of the whole configuration and stack for monitoring targets that run in the `hush-house` cluster.
+The `metrics` deployment consists of the whole configuration and stack for monitoring targets that run in the `hush-house` Kubernetes cluster.
 
 It's composed of two dependent charts:
 
 - [prometheus](https://github.com/helm/charts/blob/master/stable/prometheus/README.md); and
 - [grafana](https://github.com/helm/charts/blob/master/stable/grafana/README.md).
 
-And a publicly accessible URL for dashboards: https://metrics-hush-house.concourse-ci.org/dashboards
+And a publicly accessible URL for dashboards:
+- https://metrics-hush-house.concourse-ci.org/dashboards
+
+ps.: this stack is supposed to monitor *ALL* deployments in the cluster, not only `hush-house`.
 
 
 ## Prometheus
@@ -25,21 +28,15 @@ To have **services** from your deployment scraped by the Prometheus instance man
 - `prometheus.io/path`: If the metrics path is not `/metrics` override this; and
 - `prometheus.io/port`: If the metrics are exposed on a different port to the service then set this appropriately.
 
-To have **pods** scraped:
-
-- `prometheus.io/scrape`: Only scrape pods that have a value of `true`;
-- `prometheus.io/path`: If the metrics path is not `/metrics` override this; and
-- `prometheus.io/port`: Scrape the pod on the indicated port instead of the default of `9102`.
-
 
 ### Accessing the console
 
 Not being publicly exposed, its console can be accessed through port-forwarding:
 
 ```sh
-# Set up a local proxy that allows us to connect
-# to the `metrics-prometheus-server` service by
-# hitting `127.0.0.1:9090`.
+# Set up a local proxy that allows us to connect # to the
+# `metrics-prometheus-server` service by # hitting `127.0.0.1:9090`.
+#
 kubectl port-forward \
 	--namespace metrics \
 	service/metrics-prometheus-server \
@@ -70,5 +67,3 @@ The dashboards can be found under [`./dashboards`](./dashboards), while the temp
 Given that all of the state lives under [`./dashboards`](./dashboards) and in-place updates are not allowed in the Grafana Web UI, to update a dashboard, copy the JSON configuration and paste it under the corresponding dashboard.
 
 Once a revision gets created, the `ConfigMap` update will be noticed by a [sidecar](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/) container under the Grafana pod and update the instance to catch up with the update.
-
-NOTE: There's an intermittent [bug](https://github.com/helm/helm/issues/3785) with helm not correctly calculating the patch for configMaps. You'll have to delete the configMap for the dashboard you want to update before running `make deploy-metrics`. If grafana still doesn't show your changes then delete the grafana pod and let k8s controller bring it back.
