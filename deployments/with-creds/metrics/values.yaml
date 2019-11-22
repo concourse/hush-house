@@ -10,14 +10,31 @@ tls:
 ## Configuration for the prometheus dependency.
 ##
 prometheus:
-  enabled: true
-  pushgateway: { enabled: false }
-  alertmanager: { enabled: false }
+  pushgateway:
+    enabled: false
+  alertmanager:
+    enabled: false
   nodeExporter:
     enabled: true
+
   kubeStateMetrics:
-    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     enabled: true
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+
+  server:
+    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+    persistentVolume:
+      enabled: true
+      size: 300Gi
+      storageClass: ssd
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 8Gi
+      requests:
+        cpu: 2000m
+        memory: 8Gi
+
   serverFiles:
     prometheus.yml:
       scrape_configs:
@@ -45,20 +62,15 @@ prometheus:
               target_label: __address__
               regex: ([^:]+)(?::\d+)?;(\d+)
               replacement: $1:$2
-            - action: labelmap
-              regex: __meta_kubernetes_service_label_(.+)
             - source_labels: [__meta_kubernetes_namespace]
               action: replace
               target_label: kubernetes_namespace
-            - source_labels: [__meta_kubernetes_service_name]
-              action: replace
-              target_label: kubernetes_name
-            - source_labels: [__meta_kubernetes_pod_node_name]
-              action: replace
-              target_label: kubernetes_node
             - source_labels: [__meta_kubernetes_pod_name]
               action: replace
               target_label: kubernetes_pod_name
+            - source_labels: [__meta_kubernetes_pod_node_name]
+              action: replace
+              target_label: kubernetes_node
 
         - job_name: kubernetes-nodes-cadvisor
           scheme: https
@@ -67,9 +79,13 @@ prometheus:
             insecure_skip_verify: true
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
           kubernetes_sd_configs: [{role: node}]
+
+          metric_relabel_configs:
+            - source_labels: [namespace]
+              regex: '(ci|ci-pr|hush-house|vault|workers)'
+              action: keep
+
           relabel_configs:
-            - action: labelmap
-              regex: __meta_kubernetes_node_label_(.+)
             - target_label: __address__
               replacement: kubernetes.default.svc:443
             - source_labels: [__meta_kubernetes_node_name]
@@ -85,8 +101,6 @@ prometheus:
           bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
           kubernetes_sd_configs: [{role: node}]
           relabel_configs:
-            - action: labelmap
-              regex: __meta_kubernetes_node_label_(.+)
             - target_label: __address__
               replacement: kubernetes.default.svc:443
             - source_labels: [__meta_kubernetes_node_name]
@@ -100,19 +114,6 @@ prometheus:
         rules:
         - record: node:node_num_cpu:sum
           expr: count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode)
-  server:
-    nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
-    persistentVolume:
-      enabled: true
-      size: 30Gi
-      storageClass: ssd
-    resources:
-      limits:
-        cpu: 2000m
-        memory: 8Gi
-      requests:
-        cpu: 2000m
-        memory: 8Gi
 
 
 ## Configuration for the Grafana dependency.
