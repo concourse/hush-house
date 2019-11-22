@@ -17,6 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
+  "id": 4,
   "iteration": 1574455228918,
   "links": [
     {
@@ -185,7 +186,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (status) (increase(concourse_builds_finished{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[15m]))",
+          "expr": "sum by (status) (increase(concourse_builds_finished{kubernetes_pod_name=~\"$atc\",kubernetes_namespace=~\"$namespace\"}[$period]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ status }}",
