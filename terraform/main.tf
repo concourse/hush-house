@@ -47,7 +47,7 @@ module "cluster" {
       machine-type = "n1-standard-4"
       max          = 5
       min          = 1
-      node_count   = 3
+      node_count   = 4
       preemptible  = false
       version      = "1.12.5-gke.5"
     },
@@ -56,7 +56,7 @@ module "cluster" {
       auto-upgrade = false
       disk-size    = "50"
       disk-type    = "pd-ssd"
-      image        = "ubuntu"
+      image        = "UBUNTU"
       local-ssds   = 0
       machine-type = "custom-8-16384"
       max          = 20
@@ -80,6 +80,19 @@ module "cluster" {
       version      = "1.14.7-gke.14 "
     },
 
+     "ci-workers-pr" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      image        = "COS"
+      local-ssds   = 0
+      machine-type = "custom-8-16384"
+      max          = 10
+      min          = 1
+      node_count   = 3
+      preemptible  = false
+      version      = "1.14.7-gke.14 "
+    },
   }
 }
 

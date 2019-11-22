@@ -1,0 +1,12 @@
+name: ci
+apiVersion: v1
+version: 0.1.1
+appVersion: 0.0.139
+description: A Concourse deployment used by Concourse to ship Concourse
+maintainers:
+- name: cirocosta
+  email: cscosta@pivotal.io
+- name: kmannem
+  email: kmannem@pivotal.io
+- name: svohra
+  email: svohra@pivotal.io

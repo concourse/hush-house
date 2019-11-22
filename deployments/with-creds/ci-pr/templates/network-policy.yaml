@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: only-external
+  namespace: {{ .Release.Name }}
+spec:
+  podSelector:
+    matchLabels:
+      release: {{ .Release.Name }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: []                 # disallow any ingress
+  egress:
+    - ports:                  # allow dns
+        - port: 53
+          protocol: TCP
+        - port: 53
+          protocol: UDP
+    - to:
+        - namespaceSelector:  # allow pods in `ci` namespace laeblled `ci-web`
+            matchLabels:
+              release: ci
+          podSelector:
+            matchLabels:
+              app: ci-web
+        - ipBlock:
+            cidr: 0.0.0.0/0   # allow any out
+            except:
+              - 10.0.0.0/8    # except internal comms
