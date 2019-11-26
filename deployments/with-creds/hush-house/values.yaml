@@ -70,6 +70,7 @@ concourse:
       enableTeamAuditing: true
       enableVolumeAuditing: true
       enableWorkerAuditing: true
+      baggageclaimResponseHeaderTimeout: 10m
       encryption: { enabled: true }
       externalUrl: https://hush-house.pivotal.io
       kubernetes: { keepNamespaces: true }
