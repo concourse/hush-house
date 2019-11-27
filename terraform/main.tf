@@ -59,7 +59,7 @@ module "cluster" {
       image        = "UBUNTU"
       local-ssds   = 0
       machine-type = "custom-8-16384"
-      max          = 20
+      max          = 25
       min          = 1
       node_count   = 15
       preemptible  = false
