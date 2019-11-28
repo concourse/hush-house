@@ -18,7 +18,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 4,
-  "iteration": 1574455228918,
+  "iteration": 1574946708245,
   "links": [
     {
       "icon": "info",
@@ -435,7 +435,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "stackdriver",
-      "fill": 1,
+      "fill": 0,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
@@ -618,10 +618,11 @@
           "lastQuery": "aggregation.alignmentPeriod=+60s&aggregation.crossSeriesReducer=REDUCE_MEAN&aggregation.groupByFields=metric.label.action&aggregation.perSeriesAligner=ALIGN_DELTA&filter=metric.type=\"logging.googleapis.com/user/worker-errors\"&interval.endTime=2019-05-18T12:02:01Z&interval.startTime=2019-05-18T06:02:01Z&view=FULL",
           "lastQueryError": "",
           "metricKind": "DELTA",
-          "metricType": "logging.googleapis.com/user/worker-errors",
+          "metricType": "logging.googleapis.com/user/web-errors",
           "perSeriesAligner": "ALIGN_DELTA",
           "refId": "A",
           "service": "",
+          "unit": "1",
           "usedAlignmentPeriod": 60,
           "valueType": "INT64"
         }
@@ -633,7 +634,7 @@
       "title": "Web errors",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -673,7 +674,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "stackdriver",
-      "fill": 1,
+      "fill": 0,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
@@ -871,7 +872,7 @@
       "title": "Worker errors",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2827,7 +2828,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "ci",
           "value": "ci"
         },
@@ -3030,5 +3030,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 1
+  "version": 3
 }
