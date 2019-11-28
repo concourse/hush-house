@@ -12,8 +12,8 @@ terraform {
 
 provider "google" {
   credentials = "gcp.json"
-  project     = "${var.project}"
-  region      = "${var.region}"
+  project     = var.project
+  region      = var.region
 }
 
 # `google-beta` provides us access to GCP's beta APIs.
@@ -21,6 +21,6 @@ provider "google" {
 #
 provider "google-beta" {
   credentials = "gcp.json"
-  project     = "${var.project}"
-  region      = "${var.region}"
+  project     = var.project
+  region      = var.region
 }

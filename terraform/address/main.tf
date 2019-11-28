@@ -1,9 +1,9 @@
 data "google_dns_managed_zone" "main" {
-  name = "${var.dns-zone}"
+  name = var.dns-zone
 }
 
 resource "google_compute_address" "main" {
-  name = "${var.subdomain}"
+  name = var.subdomain
 }
 
 resource "google_dns_record_set" "main" {
@@ -11,9 +11,9 @@ resource "google_dns_record_set" "main" {
   type = "A"
   ttl  = 300
 
-  managed_zone = "${data.google_dns_managed_zone.main.name}"
+  managed_zone = data.google_dns_managed_zone.main.name
 
   rrdatas = [
-    "${google_compute_address.main.address}",
+    google_compute_address.main.address,
   ]
 }
