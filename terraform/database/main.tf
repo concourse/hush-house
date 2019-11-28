@@ -12,13 +12,13 @@ resource "random_id" "instance-name" {
 
 resource "google_sql_database_instance" "main" {
   name             = "${var.name}-${random_id.instance-name.hex}"
-  region           = "${var.region}"
+  region           = var.region
   database_version = "POSTGRES_9_6"
 
   settings {
     availability_type = "ZONAL"
     disk_autoresize   = true
-    disk_size         = "${var.disk_size_gb}"
+    disk_size         = var.disk_size_gb
     disk_type         = "PD_SSD"
     tier              = "db-custom-${var.cpus}-${var.memory_mb}"
 
@@ -29,7 +29,7 @@ resource "google_sql_database_instance" "main" {
 
     database_flags {
       name  = "max_connections"
-      value = "${var.max_connections}"
+      value = var.max_connections
     }
 
     ip_configuration {
@@ -48,7 +48,7 @@ resource "google_sql_database_instance" "main" {
     }
 
     location_preference {
-      zone = "${var.zone}"
+      zone = var.zone
     }
   }
 }
@@ -56,7 +56,7 @@ resource "google_sql_database_instance" "main" {
 resource "google_sql_database" "atc" {
   name = "atc"
 
-  instance  = "${google_sql_database_instance.main.name}"
+  instance  = google_sql_database_instance.main.name
   charset   = "UTF8"
   collation = "en_US.UTF8"
 }
@@ -69,11 +69,11 @@ resource "random_string" "password" {
 resource "google_sql_user" "user" {
   name = "atc"
 
-  instance = "${google_sql_database_instance.main.name}"
-  password = "${random_string.password.result}"
+  instance = google_sql_database_instance.main.name
+  password = random_string.password.result
 }
 
 resource "google_sql_ssl_cert" "cert" {
   common_name = "atc"
-  instance    = "${google_sql_database_instance.main.name}"
+  instance    = google_sql_database_instance.main.name
 }
