@@ -65,6 +65,20 @@ module "cluster" {
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
+    
+    "strabo-workers" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      image        = "UBUNTU"
+      local-ssds   = 0
+      machine-type = "custom-8-16384"
+      max          = 5
+      min          = 1
+      node_count   = 3
+      preemptible  = false
+      version      = "1.14.7-gke.14 "
+    },
 
      "ci-workers" = {
       auto-upgrade = false
