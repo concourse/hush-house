@@ -80,7 +80,7 @@ module "cluster" {
       version      = "1.14.7-gke.14 "
     },
 
-     "ci-workers" = {
+    "ci-workers" = {
       auto-upgrade = false
       disk-size    = "50"
       disk-type    = "pd-ssd"
@@ -94,7 +94,7 @@ module "cluster" {
       version      = "1.14.7-gke.14 "
     },
 
-     "ci-workers-pr" = {
+    "ci-workers-pr" = {
       auto-upgrade = false
       disk-size    = "50"
       disk-type    = "pd-ssd"
@@ -107,6 +107,21 @@ module "cluster" {
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
+
+    "ci-workers-monitoring" = {
+      auto-upgrade = false
+      disk-size    = "50"
+      disk-type    = "pd-ssd"
+      image        = "UBUNTU"
+      local-ssds   = 0
+      machine-type = "n1-standard-1"
+      max          = 2
+      min          = 1
+      node_count   = 1
+      preemptible  = false
+      version      = "1.14.7-gke.14 "
+    },
+
   }
 }
 
