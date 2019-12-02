@@ -5,6 +5,11 @@ concourse:
   image: concourse/concourse
   imageTag: 5.7.2
 
+  secrets:
+    teamAuthorizedKeys:
+    - team: monitoring-hush-house
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDP5oT2CUJgRP55iNQD7NK4JzxRHSKstRXAV9EJw6O2Iaf9D9foHOaYNpgeIrRW4sbGvucLMhOBchp7yOhPTxn9jCUIGQttAWnFWW9SeHYOwPmbC30ggIIKmUQ/oWC6Xxou+KPotmqkKv+YyxNh8otTY5Sbz8VodEVqYR4hgXqunbSlcYJdMJqt6w0R319INdd898o6MbRrO5tj2I0ej8/Ct/n8Ijliawj3Mlm3g3w0O31C/Aj9jpEyvt+7JfcRWeJ1VcEnDsy4/UTqLh8P46LX/vzPQoPp54qrSaMcN7/1ylqn8XG5g+QWH4rmyJhH+0d1bt4v05M8b/UuHdXHgXVDMYyIFbvz2hRdhX7ZSHtP48e1B9t1S5Uo9gPG4D0jkWdMkpQf8/b4PXNF4nmBdKcWp9DqfYZOBMM17ZckOoWTnIORuZ/Xzgk1k11k0yAwRDxEksQuTSQexf5zxnku3ZediR5CwdbY9w4NiYB0DVCK7ktPi7Yg6RPrDgfALdB4vIg6jcWI3xw0ot2XVpZ2MGmUxL+ZlsymYncQ5p3pHRbznWbR2piniCa4rbE/KP0zFTDrNIMp2433nI0q5P1WbNuOQkL/XOIFkNr6f81ra9XJZWsV4Ytozivi5cg7hiPgCgxfUpnAQ+7NsSFYnV/gmmLjKUVCsdEwxqH5IxlxMYJqlQ=='
+
   postgresql:
     enabled: false
 
