@@ -25,7 +25,7 @@ concourse:
       periodSeconds: 60
       failureThreshold: 10
       timeoutSeconds: 45
-    nodeSelector: { cloud.google.com/gke-nodepool: workers-3 }
+    nodeSelector: { cloud.google.com/gke-nodepool: strabo-workers }
     hardAntiAffinity: true
     env:
     - name: CONCOURSE_GARDEN_NETWORK_POOL
