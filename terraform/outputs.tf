@@ -48,6 +48,31 @@ output "ci-database-private-key" {
   value     = "${module.ci-database.private-key}"
 }
 
+# vault database outputs
+output "vault-database-ip" {
+  value = "${module.vault-database.ip}"
+}
+
+output "vault-database-ca-cert" {
+  sensitive = true
+  value     = "${module.vault-database.ca-cert}"
+}
+
+output "vault-database-password" {
+  sensitive = true
+  value     = "${module.vault-database.password}"
+}
+
+output "vault-database-cert" {
+  sensitive = true
+  value     = "${module.vault-database.cert}"
+}
+
+output "vault-database-private-key" {
+  sensitive = true
+  value     = "${module.vault-database.private-key}"
+}
+
 output "hush-house-address" {
   value = "${google_compute_address.hush-house.address}"
 }
