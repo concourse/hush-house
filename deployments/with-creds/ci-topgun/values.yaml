@@ -1,0 +1,52 @@
+postgresql:
+  enabled: false
+
+concourse:
+  image: concourse/concourse
+  imageDigest: sha256:e93a0149e3efe9186e403a188066c93a96ea2f223b24d49952275b63dc3e2c4d
+
+  postgresql:
+    enabled: false
+
+  web:
+    enabled: false
+
+  persistence:
+    worker:
+      storageClass: ssd
+      size: 100Gi
+
+  worker:
+    replicas: 1
+    annotations:
+      rollingUpdate: "1"
+    terminationGracePeriodSeconds: 3600
+    livenessProbe:
+      periodSeconds: 60
+      failureThreshold: 10
+      timeoutSeconds: 45
+    nodeSelector: { cloud.google.com/gke-nodepool: topgun-worker }
+    hardAntiAffinity: true
+    env:
+    - name: CONCOURSE_GARDEN_NETWORK_POOL
+      value: "10.254.0.0/16"
+    - name: CONCOURSE_GARDEN_MAX_CONTAINERS
+      value: "500"
+    - name: CONCOURSE_GARDEN_DENY_NETWORK
+      value: "169.254.169.254/32"
+    resources:
+      limits:   { cpu: 7500m, memory: 14Gi }
+      requests: { cpu: 0m,    memory: 0Gi  }
+
+  concourse:
+    worker:
+      rebalanceInterval: 2h
+      baggageclaim: { driver: overlay }
+      tag: "k8s-topgun"
+      healthcheckTimeout: 40s
+      tsa:
+        hosts: ['nci.concourse-ci.org:2222']
+
+  secrets:
+    hostKeyPub: |-
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDiMRfkctT6v/KWRAQGZtICcWp6IToTSZ60siycdLHlBHAJtqGloj+C/rhFikEXmITfOi14lfTqVfbgjXoP1QURbtpXDgdmMxYznztj5t5nNPjwWtlbGqwHibmAigEIMwICYHY/LUqKYXD1DVAP/AYFqb7QCF+s5t4jTjnlYWldncFjNoiR3f4XB3/Bz/BVVL8WSLNkCSb8gUN3H6+tCCGLz91dcNXT8t1H39h+/PskqrNaU+BKF1NJrNHii7DNXTUoagiXDGVH1/TMn211jksJ0TjVgY2dmGO7VRAo4AE03xxFaNg6gcD0jwwPjTFGDAt8p+J/1a8JzdBRCc9ogiSEOe/AxJHMDyi5twP4s8P8f1KjnZzJJ145SKGy3Rv7/JofKSLr2tAID5963HEUZeXIA4tLmXoiQc7w8zV9wWEf7h5Mrf2bLOfDfodghXq+olpFsrkGZGlMLszBggp86ZaECR6AzDlhl9v9PMARbZmNdaH10cI5wiMExH/O4lakXC6Z+CVOaYUBp80oh/kqlADbN4lYYVyvWodGpLAbHWzQpPNooyu2GHERyNGLWssFaByDPV0G3qnRfFAvExwHjL53U0uztOFE7w9KXYWuQB0B7ZCLCeC1QQ1iUSafnS5dJYu0fivAzezopSA/UqezKKA58Mud8SraJXEQ1C5//oR4sQ==
