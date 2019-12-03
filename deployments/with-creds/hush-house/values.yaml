@@ -23,7 +23,7 @@ concourse:
   web:
     annotations:
       rollingUpdate: "1"
-    replicas: 3
+    replicas: 2
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
@@ -40,10 +40,10 @@ concourse:
       loadBalancerIP: 35.202.234.135
     resources:
       requests:
-        cpu: 1500m
+        cpu: 3000m
         memory: 1Gi
       limits:
-        cpu: 1500m
+        cpu: 3000m
         memory: 1Gi
 
   concourse:
