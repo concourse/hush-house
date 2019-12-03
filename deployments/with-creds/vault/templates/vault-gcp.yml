@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vault-gcp
+type: Opaque
+data:
+  vault.gcp: {{ default "" .Values.vault.gcp | b64enc | quote }}
+

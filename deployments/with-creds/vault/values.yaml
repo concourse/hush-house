@@ -6,6 +6,12 @@ vault:
     extraVolumes:
       - type: secret
         name: vault-server-tls
+      - type: secret
+        name: vault-gcp
+    extraEnvironmentVars:
+      GOOGLE_REGION: global
+      GOOGLE_PROJECT: cf-concourse-production
+      GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/vault-gcp/vault.gcp
     standalone:
       enabled: true
       config: |
@@ -19,4 +25,9 @@ vault:
 
         storage "file" {
           path = "/vault/data"
+        }
+
+        seal "gcpckms" {
+          key_ring = "vault-helm-unseal-kr"
+          crypto_key = "vault-helm-unseal-key"
         }
