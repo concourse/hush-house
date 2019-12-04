@@ -154,3 +154,23 @@ module "ci-database" {
   zone            = "${var.zone}"
   max_connections = "100"
 }
+
+# gkms key for vault unseal
+# Concourse deployment.
+#
+resource "google_kms_key_ring" "keyring" {
+  name     = "vault-helm-unseal-kr"
+  location = "global"
+}
+
+# crypto key for vault unseal
+# Concourse deployment.
+#
+resource "google_kms_crypto_key" "vault-helm-unseal-key" {
+  name            = "vault-helm-unseal-key"
+  key_ring        = google_kms_key_ring.keyring.self_link
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
