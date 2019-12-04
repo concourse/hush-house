@@ -19,7 +19,7 @@ concourse:
   worker:
     replicas: 1
     annotations:
-      rollingUpdate: "1"
+      rollingUpdate: "2"
     terminationGracePeriodSeconds: 3600
     livenessProbe:
       periodSeconds: 60
@@ -42,6 +42,8 @@ concourse:
     worker:
       rebalanceInterval: 2h
       baggageclaim: { driver: overlay }
+      garden:
+        dnsProxyEnable: "false"
       tag: "k8s-topgun"
       healthcheckTimeout: 40s
       tsa:
