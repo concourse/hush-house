@@ -17,6 +17,9 @@ concourse:
     annotations:
       rollingUpdate: "3"
     replicas: 2
+    env:
+    - name: CONCOURSE_X_FRAME_OPTIONS
+      value: ""
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
