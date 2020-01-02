@@ -1,6 +1,0 @@
-dependencies:
-- name: docker-registry
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 1.8.1
-digest: sha256:df7031c7c6f6e193ecc4cc9774cbc14e0051ddffa3390a26abf4f3ee3db34396
-generated: "2019-08-09T20:20:04.84781-04:00"
