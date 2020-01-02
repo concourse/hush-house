@@ -22,6 +22,7 @@ prometheus:
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
 
   server:
+    retention: 60d
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     persistentVolume:
       enabled: true
