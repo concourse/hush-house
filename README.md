@@ -50,9 +50,6 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
 
 ```sh
 .
-├── ci				# Concourse pipelines and tasks designed to keep
-│				# the environment continuously up to date.
-│
 │
 ├── deployments 		# Where you can find all deployments that get
 │   │				# continuously deployed by `hush-house` when changes
