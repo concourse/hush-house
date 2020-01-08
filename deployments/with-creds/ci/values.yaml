@@ -104,7 +104,7 @@ concourse:
       prometheus: { enabled: true }
       vault:
         enabled: true
-        url: https://vault.vault.svc.cluster.local:8200
+        url: https://vault-nci.vault-nci.svc.cluster.local:8200
         sharedPath: shared
         authBackend: "cert"
         useCaCert: true
