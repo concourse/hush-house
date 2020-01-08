@@ -1,8 +1,8 @@
 # Deployments
 
-Here's where you can find all of the deployments that are picked up by `hush-house` to deploy in the `hush-house` cluster using the [`deploy` pipeline](https://hush-house.pivotal.io/teams/main/pipelines/deploy).
+Here's where you can find all of the deployments related to our internal k8s-based Concourse clusters.
 
-Each deployment directory is meant to be a [Helm Chart](https://github.com/helm/helm/blob/master/docs/charts.md), supposed to be continuously deployed in the form of releases.
+Each deployment directory is meant to be a [Helm Chart](https://github.com/helm/helm/blob/master/docs/charts.md), supposed to be continuously deployed in the form of releases. For the time being, though, our deploys are still manual.
 
 For more information about each deployment, jump to the corresponding directory's README:
 
@@ -10,6 +10,7 @@ For more information about each deployment, jump to the corresponding directory'
   - [hush-house](./with-creds/hush-house/README.md)
   - [worker](./with-creds/worker/README.md)
   - [worker-tracing](./with-creds/worker-tracing/README.md)
+  - [ci](./with-creds/ci/README.md)
 
 - Infrastructure
   - [metrics](./with-creds/metrics/README.md)
