@@ -33,7 +33,7 @@ concourse:
                 release: ci
     service:
       type: LoadBalancer
-      loadBalancerIP: 34.68.37.70
+      loadBalancerIP: 34.69.51.78
     resources:
       requests:
         cpu: 1500m
