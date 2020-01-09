@@ -56,6 +56,6 @@ output "metrics-hush-house-address" {
   value = "${module.metrics-address.address}"
 }
 
-output "concourse-nci-addresss" {
-  value = "${module.concourse-nci-address.address}"
+output "concourse-ci-addresss" {
+  value = "${module.concourse-ci-address.address}"
 }

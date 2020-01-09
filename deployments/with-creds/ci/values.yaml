@@ -79,7 +79,7 @@ concourse:
         github:
           enabled: true
       bindPort: 80
-      clusterName: ci-house
+      clusterName: ci
       containerPlacementStrategy: limit-active-tasks
       maxActiveTasksPerWorker: 5
       defaultDaysToRetainBuildLogs: 30
@@ -95,7 +95,7 @@ concourse:
       enableVolumeAuditing: true
       enableWorkerAuditing: true
       encryption: { enabled: true }
-      externalUrl: https://nci.concourse-ci.org
+      externalUrl: https://ci.concourse-ci.org
       kubernetes:
         keepNamespaces: false
         enabled: false

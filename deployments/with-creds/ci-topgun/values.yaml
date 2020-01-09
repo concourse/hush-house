@@ -47,7 +47,7 @@ concourse:
       tag: "k8s-topgun"
       healthcheckTimeout: 40s
       tsa:
-        hosts: ['nci.concourse-ci.org:2222']
+        hosts: ['ci.concourse-ci.org:2222']
 
   secrets:
     hostKeyPub: |-

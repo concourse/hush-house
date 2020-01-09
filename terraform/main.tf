@@ -7,14 +7,14 @@ resource "google_compute_address" "hush-house" {
   name = "hush-house"
 }
 
-# Reserves an address for `nci.concourse-ci.org` and ties it
+# Reserves an address for `ci.concourse-ci.org` and ties it
 # to the given domain.
 #
-module "concourse-nci-address" {
+module "concourse-ci-address" {
   source = "./address"
 
   dns-zone  = "${var.dns-zone}"
-  subdomain = "nci"
+  subdomain = "ci"
 }
 
 # Reserves an address for `metrics-hush-house.concourse-ci.org` and ties it
