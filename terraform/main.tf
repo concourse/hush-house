@@ -47,7 +47,6 @@ module "cluster" {
       machine-type = "n1-standard-4"
       max          = 5
       min          = 1
-      node_count   = 4
       preemptible  = false
       version      = "1.12.5-gke.5"
     },
@@ -61,11 +60,10 @@ module "cluster" {
       machine-type = "custom-8-16384"
       max          = 25
       min          = 1
-      node_count   = 15
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
-    
+
     "strabo-workers" = {
       auto-upgrade = false
       disk-size    = "50"
@@ -75,7 +73,6 @@ module "cluster" {
       machine-type = "custom-8-16384"
       max          = 5
       min          = 1
-      node_count   = 3
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
@@ -89,7 +86,6 @@ module "cluster" {
       machine-type = "custom-8-16384"
       max          = 10
       min          = 1
-      node_count   = 8
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
@@ -103,7 +99,6 @@ module "cluster" {
       machine-type = "custom-8-16384"
       max          = 10
       min          = 1
-      node_count   = 3
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
@@ -117,11 +112,9 @@ module "cluster" {
       machine-type = "n1-standard-1"
       max          = 2
       min          = 1
-      node_count   = 1
       preemptible  = false
       version      = "1.14.7-gke.14 "
     },
-
   }
 }
 
@@ -133,7 +126,6 @@ module "database" {
 
   name            = "hush-house"
   cpus            = "4"
-  disk_size_gb    = "25"
   memory_mb       = "5120"
   region          = "${var.region}"
   zone            = "${var.zone}"

@@ -73,8 +73,6 @@ resource "google_container_node_pool" "main" {
   cluster  = google_container_cluster.main.name
   name     = each.key
 
-  node_count = each.value.node_count
-
   autoscaling {
     min_node_count = each.value.min
     max_node_count = each.value.max
