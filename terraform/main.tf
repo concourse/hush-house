@@ -174,3 +174,38 @@ resource "google_kms_crypto_key" "vault-helm-unseal-key" {
     prevent_destroy = true
   }
 }
+
+# gkms key for vault-nci unseal
+# Concourse deployment.
+#
+resource "google_kms_key_ring" "keyring-nci" {
+  name     = "vault-helm-unseal-kr-nci"
+  location = "global"
+}
+
+# crypto key for vault-nci unseal
+# Concourse deployment.
+#
+resource "google_kms_crypto_key" "vault-helm-unseal-key-nci" {
+  name            = "vault-helm-unseal-key-nci"
+  key_ring        = google_kms_key_ring.keyring-nci.self_link
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+# Creates the CloudSQL Postgres database to be used by the `vault`
+# Concourse deployment.
+#
+ module "vault-database" {
+  source = "./database"
+
+  name            = "vault"
+  cpus            = "4"
+  disk_size_gb    = "10"
+  memory_mb       = "5120"
+  region          = "${var.region}"
+  zone            = "${var.zone}"
+  max_connections = "100"
+}

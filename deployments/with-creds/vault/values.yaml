@@ -23,11 +23,11 @@ vault:
           tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
         }
 
-        storage "file" {
-          path = "/vault/data"
+        storage "postgresql" {
+          connection_url = "host=%VAULT_IP% port=5432 user=atc password=%VAULT_SECRET% sslkey=/home/vault/vault-server-tls/vault.key sslcert=/home/vault/vault-server-tls/vault.crt sslrootcert=/home/vault/vault-server-tls/vault.ca dbname=vault"
         }
 
         seal "gcpckms" {
-          key_ring = "vault-helm-unseal-kr"
-          crypto_key = "vault-helm-unseal-key"
+          key_ring = "vault-helm-unseal-kr-nci"
+          crypto_key = "vault-helm-unseal-key-nci"
         }
