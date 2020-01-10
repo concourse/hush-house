@@ -1,6 +1,7 @@
 vault:
   global:
     tlsDisable: false
+    tlsPostgresEnable: true
   server:
     nodeSelector: 'cloud.google.com/gke-nodepool: generic-1'
     extraVolumes:
@@ -8,6 +9,8 @@ vault:
         name: vault-server-tls
       - type: secret
         name: vault-gcp
+      - type: secret
+        name: postgres
     extraEnvironmentVars:
       GOOGLE_REGION: global
       GOOGLE_PROJECT: cf-concourse-production
@@ -24,7 +27,7 @@ vault:
         }
 
         storage "postgresql" {
-          connection_url = "host=%VAULT_IP% port=5432 user=atc password=%VAULT_SECRET% sslkey=/home/vault/vault-server-tls/vault.key sslcert=/home/vault/vault-server-tls/vault.crt sslrootcert=/home/vault/vault-server-tls/vault.ca dbname=vault"
+          connection_url = "host=%POSTGRES_IP% port=5432 user=atc password=%POSTGRES_SECRET% sslkey=/home/vault/postgres/vault.key sslcert=/home/vault/postgres/vault.crt sslrootcert=/home/vault/postgres/vault.ca dbname=vault"
         }
 
         seal "gcpckms" {
