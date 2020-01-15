@@ -47,10 +47,10 @@ concourse:
     resources:
       requests:
         cpu: 3000m
-        memory: 1Gi
+        memory: 2Gi
       limits:
         cpu: 3000m
-        memory: 1Gi
+        memory: 2Gi
 
   concourse:
     web:
