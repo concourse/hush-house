@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e -u
+
+if [ "$#" != "1" ]; then
+  echo "usage: $0 <ci|hush-house|...>" >&2
+  exit 1
+fi
+
+cd $(dirname $0)/..
+
+database="$1"
+output="$(terraform output --json)"
+
+function read_attr() {
+  local attr="$1"
+  jq -r '.["'$database'-database-'$attr'"].value' <<< $output
+}
+
+ip="$(read_attr ip)"
+password="$(read_attr password)"
+
+ca_cert=/tmp/${database}-ca.crt
+jq -r '.["'$database'-database-ca-cert"].value' <<< $output > $ca_cert
+
+client_cert=/tmp/${database}-client.crt
+jq -r '.["'$database'-database-cert"].value' <<< $output > $client_cert
+
+client_key=/tmp/${database}-client.key
+jq -r '.["'$database'-database-private-key"].value' <<< $output > $client_key
+chmod 0600 $client_key
+
+echo "ip:       ${ip}"
+echo "password: ${password}"
+echo
+echo "ca cert:     ${ca_cert}"
+echo "client cert: ${client_cert}"
+echo "client key:  ${client_key}"
+echo
+echo "connect with...:"
+echo '  psql "'"host=${ip} user=atc sslcert=${client_cert} sslkey=${client_key} sslrootcert=${ca_cert} sslmode=verify-ca"'"'
