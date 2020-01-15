@@ -20,7 +20,6 @@ concourse:
     - team: telemetry-and-insights
       key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuPcsEmvCQkZMKFq2y23dOnB7t9Z9xPCFDP3WPeLUU/aNTnIIke5KrrDviRdcX3WjuaJCxDtAHWuddPdOr4aECLFx6zTPXDGkAZciYrGVszlpst6Md0tWTyw/SDZKWJ9LjG1Wat/O1X5ti+uz2gJdXeD8k4FGpbP7fv6Ids4vNuFXvaNX+V/xWFCE7LIQHT0VDp64UA4us5JvxvEscJ/gZAa8XNxbjYEcUI8fRC5w5L0o8a8+LuunXQNtoMFA6QLk3UcUDmJUFYMyGgIHJuhhohjAn7I9gPpHhm77gTr3USvEg3NFOLTwLAwLCh1SxQ8FpIM2dRJ5+uTbN0NCcryM/'
 
-
   postgresql:
     enabled: false
 
