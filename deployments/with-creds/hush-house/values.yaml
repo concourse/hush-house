@@ -46,10 +46,10 @@ concourse:
       loadBalancerIP: 35.202.234.135
     resources:
       requests:
-        cpu: 3000m
+        cpu: 5000m
         memory: 2Gi
       limits:
-        cpu: 3000m
+        cpu: 5000m
         memory: 2Gi
 
   concourse:
