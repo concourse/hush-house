@@ -44,7 +44,7 @@ module "cluster" {
       disk-type    = "pd-ssd"
       image        = "COS"
       local-ssds   = 0
-      machine-type = "n1-standard-4"
+      machine-type = "n1-standard-8"
       max          = 5
       min          = 1
       preemptible  = false
