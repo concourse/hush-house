@@ -17,8 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 4,
-  "iteration": 1574946708245,
+  "iteration": 1579873099626,
   "links": [
     {
       "icon": "info",
@@ -142,6 +141,7 @@
         "x": 0,
         "y": 11
       },
+      "hiddenSeries": false,
       "id": 56,
       "legend": {
         "avg": false,
@@ -248,6 +248,7 @@
         "x": 8,
         "y": 11
       },
+      "hiddenSeries": false,
       "id": 50,
       "legend": {
         "alignAsTable": true,
@@ -349,6 +350,7 @@
         "x": 16,
         "y": 11
       },
+      "hiddenSeries": false,
       "id": 28,
       "legend": {
         "alignAsTable": true,
@@ -443,6 +445,7 @@
         "x": 0,
         "y": 19
       },
+      "hiddenSeries": false,
       "id": 59,
       "legend": {
         "avg": false,
@@ -611,7 +614,11 @@
           "alignmentPeriod": "stackdriver-auto",
           "crossSeriesReducer": "REDUCE_MEAN",
           "defaultProject": "loading project...",
-          "filters": [],
+          "filters": [
+            "resource.label.namespace_name",
+            "=",
+            "$namespace"
+          ],
           "groupBys": [
             "metric.label.action"
           ],
@@ -682,6 +689,7 @@
         "x": 8,
         "y": 19
       },
+      "hiddenSeries": false,
       "id": 58,
       "legend": {
         "avg": false,
@@ -850,7 +858,11 @@
           "alignmentPeriod": "stackdriver-auto",
           "crossSeriesReducer": "REDUCE_MEAN",
           "defaultProject": "loading project...",
-          "filters": [],
+          "filters": [
+            "resource.label.namespace_name",
+            "=",
+            "$namespace"
+          ],
           "groupBys": [
             "metric.label.action"
           ],
@@ -861,6 +873,7 @@
           "perSeriesAligner": "ALIGN_DELTA",
           "refId": "A",
           "service": "",
+          "unit": "",
           "usedAlignmentPeriod": 60,
           "valueType": "INT64"
         }
@@ -920,6 +933,7 @@
         "x": 16,
         "y": 19
       },
+      "hiddenSeries": false,
       "id": 49,
       "legend": {
         "alignAsTable": true,
@@ -1022,6 +1036,7 @@
         "x": 0,
         "y": 27
       },
+      "hiddenSeries": false,
       "id": 19,
       "legend": {
         "alignAsTable": true,
@@ -2820,7 +2835,7 @@
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 20,
+  "schemaVersion": 21,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -3030,5 +3045,5 @@
   "timezone": "",
   "title": "Concourse",
   "uid": "qxMpiDYiz",
-  "version": 3
+  "version": 1
 }
