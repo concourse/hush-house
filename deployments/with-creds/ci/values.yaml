@@ -82,18 +82,7 @@ concourse:
       clusterName: ci
       containerPlacementStrategy: limit-active-tasks
       maxActiveTasksPerWorker: 5
-      defaultDaysToRetainBuildLogs: 30
-      enableLidar: true
-      enableBuildAuditing: true
-      enableContainerAuditing: true
       enableGlobalResources: true
-      enableJobAuditing: true
-      enablePipelineAuditing: true
-      enableResourceAuditing: true
-      enableSystemAuditing: true
-      enableTeamAuditing: true
-      enableVolumeAuditing: true
-      enableWorkerAuditing: true
       encryption: { enabled: true }
       externalUrl: https://ci.concourse-ci.org
       kubernetes:
