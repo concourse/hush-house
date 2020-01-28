@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageDigest: sha256:b50f6207373cc671965ea0c4832bb394508b7eca337a80100d38d961be27fbb5
+  imageTag: 5.8.0
 
   secrets:
     teamAuthorizedKeys:
@@ -28,7 +28,7 @@ concourse:
 
   web:
     annotations:
-      rollingUpdate: "1"
+      rollingUpdate: "2"
     replicas: 2
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
