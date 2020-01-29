@@ -41,6 +41,13 @@ concourse:
               matchLabels:
                 app: hush-house-web
                 release: hush-house
+    additionalVolumes:
+      - name: dsdsocket
+        hostPath:
+          path: /var/run/datadog
+    additionalVolumeMounts:
+      - name: dsdsocket
+        mountPath: /var/run/datadog
     service:
       type: LoadBalancer
       loadBalancerIP: 35.202.234.135
@@ -80,9 +87,15 @@ concourse:
       encryption: { enabled: true }
       externalUrl: https://hush-house.pivotal.io
       kubernetes: { keepNamespaces: true }
-      metrics: { captureErrorMetrics: true }
-      prometheus: { enabled: true }
+      metrics:
+        attribute: "environment:hush-house"
       tls: { enabled: true, bindPort: 443 }
+      datadog:
+        enabled: true
+
+        # horrible hack; we need a proper way to configure unix sockets
+        agentHost: unix
+        agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 173.255.117.168
         database: atc
