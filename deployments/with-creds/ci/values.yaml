@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageTag: 6.0.0-rc.2
+  imageTag: 6.0.0-rc.5
 
   secrets:
     teamAuthorizedKeys:
@@ -31,6 +31,13 @@ concourse:
               matchLabels:
                 app: ci-web
                 release: ci
+    additionalVolumes:
+      - name: dsdsocket
+        hostPath:
+          path: /var/run/datadog
+    additionalVolumeMounts:
+      - name: dsdsocket
+        mountPath: /var/run/datadog
     service:
       type: LoadBalancer
       loadBalancerIP: 34.69.51.78
@@ -89,8 +96,8 @@ concourse:
         keepNamespaces: false
         enabled: false
         createTeamNamespaces: false
-      metrics: { captureErrorMetrics: true }
-      prometheus: { enabled: true }
+      metrics:
+        attribute: "environment:ci"
       vault:
         enabled: true
         url: https://vault.vault.svc.cluster.local:8200
@@ -98,12 +105,24 @@ concourse:
         authBackend: "cert"
         useCaCert: true
       tls: { enabled: true, bindPort: 443 }
+      datadog:
+        enabled: true
+
+        # horrible hack; we need a proper way to configure unix sockets
+        agentHost: unix
+        agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 34.69.204.254
         database: atc
         sslmode: verify-ca
-
     worker:
       rebalanceInterval: 2h
       baggageclaim: { driver: overlay }
       healthcheckTimeout: 40s
+
+datadog:
+  datadog:
+    useDogStatsDSocketVolume: true
+    tags: ["environment:ci"]
+kubeStateMetrics:
+  enabled: false

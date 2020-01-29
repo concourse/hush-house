@@ -3,3 +3,6 @@ dependencies:
 - name: concourse
   version: 8.2.7
   repository: https://kubernetes-charts.storage.googleapis.com/
+- name: datadog
+  version: 1.39.5
+  repository: https://kubernetes-charts.storage.googleapis.com/
