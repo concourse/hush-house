@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse-rc
-  imageTag: 6.0.0-rc.5
+  image: vito/concourse
+  imageTag: tracing-migrations
 
   secrets:
     teamAuthorizedKeys:
@@ -20,6 +20,8 @@ concourse:
     env:
     - name: CONCOURSE_X_FRAME_OPTIONS
       value: ""
+    - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
+      value: http://simplest-collector.jaeger.svc.cluster.local:14268/api/traces
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
