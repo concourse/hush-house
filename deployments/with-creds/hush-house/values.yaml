@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse
-  imageTag: 5.8.0
+  image: concourse/concourse-rc
+  imageTag: 6.0.0-rc.11
 
   secrets:
     teamAuthorizedKeys:
@@ -30,6 +30,11 @@ concourse:
     annotations:
       rollingUpdate: "2"
     replicas: 2
+    env:
+    - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
+      value: http://simplest-collector.jaeger.svc.cluster.local:14268/api/traces
+    - name: CONCOURSE_TRACING_JAEGER_SERVICE
+      value: hush-house-web
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
