@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: vito/concourse
-  imageTag: tracing-migrations
+  imageTag: revert-zstd-2
 
   secrets:
     teamAuthorizedKeys:
