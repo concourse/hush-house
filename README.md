@@ -155,6 +155,11 @@ make helm-creds
 make helm-set-client-creds
 ```
 
+5. Run Helm command against Hush-House requires `--tls`.For example,
+
+```sh
+helm install ... --tls
+```
 
 ## IaaS
 
