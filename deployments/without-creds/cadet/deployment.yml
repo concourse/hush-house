@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cadet-deployment
+  labels:
+    app: cadet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cadet
+  template:
+    metadata:
+      labels:
+        app: cadet
+    spec:
+      containers:
+      - name: cadet
+        image: gcr.io/cf-concourse-production/cadet:47
+        ports:
+        - containerPort: 8000
+
+        env:
+        # enforce HTTPS and secure cookies
+        - name: NODE_ENV
+          value: production
+
+        # run against concourse org
+        - name: GITHUB_ORG
+          value: concourse
+
+        # don't refresh; trust the webhooks
+        - name: NO_REFRESH
+          value: 'true'
+
+        # configure github token
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cadet-github-token
+              key: token
+
+        # configure github oauth
+        - name: GITHUB_AUTH_CALLBACK_URL
+          value: https://project.concourse-ci.org/auth/github/callback
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: cadet-github-client
+              key: id
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: cadet-github-client
+              key: secret

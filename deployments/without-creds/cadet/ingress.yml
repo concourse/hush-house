@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cadet-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "cadet-static-ip"
+spec:
+  tls:
+  - secretName: concourse-ci-org-tls
+  backend:
+    serviceName: cadet
+    servicePort: 80
