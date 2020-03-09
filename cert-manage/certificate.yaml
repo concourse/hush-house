@@ -17,7 +17,8 @@ spec:
     - client auth
   # At least one of a DNS Name, USI SAN, or IP address is required.
   dnsNames:
-  - project.concourse-ci.org
+    # dnsNames
+    #- example.concourse-ci.org
     # uriSANs:
     # - spiffe://cluster.local/ns/sandbox/sa/concourse
     # ipAddresses:
