@@ -1,0 +1,32 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: concourse-ci-org
+spec:
+  secretName: concourse-ci-org-tls
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  organization:
+  - concourse
+  isCA: false
+  keySize: 2048
+  keyAlgorithm: rsa
+  keyEncoding: pkcs1
+  usages:
+    - server auth
+    - client auth
+  # At least one of a DNS Name, USI SAN, or IP address is required.
+  dnsNames:
+  - project.concourse-ci.org
+    # uriSANs:
+    # - spiffe://cluster.local/ns/sandbox/sa/concourse
+    # ipAddresses:
+    # - 192.168.0.5
+  issuerRef:
+    name: letsencrypt-production
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: ClusterIssuer
+    # This is optional since cert-manager will default to this value however
+    # if you are using an external issuer, change this to that issuer group.
+    group: cert-manager.io
