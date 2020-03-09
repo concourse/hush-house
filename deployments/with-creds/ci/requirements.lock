@@ -1,9 +1,9 @@
 dependencies:
 - name: concourse
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 8.2.7
+  repository: https://concourse-charts.storage.googleapis.com/
+  version: 9.1.1
 - name: datadog
   repository: https://kubernetes-charts.storage.googleapis.com/
   version: 1.39.5
-digest: sha256:badc680dce33477add7321076cde4d42355bff63ed0277afaca5ff783f673334
-generated: "2020-01-29T13:39:38.426883-05:00"
+digest: sha256:6644d15119e1f4efac37b0cc51e55f367045c1ebffa02a2a1a8e2f20726eb2c1
+generated: "2020-03-09T10:49:13.000369-04:00"

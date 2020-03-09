@@ -1,5 +1,8 @@
 HELM_FLAGS   ?=
 
+%-ci:
+	cd ci && make $*-ci
+
 creds-%:
 	cd ./$* && \
 		lpass show --notes hush-house-values-$* > ./.values.yaml
