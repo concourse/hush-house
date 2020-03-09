@@ -3,8 +3,8 @@
 ##
 tls:
   enabled: true
-  cert:
-  key:
+  dnsName: metrics-hush-house.concourse-ci.org
+  secretName: concourse-ci-org-tls
 
 
 ## Configuration for the prometheus dependency.
@@ -131,15 +131,15 @@ grafana:
   extraSecretMounts:
   - name: metrics-tls
     mountPath: /tls
-    secretName: metrics-tls
+    secretName: concourse-ci-org-tls
     readOnly: true
   grafana.ini:
     server:
       protocol: https
       domain: metrics-hush-house.concourse-ci.org
       root_url: https://metrics-hush-house.concourse-ci.org
-      cert_file: /tls/cert
-      cert_key: /tls/key
+      cert_file: /tls/tls.crt
+      cert_key: /tls/tls.key
     users:
       auto_assign_organization_role: Editor
     auth.anonymous:

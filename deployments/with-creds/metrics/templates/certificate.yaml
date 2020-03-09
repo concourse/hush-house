@@ -1,0 +1,27 @@
+{{- if .Values.grafana.enabled }}
+{{- if .Values.tls.enabled }}
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: concourse-ci-org
+spec:
+  secretName: {{ .Values.tls.secretName | quote }}
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  organization:
+    - concourse
+  isCA: false
+  keySize: 2048
+  keyAlgorithm: rsa
+  keyEncoding: pkcs1
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - {{ .Values.tls.dnsName | quote }}
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+    group: cert-manager.io
+{{- end }}
+{{- end }}
