@@ -106,7 +106,8 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
   - `brew install terraform`
 - [Helm (`helm`)](https://helm.sh/)
   - `brew install kubernetes-cli`
-  - `brew install kubernetes-helm`
+  - `brew install helm && mv /usr/local/bin/helm{,3}` (for `ci`)
+  - `brew install helm@2` (for the other deployments)
 - [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
   - `helm plugin install https://github.com/databus23/helm-diff --version master`
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/)
