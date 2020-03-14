@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  nginx.conf: |
+    events {
+    }
+
+    http {
+      server {
+        listen 8000;
+        root /data/www;
+        location / {
+          try_files '' /redirect.html =404;
+        }
+      }
+    }
+  redirect.html: |
+    <head>
+      <meta http-equiv="Refresh" content="0; URL=https://pivotal.zoom.us/j/109775612">
+    </head>
+metadata:
+  name: nginx-conf

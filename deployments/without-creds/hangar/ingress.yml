@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hangar-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "hangar-static-ip"
+spec:
+  backend:
+    serviceName: hangar
+    servicePort: 80

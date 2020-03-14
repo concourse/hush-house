@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hangar-deployment
+  labels:
+    app: hangar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hangar
+  template:
+    metadata:
+      labels:
+        app: hangar
+    spec:
+      containers:
+        - name: hangar
+          image: nginx
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /etc/nginx/
+              name: nginx-config
+            - mountPath: /data/www/
+              name: nginx-config
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-conf
