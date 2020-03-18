@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageTag: 6.0.0-rc.11
+  imageTag: 6.0.0-rc.25
 
   secrets:
     teamAuthorizedKeys:
@@ -19,7 +19,7 @@ concourse:
       key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDE9Zp5Jk1/lXI9gglhBd6bybkt5cgCYl4KktTT8XMuMoEI5pkdV3jewfg8PwD5HLHDcUSbjOeLEHXZn4eKckcodv9SshL8HMbUjnoVKmUEQpa/+LY8+DBHAX/WuZu8XJyv5479PgzxZRg0YW43KhEa7Jj910+OnLLLo0vnGaNDbHfN6N9jZ34O7TEzKipMV7wOBf7opsYqqJhWHXeSqEy+DHK2q+cswtBcrngInZ44tL3w9PvZwkKDuX8p4zmBfEMmCQqd+4FCAgiZZi5cMCrVkyr3iSEiLCFi2EN7Uojw+CdvC8LDESr7DMAgrjtJ1VERJvjn80M4x+IbgbtoSkFP'
     - team: telemetry-and-insights
       key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5eCEYB9os8sjARt2UgpDNtY9CLKB6xUZ6LfLWGWCkxf98zxeqhB8L1n2Tu/hEZha+Btf7HD15fyLgmljhSDuqIrn0I8mS1Ulk5ohk0Ofo939OTCFlJIKxy6S4DhIEkK2XOIsw2mSrEL3omxEsT2iBopwJq/b/3Ikdyr66JbESygy4Zk5CJJ6Mw6JRxJFd0BUlAHcV2a+/aCbxNPOnZUbVNfBjGh/pka0m6DHnuGxY9fhY8PZhCalSpeiyytSFWs+6d30WgepIiS1XGVsgT3t/dott8/1T60wqJLDyoxgkincC7gBH/H3/rdXnxuHe1xQThYhwOSdlAom9KIKvKQlF'
-    - team: cf-volume-services  
+    - team: cf-volume-services
       key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDaYvKmhyM49CK0bd0Bz/z8XL/DnbsWkh/1LGAnaQrMGstfKkqkcQnKfoYTu5VtBIzrmDWdy5CjAiAhyfE4ko8Kd/gUByO4DlH5E4FQKRhsILX6wcXatI56nCO1X46jQTGAcouA+/IrDMG1cjVtRhgItOj0ZxNN+Y8e1X1EkTHeH+bhw80GOIbqSTLztGBnETu7Y031rIsCEgp5P3cKvjbJovszC9yKRrVAEFtXdd5IggQ2Cu/YE/9A5IbFI1DSLgOo8I0gTlJu5nuCJ2W4UFbWE1Cq3W68h4SMzalJB4xah5IUrniQ8oQgVZYsA1NLKRe82PBwM4L8toJoLiQtJ22BmJz7ihw6Uukdm/4MmamHcBzYmYOl8IT40ZSzTdAaMXBTrEdJOtEYitXniT6HPPH9WC7U8zRGv2rCl3g7FsvANSx2cc88Rz0hJXaC9zD6Ad4TWJf2E4m0DBvj1OAm19UmcExLGR+g2cRRwwU/w7cGA4fro3vbzuiGaSnVnh/CKNUQ3MdRJJWv504NqzxLfC6q7zTftgplJp92w2TDb6bgupgshLcMta5ptpFazb8emGfdfTluYoZxa+nh3zRMAL9LtuxOia5M7ee3jF/NQgogyN6oPZgiFGYOt3Zqwh3iYbLvUkJPgpd50BWVOZdtBgOwrgX6f/5eZpAqaGNycYqccQ=='
 
   postgresql:
