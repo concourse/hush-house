@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: vito/concourse
-  imageTag: revert-zstd-2
+  image: concourse/concourse-rc
+  imageTag: 6.0.0-rc.62
 
   secrets:
     teamAuthorizedKeys:
