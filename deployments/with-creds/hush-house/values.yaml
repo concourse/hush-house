@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageTag: 6.0.0-rc.25
+  imageTag: 6.0.0-rc.62
 
   secrets:
     teamAuthorizedKeys:
