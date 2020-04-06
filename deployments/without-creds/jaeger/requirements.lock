@@ -1,6 +1,12 @@
 dependencies:
 - name: jaeger-operator
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 2.6.0
-digest: sha256:5fb0a927ff686b10b18fafa2254caffa593b8f91e983f9db26b2c911926345bd
-generated: "2019-06-02T09:43:11.786078-04:00"
+  repository: https://jaegertracing.github.io/helm-charts
+  version: 2.14.1
+- name: elasticsearch
+  repository: https://helm.elastic.co
+  version: 7.6.2
+- name: kibana
+  repository: https://helm.elastic.co
+  version: 7.6.2
+digest: sha256:d9ca929acd23a441e042f24172da035f93a19eebc07ddd3b6daf6ea2fa59e432
+generated: "2020-04-06T12:18:15.53782-04:00"

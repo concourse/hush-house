@@ -1,5 +1,11 @@
 ---
 dependencies:
 - name: jaeger-operator
-  version: 2.6.0
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 2.14.1
+  repository: https://jaegertracing.github.io/helm-charts
+- name: elasticsearch
+  version: 7.6.2
+  repository: https://helm.elastic.co
+- name: kibana
+  version: 7.6.2
+  repository: https://helm.elastic.co

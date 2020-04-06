@@ -5,7 +5,11 @@ metadata:
 spec:
   strategy: allInOne
   storage:
-    type: memory
+    type: elasticsearch
+    options:
+      es:
+        server-urls: http://elasticsearch-master:9200
+        tags-as-fields: {all: true}
   collector:
     affinity:
       requiredDuringSchedulingIgnoredDuringExecution:

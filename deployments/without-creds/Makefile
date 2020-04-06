@@ -1,5 +1,7 @@
 HELM_FLAGS   ?=
 
+%-jaeger:
+	cd jaeger && make $*-jaeger
 
 diff-%: deps-%
 	cd ./$* && \
