@@ -27,6 +27,16 @@ module "metrics-address" {
   subdomain = "metrics-hush-house"
 }
 
+# Reserves an address for `tracing.concourse-ci.org` and ties it
+# to the given domain.
+#
+module "tracing-address" {
+  source = "./address"
+
+  dns-zone  = "${var.dns-zone}"
+  subdomain = "tracing"
+}
+
 # Instantiates the GKE Kubernetes cluster.
 #
 module "cluster" {

@@ -3,6 +3,11 @@ HELM_FLAGS   ?=
 %-ci:
 	cd ci && make $*-ci
 
+
+%-jaeger:
+	cd jaeger && make $*-jaeger
+
+
 creds-%:
 	cd ./$* && \
 		lpass show --notes hush-house-values-$* > ./.values.yaml

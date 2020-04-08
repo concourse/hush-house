@@ -1,0 +1,46 @@
+# Default values for jaeger.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nginx-ingress:
+  controller:
+    defaultBackend:
+      loadBalancerIP: 34.69.102.130
+elasticsearch:
+  replicas: 1
+  nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+kibana:
+  nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+    - tracing.concourse-ci.org
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$request_uri"
+    tls:
+    - hosts:
+      - tracing.concourse-ci.org
+      secretName: kibana-tls
+jaeger:
+  nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+oauth2-proxy:
+  nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
+  extraArgs:
+    provider: github
+    email-domain: "pivotal.io"
+  service:
+    port: 4180
+  ingress:
+    enabled: true
+    path: /oauth2
+    hosts:
+    - tracing.concourse-ci.org
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    tls:
+    - hosts:
+      - tracing.concourse-ci.org
+      secretName: kibana-tls

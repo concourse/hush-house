@@ -81,6 +81,10 @@ output "metrics-hush-house-address" {
   value = "${module.metrics-address.address}"
 }
 
-output "concourse-ci-addresss" {
+output "concourse-ci-address" {
   value = "${module.concourse-ci-address.address}"
+}
+
+output "tracing-address" {
+  value = "${module.tracing-address.address}"
 }

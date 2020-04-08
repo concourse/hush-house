@@ -1,5 +1,11 @@
 ---
 dependencies:
+- name: nginx-ingress
+  version: 1.36.0
+  repository: https://kubernetes-charts.storage.googleapis.com
+- name: oauth2-proxy
+  version: 2.4.1
+  repository: https://kubernetes-charts.storage.googleapis.com
 - name: jaeger-operator
   version: 2.14.1
   repository: https://jaegertracing.github.io/helm-charts

@@ -1,0 +1,18 @@
+dependencies:
+- name: nginx-ingress
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 1.36.0
+- name: oauth2-proxy
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 2.4.1
+- name: jaeger-operator
+  repository: https://jaegertracing.github.io/helm-charts
+  version: 2.14.1
+- name: elasticsearch
+  repository: https://helm.elastic.co
+  version: 7.6.2
+- name: kibana
+  repository: https://helm.elastic.co
+  version: 7.6.2
+digest: sha256:b851462e70f1b426d44e29147f4efec0369235c8fb56b849e9600727c50ba357
+generated: "2020-04-07T17:01:29.077822-04:00"
