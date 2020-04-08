@@ -30,7 +30,8 @@ oauth2-proxy:
   nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
   extraArgs:
     provider: github
-    email-domain: "pivotal.io"
+    email-domain: "*"
+    github-org: concourse
   service:
     port: 4180
   ingress:
