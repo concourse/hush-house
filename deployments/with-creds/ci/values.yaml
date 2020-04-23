@@ -126,6 +126,6 @@ concourse:
 datadog:
   datadog:
     useDogStatsDSocketVolume: true
-    tags: ["environment:ci"]
+
 kubeStateMetrics:
   enabled: false
