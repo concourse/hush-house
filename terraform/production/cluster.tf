@@ -4,7 +4,8 @@ module "cluster" {
   source = "../cluster"
 
   name   = "production"
-  project = var.project
   region = var.region
   zone   = var.zone
+
+  node_pools = {}
 }
