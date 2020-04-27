@@ -7,5 +7,5 @@ module "cluster" {
   region = var.region
   zone   = var.zone
 
-  node_pools = {}
+  node-pools = {}
 }
