@@ -23,7 +23,6 @@ resource "google_container_cluster" "main" {
 
   remove_default_node_pool = true
   initial_node_count       = 1
-  min_master_version       = "1.12.5-gke.5"
 
   ip_allocation_policy {
     cluster_secondary_range_name  = module.vpc.pods-range-name
