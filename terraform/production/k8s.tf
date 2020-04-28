@@ -6,7 +6,7 @@ provider "kubernetes" {
   username = module.cluster.username
   password = module.cluster.password
   
-  cluster_ca_certificate = module.cluster.cluster_ca_certificate
+  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
 }
 
 resource "kubernetes_namespace" "ci" {
