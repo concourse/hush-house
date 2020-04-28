@@ -4,7 +4,7 @@ data "helm_repository" "stable" {
 }
 
 resource "helm_release" "datadog" {
-  namespace = "datadog"
+  namespace = kubernetes_namespace.datadog.id
   name       = "datadog"
   repository = data.helm_repository.stable.metadata[0].name
   chart      = "datadog"

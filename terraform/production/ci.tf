@@ -4,13 +4,13 @@ data "helm_repository" "concourse" {
 }
 
 resource "helm_release" "ci-concourse" {
-  namespace  = "ci"
+  namespace  = kubernetes_namespace.ci.id
   name       = "concourse"
   repository = data.helm_repository.concourse.metadata[0].name
   chart      = "concourse"
   version    = "9.1.1"
 
   values = [
-    file("ci-values.yml")
+    file("${path.module}/ci-values.yml")
   ]
 }
