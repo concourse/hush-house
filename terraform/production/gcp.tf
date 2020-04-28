@@ -1,5 +1,3 @@
-data "google_client_config" "current" {}
-
 provider "google" {
   credentials = var.credentials
   project     = var.project
@@ -14,3 +12,5 @@ provider "google-beta" {
   project     = var.project
   region      = var.region
 }
+
+data "google_client_config" "current" {}
