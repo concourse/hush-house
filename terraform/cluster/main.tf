@@ -50,6 +50,9 @@ resource "google_container_cluster" "main" {
   }
 
   master_auth {
+    username = "concourse"
+    password = random_string.password.result
+
     client_certificate_config {
       issue_client_certificate = false
     }
