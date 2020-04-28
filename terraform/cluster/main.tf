@@ -126,6 +126,6 @@ data "template_file" "kubeconfig" {
     username     = google_container_cluster.main.master_auth[0].username
     password     = google_container_cluster.main.master_auth[0].password
     endpoint     = google_container_cluster.main.endpoint
-    cluster_ca   = google_container_cluster.master_auth[0].cluster_ca_certificate
+    cluster_ca   = google_container_cluster.main.master_auth[0].cluster_ca_certificate
   }
 }
