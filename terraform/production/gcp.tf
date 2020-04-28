@@ -1,3 +1,5 @@
+data "google_client_config" "current" {}
+
 provider "google" {
   credentials = var.credentials
   project     = var.project
