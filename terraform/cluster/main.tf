@@ -15,6 +15,8 @@ resource "random_string" "password" {
 }
 
 resource "google_container_cluster" "main" {
+  provider = google-beta
+
   name     = var.name
   location = var.zone
 
