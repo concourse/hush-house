@@ -7,5 +7,7 @@ module "cluster" {
   region = var.region
   zone   = var.zone
 
+  release_channel = "STABLE"
+
   node_pools = {}
 }
