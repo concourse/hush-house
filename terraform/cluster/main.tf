@@ -9,6 +9,11 @@ module "vpc" {
   services_cidr = "10.12.0.0/16"
 }
 
+resource "random_string" "password" {
+  length  = 32
+  special = true
+}
+
 resource "google_container_cluster" "main" {
   provider = google-beta
 
