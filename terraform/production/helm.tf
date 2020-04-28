@@ -1,5 +1,7 @@
 provider "helm" {
   kubernetes {
+    load_config_file = false
+
     host     = module.cluster.host
 
     client_certificate     = module.cluster.client_certificate
