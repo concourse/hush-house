@@ -49,7 +49,7 @@ module "cluster" {
   node_pools = {
 
     "generic-1" = {
-      auto-upgrade = false
+      auto_upgrade = false
       disk_size    = "50"
       disk_type    = "pd-ssd"
       image        = "COS"
@@ -62,7 +62,7 @@ module "cluster" {
     },
 
     "workers-3" = {
-      auto-upgrade = false
+      auto_upgrade = false
       disk_size    = "50"
       disk_type    = "pd-ssd"
       image        = "UBUNTU"
@@ -75,7 +75,7 @@ module "cluster" {
     },
 
     "ci-workers" = {
-      auto-upgrade = false
+      auto_upgrade = false
       disk_size    = "50"
       disk_type    = "pd-ssd"
       image        = "UBUNTU"
@@ -88,7 +88,7 @@ module "cluster" {
     },
 
     "ci-workers-pr" = {
-      auto-upgrade = false
+      auto_upgrade = false
       disk_size    = "50"
       disk_type    = "pd-ssd"
       image        = "UBUNTU"
@@ -101,7 +101,7 @@ module "cluster" {
     },
 
     "ci-workers-monitoring" = {
-      auto-upgrade = false
+      auto_upgrade = false
       disk_size    = "50"
       disk_type    = "pd-ssd"
       image        = "UBUNTU"

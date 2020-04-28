@@ -85,7 +85,7 @@ resource "google_container_node_pool" "main" {
 
   management {
     auto_repair  = true
-    auto_upgrade = each.value.auto-upgrade
+    auto_upgrade = each.value.auto_upgrade
   }
 
   node_config {
