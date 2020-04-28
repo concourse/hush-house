@@ -7,7 +7,7 @@ output "ip" {
   value = "${google_sql_database_instance.main.ip_address.0.ip_address}"
 }
 
-output "ca-cert" {
+output "ca_cert" {
   sensitive = true
   value     = "${google_sql_database_instance.main.server_ca_cert.0.cert}"
 }
@@ -17,7 +17,7 @@ output "cert" {
   value     = "${google_sql_ssl_cert.cert.cert}"
 }
 
-output "private-key" {
+output "private_key" {
   sensitive = true
   value     = "${google_sql_ssl_cert.cert.private_key}"
 }

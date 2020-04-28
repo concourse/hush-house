@@ -1,90 +1,90 @@
 # hush-house database outputs
-output "hush-house-database-ip" {
+output "hush_house_database_ip" {
   value = "${module.database.ip}"
 }
 
-output "hush-house-database-ca-cert" {
+output "hush_house_database_ca_cert" {
   sensitive = true
-  value     = "${module.database.ca-cert}"
+  value     = "${module.database.ca_cert}"
 }
 
-output "hush-house-database-password" {
+output "hush_house_database_password" {
   sensitive = true
   value     = "${module.database.password}"
 }
 
-output "hush-house-database-cert" {
+output "hush_house_database_cert" {
   sensitive = true
   value     = "${module.database.cert}"
 }
 
-output "hush-house-database-private-key" {
+output "hush_house_database_private_key" {
   sensitive = true
-  value     = "${module.database.private-key}"
+  value     = "${module.database.private_key}"
 }
 
 # ci database outputs
-output "ci-database-ip" {
-  value = "${module.ci-database.ip}"
+output "ci_database_ip" {
+  value = "${module.ci_database.ip}"
 }
 
-output "ci-database-ca-cert" {
+output "ci_database_ca_cert" {
   sensitive = true
-  value     = "${module.ci-database.ca-cert}"
+  value     = "${module.ci_database.ca_cert}"
 }
 
-output "ci-database-password" {
+output "ci_database_password" {
   sensitive = true
-  value     = "${module.ci-database.password}"
+  value     = "${module.ci_database.password}"
 }
 
-output "ci-database-cert" {
+output "ci_database_cert" {
   sensitive = true
-  value     = "${module.ci-database.cert}"
+  value     = "${module.ci_database.cert}"
 }
 
-output "ci-database-private-key" {
+output "ci_database_private_key" {
   sensitive = true
-  value     = "${module.ci-database.private-key}"
+  value     = "${module.ci_database.private_key}"
 }
 
 # vault database outputs
-output "vault-database-ip" {
-  value = "${module.vault-database.ip}"
+output "vault_database_ip" {
+  value = "${module.vault_database.ip}"
 }
 
-output "vault-database-ca-cert" {
+output "vault_database_ca_cert" {
   sensitive = true
-  value     = "${module.vault-database.ca-cert}"
+  value     = "${module.vault_database.ca_cert}"
 }
 
-output "vault-database-password" {
+output "vault_database_password" {
   sensitive = true
-  value     = "${module.vault-database.password}"
+  value     = "${module.vault_database.password}"
 }
 
-output "vault-database-cert" {
+output "vault_database_cert" {
   sensitive = true
-  value     = "${module.vault-database.cert}"
+  value     = "${module.vault_database.cert}"
 }
 
-output "vault-database-private-key" {
+output "vault_database_private_key" {
   sensitive = true
-  value     = "${module.vault-database.private-key}"
+  value     = "${module.vault_database.private_key}"
 }
 
-output "hush-house-address" {
-  value = "${google_compute_address.hush-house.address}"
+output "hush_house_address" {
+  value = "${google_compute_address.hush_house.address}"
 }
 
-output "metrics-hush-house-address" {
-  value = "${module.metrics-address.address}"
+output "metrics_hush_house_address" {
+  value = "${module.metrics_address.address}"
 }
 
-output "concourse-ci-address" {
-  value = "${module.concourse-ci-address.address}"
+output "concourse_ci_address" {
+  value = "${module.concourse_ci_address.address}"
 }
 
-output "tracing-address" {
-  value = "${module.tracing-address.address}"
+output "tracing_address" {
+  value = "${module.tracing_address.address}"
 }

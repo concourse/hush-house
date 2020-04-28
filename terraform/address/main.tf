@@ -1,5 +1,5 @@
 data "google_dns_managed_zone" "main" {
-  name = var.dns-zone
+  name = var.dns_zone
 }
 
 resource "google_compute_address" "main" {

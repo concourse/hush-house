@@ -6,24 +6,24 @@ variable "region" {
   description = "TODO"
 }
 
-variable "vms-cidr" {
+variable "vms_cidr" {
   description = "TODO"
 }
 
-variable "pods-cidr" {
+variable "pods_cidr" {
   description = "TODO"
 }
 
-variable "pods-range-name" {
+variable "pods_range_name" {
   default     = "pods-range"
   description = "TODO"
 }
 
-variable "services-cidr" {
+variable "services_cidr" {
   description = "TODO"
 }
 
-variable "services-range-name" {
+variable "services_range_name" {
   default     = "services-range"
   description = "TODO"
 }

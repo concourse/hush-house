@@ -13,6 +13,6 @@ variable "region" {
   description = "The region in which the cluster should be located at."
 }
 
-variable "node-pools" {
+variable "node_pools" {
   description = "A list of node pool configurations to create and assign to the cluster."
 }

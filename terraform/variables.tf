@@ -13,7 +13,7 @@ variable "project" {
   default     = "cf-concourse-production"
 }
 
-variable "dns-zone" {
+variable "dns_zone" {
   description = "The default DNS zone to use when creating subdomains."
   default     = "concourse-ci-org"
 }

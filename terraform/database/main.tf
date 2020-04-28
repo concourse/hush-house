@@ -6,12 +6,12 @@
 #
 #
 #
-resource "random_id" "instance-name" {
+resource "random_id" "instance_name" {
   byte_length = 4
 }
 
 resource "google_sql_database_instance" "main" {
-  name             = "${var.name}-${random_id.instance-name.hex}"
+  name             = "${var.name}-${random_id.instance_name.hex}"
   region           = var.region
   database_version = "POSTGRES_9_6"
 

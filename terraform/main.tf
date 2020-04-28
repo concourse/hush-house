@@ -3,37 +3,37 @@
 # This is needed so that we can have a static IP that `hush-house.pivotal.io`
 # can point.
 #
-resource "google_compute_address" "hush-house" {
+resource "google_compute_address" "hush_house" {
   name = "hush-house"
 }
 
 # Reserves an address for `ci.concourse-ci.org` and ties it
 # to the given domain.
 #
-module "concourse-ci-address" {
+module "concourse_ci_address" {
   source = "./address"
 
-  dns-zone  = "${var.dns-zone}"
+  dns_zone  = "${var.dns_zone}"
   subdomain = "ci"
 }
 
 # Reserves an address for `metrics-hush-house.concourse-ci.org` and ties it
 # to the given domain.
 #
-module "metrics-address" {
+module "metrics_address" {
   source = "./address"
 
-  dns-zone  = "${var.dns-zone}"
+  dns_zone  = "${var.dns_zone}"
   subdomain = "metrics-hush-house"
 }
 
 # Reserves an address for `tracing.concourse-ci.org` and ties it
 # to the given domain.
 #
-module "tracing-address" {
+module "tracing_address" {
   source = "./address"
 
-  dns-zone  = "${var.dns-zone}"
+  dns_zone  = "${var.dns_zone}"
   subdomain = "tracing"
 }
 
@@ -46,15 +46,15 @@ module "cluster" {
   zone   = "${var.zone}"
   region = "${var.region}"
 
-  node-pools = {
+  node_pools = {
 
     "generic-1" = {
       auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
+      disk_size    = "50"
+      disk_type    = "pd-ssd"
       image        = "COS"
-      local-ssds   = 0
-      machine-type = "n1-standard-8"
+      local_ssds   = 0
+      machine_type = "n1-standard-8"
       max          = 5
       min          = 1
       preemptible  = false
@@ -63,11 +63,11 @@ module "cluster" {
 
     "workers-3" = {
       auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
+      disk_size    = "50"
+      disk_type    = "pd-ssd"
       image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "custom-8-16384"
+      local_ssds   = 0
+      machine_type = "custom-8-16384"
       max          = 25
       min          = 1
       preemptible  = false
@@ -76,11 +76,11 @@ module "cluster" {
 
     "ci-workers" = {
       auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
+      disk_size    = "50"
+      disk_type    = "pd-ssd"
       image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "custom-8-16384"
+      local_ssds   = 0
+      machine_type = "custom-8-16384"
       max          = 10
       min          = 1
       preemptible  = false
@@ -89,11 +89,11 @@ module "cluster" {
 
     "ci-workers-pr" = {
       auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
+      disk_size    = "50"
+      disk_type    = "pd-ssd"
       image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "custom-8-16384"
+      local_ssds   = 0
+      machine_type = "custom-8-16384"
       max          = 10
       min          = 1
       preemptible  = false
@@ -102,11 +102,11 @@ module "cluster" {
 
     "ci-workers-monitoring" = {
       auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
+      disk_size    = "50"
+      disk_type    = "pd-ssd"
       image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "n1-standard-1"
+      local_ssds   = 0
+      machine_type = "n1-standard-1"
       max          = 2
       min          = 1
       preemptible  = false
@@ -132,7 +132,7 @@ module "database" {
 # Creates the CloudSQL Postgres database to be used by the `ci`
 # Concourse deployment.
 #
-module "ci-database" {
+module "ci_database" {
   source = "./database"
 
   name            = "ci"
@@ -155,7 +155,7 @@ resource "google_kms_key_ring" "keyring" {
 # crypto key for vault unseal
 # Concourse deployment.
 #
-resource "google_kms_crypto_key" "vault-helm-unseal-key" {
+resource "google_kms_crypto_key" "vault_helm_unseal_key" {
   name            = "vault-helm-unseal-key"
   key_ring        = google_kms_key_ring.keyring.self_link
 
@@ -167,7 +167,7 @@ resource "google_kms_crypto_key" "vault-helm-unseal-key" {
 # gkms key for vault-nci unseal
 # Concourse deployment.
 #
-resource "google_kms_key_ring" "keyring-nci" {
+resource "google_kms_key_ring" "keyring_nci" {
   name     = "vault-helm-unseal-kr-nci"
   location = "global"
 }
@@ -175,9 +175,9 @@ resource "google_kms_key_ring" "keyring-nci" {
 # crypto key for vault-nci unseal
 # Concourse deployment.
 #
-resource "google_kms_crypto_key" "vault-helm-unseal-key-nci" {
+resource "google_kms_crypto_key" "vault_helm_unseal_key_nci" {
   name            = "vault-helm-unseal-key-nci"
-  key_ring        = google_kms_key_ring.keyring-nci.self_link
+  key_ring        = google_kms_key_ring.keyring_nci.self_link
 
   lifecycle {
     prevent_destroy = true
@@ -187,7 +187,7 @@ resource "google_kms_crypto_key" "vault-helm-unseal-key-nci" {
 # Creates the CloudSQL Postgres database to be used by the `vault`
 # Concourse deployment.
 #
- module "vault-database" {
+ module "vault_database" {
   source = "./database"
 
   name            = "vault"

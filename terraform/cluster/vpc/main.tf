@@ -7,31 +7,31 @@ resource "google_compute_network" "main" {
 resource "google_compute_subnetwork" "main" {
   name = "${var.name}-sn-1"
 
-  ip_cidr_range = var.vms-cidr
+  ip_cidr_range = var.vms_cidr
   network       = google_compute_network.main.name
   region        = var.region
 
   secondary_ip_range {
-    range_name    = var.pods-range-name
-    ip_cidr_range = var.pods-cidr
+    range_name    = var.pods_range_name
+    ip_cidr_range = var.pods_cidr
   }
 
   secondary_ip_range {
-    range_name    = var.services-range-name
-    ip_cidr_range = var.services-cidr
+    range_name    = var.services_range_name
+    ip_cidr_range = var.services_cidr
   }
 }
 
-resource "google_compute_firewall" "internal-ingress" {
+resource "google_compute_firewall" "internal_ingress" {
   name = "${var.name}-internal"
 
   network   = google_compute_network.main.name
   direction = "INGRESS"
 
   source_ranges = [
-    var.vms-cidr,
-    var.pods-cidr,
-    var.services-cidr,
+    var.vms_cidr,
+    var.pods_cidr,
+    var.services_cidr,
   ]
 
   allow {
@@ -47,7 +47,7 @@ resource "google_compute_firewall" "internal-ingress" {
   }
 }
 
-resource "google_compute_firewall" "external-ingress" {
+resource "google_compute_firewall" "external_ingress" {
   name      = "${var.name}-external"
   network   = google_compute_network.main.name
   direction = "INGRESS"

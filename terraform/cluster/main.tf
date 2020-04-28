@@ -4,9 +4,9 @@ module "vpc" {
   name   = var.name
   region = var.region
 
-  vms-cidr      = "10.10.0.0/16"
-  pods-cidr     = "10.11.0.0/16"
-  services-cidr = "10.12.0.0/16"
+  vms_cidr      = "10.10.0.0/16"
+  pods_cidr     = "10.11.0.0/16"
+  services_cidr = "10.12.0.0/16"
 }
 
 resource "random_string" "password" {
@@ -19,14 +19,14 @@ resource "google_container_cluster" "main" {
   location = var.zone
 
   network    = module.vpc.name
-  subnetwork = module.vpc.subnet-name
+  subnetwork = module.vpc.subnet_name
 
   remove_default_node_pool = true
   initial_node_count       = 1
 
   ip_allocation_policy {
-    cluster_secondary_range_name  = module.vpc.pods-range-name
-    services_secondary_range_name = module.vpc.services-range-name
+    cluster_secondary_range_name  = module.vpc.pods_range_name
+    services_secondary_range_name = module.vpc.services_range_name
   }
 
   addons_config {
@@ -66,7 +66,7 @@ resource "google_container_cluster" "main" {
 
 resource "google_container_node_pool" "main" {
   provider = google-beta
-  for_each = var.node-pools
+  for_each = var.node_pools
 
   location = var.zone
   cluster  = google_container_cluster.main.name
@@ -84,10 +84,10 @@ resource "google_container_node_pool" "main" {
 
   node_config {
     preemptible     = each.value.preemptible
-    machine_type    = each.value.machine-type
-    local_ssd_count = each.value.local-ssds
-    disk_size_gb    = each.value.disk-size
-    disk_type       = each.value.disk-type
+    machine_type    = each.value.machine_type
+    local_ssd_count = each.value.local_ssds
+    disk_size_gb    = each.value.disk_size
+    disk_type       = each.value.disk_type
     image_type      = each.value.image
 
     workload_metadata_config {

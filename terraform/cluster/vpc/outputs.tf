@@ -2,16 +2,16 @@ output "name" {
   value = "${google_compute_network.main.name}"
 }
 
-output "subnet-name" {
+output "subnet_name" {
   value = "${google_compute_subnetwork.main.name}"
 }
 
-output "pods-range-name" {
-  value = "${var.pods-range-name}"
+output "pods_range_name" {
+  value = "${var.pods_range_name}"
 }
 
-output "services-range-name" {
-  value = "${var.services-range-name}"
+output "services_range_name" {
+  value = "${var.services_range_name}"
 }
 
 output "uri" {
