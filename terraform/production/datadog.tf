@@ -15,9 +15,12 @@ resource "helm_release" "datadog" {
     value = true
   }
 
+  # workaround "cannot re-use a name that is still in use"
+  force_update = true
+
 # XXX: check on this later
 #   set {
 #     name = "kubeStateMetrics.enabled"
-#     value = true
+#     value = false
 #   }
 }

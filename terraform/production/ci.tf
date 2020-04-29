@@ -13,4 +13,7 @@ resource "helm_release" "ci-concourse" {
   values = [
     file("${path.module}/ci-values.yml")
   ]
+
+  # workaround "cannot re-use a name that is still in use"
+  force_update = true
 }
