@@ -75,6 +75,10 @@ resource "google_container_node_pool" "main" {
     max_node_count = each.value.max
   }
 
+  # start with the minimum number of nodes, otherwise the autoscaler won't even
+  # have anywhere to run
+  initial_node_count = each.value.min
+
   management {
     auto_repair  = true
     auto_upgrade = each.value.auto_upgrade
