@@ -2,12 +2,12 @@ output "endpoint" {
   value = google_container_cluster.main.endpoint
 }
 
-output "client_certificate" {
-  value = google_container_cluster.main.master_auth[0].client_certificate
+output "username" {
+  value = google_container_cluster.main.master_auth[0].username
 }
 
-output "client_key" {
-  value = google_container_cluster.main.master_auth[0].client_key
+output "password" {
+  value = google_container_cluster.main.master_auth[0].password
   sensitive = true
 }
 
