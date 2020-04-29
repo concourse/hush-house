@@ -9,11 +9,6 @@ module "vpc" {
   services_cidr = "10.12.0.0/16"
 }
 
-resource "random_string" "password" {
-  length  = 32
-  special = true
-}
-
 resource "google_container_cluster" "main" {
   provider = google-beta
 
@@ -50,11 +45,8 @@ resource "google_container_cluster" "main" {
   }
 
   master_auth {
-    username = "concourse"
-    password = random_string.password.result
-
     client_certificate_config {
-      issue_client_certificate = false
+      issue_client_certificate = true
     }
   }
 
