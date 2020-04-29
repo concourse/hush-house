@@ -39,4 +39,8 @@ resource "kubernetes_pod" "nginx" {
       }
     }
   }
+
+  depends_on = [
+    module.cluster.node_pools,
+  ]
 }
