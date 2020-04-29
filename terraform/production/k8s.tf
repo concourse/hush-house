@@ -9,18 +9,6 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
 }
 
-# resource "kubernetes_namespace" "ci" {
-#   metadata {
-#     name = "ci"
-#   }
-# }
-
-# resource "kubernetes_namespace" "datadog" {
-#   metadata {
-#     name = "datadog"
-#   }
-# }
-
 resource "kubernetes_pod" "nginx" {
   metadata {
     name = "nginx-example"

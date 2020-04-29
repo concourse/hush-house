@@ -1,3 +1,9 @@
+# resource "kubernetes_namespace" "datadog" {
+#   metadata {
+#     name = "datadog"
+#   }
+# }
+
 # data "helm_repository" "stable" {
 #   name = "stable"
 #   url  = "https://kubernetes-charts.storage.googleapis.com"
@@ -23,4 +29,8 @@
 # #     name = "kubeStateMetrics.enabled"
 # #     value = false
 # #   }
+
+  # depends_on = [
+  #   module.cluster.node_pools,
+  # ]
 # }
