@@ -16,7 +16,7 @@ resource "helm_release" "datadog" {
   }
 
   # workaround "cannot re-use a name that is still in use"
-  force_update = true
+  replace = true
 
 # XXX: check on this later
 #   set {

@@ -15,5 +15,5 @@ resource "helm_release" "ci-concourse" {
   ]
 
   # workaround "cannot re-use a name that is still in use"
-  force_update = true
+  replace = true
 }
