@@ -35,8 +35,8 @@ data "template_file" "ci_values" {
     db_cert        = jsonencode(module.ci_database.cert)
     db_private_key = jsonencode(module.ci_database.private_key)
 
-    encryption_key = jsonencode(random_password.encryption_key)
-    local_users    = jsonencode("admin:${random_password.admin_password}")
+    encryption_key = jsonencode(random_password.encryption_key.result)
+    local_users    = jsonencode("admin:${random_password.admin_password.result}")
   }
 }
 
