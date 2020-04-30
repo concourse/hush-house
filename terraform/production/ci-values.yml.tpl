@@ -1,5 +1,5 @@
 image: concourse/concourse-rc
-imageTag: 6.0.0
+imageTag: 6.0.0-rc.41
 
 web:
   nodeSelector:
