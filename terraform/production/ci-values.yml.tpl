@@ -94,3 +94,5 @@ secrets:
   postgresCaCert: ${db_ca_cert}
   postgresClientCert: ${db_cert}
   postgresClientKey: ${db_private_key}
+
+  encryptionKey: ${encryption_key}

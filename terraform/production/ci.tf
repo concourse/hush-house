@@ -9,6 +9,11 @@ data "helm_repository" "concourse" {
   url  = "https://concourse-charts.storage.googleapis.com"
 }
 
+resource "random_password" "encryption_key" {
+    length = 32
+    special = true
+}
+
 data "template_file" "ci_values" {
   template = file("${path.module}/ci-values.yml.tpl")
   vars = {
@@ -24,6 +29,8 @@ data "template_file" "ci_values" {
     db_ca_cert     = jsonencode(module.ci_database.ca_cert)
     db_cert        = jsonencode(module.ci_database.cert)
     db_private_key = jsonencode(module.ci_database.private_key)
+
+    encryption_key = jsonencode(random_password.encryption_key)
   }
 }
 
