@@ -5,9 +5,6 @@ web:
   annotations:
     rollingUpdate: "3"
   replicas: 2
-  env:
-    - name: CONCOURSE_X_FRAME_OPTIONS
-      value: ""
   nodeSelector:
     cloud.google.com/gke-nodepool: generic-1
 
@@ -22,9 +19,6 @@ web:
   service:
     type: LoadBalancer
     loadBalancerIP: ${lb_address}
-
-  letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
-  tls: { enabled: true, bindPort: 443 }
 
 persistence:
   worker:
@@ -61,6 +55,9 @@ concourse:
           team: concourse:Pivotal
       github:
         enabled: true
+    env:
+    - name: CONCOURSE_X_FRAME_OPTIONS
+      value: ""
     externalUrl: ${external_url}
     bindPort: 80
     clusterName: ci
@@ -73,6 +70,8 @@ concourse:
       enabled: false
       createTeamNamespaces: false
 
+    letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
+    tls: { enabled: true, bindPort: 443 }
   worker:
     rebalanceInterval: 2h
     baggageclaim: { driver: overlay }
