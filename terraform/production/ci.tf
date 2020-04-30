@@ -24,7 +24,7 @@ resource "helm_release" "ci-concourse" {
   version    = "9.1.1"
 
   values = [
-    template_file.template_file.rendered,
+    data.template_file.ci_values.rendered,
   ]
 
   depends_on = [
