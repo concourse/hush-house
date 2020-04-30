@@ -7,6 +7,9 @@ web:
   replicas: 2
   nodeSelector:
     cloud.google.com/gke-nodepool: generic-1
+  env:
+  - name: CONCOURSE_X_FRAME_OPTIONS
+    value: ""
 
   resources:
     requests:
@@ -55,9 +58,6 @@ concourse:
           team: concourse:Pivotal
       github:
         enabled: true
-    env:
-    - name: CONCOURSE_X_FRAME_OPTIONS
-      value: ""
     externalUrl: ${external_url}
     bindPort: 80
     clusterName: ci
