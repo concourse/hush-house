@@ -23,6 +23,9 @@ web:
     type: LoadBalancer
     loadBalancerIP: ${lb_address}
 
+  letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
+  tls: { enabled: true, bindPort: 443 }
+
 persistence:
   worker:
     storageClass: ssd
