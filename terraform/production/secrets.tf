@@ -17,6 +17,10 @@ resource "google_secret_manager_secret" "admin_password" {
     cluster    = "production"
     deployment = "ci"
   }
+
+  replication {
+    automatic = true
+  }
 }
 
 
