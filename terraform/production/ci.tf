@@ -12,8 +12,10 @@ data "helm_repository" "concourse" {
 data "template_file" "ci_values" {
   template = file("${path.module}/ci-values.yml.tpl")
   vars = {
-    lb_address   = module.concourse_ci_address.address
-    external_url = "http://${var.subdomain}.${var.domain}"
+    lb_address           = module.concourse_ci_address.address
+    external_url         = "http://${var.subdomain}.${var.domain}"
+    github_client_id     = data.google_secret_manager_secret_version.github_client_id
+    github_client_secret = data.google_secret_manager_secret_version.github_client_secret
   }
 }
 

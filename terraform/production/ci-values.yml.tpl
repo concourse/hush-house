@@ -54,10 +54,10 @@ concourse:
     auth:
       mainTeam:
         localUser: admin
-      #   github:
-      #     team: concourse:Pivotal
-      # github:
-      #   enabled: true
+        github:
+          team: concourse:Pivotal
+      github:
+        enabled: true
     externalUrl: ${external_url}
     bindPort: 80
     clusterName: ci
@@ -74,3 +74,7 @@ concourse:
     rebalanceInterval: 2h
     baggageclaim: { driver: overlay }
     healthcheckTimeout: 40s
+
+secrets:
+  githubClientId: ${github_client_id}
+  githubClientSecret: ${github_client_secret}
