@@ -14,3 +14,7 @@ concourse:
       limits:
         cpu: 1500m
         memory: 1Gi
+
+    service:
+      type: LoadBalancer
+      loadBalancerIP: ${lb_address}

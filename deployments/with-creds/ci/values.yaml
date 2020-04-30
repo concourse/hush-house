@@ -39,9 +39,6 @@ concourse:
     additionalVolumeMounts:
       - name: dsdsocket
         mountPath: /var/run/datadog
-    service:
-      type: LoadBalancer
-      loadBalancerIP: 34.69.51.78
 
   persistence:
     worker:

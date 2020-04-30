@@ -9,6 +9,13 @@ data "helm_repository" "concourse" {
   url  = "https://concourse-charts.storage.googleapis.com"
 }
 
+data "template_file" "ci_values" {
+  template = file("${path.module}/ci-values.yml.tpl")
+  vars = {
+    lb_address = module.concourse_ci_address.address
+  }
+}
+
 resource "helm_release" "ci-concourse" {
   namespace  = kubernetes_namespace.ci.id
   name       = "concourse"
@@ -17,7 +24,7 @@ resource "helm_release" "ci-concourse" {
   version    = "9.1.1"
 
   values = [
-    file("${path.module}/ci-values.yml")
+    template_file.template_file.rendered,
   ]
 
   depends_on = [
