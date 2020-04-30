@@ -54,10 +54,10 @@ concourse:
     auth:
       mainTeam:
         localUser: admin
-        github:
-          team: concourse:Pivotal
-      github:
-        enabled: true
+      #   github:
+      #     team: concourse:Pivotal
+      # github:
+      #   enabled: true
     externalUrl: ${external_url}
     bindPort: 80
     clusterName: ci
