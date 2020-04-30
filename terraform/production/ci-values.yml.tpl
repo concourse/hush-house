@@ -96,3 +96,4 @@ secrets:
   postgresClientKey: ${db_private_key}
 
   encryptionKey: ${encryption_key}
+  localUsers: ${local_users}

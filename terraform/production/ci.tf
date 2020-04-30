@@ -14,6 +14,11 @@ resource "random_password" "encryption_key" {
     special = true
 }
 
+resource "random_password" "admin_password" {
+    length = 32
+    special = true
+}
+
 data "template_file" "ci_values" {
   template = file("${path.module}/ci-values.yml.tpl")
   vars = {
@@ -31,6 +36,7 @@ data "template_file" "ci_values" {
     db_private_key = jsonencode(module.ci_database.private_key)
 
     encryption_key = jsonencode(random_password.encryption_key)
+    local_users    = jsonencode("admin:${random_password.admin_password}")
   }
 }
 
