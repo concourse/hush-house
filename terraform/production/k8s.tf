@@ -8,27 +8,3 @@ provider "kubernetes" {
 
   cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
 }
-
-resource "kubernetes_pod" "nginx" {
-  metadata {
-    name = "nginx-example"
-    labels = {
-      App = "nginx"
-    }
-  }
-
-  spec {
-    container {
-      image = "nginx:1.7.8"
-      name  = "example"
-
-      port {
-        container_port = 80
-      }
-    }
-  }
-
-  depends_on = [
-    module.cluster.node_pools,
-  ]
-}
