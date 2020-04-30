@@ -60,7 +60,7 @@ resource "google_sql_database" "atc" {
   collation = "en_US.UTF8"
 }
 
-resource "random_string" "password" {
+resource "random_password" "password" {
   length  = 32
   special = true
 }
@@ -69,7 +69,7 @@ resource "google_sql_user" "user" {
   name = "atc"
 
   instance = google_sql_database_instance.main.name
-  password = random_string.password.result
+  password = random_password.password.result
 }
 
 resource "google_sql_ssl_cert" "cert" {

@@ -1,6 +1,6 @@
 output "password" {
   sensitive = true
-  value     = "${random_string.password.result}"
+  value     = "${random_password.password.result}"
 }
 
 output "ip" {
