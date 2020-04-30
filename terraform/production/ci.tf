@@ -21,9 +21,9 @@ data "template_file" "ci_values" {
     db_ip          = module.ci_database.ip
     db_user        = "atc"
     db_password    = module.ci_database.password
-    db_ca_cert     = module.ci_database.ca_cert
-    db_cert        = module.ci_database.cert
-    db_private_key = module.ci_database.private_key
+    db_ca_cert     = jsonencode(module.ci_database.ca_cert)
+    db_cert        = jsonencode(module.ci_database.cert)
+    db_private_key = jsonencode(module.ci_database.private_key)
   }
 }
 

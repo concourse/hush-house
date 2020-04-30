@@ -91,6 +91,6 @@ secrets:
 
   postgresUser: ${db_user}
   postgresPassword: ${db_password}
-  postgresCaCert: "${db_ca_cert}"
-  postgresClientCert: "${db_cert}"
-  postgresClientKey: "${db_private_key}"
+  postgresCaCert: ${db_ca_cert}
+  postgresClientCert: ${db_cert}
+  postgresClientKey: ${db_private_key}
