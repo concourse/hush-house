@@ -12,7 +12,8 @@ data "helm_repository" "concourse" {
 data "template_file" "ci_values" {
   template = file("${path.module}/ci-values.yml.tpl")
   vars = {
-    lb_address = module.concourse_ci_address.address
+    lb_address   = module.concourse_ci_address.address
+    external_url = "http://${var.subdomain}.${var.domain}"
   }
 }
 

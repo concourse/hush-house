@@ -18,5 +18,5 @@ module "concourse_ci_address" {
   source = "../address"
 
   dns_zone  = var.dns_zone
-  subdomain = "ci-test"
+  subdomain = var.subdomain
 }

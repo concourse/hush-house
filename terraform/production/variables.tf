@@ -22,3 +22,13 @@ variable "dns_zone" {
   description = "The default DNS zone to use when creating subdomains."
   default     = "concourse-ci-org"
 }
+
+variable "domain" {
+  description = "The domain name corresponding to the provided dns_zone."
+  default     = "concourse-ci.org"
+}
+
+variable "subdomain" {
+  description = "The subdomain to prepend to the provided domain."
+  default     = "ci-test"
+}

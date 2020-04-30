@@ -14,12 +14,7 @@ concourse:
     enabled: false
 
   web:
-    annotations:
-      rollingUpdate: "3"
-    replicas: 2
     env:
-    - name: CONCOURSE_X_FRAME_OPTIONS
-      value: ""
     - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
       value: http://simplest-collector.jaeger.svc.cluster.local:14268/api/traces
     affinity:
@@ -40,53 +35,13 @@ concourse:
       - name: dsdsocket
         mountPath: /var/run/datadog
 
-  persistence:
-    worker:
-      storageClass: ssd
-      size: 750Gi
-
   worker:
     replicas: 8
-    annotations:
-      manual-update-revision: "1"
-    terminationGracePeriodSeconds: 3600
-    livenessProbe:
-      periodSeconds: 60
-      failureThreshold: 10
-      timeoutSeconds: 45
     nodeSelector: { cloud.google.com/gke-nodepool: ci-workers }
     hardAntiAffinity: true
-    env:
-    - name: CONCOURSE_GARDEN_NETWORK_POOL
-      value: "10.254.0.0/16"
-    - name: CONCOURSE_GARDEN_MAX_CONTAINERS
-      value: "500"
-    - name: CONCOURSE_GARDEN_DENY_NETWORK
-      value: "169.254.169.254/32"
-    resources:
-      limits:   { cpu: 7500m, memory: 14Gi }
-      requests: { cpu: 0m,    memory: 0Gi  }
 
   concourse:
     web:
-      auth:
-        mainTeam:
-          localUser: admin
-          github:
-            team: concourse:Pivotal
-        github:
-          enabled: true
-      bindPort: 80
-      clusterName: ci
-      containerPlacementStrategy: limit-active-tasks
-      maxActiveTasksPerWorker: 5
-      enableGlobalResources: true
-      encryption: { enabled: true }
-      externalUrl: https://ci.concourse-ci.org
-      kubernetes:
-        keepNamespaces: false
-        enabled: false
-        createTeamNamespaces: false
       metrics:
         attribute: "environment:ci"
       vault:
@@ -107,10 +62,6 @@ concourse:
         host: 34.69.204.254
         database: atc
         sslmode: verify-ca
-    worker:
-      rebalanceInterval: 2h
-      baggageclaim: { driver: overlay }
-      healthcheckTimeout: 40s
 
 datadog:
   datadog:
