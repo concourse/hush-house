@@ -14,8 +14,8 @@ data "template_file" "ci_values" {
   vars = {
     lb_address           = module.concourse_ci_address.address
     external_url         = "http://${var.subdomain}.${var.domain}"
-    github_client_id     = data.google_secret_manager_secret_version.github_client_id
-    github_client_secret = data.google_secret_manager_secret_version.github_client_secret
+    github_client_id     = data.google_secret_manager_secret_version.github_client_id.secret_data
+    github_client_secret = data.google_secret_manager_secret_version.github_client_secret.secret_data
   }
 }
 
