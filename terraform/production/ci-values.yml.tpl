@@ -1,6 +1,9 @@
 image: concourse/concourse-rc
 imageTag: 6.0.0-rc.41
 
+postgresql:
+  enabled: false
+
 web:
   annotations:
     rollingUpdate: "3"
@@ -72,6 +75,11 @@ concourse:
 
     letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
     tls: { enabled: true, bindPort: 443 }
+
+    postgres:
+      host: ${db_ip}
+      database: atc
+      sslmode: verify-ca
   worker:
     rebalanceInterval: 2h
     baggageclaim: { driver: overlay }
@@ -80,3 +88,9 @@ concourse:
 secrets:
   githubClientId: ${github_client_id}
   githubClientSecret: ${github_client_secret}
+
+  postgresUser: ${db_user}
+  postgresPassword: ${db_password}
+  postgresCaCert: "${db_ca_cert}"
+  postgresClientCert: "${db_cert}"
+  postgresClientKey: "${db_private_key}"
