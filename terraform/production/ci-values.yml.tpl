@@ -100,3 +100,6 @@ secrets:
 
   hostKey: ${host_key}
   hostKeyPub: ${host_key_pub}
+
+  workerKey: ${worker_key}
+  workerKeyPub: ${worker_key_pub}
