@@ -24,11 +24,6 @@ resource "tls_private_key" "host_key" {
   rsa_bits  = 4096
 }
 
-resource "tls_private_key" "host_key" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
 resource "tls_private_key" "worker_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
