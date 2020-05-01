@@ -97,3 +97,6 @@ secrets:
 
   encryptionKey: ${encryption_key}
   localUsers: ${local_users}
+
+  hostKey: ${host_key}
+  hostKeyPub: ${host_key_pub}

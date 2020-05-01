@@ -23,7 +23,6 @@ resource "google_secret_manager_secret" "admin_password" {
   }
 }
 
-
 resource "google_secret_manager_secret_version" "admin_password" {
   provider = google-beta
 
