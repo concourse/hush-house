@@ -103,3 +103,5 @@ secrets:
 
   workerKey: ${worker_key}
   workerKeyPub: ${worker_key_pub}
+
+  sessionSigningKey: ${session_signing_key}

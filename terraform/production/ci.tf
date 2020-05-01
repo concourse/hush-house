@@ -34,6 +34,11 @@ resource "tls_private_key" "worker_key" {
   rsa_bits  = 4096
 }
 
+resource "tls_private_key" "session_signing_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 data "template_file" "ci_values" {
   template = file("${path.module}/ci-values.yml.tpl")
   vars = {
@@ -58,6 +63,8 @@ data "template_file" "ci_values" {
 
     worker_key     = jsonencode(tls_private_key.worker_key.private_key_pem)
     worker_key_pub = jsonencode(tls_private_key.worker_key.public_key_openssh)
+
+    session_signing_key = jsonencode(tls_private_key.session_signing_key.private_key_pem)
   }
 }
 
