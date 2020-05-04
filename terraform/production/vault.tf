@@ -38,6 +38,8 @@ data "template_file" "vault_values" {
     key_ring = google_kms_key_ring.vault.id
     crypto_key = google_kms_crypto_key.vault.id
 
+    gcp_service_account_key = jsonencode(var.credentials)
+
     db_ip          = module.vault_database.ip
     db_user        = "atc"
     db_password    = module.vault_database.password

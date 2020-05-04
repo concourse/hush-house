@@ -33,6 +33,9 @@ server:
         key_ring = "${key_ring}"
         crypto_key = "${crypto_key}"
       }
+
+gcp: ${gcp_service_account_key}
+
 postgres:
   ip: ${db_ip}
   user: ${db_user}
