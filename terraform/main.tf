@@ -144,26 +144,6 @@ module "ci_database" {
   max_connections = "100"
 }
 
-# gkms key for vault unseal
-# Concourse deployment.
-#
-resource "google_kms_key_ring" "keyring" {
-  name     = "vault-helm-unseal-kr"
-  location = "global"
-}
-
-# crypto key for vault unseal
-# Concourse deployment.
-#
-resource "google_kms_crypto_key" "vault_helm_unseal_key" {
-  name            = "vault-helm-unseal-key"
-  key_ring        = google_kms_key_ring.keyring.self_link
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
 # gkms key for vault-nci unseal
 # Concourse deployment.
 #
