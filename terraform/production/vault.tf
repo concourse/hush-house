@@ -18,6 +18,44 @@ resource "google_kms_crypto_key" "vault" {
   }
 }
 
+resource "tls_private_key" "vault_ca" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "tls_self_signed_cert" "vault_ca" {
+  key_algorithm   = tls_private_key.vault_ca.algorithm
+  private_key_pem = tls_private_key.vault_ca.private_key_pem
+
+  subject {
+    common_name = "vault-ca"
+  }
+
+  validity_period_hours = 8760
+  is_ca_certificate     = true
+
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "cert_signing",
+  ]
+}
+
+module "vault_cert" {
+  source = "../cert"
+
+  common_name  = "vault.vault.svc.cluster.local"
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "server_auth",
+  ]
+
+  ca_key_algorithm   = tls_private_key.vault_ca.algorithm
+  ca_cert_pem        = tls_self_signed_cert.vault_ca.cert_pem
+  ca_private_key_pem = tls_private_key.vault_ca.private_key_pem
+}
+
 # Creates the CloudSQL Postgres database to be used by `vault`
 #
 module "vault_database" {
@@ -39,6 +77,10 @@ data "template_file" "vault_values" {
     crypto_key = google_kms_crypto_key.vault.id
 
     gcp_service_account_key = jsonencode(var.credentials)
+
+    vault_ca_cert     = jsonencode(tls_self_signed_cert.vault_ca.cert_pem)
+    vault_cert        = jsonencode(module.vault_cert.cert_pem)
+    vault_private_key = jsonencode(module.vault_cert.private_key_pem)
 
     db_ip          = module.vault_database.ip
     db_user        = "atc"
