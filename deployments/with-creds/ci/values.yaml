@@ -1,6 +1,3 @@
-postgresql:
-  enabled: false
-
 concourse:
   image: concourse/concourse-rc
   imageTag: 6.0.0-rc.62
