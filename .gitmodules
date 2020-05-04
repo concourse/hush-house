@@ -2,5 +2,5 @@
 	path = cluster-bootstrap/storage/sig-storage-local-static-provisioner
 	url = https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner
 [submodule "deployments/with-creds/vault/charts/vault-helm"]
-	path = deployments/with-creds/vault/charts/vault-helm
+	path = helm/charts/vault-helm
 	url = https://github.com/concourse/vault-helm
