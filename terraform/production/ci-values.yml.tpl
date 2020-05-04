@@ -105,3 +105,7 @@ secrets:
   workerKeyPub: ${worker_key_pub}
 
   sessionSigningKey: ${session_signing_key}
+
+  vaultCaCert: ${vault_ca_cert}
+  vaultClientCert: ${vault_client_cert}
+  vaultClientKey: ${vault_client_private_key}

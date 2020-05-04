@@ -37,8 +37,8 @@ server:
 gcp: ${gcp_service_account_key}
 
 ca: ${vault_ca_cert}
-crt: ${vault_cert}
-key: ${vault_private_key}
+crt: ${vault_server_cert}
+key: ${vault_server_private_key}
 
 postgres:
   ip: ${db_ip}

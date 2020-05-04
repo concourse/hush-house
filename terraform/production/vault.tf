@@ -41,7 +41,7 @@ resource "tls_self_signed_cert" "vault_ca" {
   ]
 }
 
-module "vault_cert" {
+module "vault_server_cert" {
   source = "../cert"
 
   common_name  = "vault.vault.svc.cluster.local"
@@ -49,6 +49,21 @@ module "vault_cert" {
     "key_encipherment",
     "digital_signature",
     "server_auth",
+  ]
+
+  ca_key_algorithm   = tls_private_key.vault_ca.algorithm
+  ca_cert_pem        = tls_self_signed_cert.vault_ca.cert_pem
+  ca_private_key_pem = tls_private_key.vault_ca.private_key_pem
+}
+
+module "vault_client_cert" {
+  source = "../cert"
+
+  common_name  = "concourse"
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "client_auth",
   ]
 
   ca_key_algorithm   = tls_private_key.vault_ca.algorithm
@@ -78,9 +93,9 @@ data "template_file" "vault_values" {
 
     gcp_service_account_key = jsonencode(var.credentials)
 
-    vault_ca_cert     = jsonencode(tls_self_signed_cert.vault_ca.cert_pem)
-    vault_cert        = jsonencode(module.vault_cert.cert_pem)
-    vault_private_key = jsonencode(module.vault_cert.private_key_pem)
+    vault_ca_cert            = jsonencode(tls_self_signed_cert.vault_ca.cert_pem)
+    vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
+    vault_server_private_key = jsonencode(module.vault_server_cert.private_key_pem)
 
     db_ip          = module.vault_database.ip
     db_user        = "atc"
