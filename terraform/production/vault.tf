@@ -122,8 +122,8 @@ data "template_file" "vault_values" {
     vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
     vault_server_private_key = jsonencode(module.vault_server_cert.private_key_pem)
 
-    gcp_project = var.project
-    gcp_region  = var.region
+    gcp_project = google_kms_key_ring.vault.project
+    gcp_region  = google_kms_key_ring.vault.location
     gcs_bucket  = google_storage_bucket.production_vault.name
   }
 }
