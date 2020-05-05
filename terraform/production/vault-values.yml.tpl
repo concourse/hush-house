@@ -7,7 +7,7 @@ server:
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
   extraContainers:
     - name: vault-init
-      image: gcr.io/hightowerlabs/vault-init
+      image: registry.hub.docker.com/sethvargo/vault-init:1.0.0
       imagePullPolicy: Always
       env:
         - name: CHECK_INTERVAL
