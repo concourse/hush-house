@@ -78,7 +78,7 @@ resource "google_service_account" "production_vault" {
 }
 
 resource "google_storage_bucket" "production_vault" {
-  name = "production-vault"
+  name = "concourse-production-vault"
   bucket_policy_only = true
 
   versioning {
