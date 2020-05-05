@@ -5,7 +5,7 @@ injector:
   enabled: false
 server:
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
-  extraContainers: |
+  extraContainers:
     - name: vault-init
       image: gcr.io/hightowerlabs/vault-init
       imagePullPolicy: Always
