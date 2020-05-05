@@ -81,7 +81,7 @@ resource "google_storage_bucket" "production_vault" {
   name = "production-vault"
   bucket_policy_only = true
 
-  versioning = {
+  versioning {
     enabled = true
   }
 
