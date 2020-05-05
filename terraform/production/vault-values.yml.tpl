@@ -26,7 +26,7 @@ server:
       }
 
       storage "postgresql" {
-        connection_url = "host=%POSTGRES_IP% port=5432 user=${db_user} password=%POSTGRES_SECRET% sslkey=/vault/postgres/postgres-client.key sslcert=/vault/postgres/postgres-client.crt sslrootcert=/vault/postgres/postgres.ca dbname=vault"
+        connection_url = "host=%POSTGRES_IP% port=5432 user=${db_user} password=%POSTGRES_SECRET% sslkey=/vault/postgres/postgres-client.key sslcert=/vault/postgres/postgres-client.crt sslrootcert=/vault/postgres/postgres.ca dbname=${db_database}"
       }
 
       seal "gcpckms" {

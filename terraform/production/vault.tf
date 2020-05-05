@@ -83,6 +83,8 @@ module "vault_database" {
   region          = "${var.region}"
   zone            = "${var.zone}"
   max_connections = "100"
+
+  database = "vault"
 }
 
 data "template_file" "vault_values" {
@@ -97,7 +99,8 @@ data "template_file" "vault_values" {
     vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
     vault_server_private_key = jsonencode(module.vault_server_cert.private_key_pem)
 
-    db_user = module.vault_database.user
+    db_user     = module.vault_database.user
+    db_database = module.vault_database.database
   }
 }
 
