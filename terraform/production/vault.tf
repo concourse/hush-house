@@ -84,7 +84,7 @@ module "vault_database" {
   zone            = "${var.zone}"
   max_connections = "100"
 
-  database = "vault"
+  database_name = "vault"
 }
 
 data "template_file" "vault_values" {
