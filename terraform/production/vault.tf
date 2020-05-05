@@ -102,7 +102,7 @@ data "template_file" "vault_values" {
 resource "helm_release" "vault" {
   namespace  = kubernetes_namespace.vault.id
   name       = "vault"
-  chart      = "../../helm/charts/vault"
+  chart      = "../../helm/charts/vault-helm"
 
   values = [
     data.template_file.vault_values.rendered,
