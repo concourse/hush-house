@@ -23,6 +23,7 @@ server:
 
       seal "gcpckms" {
         project    = "${gcp_project}"
+        region     = "${gcp_region}"
         key_ring   = "${key_ring}"
         crypto_key = "${crypto_key}"
       }
