@@ -19,8 +19,8 @@ server:
         tls_client_ca_file = "/vault/userconfig/vault-server-tls/vault.ca"
       }
 
-      storage "postgresql" {
-        connection_url = "host=${db_ip} port=5432 user=${db_user} password=${db_password} sslkey=/vault/postgres/postgres-client.key sslcert=/vault/postgres/postgres-client.crt sslrootcert=/vault/postgres/postgres.ca dbname=${db_database}"
+      storage "gcs" {
+        bucket = "${gcs_bucket}"
       }
 
       seal "gcpckms" {

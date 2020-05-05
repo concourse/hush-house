@@ -71,20 +71,45 @@ module "vault_client_cert" {
   ca_private_key_pem = tls_private_key.vault_ca.private_key_pem
 }
 
-# Creates the CloudSQL Postgres database to be used by `vault`
-#
-module "vault_database" {
-  source = "../database"
+resource "google_service_account" "production_vault" {
+  account_id   = "production-vault"
+  display_name = "Production Vault"
+  description  = "Used to operate Vault in our Production cluster."
+}
 
-  name            = "vault"
-  cpus            = "4"
-  disk_size_gb    = "10"
-  memory_mb       = "5120"
-  region          = "${var.region}"
-  zone            = "${var.zone}"
-  max_connections = "100"
+resource "google_storage_bucket" "production_vault" {
+  name = "production-vault"
+  bucket_policy_only = true
 
-  database_name = "vault"
+  versioning = {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    action {
+      type = "delete"
+    }
+
+    condition {
+      num_newer_versions = 3
+    }
+  }
+}
+
+resource "google_project_iam_member" "production_vault_policy" {
+  for_each = {
+    "kmsAdmin" = "roles/cloudkms.admin"
+    "kmsEncrypt" = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  }
+
+  role = each.value
+  member = "serviceAccount:${google_service_account.production_vault.email}"
+}
+
+resource "google_storage_bucket_iam_member" "production_vault_policy" {
+  bucket = google_storage_bucket.concourse_greenpeace.name
+  role   = "roles/storage.objectAdmin"
+  member = "serviceAccount:${google_service_account.production_vault.email}"
 }
 
 resource "google_service_account" "production_vault" {
@@ -113,10 +138,7 @@ data "template_file" "vault_values" {
     vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
     vault_server_private_key = jsonencode(module.vault_server_cert.private_key_pem)
 
-    db_ip       = module.vault_database.ip
-    db_user     = module.vault_database.user
-    db_password = module.vault_database.password
-    db_database = module.vault_database.database
+    gcs_bucket = google_storage_bucket.production_vault.name
   }
 }
 
@@ -131,7 +153,6 @@ resource "helm_release" "vault" {
 
   depends_on = [
     module.cluster.node_pools,
-    kubernetes_secret.vault_postgres,
     kubernetes_secret.vault_gcp,
     kubernetes_secret.vault_server_tls,
   ]
