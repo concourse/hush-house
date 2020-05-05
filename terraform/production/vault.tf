@@ -96,6 +96,8 @@ data "template_file" "vault_values" {
     vault_ca_cert            = jsonencode(tls_self_signed_cert.vault_ca.cert_pem)
     vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
     vault_server_private_key = jsonencode(module.vault_server_cert.private_key_pem)
+
+    db_user = module.vault_database.user
   }
 }
 
