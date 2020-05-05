@@ -15,7 +15,7 @@ server:
         - name: GCS_BUCKET_NAME
           value: "${gcs_bucket}"
         - name: "KMS_KEY_ID"
-          value: "${crypto_key}"
+          value: "${crypto_key_id}"
   extraVolumes:
     - type: secret
       name: vault-server-tls
@@ -37,8 +37,8 @@ server:
       seal "gcpckms" {
         project    = "${gcp_project}"
         region     = "${gcp_region}"
-        key_ring   = "${key_ring}"
-        crypto_key = "${crypto_key}"
+        key_ring   = "${key_ring_name}"
+        crypto_key = "${crypto_key_name}"
       }
 
 ca: ${vault_ca_cert}
