@@ -22,6 +22,8 @@ server:
   standalone:
     enabled: true
     config: |
+      ui = true
+
       listener "tcp" {
         address = "[::]:8200"
         cluster_address = "[::]:8201"
@@ -40,6 +42,10 @@ server:
         key_ring   = "${key_ring_name}"
         crypto_key = "${crypto_key_name}"
       }
+
+ui:
+  enabled: true
+  externalPort: 8200
 
 ca: ${vault_ca_cert}
 crt: ${vault_server_cert}
