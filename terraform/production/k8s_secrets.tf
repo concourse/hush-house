@@ -14,17 +14,6 @@ resource "kubernetes_secret" "vault_postgres" {
   }
 }
 
-resource "kubernetes_secret" "vault_gcp" {
-  metadata {
-    name      = "vault-gcp"
-    namespace = kubernetes_namespace.vault.id
-  }
-
-  data = {
-    "vault.gcp" = var.credentials
-  }
-}
-
 resource "kubernetes_secret" "vault_server_tls" {
   metadata {
     name      = "vault-server-tls"

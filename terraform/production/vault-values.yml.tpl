@@ -2,18 +2,12 @@ global:
   tlsDisable: false
   tlsPostgresEnable: true
 server:
-  nodeSelector: 'cloud.google.com/gke-nodepool: generic-1'
+  nodeSelector: 'cloud.google.com/gke-nodepool: vault'
   extraVolumes:
     - type: secret
       name: vault-server-tls
     - type: secret
-      name: vault-gcp
-    - type: secret
       name: postgres
-  extraEnvironmentVars:
-    GOOGLE_REGION: global
-    GOOGLE_PROJECT: cf-concourse-production
-    GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/vault-gcp/vault.gcp
   standalone:
     enabled: true
     config: |
@@ -33,8 +27,6 @@ server:
         key_ring = "${key_ring}"
         crypto_key = "${crypto_key}"
       }
-
-gcp: ${gcp_service_account_key}
 
 ca: ${vault_ca_cert}
 crt: ${vault_server_cert}

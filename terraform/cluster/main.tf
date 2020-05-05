@@ -114,6 +114,8 @@ resource "google_container_node_pool" "main" {
       "logging-write",
       "monitoring",
     ]
+
+    service_account = each.value.service_account
   }
 
   timeouts {

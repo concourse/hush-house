@@ -87,13 +87,27 @@ module "vault_database" {
   database_name = "vault"
 }
 
+resource "google_service_account" "production_vault" {
+  account_id   = "production-vault"
+  display_name = "Production Vault"
+  description  = "Used to operate Vault in our Production cluster."
+}
+
+resource "google_project_iam_member" "production_vault_policy" {
+  for_each = {
+    "kmsAdmin" = "roles/cloudkms.admin"
+    "kmsEncrypt" = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  }
+
+  role = each.value
+  member = "serviceAccount:${google_service_account.production_vault.email}"
+}
+
 data "template_file" "vault_values" {
   template = file("${path.module}/vault-values.yml.tpl")
   vars = {
     key_ring = google_kms_key_ring.vault.id
     crypto_key = google_kms_crypto_key.vault.id
-
-    gcp_service_account_key = jsonencode(var.credentials)
 
     vault_ca_cert            = jsonencode(tls_self_signed_cert.vault_ca.cert_pem)
     vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
