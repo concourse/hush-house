@@ -87,7 +87,7 @@ resource "google_storage_bucket" "production_vault" {
 
   lifecycle_rule {
     action {
-      type = "delete"
+      type = "Delete"
     }
 
     condition {
