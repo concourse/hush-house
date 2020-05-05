@@ -6,8 +6,6 @@ server:
   extraVolumes:
     - type: secret
       name: vault-server-tls
-    - type: secret
-      name: postgres
   standalone:
     enabled: true
     config: |
