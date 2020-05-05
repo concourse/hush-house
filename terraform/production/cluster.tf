@@ -11,28 +11,32 @@ module "cluster" {
 
   node_pools = {
     "generic-1" = {
-      auto_upgrade    = true
-      disk_size       = "50"
-      disk_type       = "pd-ssd"
-      image           = "COS"
-      local_ssds      = 0
-      machine_type    = "n1-standard-8"
-      max             = 5
-      min             = 1
-      preemptible     = false
-      service_account = null
+      auto_upgrade       = true
+      disk_size          = "50"
+      disk_type          = "pd-ssd"
+      image              = "COS"
+      local_ssds         = 0
+      machine_type       = "n1-standard-8"
+      max                = 5
+      min                = 1
+      preemptible        = false
+      service_account    = null
+      extra_oauth_scopes = []
     },
     "vault" = {
-      auto_upgrade    = true
-      disk_size       = "10"
-      disk_type       = "pd-ssd"
-      image           = "COS"
-      local_ssds      = 0
-      machine_type    = "n1-standard-8"
-      max             = 1
-      min             = 1
-      preemptible     = false
-      service_account = google_service_account.production_vault.email
+      auto_upgrade       = true
+      disk_size          = "10"
+      disk_type          = "pd-ssd"
+      image              = "COS"
+      local_ssds         = 0
+      machine_type       = "n1-standard-8"
+      max                = 1
+      min                = 1
+      preemptible        = false
+      service_account    = google_service_account.production_vault.email
+      extra_oauth_scopes = [
+        "https://www.googleapis.com/auth/cloud-platform",
+      ]
     },
   }
 }

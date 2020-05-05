@@ -108,12 +108,12 @@ resource "google_container_node_pool" "main" {
       disable-legacy-endpoints = "true"
     }
 
-    oauth_scopes = [
+    oauth_scopes = concat([
       "compute-rw",
       "storage-ro",
       "logging-write",
       "monitoring",
-    ]
+    ], each.value.extra_oauth_scopes)
 
     service_account = each.value.service_account
   }
