@@ -5,6 +5,17 @@ injector:
   enabled: false
 server:
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
+  extraContainers: |
+    - name: vault-init
+      image: gcr.io/hightowerlabs/vault-init
+      imagePullPolicy: Always
+      env:
+        - name: CHECK_INTERVAL
+          value: "10"
+        - name: GCS_BUCKET_NAME
+          value: "${gcs_bucket}"
+        - name: "KMS_KEY_ID"
+          value: "${crypto_key}"
   extraVolumes:
     - type: secret
       name: vault-server-tls
