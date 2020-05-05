@@ -112,22 +112,6 @@ resource "google_storage_bucket_iam_member" "production_vault_policy" {
   member = "serviceAccount:${google_service_account.production_vault.email}"
 }
 
-resource "google_service_account" "production_vault" {
-  account_id   = "production-vault"
-  display_name = "Production Vault"
-  description  = "Used to operate Vault in our Production cluster."
-}
-
-resource "google_project_iam_member" "production_vault_policy" {
-  for_each = {
-    "kmsAdmin" = "roles/cloudkms.admin"
-    "kmsEncrypt" = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-  }
-
-  role = each.value
-  member = "serviceAccount:${google_service_account.production_vault.email}"
-}
-
 data "template_file" "vault_values" {
   template = file("${path.module}/vault-values.yml.tpl")
   vars = {
