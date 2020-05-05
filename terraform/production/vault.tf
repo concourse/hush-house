@@ -117,5 +117,8 @@ resource "helm_release" "vault" {
 
   depends_on = [
     module.cluster.node_pools,
+    kubernetes_secret.vault_postgres,
+    kubernetes_secret.vault_gcp,
+    kubernetes_secret.vault_server_tls,
   ]
 }
