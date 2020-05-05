@@ -1,6 +1,8 @@
 global:
   tlsDisable: false
   tlsPostgresEnable: true
+injector:
+  enabled: false
 server:
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
   extraVolumes:
