@@ -115,8 +115,8 @@ resource "google_storage_bucket_iam_member" "production_vault_policy" {
 data "template_file" "vault_values" {
   template = file("${path.module}/vault-values.yml.tpl")
   vars = {
-    key_ring   = google_kms_key_ring.vault.id
-    crypto_key = google_kms_crypto_key.vault.id
+    key_ring   = google_kms_key_ring.vault.name
+    crypto_key = google_kms_crypto_key.vault.name
 
     vault_ca_cert            = jsonencode(tls_self_signed_cert.vault_ca.cert_pem)
     vault_server_cert        = jsonencode(module.vault_server_cert.cert_pem)
