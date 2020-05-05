@@ -78,7 +78,7 @@ concourse:
 
     postgres:
       host: ${db_ip}
-      database: atc
+      database: ${db_database}
       sslmode: verify-ca
   worker:
     rebalanceInterval: 2h

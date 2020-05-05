@@ -59,8 +59,9 @@ data "template_file" "ci_values" {
     github_client_secret = data.google_secret_manager_secret_version.github_client_secret.secret_data
 
     db_ip          = module.ci_database.ip
-    db_user        = "atc"
+    db_user        = module.ci_database.user
     db_password    = module.ci_database.password
+    db_database    = module.ci_database.database
     db_ca_cert     = jsonencode(module.ci_database.ca_cert)
     db_cert        = jsonencode(module.ci_database.cert)
     db_private_key = jsonencode(module.ci_database.private_key)

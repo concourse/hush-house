@@ -3,6 +3,21 @@ variable "name" {
   description = "The name of the CloudSQL instance to create (ps.: a random ID is appended to this name)"
 }
 
+variable "database_name" {
+    default     = "atc"
+    description = "The name of the SQL database."
+}
+
+variable "user" {
+    default     = "atc"
+    description = "The name of the user."
+}
+
+variable "common_name" {
+    default     = "atc"
+    description = "The common name to be used in the certificate to identify the client."
+}
+
 variable "memory_mb" {
   default     = ""
   description = "Number of MBs to assign to the CloudSQL instance."

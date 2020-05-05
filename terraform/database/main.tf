@@ -52,8 +52,8 @@ resource "google_sql_database_instance" "main" {
   }
 }
 
-resource "google_sql_database" "atc" {
-  name = "atc"
+resource "google_sql_database" "db" {
+  name = var.database_name
 
   instance  = google_sql_database_instance.main.name
   charset   = "UTF8"
@@ -66,13 +66,13 @@ resource "random_password" "password" {
 }
 
 resource "google_sql_user" "user" {
-  name = "atc"
+  name = var.user
 
   instance = google_sql_database_instance.main.name
   password = random_password.password.result
 }
 
 resource "google_sql_ssl_cert" "cert" {
-  common_name = "atc"
+  common_name = var.common_name
   instance    = google_sql_database_instance.main.name
 }

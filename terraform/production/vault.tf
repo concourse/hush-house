@@ -98,7 +98,7 @@ data "template_file" "vault_values" {
     vault_server_private_key = jsonencode(module.vault_server_cert.private_key_pem)
 
     db_ip          = module.vault_database.ip
-    db_user        = "atc"
+    db_user        = module.vault_database.user
     db_password    = module.vault_database.password
     db_ca_cert     = jsonencode(module.vault_database.ca_cert)
     db_cert        = jsonencode(module.vault_database.cert)
