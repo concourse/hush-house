@@ -107,7 +107,7 @@ resource "google_project_iam_member" "production_vault_policy" {
 }
 
 resource "google_storage_bucket_iam_member" "production_vault_policy" {
-  bucket = google_storage_bucket.concourse_greenpeace.name
+  bucket = google_storage_bucket.production_vault.name
   role   = "roles/storage.objectAdmin"
   member = "serviceAccount:${google_service_account.production_vault.email}"
 }
