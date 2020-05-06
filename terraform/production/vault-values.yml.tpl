@@ -17,6 +17,8 @@ server:
           value: "${gcs_bucket}"
         - name: "KMS_KEY_ID"
           value: "${crypto_key_id}"
+        - name: "VAULT_SKIP_VERIFY"
+          value: "true"
   extraVolumes:
     - type: secret
       name: vault-server-tls
