@@ -1,6 +1,5 @@
 global:
   tlsDisable: false
-  tlsPostgresEnable: true
 injector:
   enabled: false
 server:
