@@ -72,7 +72,12 @@ concourse:
       keepNamespaces: false
       enabled: false
       createTeamNamespaces: false
-
+    vault:
+      enabled: true
+      url: https://vault.vault.svc.cluster.local:8200
+      sharedPath: shared
+      authBackend: "cert"
+      useCaCert: true
     letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
     tls: { enabled: true, bindPort: 443 }
 

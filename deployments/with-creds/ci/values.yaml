@@ -38,12 +38,6 @@ concourse:
     web:
       metrics:
         attribute: "environment:ci"
-      vault:
-        enabled: true
-        url: https://vault.vault.svc.cluster.local:8200
-        sharedPath: shared
-        authBackend: "cert"
-        useCaCert: true
       datadog:
         enabled: true
 
