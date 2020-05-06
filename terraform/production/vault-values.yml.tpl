@@ -3,7 +3,7 @@ global:
 injector:
   enabled: false
 server:
-  annotation:
+  annotations:
     update: "1"
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
   extraContainers:
