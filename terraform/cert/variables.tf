@@ -9,6 +9,12 @@ variable "dns_names" {
   default     = []
 }
 
+variable "ip_addresses" {
+  description = "List of IP addresses for which a certificate is being requested."
+  type        = list(string)
+  default     = []
+}
+
 variable "allowed_uses" {
   description = "List of keywords each describing a use that is permitted for the issued certificate."
   type        = list(string)

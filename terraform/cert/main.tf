@@ -11,7 +11,8 @@ resource "tls_cert_request" "cert" {
     common_name = var.common_name
   }
 
-  dns_names = var.dns_names
+  dns_names    = var.dns_names
+  ip_addresses = var.ip_addresses
 }
 
 resource "tls_locally_signed_cert" "cert" {

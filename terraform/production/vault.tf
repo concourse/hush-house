@@ -53,7 +53,9 @@ module "vault_server_cert" {
 
   dns_names = [
     "vault.vault.svc.cluster.local",
-    "IP:127.0.0.1",
+  ]
+  ip_addresses = [
+    "127.0.0.1",
   ]
 
   ca_key_algorithm   = tls_private_key.vault_ca.algorithm
