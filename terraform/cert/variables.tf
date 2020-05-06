@@ -3,6 +3,12 @@ variable "common_name" {
   type        = string
 }
 
+variable "dns_names" {
+  description = "List of DNS names for which a certificate is being requested."
+  type        = list(string)
+  default     = []
+}
+
 variable "allowed_uses" {
   description = "List of keywords each describing a use that is permitted for the issued certificate."
   type        = list(string)

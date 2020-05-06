@@ -3,6 +3,8 @@ global:
 injector:
   enabled: false
 server:
+  annotation:
+    update: "1"
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
   extraContainers:
     - name: vault-init

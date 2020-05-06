@@ -10,6 +10,8 @@ resource "tls_cert_request" "cert" {
   subject {
     common_name = var.common_name
   }
+
+  dns_names = var.dns_names
 }
 
 resource "tls_locally_signed_cert" "cert" {

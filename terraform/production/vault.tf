@@ -28,7 +28,7 @@ resource "tls_self_signed_cert" "vault_ca" {
   private_key_pem = tls_private_key.vault_ca.private_key_pem
 
   subject {
-    common_name = "vault-ca"
+    common_name = "vault_ca"
   }
 
   validity_period_hours = 8760
@@ -49,6 +49,11 @@ module "vault_server_cert" {
     "key_encipherment",
     "digital_signature",
     "server_auth",
+  ]
+
+  dns_names = [
+    "vault.vault.svc.cluster.local",
+    "127.0.0.1",
   ]
 
   ca_key_algorithm   = tls_private_key.vault_ca.algorithm
