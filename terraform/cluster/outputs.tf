@@ -1,3 +1,11 @@
+output "name" {
+  value = google_container_cluster.main.name
+}
+
+output "location" {
+  value = google_container_cluster.main.location
+}
+
 output "endpoint" {
   value = google_container_cluster.main.endpoint
 }
