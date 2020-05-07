@@ -87,6 +87,27 @@ concourse:
             team: concourse:Pivotal
         github:
           enabled: true
+      # so pipeline-operator ended up with two permissions
+      # - RerunJobBuild
+      # - CheckResource
+      # which will be granted to concourse:contributors for
+      # operating PR pipeline
+      configRBAC: |
+        member:
+        - AbortBuild
+        - CreateJobBuild
+        - PauseJob
+        - UnpauseJob
+        - ClearTaskCache
+        - UnpinResource
+        - SetPinCommentOnResource
+        - CheckResourceWebHook
+        - CheckResourceType
+        - EnableResourceVersion
+        - DisableResourceVersion
+        - PinResourceVersion
+        - PausePipeline
+        - UnpausePipeline
       bindPort: 80
       clusterName: ci
       containerPlacementStrategy: limit-active-tasks

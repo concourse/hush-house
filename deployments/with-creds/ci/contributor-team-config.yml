@@ -1,0 +1,5 @@
+# fly -t ci set-team -n contributor --config contributor-team-config.yml
+roles:
+- name: pipeline-operator
+  github:
+    teams: ["concourse:contributors"]
