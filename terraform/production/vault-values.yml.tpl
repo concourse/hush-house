@@ -6,19 +6,6 @@ server:
   annotations:
     update: "1"
   nodeSelector: 'cloud.google.com/gke-nodepool: vault'
-  extraContainers:
-    - name: vault-init
-      image: registry.hub.docker.com/sethvargo/vault-init:latest
-      imagePullPolicy: Always
-      env:
-        - name: CHECK_INTERVAL
-          value: "10"
-        - name: GCS_BUCKET_NAME
-          value: "${gcs_bucket}"
-        - name: "KMS_KEY_ID"
-          value: "${crypto_key_id}"
-        - name: "VAULT_SKIP_VERIFY"
-          value: "true"
   extraVolumes:
     - type: secret
       name: vault-server-tls
