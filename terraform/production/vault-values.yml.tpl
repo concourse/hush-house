@@ -9,6 +9,8 @@ server:
   extraVolumes:
     - type: secret
       name: vault-server-tls
+  extraEnvironmentVariables:
+    VAULT_CACERT="/vault/userconfig/vault-server-tls/vault.ca"
   standalone:
     enabled: true
     config: |
