@@ -4,11 +4,6 @@ resource "kubernetes_namespace" "ci" {
   }
 }
 
-data "helm_repository" "concourse" {
-  name = "concourse"
-  url  = "https://concourse-charts.storage.googleapis.com"
-}
-
 resource "random_password" "encryption_key" {
     length = 32
     special = true
@@ -86,7 +81,7 @@ data "template_file" "ci_values" {
 resource "helm_release" "ci-concourse" {
   namespace  = kubernetes_namespace.ci.id
   name       = "concourse"
-  repository = data.helm_repository.concourse.metadata[0].name
+  repository = "https://concourse-charts.storage.googleapis.com"
   chart      = "concourse"
   version    = "9.1.1"
 

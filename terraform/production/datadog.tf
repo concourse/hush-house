@@ -4,15 +4,10 @@
 #   }
 # }
 
-# data "helm_repository" "stable" {
-#   name = "stable"
-#   url  = "https://kubernetes-charts.storage.googleapis.com"
-# }
-
 # resource "helm_release" "datadog" {
 #   namespace = kubernetes_namespace.datadog.id
 #   name       = "datadog"
-#   repository = data.helm_repository.stable.metadata[0].name
+#   repository = "https://kubernetes-charts.storage.googleapis.com"
 #   chart      = "datadog"
 #   version    = "1.39.5"
 
