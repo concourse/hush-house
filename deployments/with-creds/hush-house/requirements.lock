@@ -1,6 +1,6 @@
 dependencies:
 - name: concourse
-  repository: https://concourse-charts.storage.googleapis.com/
-  version: 9.1.1
-digest: sha256:1a0279675efcda2886831e4e2593e87134ca86406dc50653e1ddb05fa412d284
-generated: "2020-04-15T10:28:25.881237-04:00"
+  repository: file:///home/ubuntu/workspace/concourse-chart
+  version: 10.1.0
+digest: sha256:aef4d23293a7c70b4f653879eec1828a7836cc42be3d73bac4392f9e3b181119
+generated: "2020-05-05T10:42:58.251605692-04:00"
