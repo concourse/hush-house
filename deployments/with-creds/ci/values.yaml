@@ -90,6 +90,7 @@ concourse:
       bindPort: 80
       clusterName: ci
       containerPlacementStrategy: limit-active-tasks
+      streamingArtifactsCompression: zstd
       maxActiveTasksPerWorker: 5
       enableGlobalResources: true
       encryption: { enabled: true }
