@@ -19,5 +19,5 @@ output vault_crypto_key_self_link {
 }
 
 output vault_ca_cert {
-  value = tls_private_key.vault_ca.cert_pem
+  value = tls_self_signed_cert.vault_ca.cert_pem
 }
