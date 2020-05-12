@@ -34,6 +34,9 @@ server:
         key_ring   = "${key_ring_name}"
         crypto_key = "${crypto_key_name}"
       }
+    serviceaccount:
+      annotations:
+        iam.gke.io/gcp-service-account: "${gcp_serviceaccount}"
 
 ui:
   enabled: true

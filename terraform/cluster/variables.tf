@@ -3,6 +3,11 @@ variable "name" {
   description = "The name of the GKE cluster to be created."
 }
 
+variable "project" {
+  default     = ""
+  description = "The project where the cluster should live."
+}
+
 variable "zone" {
   default     = ""
   description = "The zone where the cluster should live."

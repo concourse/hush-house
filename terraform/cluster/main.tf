@@ -31,6 +31,10 @@ resource "google_container_cluster" "main" {
     services_secondary_range_name = module.vpc.services_range_name
   }
 
+  workload_identity_config {
+    identity_namespace = "${var.project}.svc.id.goog"
+  }
+
   release_channel {
     channel = var.release_channel
   }

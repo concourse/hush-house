@@ -3,9 +3,10 @@
 module "cluster" {
   source = "../cluster"
 
-  name   = "production"
-  region = var.region
-  zone   = var.zone
+  name    = "production"
+  project = var.project
+  region  = var.region
+  zone    = var.zone
 
   release_channel = "STABLE"
 
@@ -21,19 +22,6 @@ module "cluster" {
       min                = 1
       preemptible        = false
       service_account    = null
-      extra_oauth_scopes = []
-    },
-    "vault" = {
-      auto_upgrade       = true
-      disk_size          = "10"
-      disk_type          = "pd-ssd"
-      image              = "COS"
-      local_ssds         = 0
-      machine_type       = "n1-standard-8"
-      max                = 1
-      min                = 1
-      preemptible        = false
-      service_account    = google_service_account.production_vault.email
       extra_oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform",
       ]

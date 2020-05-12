@@ -107,6 +107,8 @@ resource "google_project_iam_member" "production_vault_policy" {
   for_each = {
     "kmsAdmin" = "roles/cloudkms.admin"
     "kmsEncrypt" = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+    "workloadIdentityUser" = "roles/iam.workloadIdentityUser"
   }
 
   role = each.value
@@ -133,6 +135,8 @@ data "template_file" "vault_values" {
     gcp_project = google_kms_key_ring.vault.project
     gcp_region  = google_kms_key_ring.vault.location
     gcs_bucket  = google_storage_bucket.production_vault.name
+
+    gcp_serviceaccount = google_service_account.production_vault.email
   }
 }
 
