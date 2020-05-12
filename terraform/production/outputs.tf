@@ -17,3 +17,7 @@ output vault_namespace {
 output vault_crypto_key_self_link {
   value = google_kms_crypto_key.vault.self_link
 }
+
+output vault_ca_cert {
+  value = tls_private_key.vault_ca.cert_pem
+}
