@@ -5,7 +5,6 @@ injector:
 server:
   annotations:
     update: "1"
-  nodeSelector: 'cloud.google.com/gke-nodepool: vault'
   extraVolumes:
     - type: secret
       name: vault-server-tls
