@@ -10,6 +10,7 @@ server:
       name: vault-server-tls
   extraEnvironmentVars:
     VAULT_CACERT: /vault/userconfig/vault-server-tls/vault.ca
+    GOOGLE_REGION: global
   standalone:
     enabled: true
     config: |
