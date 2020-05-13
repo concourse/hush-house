@@ -107,12 +107,20 @@ resource "google_project_iam_member" "production_vault_policy" {
   for_each = {
     "kmsAdmin" = "roles/cloudkms.admin"
     "kmsEncrypt" = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-
-    "workloadIdentityUser" = "roles/iam.workloadIdentityUser"
   }
 
   role = each.value
   member = "serviceAccount:${google_service_account.production_vault.email}"
+}
+
+resource "google_service_account_iam_binding" "production_vault_workload_identity" {
+  service_account_id = google_service_account.production_vault.name
+  role               = "roles/iam.workloadIdentityUser"
+
+  members = [
+    # TODO: don't hardcode k8s service account name
+    "serviceAccount:${var.project}.svc.id.goog[${kubernetes_namespace.vault.id}/vault]",
+  ]
 }
 
 resource "google_storage_bucket_iam_member" "production_vault_policy" {
