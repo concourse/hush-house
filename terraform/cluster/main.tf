@@ -105,7 +105,7 @@ resource "google_container_node_pool" "main" {
     image_type      = each.value.image
 
     workload_metadata_config {
-      node_metadata = "SECURE"
+      node_metadata = "GKE_METADATA_SERVER"
     }
 
     metadata = {
