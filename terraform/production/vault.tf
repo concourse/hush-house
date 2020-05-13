@@ -107,6 +107,8 @@ resource "google_project_iam_member" "production_vault_policy" {
   for_each = {
     "kmsAdmin" = "roles/cloudkms.admin"
     "kmsEncrypt" = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+    "serviceAccountTokenCreator" = "roles/iam.serviceAccountTokenCreator"
   }
 
   role = each.value
@@ -115,7 +117,7 @@ resource "google_project_iam_member" "production_vault_policy" {
 
 resource "google_service_account_iam_binding" "production_vault_workload_identity" {
   service_account_id = google_service_account.production_vault.name
-  role               = "roles/iam.workloadIdentityUser"
+  role               = "roles/iam.serviceAccountTokenCreator"
 
   members = [
     # TODO: don't hardcode k8s service account name
