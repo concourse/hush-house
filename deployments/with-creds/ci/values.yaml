@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageTag: 6.1.0-rc.1
+  imageTag: 6.2.0-rc.2
 
   secrets:
     teamAuthorizedKeys:
@@ -93,6 +93,7 @@ concourse:
       streamingArtifactsCompression: zstd
       maxActiveTasksPerWorker: 5
       enableGlobalResources: true
+      enableArchivePipeline: true
       encryption: { enabled: true }
       externalUrl: https://ci.concourse-ci.org
       kubernetes:

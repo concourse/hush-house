@@ -1,9 +1,9 @@
 dependencies:
 - name: concourse
-  repository: file:///home/ubuntu/workspace/concourse-chart
-  version: 10.1.0
+  repository: file:///Users/ruiyang/workspace/concourse-chart
+  version: 10.2.3
 - name: datadog
   repository: https://kubernetes-charts.storage.googleapis.com/
   version: 1.39.5
-digest: sha256:ce506c50a88934565fe9307803f75ee6744365258f04aed283dd9e146559cbe3
-generated: "2020-05-11T15:04:07.667953-04:00"
+digest: sha256:8f65adac2a6d7cc90d82ad989c0fb7568342fa7584b97b263ed73bec844ebc83
+generated: "2020-05-20T10:03:01.085304-04:00"
