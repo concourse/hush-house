@@ -43,6 +43,7 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
   - [Getting the GCP credentials](#getting-the-gcp-credentials)
   - [Applying the Terraform](#applying-the-terraform)
   - [Creating the base Kubernetes objects](#creating-the-base-kubernetes-objects)
+- [Creating Datadog dashboards](#creating-datadog-dashboards)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -94,6 +95,7 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
     ├── cluster			# Module for creating GKE clusters w/ node pools
     │   └── vpc			# Module for setting up the VPC of the cluster
     └── database		# Module for setting up CloudSQL
+    └── dashboard		# Module for setting up Datadog dashboards
 
 ```
 
@@ -490,3 +492,10 @@ cd ./cluster-bootstrap/storage
 ./ssd-storage-class.sh
 ```
 
+## Creating Datadog dashboards
+
+Creating the Datadog dashboards for our `hush-house` and `ci` deployments requires:
+
+1. having Datadog app and api keys,
+1. calling `dashboards` module as described in its [documentation](./terraform/dashboards/README.md) from a Terraform root module, then
+1. applying the Terraform definition
