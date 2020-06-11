@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageTag: 6.2.0-rc.2
+  imageTag: 6.3.0-rc.2
 
   secrets:
     teamAuthorizedKeys:
@@ -41,8 +41,12 @@ concourse:
       - name: dsdsocket
         mountPath: /var/run/datadog
     service:
-      type: LoadBalancer
-      loadBalancerIP: 34.69.51.78
+      api:
+        type: LoadBalancer
+        loadBalancerIP: 34.69.51.78
+      workerGateway:
+        type: LoadBalancer
+        loadBalancerIP: 34.69.51.78
     resources:
       requests:
         cpu: 1500m

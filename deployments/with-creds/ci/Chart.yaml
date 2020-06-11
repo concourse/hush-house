@@ -5,7 +5,7 @@ appVersion: 0.0.139
 description: A Concourse deployment used by Concourse to ship Concourse
 dependencies:
 - name: concourse
-  version: 9.1.1
+  version: 11.1.0
   repository: https://concourse-charts.storage.googleapis.com/
 - name: datadog
   version: 1.39.5
