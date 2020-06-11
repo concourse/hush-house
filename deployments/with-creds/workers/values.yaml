@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageDigest: sha256:b50f6207373cc671965ea0c4832bb394508b7eca337a80100d38d961be27fbb5
+  imageTag: 6.2.0
 
   postgresql:
     enabled: false
@@ -44,7 +44,7 @@ concourse:
       baggageclaim: { driver: overlay }
       healthcheckTimeout: 40s
       tsa:
-        hosts: ['hush-house-web.hush-house.svc.cluster.local:2222']
+        hosts: ['hush-house-web-worker-gateway.hush-house.svc.cluster.local:2222']
 
   secrets:
     hostKeyPub: |-

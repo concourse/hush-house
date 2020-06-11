@@ -1,6 +1,6 @@
 dependencies:
 - name: concourse
-  repository: file:///Users/ruiyang/workspace/concourse-chart
-  version: 10.2.3
-digest: sha256:19e0372078846f2de8cfaa5d7b1b33a2161283fd59c23ec561dd30368afa4210
-generated: "2020-05-20T10:51:06.447271-04:00"
+  repository: https://concourse-charts.storage.googleapis.com/
+  version: 11.1.0
+digest: sha256:daa16e8ca389687af10ae250b367a896094da368ed9e3a427500272d79f6acc0
+generated: "2020-06-11T11:18:19.550826-04:00"

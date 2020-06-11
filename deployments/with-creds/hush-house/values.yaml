@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-rc
-  imageTag: 6.2.0-rc.2
+  imageTag: 6.3.0-rc.2
 
   secrets:
     teamAuthorizedKeys:
@@ -30,7 +30,9 @@ concourse:
 
   web:
     annotations:
-      rollingUpdate: "2"
+      rollingUpdate: "3"
+    livenessProbe:
+      initialDelaySeconds: 600
     replicas: 2
     env:
     - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
@@ -56,8 +58,12 @@ concourse:
       - name: dsdsocket
         mountPath: /var/run/datadog
     service:
-      type: LoadBalancer
-      loadBalancerIP: 35.202.234.135
+      api:
+        type: LoadBalancer
+        loadBalancerIP: 35.202.234.135
+      workerGateway:
+        type: LoadBalancer
+        loadBalancerIP: 35.202.234.135
     resources:
       requests:
         cpu: 5000m
