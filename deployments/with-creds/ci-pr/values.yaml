@@ -43,4 +43,4 @@ concourse:
       tag: "pr"
       healthcheckTimeout: 40s
       tsa:
-        hosts: ['ci-web.ci.svc.cluster.local:2222']
+        hosts: ['ci-web-worker-gateway.ci.svc.cluster.local:2222']
