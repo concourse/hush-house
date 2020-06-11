@@ -108,6 +108,9 @@ This repository contains the configuration of [hush-house.pivotal.io](https://hu
   - `brew install kubernetes-cli`
   - `brew install helm && mv /usr/local/bin/helm{,3}` (for `ci`)
   - `brew install helm@2` (for the other deployments)
+- [Kapp (`kapp`)](https://get-kapp.io/) (for `ci`)
+  - `brew tap k14s/tap`
+  - `brew install kapp`
 - [Helm diff plugin (`helm diff`)](https://github.com/databus23/helm-diff)
   - `helm plugin install https://github.com/databus23/helm-diff --version master`
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/)

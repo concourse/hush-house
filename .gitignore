@@ -5,6 +5,7 @@ gcp.json
 .envrc
 .values.yml
 .values.yaml
+.template.yaml
 helm/*.pem
 helm/*.srl
 ci/*.json

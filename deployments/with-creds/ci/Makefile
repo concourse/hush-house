@@ -24,22 +24,18 @@ diff-ci: | ensure-creds-file-exists-ci deps-ci
 
 template-ci: | ensure-creds-file-exists-ci deps-ci
 	helm3 template \
-	--name=ci \
-	--values=./.values.yaml \
-	$(HELM_FLAGS) \
-	.
-
-
-deploy-ci: | ensure-creds-file-exists-ci deps-ci
-	helm3 upgrade \
-		--install \
-		--namespace=ci \
-		--timeout=900s \
-		--values=./.values.yaml \
-		--wait \
-		$(HELM_FLAGS) \
 		ci \
-		.
+		--values=./.values.yaml \
+		$(HELM_FLAGS) \
+		. > .template.yaml
+
+
+deploy-ci: | template-ci
+	kapp deploy \
+		--namespace ci \
+		--app ci \
+		--file .template.yaml \
+		$(KAPP_FLAGS)
 
 
 deps-ci:
