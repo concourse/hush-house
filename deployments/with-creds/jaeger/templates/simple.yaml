@@ -10,6 +10,8 @@ spec:
         base-path: /jaeger
   storage:
     type: elasticsearch
+    esIndexCleaner:
+      numberOfDays: 4
     options:
       es:
         server-urls: http://elasticsearch-master:9200
