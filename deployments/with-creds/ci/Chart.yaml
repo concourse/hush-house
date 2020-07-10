@@ -1,11 +1,11 @@
 name: ci
 apiVersion: v1
-version: 0.1.1
-appVersion: 0.0.139
+version: 0.1.2
+appVersion: 0.0.140
 description: A Concourse deployment used by Concourse to ship Concourse
 dependencies:
 - name: concourse
-  version: 11.1.0
+  version: 11.2.3
   repository: https://concourse-charts.storage.googleapis.com/
 - name: datadog
   version: 1.39.5
