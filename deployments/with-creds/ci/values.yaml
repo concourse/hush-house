@@ -20,8 +20,6 @@ concourse:
     env:
     - name: CONCOURSE_X_FRAME_OPTIONS
       value: ""
-    - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
-      value: http://simplest-collector.jaeger.svc.cluster.local:14268/api/traces
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
@@ -33,10 +31,53 @@ concourse:
               matchLabels:
                 app: ci-web
                 release: ci
+    extraInitContainers:
+      - name: oc-config
+        image: busybox
+        volumeMounts:
+          - name: oc-agent-config
+            mountPath: /etc/config
+        command:
+          - sh
+          - -c
+          - |
+            echo 'receivers:
+              jaeger:
+                collector_http_port: 14268
+            exporters:
+              wavefront:
+                enable_tracing: true
+                application_name: concourse
+                service_name: atc
+                proxy:
+                  Host: 127.0.0.1
+                  TracingPort: 30000
+            ' > /etc/config/config.yml
+    sidecarContainers:
+      - name: oc-agent
+        image: omnition/opencensus-agent:0.1.11
+        volumeMounts:
+          - name: oc-agent-config
+            mountPath: /etc/config
+        command: ["/ocagent_linux", "--config=/etc/config/config.yml"]
+      - name: wavefront-proxy
+        image: wavefronthq/proxy:7.2
+        env:
+        - name: WAVEFRONT_URL
+          value: "https://vmware.wavefront.com/api/"
+        - name: WAVEFRONT_PROXY_ARGS
+          value: "--traceListenerPorts 30000"
+        - name: WAVEFRONT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: wavefront-proxy
+              key: token
     additionalVolumes:
       - name: dsdsocket
         hostPath:
           path: /var/run/datadog
+      - name: oc-agent-config
+        emptyDir: {}
     additionalVolumeMounts:
       - name: dsdsocket
         mountPath: /var/run/datadog
@@ -127,6 +168,8 @@ concourse:
         createTeamNamespaces: false
       metrics:
         attribute: "environment:ci"
+      tracing:
+        jaegerEndpoint: http://127.0.0.1:14268/api/traces
       vault:
         enabled: true
         url: https://vault.vault.svc.cluster.local:8200
