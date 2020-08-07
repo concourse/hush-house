@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ocagent-config
+  labels:
+    app: ocagent-config
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  config.yml: |
+    receivers:
+      jaeger:
+        collector_http_port: 14268
+    exporters:
+      wavefront:
+        enable_tracing: true
+        application_name: concourse
+        service_name: atc
+        proxy:
+          Host: 127.0.0.1
+          TracingPort: 30000
