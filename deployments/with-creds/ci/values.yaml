@@ -31,28 +31,6 @@ concourse:
               matchLabels:
                 app: ci-web
                 release: ci
-    extraInitContainers:
-      - name: oc-config
-        image: busybox
-        volumeMounts:
-          - name: oc-agent-config
-            mountPath: /etc/config
-        command:
-          - sh
-          - -c
-          - |
-            echo 'receivers:
-              jaeger:
-                collector_http_port: 14268
-            exporters:
-              wavefront:
-                enable_tracing: true
-                application_name: concourse
-                service_name: atc
-                proxy:
-                  Host: 127.0.0.1
-                  TracingPort: 30000
-            ' > /etc/config/config.yml
     sidecarContainers:
       - name: oc-agent
         image: omnition/opencensus-agent:0.1.11
@@ -77,7 +55,8 @@ concourse:
         hostPath:
           path: /var/run/datadog
       - name: oc-agent-config
-        emptyDir: {}
+        configMap:
+          name: ocagent-config
     additionalVolumeMounts:
       - name: dsdsocket
         mountPath: /var/run/datadog
