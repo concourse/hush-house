@@ -55,7 +55,7 @@ module "cluster" {
       image        = "COS"
       local-ssds   = 0
       machine-type = "n1-standard-8"
-      max          = 5
+      max          = 6
       min          = 1
       preemptible  = false
       version      = "1.12.5-gke.5"
