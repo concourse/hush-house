@@ -35,6 +35,7 @@ deploy-ci: | template-ci
 		--namespace ci \
 		--app ci \
 		--file .template.yaml \
+		--diff-changes \
 		$(KAPP_FLAGS)
 
 
