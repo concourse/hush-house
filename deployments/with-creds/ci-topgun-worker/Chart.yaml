@@ -1,7 +1,7 @@
 name: ci-topgun-worker
 apiVersion: v1
-version: 0.1.4
-appVersion: 0.0.142
+version: 0.1.5
+appVersion: 0.0.143
 description: A Concourse deployment used by Concourse to ship Concourse
 maintainers:
 - name: cirocosta
