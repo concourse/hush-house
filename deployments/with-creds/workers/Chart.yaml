@@ -1,7 +1,7 @@
 name: worker-ubuntu
 apiVersion: v1
-version: 0.0.1
-appVersion: 0.0.1
+version: 0.0.2
+appVersion: 0.0.2
 description: The deployment of a modified hush-house worker with tracing enabled
 maintainers:
 - name: cirocosta
