@@ -35,8 +35,6 @@ concourse:
   web:
     annotations:
       rollingUpdate: "3"
-    livenessProbe:
-      initialDelaySeconds: 600
     replicas: 2
     env:
     - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
