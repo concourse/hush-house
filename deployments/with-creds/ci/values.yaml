@@ -138,7 +138,7 @@ concourse:
       streamingArtifactsCompression: zstd
       maxActiveTasksPerWorker: 5
       enableGlobalResources: true
-      enableArchivePipeline: true
+      enableAcrossStep: true
       encryption: { enabled: true }
       externalUrl: https://ci.concourse-ci.org
       kubernetes:
