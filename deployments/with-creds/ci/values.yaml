@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: concourse/concourse
-  imageTag: 6.5.1
+  image: concourse/concourse-dev
+  imageDigest: sha256:cc4836bac9dbb015eb825daa7567224a8a2f99874b24f53e0bc29650b91ba6a4
 
   secrets:
     teamAuthorizedKeys:
@@ -16,6 +16,10 @@ concourse:
   web:
     annotations:
       rollingUpdate: "3"
+    livenessProbe:
+      # XXX(vito): for builds bigint migration - comment out when no longer
+      # needed
+      initialDelaySeconds: 600
     replicas: 2
     env:
     - name: CONCOURSE_X_FRAME_OPTIONS
