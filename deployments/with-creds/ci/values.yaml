@@ -32,6 +32,27 @@ concourse:
                 app: ci-web
                 release: ci
     sidecarContainers:
+      - name: telegraf
+        image: telegraf
+        volumeMounts:
+        - name: dsdsocket
+          mountPath: /var/run/datadog
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo '
+          [[inputs.prometheus]]
+            urls = ["http://127.0.0.1:9391"]
+            metric_version = 2
+            name_override = "concourse.ci"
+            [inputs.prometheus.tags]
+              environment = "ci"
+          [[outputs.datadog]]
+            url = unix:///var/run/datadog/dsd.socket
+          ' > /etc/telegraf/telegraf.conf
+
+          exec telegraf
       - name: oc-agent
         image: omnition/opencensus-agent:0.1.11
         volumeMounts:
@@ -145,8 +166,6 @@ concourse:
         keepNamespaces: false
         enabled: false
         createTeamNamespaces: false
-      metrics:
-        attribute: "environment:ci"
       tracing:
         jaegerEndpoint: http://127.0.0.1:14268/api/traces
       vault:
@@ -157,12 +176,8 @@ concourse:
         useCaCert: true
       letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
       tls: { enabled: true, bindPort: 443 }
-      datadog:
+      prometheus:
         enabled: true
-
-        # horrible hack; we need a proper way to configure unix sockets
-        agentHost: unix
-        agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 34.69.204.254
         database: atc

@@ -12,11 +12,24 @@ data:
     receivers:
       jaeger:
         collector_http_port: 14268
+      prometheus:
+        config:
+          global:
+            scrape_interval: '5s'
+            evaluation_interval: '5s'
+          scrape_configs:
+            - job_name: 'concourse'
+              static_configs:
+                - targets:
+                  - 'localhost:9391'
     exporters:
       wavefront:
         enable_tracing: true
         application_name: concourse
         service_name: atc
+        custom_tags:
+        - "environment" : "ci"
         proxy:
           Host: 127.0.0.1
           TracingPort: 30000
+          MetricsPort: 2878
