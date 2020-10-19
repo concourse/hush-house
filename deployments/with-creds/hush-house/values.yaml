@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageDigest: sha256:11018d81dd2650e4bbf97cfcdb6448bf0b1fec7374c43cf23aaa1d31dac6cec6  # v6.5.1
+  imageDigest: sha256:e379c2cdb3ff9636009519cc696e622c60aa62bc4c0f517b034c299e5975be46  # v6.6.0
 
   secrets:
     teamAuthorizedKeys:
