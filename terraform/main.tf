@@ -122,8 +122,8 @@ module "database" {
   source = "./database"
 
   name            = "hush-house"
-  cpus            = "4"
-  memory_mb       = "5120"
+  cpus            = "6"
+  memory_mb       = "6400"
   region          = "${var.region}"
   zone            = "${var.zone}"
   max_connections = "300"
