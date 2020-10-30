@@ -1,4 +1,5 @@
 HELM_FLAGS   ?=
+KAPP_FLAGS   ?=
 
 %-ci:
 	cd ci && make $*-ci
@@ -24,8 +25,7 @@ save-creds-%:
 
 diff-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
-		helm diff upgrade \
-			--tls \
+		helm3 diff upgrade \
 			--namespace=$* \
 			--detailed-exitcode \
 			--values=./.values.yaml \
@@ -36,31 +36,28 @@ diff-%: | ensure-creds-file-exists-% deps-%
 
 template-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
-		helm template \
-		--name=$* \
+		helm3 template \
+		--namespace $* \
 		--values=./.values.yaml \
 		$(HELM_FLAGS) \
-		.
+		$* \
+		. > .template.yaml
 
 
-deploy-%: | ensure-creds-file-exists-% deps-%
+deploy-%: | template-%
 	cd ./$* && \
-		helm upgrade \
-			--tls \
-			--install \
+		kapp deploy \
 			--namespace=$* \
-			--timeout=900 \
-			--values=./.values.yaml \
-			--wait \
-			$(HELM_FLAGS) \
-			$* \
-			.
+			--app=$* \
+			--file=.template.yaml \
+			--diff-changes \
+			$(KAPP_FLAGS)
 
 
 deps-%:
 	cd ./$* && \
 		grep 'file://' requirements.yaml || \
-		helm dependency update .
+		helm3 dependency update .
 
 
 ensure-creds-file-exists-%:

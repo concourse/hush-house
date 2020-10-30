@@ -24,9 +24,9 @@ diff-ci: | ensure-creds-file-exists-ci deps-ci
 
 template-ci: | ensure-creds-file-exists-ci deps-ci
 	helm3 template \
-		ci \
 		--values=./.values.yaml \
 		$(HELM_FLAGS) \
+		ci \
 		. > .template.yaml
 
 
