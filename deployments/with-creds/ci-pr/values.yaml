@@ -38,6 +38,7 @@ concourse:
 
   concourse:
     worker:
+      runtime: containerd
       rebalanceInterval: 2h
       baggageclaim: { driver: overlay }
       tag: "pr"
