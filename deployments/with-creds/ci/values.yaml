@@ -175,6 +175,7 @@ concourse:
       rebalanceInterval: 2h
       baggageclaim: { driver: overlay }
       healthcheckTimeout: 40s
+      runtime: containerd
 
 datadog:
   datadog:
