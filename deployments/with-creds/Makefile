@@ -3,6 +3,8 @@ HELM_FLAGS   ?=
 %-ci:
 	cd ci && make $*-ci
 
+%-ci-pr:
+	cd ci-pr && make $*-ci-pr
 
 %-jaeger:
 	cd jaeger && make $*-jaeger
