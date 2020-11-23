@@ -13,7 +13,7 @@ save-creds-ci:
 
 
 diff-ci: | ensure-creds-file-exists-ci deps-ci
-	helm3 diff upgrade \
+	helm diff upgrade \
 		--namespace=ci \
 		--detailed-exitcode \
 		--values=./.values.yaml \
@@ -23,7 +23,7 @@ diff-ci: | ensure-creds-file-exists-ci deps-ci
 
 
 template-ci: | ensure-creds-file-exists-ci deps-ci
-	helm3 template \
+	helm template \
 		ci \
 		--values=./.values.yaml \
 		$(HELM_FLAGS) \
@@ -40,7 +40,7 @@ deploy-ci: | template-ci
 
 
 deps-ci:
-	helm3 dependency update .
+	helm dependency update .
 
 
 ensure-creds-file-exists-ci:

@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: vito/concourse
-  imageDigest: sha256:8ec0fe6652be3bf152ae196f6612fac2fe035804076caa6b107a88a1bef432fd
+  image: concourse/concourse-dev
+  imageDigest: sha256:5a6f3c2fccaff7cc91274c16251fe916acd9b6e0b3fd6825dc7ed914860fe5ba
 
   secrets:
     teamAuthorizedKeys:
