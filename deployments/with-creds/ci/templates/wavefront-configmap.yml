@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wavefront-config
+  labels:
+    app: wavefront-config
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  # https://docs.wavefront.com/proxies_preprocessor_rules.html
+  preprocessor_rules.yml: |
+    # rules for jaeger tracing. Wavefront appears to be very picky about the metadata
+    # https://docs.wavefront.com/wavefront_limits.html#default-customer-specific-limits
+    '14268':
+      #  drop any unuseful tags because wavefront limits it to 20
+      ################################################################
+      - rule    : drop-sdk-tags
+        action  : spanDropTag
+        key     : telemetry.sdk.*
+

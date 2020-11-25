@@ -36,31 +36,33 @@ concourse:
                 app: ci-web
                 release: ci
     sidecarContainers:
-      - name: oc-agent
-        image: omnition/opencensus-agent:0.1.11
-        volumeMounts:
-          - name: oc-agent-config
-            mountPath: /etc/config
-        command: ["/ocagent_linux", "--config=/etc/config/config.yml"]
+      # TODO: use opentelementry collector as middle-man
       - name: wavefront-proxy
-        image: wavefronthq/proxy:7.2
+        image: wavefronthq/proxy:9.2
         env:
         - name: WAVEFRONT_URL
           value: "https://vmware.wavefront.com/api/"
         - name: WAVEFRONT_PROXY_ARGS
-          value: "--traceListenerPorts 30000"
+          # https://github.com/wavefrontHQ/wavefront-proxy/blob/master/pkg/etc/wavefront/wavefront-proxy/wavefront.conf.default
+          value: |
+            --traceJaegerHttpListenerPorts 14268
+            --traceJaegerApplicationName Concourse
+            --preprocessorConfigFile /etc/config/preprocessor_rules.yml
         - name: WAVEFRONT_TOKEN
           valueFrom:
             secretKeyRef:
               name: wavefront-proxy
               key: token
+        volumeMounts:
+          - name: wavefront-rules
+            mountPath: /etc/config
     additionalVolumes:
       - name: dsdsocket
         hostPath:
           path: /var/run/datadog
-      - name: oc-agent-config
+      - name: wavefront-rules
         configMap:
-          name: ocagent-config
+          name: wavefront-config
     additionalVolumeMounts:
       - name: dsdsocket
         mountPath: /var/run/datadog
