@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otelcol-config
+  labels:
+    app: otelcol-config
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  otelcol.yml: |
+    receivers:
+      jaeger:
+        protocols:
+          thrift_http:
+            endpoint: 0.0.0.0:14268
+    exporters:
+      jaeger:
+        endpoint: localhost:14250
+        insecure: true
+      logging:
+        loglevel: debug
+    processors:
+      attributes/strip_tags:
+        actions:
+        - key: telemetry.sdk.name
+          action: delete
+        - key: telemetry.sdk.language
+          action: delete
+        - key: instrumentation.name
+          action: delete
+      attributes/insert_tags:
+        actions:
+        - key: debug
+          action: insert
+          value: "true"
+        - key: cluster
+          action: insert
+          value: ci.concourse-ci.org
+    service:
+      pipelines:
+        traces:
+          receivers:
+          - jaeger
+          processors:
+          - attributes/strip_tags
+          - attributes/insert_tags
+          exporters:
+          - jaeger
+          - logging

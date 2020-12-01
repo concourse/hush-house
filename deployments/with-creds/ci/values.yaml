@@ -36,7 +36,12 @@ concourse:
                 app: ci-web
                 release: ci
     sidecarContainers:
-      # TODO: use opentelementry collector as middle-man
+      - name: otel-collector
+        image: otel/opentelemetry-collector:0.15.0
+        args: ['--config=/etc/config/otelcol.yml']
+        volumeMounts:
+          - name: otelcol-config
+            mountPath: /etc/config
       - name: wavefront-proxy
         image: wavefronthq/proxy:9.2
         env:
@@ -45,24 +50,20 @@ concourse:
         - name: WAVEFRONT_PROXY_ARGS
           # https://github.com/wavefrontHQ/wavefront-proxy/blob/master/pkg/etc/wavefront/wavefront-proxy/wavefront.conf.default
           value: |
-            --traceJaegerHttpListenerPorts 14268
+            --traceJaegerGrpcListenerPorts 14250
             --traceJaegerApplicationName Concourse
-            --preprocessorConfigFile /etc/config/preprocessor_rules.yml
         - name: WAVEFRONT_TOKEN
           valueFrom:
             secretKeyRef:
               name: wavefront-proxy
               key: token
-        volumeMounts:
-          - name: wavefront-rules
-            mountPath: /etc/config
     additionalVolumes:
       - name: dsdsocket
         hostPath:
           path: /var/run/datadog
-      - name: wavefront-rules
+      - name: otelcol-config
         configMap:
-          name: wavefront-config
+          name: otelcol-config
     additionalVolumeMounts:
       - name: dsdsocket
         mountPath: /var/run/datadog
