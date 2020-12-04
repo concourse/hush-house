@@ -2,8 +2,8 @@ postgresql:
   enabled: false
 
 concourse:
-  image: cirocosta/concourse
-  imageTag: containerd
+  image: concourse/concourse-dev
+  imageDigest: sha256:5a6f3c2fccaff7cc91274c16251fe916acd9b6e0b3fd6825dc7ed914860fe5ba
   imagePullPolicy: Always
 
   postgresql:
@@ -27,10 +27,12 @@ concourse:
     nodeSelector: { cloud.google.com/gke-nodepool: ci-workers-monitoring }
     hardAntiAffinity: true
     env:
-    - name: CONCOURSE_GARDEN_USE_CONTAINERD
-      value: "true"
-    - name: CONCOURSE_GARDEN_BIN
-      value: "containerd"
+    - name: CONCOURSE_GARDEN_NETWORK_POOL
+      value: "10.254.0.0/16"
+    - name: CONCOURSE_GARDEN_MAX_CONTAINERS
+      value: "500"
+    - name: CONCOURSE_GARDEN_DENY_NETWORK
+      value: "169.254.169.254/32"
     resources:
       limits:   { cpu: 7500m, memory: 14Gi }
       requests: { cpu: 0m,    memory: 0Gi  }
@@ -41,8 +43,6 @@ concourse:
       baggageclaim: { driver: overlay }
       team: "monitoring-hush-house"
       healthcheckTimeout: 40s
-      garden:
-        bin: containerd
       tsa:
         hosts: ['ci-web-worker-gateway.ci.svc.cluster.local:2222']
 
