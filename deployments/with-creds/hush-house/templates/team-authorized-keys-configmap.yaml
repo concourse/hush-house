@@ -1,7 +1,7 @@
 {{- $root := . }}
 {{- $files := .Files.Glob "team-authorized-keys/*.pub" }}
 
-{{- if (len $files) gt 1 }}
+{{- if (gt (len $files) 1) }}
 ---
 apiVersion: v1
 kind: ConfigMap
