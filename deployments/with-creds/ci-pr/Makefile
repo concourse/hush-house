@@ -13,7 +13,7 @@ save-creds-ci-pr:
 
 
 diff-ci-pr: | ensure-creds-file-exists-ci-pr deps-ci-pr
-	helm3 diff upgrade \
+	helm diff upgrade \
 		--namespace=ci-pr \
 		--detailed-exitcode \
 		--values=./.values.yaml \
@@ -23,7 +23,7 @@ diff-ci-pr: | ensure-creds-file-exists-ci-pr deps-ci-pr
 
 
 template-ci-pr: | ensure-creds-file-exists-ci-pr deps-ci-pr
-	helm3 template \
+	helm template \
 		ci-pr \
 		--values=./.values.yaml \
 		$(HELM_FLAGS) \
@@ -40,7 +40,7 @@ deploy-ci-pr: | template-ci-pr
 
 
 deps-ci-pr:
-	helm3 dependency update .
+	helm dependency update .
 
 
 ensure-creds-file-exists-ci-pr:
