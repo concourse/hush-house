@@ -47,4 +47,3 @@ data:
           - attributes/insert_tags
           exporters:
           - jaeger
-          - logging
