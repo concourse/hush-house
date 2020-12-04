@@ -1,0 +1,21 @@
+# This file is to tell kapp to do a 3 way merge when modifying StatefulSets.
+# K8s sets default values for fields that are not specified when creating a
+# StatefulSet, but since kapp was not aware of this, it'll try to remove those
+# fields. But since StatefulSet.spec is immutable, k8s will reject those changes
+#
+# To work around this, kapp provides a way to configure it by passing in a 
+# Config file. This file is passed in along the helm templated ones on deploy
+# but kapp is smart enough to read this file and not actully apply it to the
+# cluster
+
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+
+minimumRequiredVersion: 0.23.0
+
+rebaseRules:
+- path: [spec]
+  type: copy
+  sources: [existing, new]  # copy existing into new
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: apps/v1, kind: StatefulSet}

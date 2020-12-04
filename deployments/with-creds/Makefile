@@ -1,13 +1,11 @@
 HELM_FLAGS   ?=
-
-%-ci:
-	cd ci && make $*-ci
-
-%-ci-pr:
-	cd ci-pr && make $*-ci-pr
+KAPP_FLAGS   ?=
 
 %-jaeger:
 	cd jaeger && make $*-jaeger
+
+%-vault:
+	cd vault && make $*-vault
 
 
 creds-%:
@@ -39,24 +37,21 @@ diff-%: | ensure-creds-file-exists-% deps-%
 template-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
 		helm template \
-		--name=$* \
-		--values=./.values.yaml \
-		$(HELM_FLAGS) \
-		.
-
-
-deploy-%: | ensure-creds-file-exists-% deps-%
-	cd ./$* && \
-		helm upgrade \
-			--tls \
-			--install \
-			--namespace=$* \
-			--timeout=900 \
-			--values=./.values.yaml \
-			--wait \
-			$(HELM_FLAGS) \
 			$* \
-			.
+			--values=./.values.yaml \
+			$(HELM_FLAGS) \
+			. > .template.yaml
+
+
+deploy-%: | template-%
+	cd ./$* && \
+		kapp deploy \
+			--namespace $* \
+			--app $* \
+			--file .template.yaml \
+			--file ../kapp-config.yaml \
+			--diff-changes \
+			$(KAPP_FLAGS)
 
 
 deps-%:
