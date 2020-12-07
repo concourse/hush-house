@@ -10,10 +10,10 @@ metadata:
 data:
   otelcol.yml: |
     receivers:
-      jaeger:
+      otlp:
         protocols:
-          thrift_http:
-            endpoint: 0.0.0.0:14268
+          grpc:
+            endpoint: 0.0.0.0:55680
     exporters:
       jaeger:
         endpoint: localhost:14250
@@ -31,17 +31,18 @@ data:
           action: delete
       attributes/insert_tags:
         actions:
-        - key: debug
-          action: insert
-          value: "true"
         - key: cluster
           action: insert
           value: ci.concourse-ci.org
+        # uncomment to disable "intelligent" sampling by wavefront
+        # - key: debug
+        #   action: insert
+        #   value: "true"
     service:
       pipelines:
         traces:
           receivers:
-          - jaeger
+          - otlp
           processors:
           - attributes/strip_tags
           - attributes/insert_tags
