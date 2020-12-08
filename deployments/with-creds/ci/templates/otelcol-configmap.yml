@@ -14,12 +14,21 @@ data:
         protocols:
           grpc:
             endpoint: 0.0.0.0:55680
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: 'otel-collector'
+              scrape_interval: 30s
+              static_configs:
+                - targets: ['0.0.0.0:9391']
     exporters:
       jaeger:
         endpoint: localhost:14250
         insecure: true
       logging:
         loglevel: debug
+      prometheusremotewrite:
+        endpoint: http://localhost:9000/receive
     processors:
       attributes/strip_tags:
         actions:
@@ -29,7 +38,7 @@ data:
           action: delete
         - key: instrumentation.name
           action: delete
-      attributes/insert_tags:
+      attributes/insert_cluster:
         actions:
         - key: cluster
           action: insert
@@ -38,6 +47,15 @@ data:
         # - key: debug
         #   action: insert
         #   value: "true"
+      metricstransform/insert_url:
+        transforms:
+        - include: .*
+          match_type: regexp
+          action: update
+          operations:
+            - action: add_label
+              new_label: url
+              new_value: ci.concourse-ci.org
     service:
       pipelines:
         traces:
@@ -45,6 +63,13 @@ data:
           - otlp
           processors:
           - attributes/strip_tags
-          - attributes/insert_tags
+          - attributes/insert_cluster
           exporters:
           - jaeger
+        metrics:
+          receivers:
+          - prometheus
+          processors:
+          - metricstransform/insert_url
+          exporters:
+          - prometheusremotewrite

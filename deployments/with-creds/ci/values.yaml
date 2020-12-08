@@ -44,11 +44,18 @@ concourse:
                 release: ci
     sidecarContainers:
       - name: otel-collector
-        image: otel/opentelemetry-collector:0.15.0
+        image: otel/opentelemetry-collector-contrib:0.15.0
         args: ['--config=/etc/config/otelcol.yml']
         volumeMounts:
           - name: otelcol-config
             mountPath: /etc/config
+      - name: prom-storage-adapter
+        image: wavefronthq/prometheus-storage-adapter
+        args:
+          - -proxy=127.0.0.1
+          - -proxy-port=2878
+          - -listen=9000
+          - -convert-paths=true
       - name: wavefront-proxy
         image: wavefronthq/proxy:9.2
         env:
@@ -57,6 +64,8 @@ concourse:
         - name: WAVEFRONT_PROXY_ARGS
           # https://github.com/wavefrontHQ/wavefront-proxy/blob/master/pkg/etc/wavefront/wavefront-proxy/wavefront.conf.default
           value: |
+            --prefix concourse
+            --hostname=ci.concourse-ci.org
             --traceJaegerGrpcListenerPorts 14250
             --traceJaegerApplicationName Concourse
         - name: WAVEFRONT_TOKEN
@@ -169,12 +178,15 @@ concourse:
         useCaCert: true
       letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
       tls: { enabled: true, bindPort: 443 }
-      datadog:
+      prometheus:
         enabled: true
 
-        # horrible hack; we need a proper way to configure unix sockets
-        agentHost: unix
-        agentPort: ///var/run/datadog/dsd.socket
+      # datadog:
+      #   enabled: true
+
+      #   # horrible hack; we need a proper way to configure unix sockets
+      #   agentHost: unix
+      #   agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 34.69.204.254
         database: atc
