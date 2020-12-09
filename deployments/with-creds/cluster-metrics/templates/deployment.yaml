@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: "{{ .Release.Name }}-collector"
+  labels:
+    app: otel-collector
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-collector
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+        release: "{{ .Release.Name }}"
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      containers:
+      - name: otel-collector
+        image: otel/opentelemetry-collector-contrib:0.16.0
+        args: ['--config=/etc/config/otelcol.yml', '--log-level=debug']
+        volumeMounts:
+          - name: otelcol-config
+            mountPath: /etc/config
+      - name: prom-storage-adapter
+        image: wavefronthq/prometheus-storage-adapter
+        args:
+          - -proxy=127.0.0.1
+          - -proxy-port=2878
+          - -listen=9000
+          - -convert-paths=true
+      - name: wavefront-proxy
+        image: wavefronthq/proxy:9.2
+        volumeMounts:
+          - name: otelcol-config
+            mountPath: /etc/config
+        env:
+        - name: WAVEFRONT_URL
+          value: "https://vmware.wavefront.com/api/"
+        - name: WAVEFRONT_PROXY_ARGS
+          # https://github.com/wavefrontHQ/wavefront-proxy/blob/master/pkg/etc/wavefront/wavefront-proxy/wavefront.conf.default
+          value: |
+            --prefix concourse
+            --hostname ci.concourse-ci.org
+        - name: WAVEFRONT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: wavefront-proxy
+              key: token
+      volumes:
+      - name: otelcol-config
+        configMap:
+          name: otelcol-config
