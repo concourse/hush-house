@@ -157,7 +157,7 @@ concourse:
         - UnpausePipeline
       bindPort: 80
       clusterName: ci
-      containerPlacementStrategy: limit-active-tasks
+      containerPlacementStrategy: random
       streamingArtifactsCompression: zstd
       maxActiveTasksPerWorker: 5
       enableGlobalResources: true
