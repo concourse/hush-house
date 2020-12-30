@@ -9,6 +9,7 @@
 1. Verify
     1. You should be able to login in to the container with the command `kubectl exec -it -n vault vault-0 /bin/sh`
     1. `export VAULT_SKIP_VERIFY=true`
+    1. `export VAULT_TOKEN=<vault initial root token from lastpass>`
     1. `vault status`.
         ```
         Key                      Value
