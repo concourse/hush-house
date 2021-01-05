@@ -39,10 +39,13 @@ concourse:
       rollingUpdate: "3"
     replicas: 2
     env:
-    - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
-      value: http://simplest-collector.jaeger.svc.cluster.local:14268/api/traces
-    - name: CONCOURSE_TRACING_JAEGER_SERVICE
-      value: hush-house-web
+      # The OTLP tracing stuff aren't on the latest chart yet so we're stting them as env vars
+    - name: CONCOURSE_TRACING_SERVICE_NAME
+      value: web
+    - name: CONCOURSE_TRACING_OTLP_ADDRESS
+      value: 127.0.0.1:55680
+    - name: CONCOURSE_TRACING_OTLP_USE_TLS
+      value: "false"
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
@@ -58,13 +61,41 @@ concourse:
       initialDelaySeconds: 600
     readinessProbe:
       initialDelaySeconds: 600
+    sidecarContainers:
+      - name: otel-collector
+        image: otel/opentelemetry-collector-contrib:0.15.0
+        args: ['--config=/etc/config/otelcol.yml']
+        volumeMounts:
+          - name: otelcol-config
+            mountPath: /etc/config
+      - name: prom-storage-adapter
+        image: wavefronthq/prometheus-storage-adapter
+        args:
+          - -proxy=127.0.0.1
+          - -proxy-port=2878
+          - -listen=9000
+          - -convert-paths=true
+      - name: wavefront-proxy
+        image: wavefronthq/proxy:9.2
+        env:
+        - name: WAVEFRONT_URL
+          value: "https://vmware.wavefront.com/api/"
+        - name: WAVEFRONT_PROXY_ARGS
+          # https://github.com/wavefrontHQ/wavefront-proxy/blob/master/pkg/etc/wavefront/wavefront-proxy/wavefront.conf.default
+          value: |
+            --prefix concourse
+            --hostname=hush-house.pivotal.io
+            --traceJaegerGrpcListenerPorts 14250
+            --traceJaegerApplicationName Concourse
+        - name: WAVEFRONT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: wavefront-proxy
+              key: token
     additionalVolumes:
-      - name: dsdsocket
-        hostPath:
-          path: /var/run/datadog
-    additionalVolumeMounts:
-      - name: dsdsocket
-        mountPath: /var/run/datadog
+      - name: otelcol-config
+        configMap:
+          name: otelcol-config
     service:
       api:
         type: LoadBalancer
@@ -118,17 +149,18 @@ concourse:
         attribute: "environment:hush-house"
       letsEncrypt: { enabled: true, acmeURL: "https://acme-v02.api.letsencrypt.org/directory" }
       tls: { enabled: true, bindPort: 443 }
-      datadog:
+      prometheus:
         enabled: true
+      # datadog:
+      #   enabled: true
 
-        # horrible hack; we need a proper way to configure unix sockets
-        agentHost: unix
-        agentPort: ///var/run/datadog/dsd.socket
+      #   # horrible hack; we need a proper way to configure unix sockets
+      #   agentHost: unix
+      #   agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 173.255.117.168
         database: atc
         sslmode: verify-ca
       logLevel: debug
-      logDbQueries: true
     tsa:
       logLevel: debug

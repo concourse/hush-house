@@ -74,15 +74,9 @@ concourse:
               name: wavefront-proxy
               key: token
     additionalVolumes:
-      - name: dsdsocket
-        hostPath:
-          path: /var/run/datadog
       - name: otelcol-config
         configMap:
           name: otelcol-config
-    additionalVolumeMounts:
-      - name: dsdsocket
-        mountPath: /var/run/datadog
     service:
       api:
         type: LoadBalancer
@@ -174,12 +168,6 @@ concourse:
       prometheus:
         enabled: true
 
-      # datadog:
-      #   enabled: true
-
-      #   # horrible hack; we need a proper way to configure unix sockets
-      #   agentHost: unix
-      #   agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 34.69.204.254
         database: atc
