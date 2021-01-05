@@ -9,7 +9,7 @@ dependencies:
   repository: https://concourse-charts.storage.googleapis.com/
 - name: datadog
   version: 1.39.5
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable/
 maintainers:
 - name: cirocosta
   email: cscosta@pivotal.io

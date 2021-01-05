@@ -3,7 +3,7 @@ dependencies:
   repository: https://concourse-charts.storage.googleapis.com/
   version: 14.1.0
 - name: datadog
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable/
   version: 1.39.5
-digest: sha256:efa95f7ade5dbe7d2b24b31eab2e9aeeabf0b2b098d2f62e50eec1afcce79d21
-generated: "2020-11-02T14:40:08.685991-05:00"
+digest: sha256:5758ba620c497f481e44663e5b03657a8d96da9e9a80006361bb0ab870e0c225
+generated: "2021-01-05T14:10:33.421716-05:00"

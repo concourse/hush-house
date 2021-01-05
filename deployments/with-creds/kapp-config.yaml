@@ -16,6 +16,6 @@ minimumRequiredVersion: 0.23.0
 rebaseRules:
 - path: [spec]
   type: copy
-  sources: [existing, new]  # copy existing into new
+  sources: [new, existing]  # copy new into existing
   resourceMatchers:
   - apiVersionKindMatcher: {apiVersion: apps/v1, kind: StatefulSet}

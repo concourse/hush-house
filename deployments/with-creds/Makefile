@@ -56,7 +56,7 @@ deploy-%: | template-%
 
 deps-%:
 	cd ./$* && \
-		grep 'file://' requirements.yaml || \
+		grep 'file://' Chart.yaml || \
 		helm dependency update .
 
 
