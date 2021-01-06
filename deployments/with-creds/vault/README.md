@@ -3,7 +3,7 @@
 1. ~Clone [vault-helm](https://github.com/hashicorp/vault-helm) into charts/vault-helm and checkout the version referenced in `requirements.yaml`~
 1. We have a forked version of [vault-helm](https://github.com/concourse/vault-helm). Which has something special for the postgres backend. Please keep using this version until it gets merged back to `vault-helm` chart.
 1. How to deploy `vault`
-    1. `git clone https://github.com/concourse/vault-helm` to the `charts` (hush-house/deployments/with-creds/vault/charts) directory.
+    1. `git clone -b concourse https://github.com/concourse/vault-helm` to the `charts` (hush-house/deployments/with-creds/vault/charts) directory.
     1. `make creds-vault`
     1. `make deploy-vault`. If you get the error `app-name has no deployed releases`, delete the deployment with the command `helm delete --purge vault --tls`, then try again.
 1. Verify
