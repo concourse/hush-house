@@ -20,6 +20,7 @@ resource "google_sql_database_instance" "main" {
     disk_autoresize   = true
     disk_type         = "PD_SSD"
     tier              = "db-custom-${var.cpus}-${var.memory_mb}"
+    replication_type = ""
 
     database_flags {
       name  = "log_min_duration_statement"

@@ -130,6 +130,8 @@ concourse:
       clusterName: hush-house
       containerPlacementStrategy: random
       defaultDaysToRetainBuildLogs: 30
+      # TODO: remove this after job scheduling slowness gone
+      backendMaxConns: 100
       enableLidar: true
       enableBuildAuditing: true
       enableContainerAuditing: true

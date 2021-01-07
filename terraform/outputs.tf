@@ -77,10 +77,6 @@ output "hush-house-address" {
   value = "${google_compute_address.hush-house.address}"
 }
 
-output "metrics-hush-house-address" {
-  value = "${module.metrics-address.address}"
-}
-
 output "concourse-ci-address" {
   value = "${module.concourse-ci-address.address}"
 }

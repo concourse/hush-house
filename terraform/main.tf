@@ -17,16 +17,6 @@ module "concourse-ci-address" {
   subdomain = "ci"
 }
 
-# Reserves an address for `metrics-hush-house.concourse-ci.org` and ties it
-# to the given domain.
-#
-module "metrics-address" {
-  source = "./address"
-
-  dns-zone  = "${var.dns-zone}"
-  subdomain = "metrics-hush-house"
-}
-
 # Reserves an address for `tracing.concourse-ci.org` and ties it
 # to the given domain.
 #
@@ -123,7 +113,7 @@ module "database" {
 
   name            = "hush-house"
   cpus            = "6"
-  memory_mb       = "6400"
+  memory_mb       = "10240"
   region          = "${var.region}"
   zone            = "${var.zone}"
   max_connections = "300"
