@@ -8,6 +8,7 @@
   "displayQueryParameters": true,
   "sections": [
     {
+      "name": "Tracing Charts Section",
       "rows": [
         {
           "charts": [
@@ -61,8 +62,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 4,
-                  "w": 2
+                  "w": 2,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -116,8 +117,8 @@
                 "dashboardLayout": {
                   "x": 2,
                   "y": 0,
-                  "h": 4,
-                  "w": 6
+                  "w": 6,
+                  "h": 4
                 }
               },
               "sources": [
@@ -203,8 +204,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 0,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 }
               },
               "sources": [
@@ -276,8 +277,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 4,
-                  "h": 4,
-                  "w": 2
+                  "w": 2,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -355,8 +356,8 @@
                 "dashboardLayout": {
                   "x": 2,
                   "y": 4,
-                  "h": 4,
-                  "w": 6
+                  "w": 6,
+                  "h": 4
                 }
               },
               "sources": [
@@ -464,8 +465,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 4,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 }
               },
               "sources": [
@@ -536,8 +537,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 8,
-                  "h": 4,
-                  "w": 2
+                  "w": 2,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -591,8 +592,8 @@
                 "dashboardLayout": {
                   "x": 2,
                   "y": 8,
-                  "h": 4,
-                  "w": 6
+                  "w": 6,
+                  "h": 4
                 }
               },
               "sources": [
@@ -694,8 +695,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 8,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 }
               },
               "sources": [
@@ -776,8 +777,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 12,
-                  "h": 5,
-                  "w": 12
+                  "w": 12,
+                  "h": 5
                 }
               },
               "sources": [
@@ -796,10 +797,10 @@
           ],
           "heightFactor": 100
         }
-      ],
-      "name": "Tracing Charts Section"
+      ]
     },
     {
+      "name": "Overview",
       "rows": [
         {
           "charts": [
@@ -840,8 +841,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 4,
-                  "w": 12
+                  "w": 12,
+                  "h": 4
                 }
               },
               "sources": [
@@ -868,7 +869,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "BOTTOM",
                 "customTags": [],
                 "showRawValues": false,
@@ -879,7 +879,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -903,8 +902,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 4,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -931,7 +930,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "BOTTOM",
                 "customTags": [],
                 "showRawValues": false,
@@ -942,7 +940,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -966,8 +963,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 4,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -1027,8 +1024,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 4,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -1063,10 +1060,10 @@
           ],
           "heightFactor": 100
         }
-      ],
-      "name": "Overview"
+      ]
     },
     {
+      "name": "Builds",
       "rows": [
         {
           "charts": [
@@ -1078,7 +1075,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(73,175,217,1)",
                   "rgba(73,175,217,1)"
@@ -1100,7 +1096,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1132,8 +1127,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 4,
-                  "w": 3
+                  "w": 3,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1162,7 +1157,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(133,200,26,1)",
                   "rgba(245,79,71,1)"
@@ -1184,7 +1178,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1216,8 +1209,8 @@
                 "dashboardLayout": {
                   "x": 3,
                   "y": 0,
-                  "h": 4,
-                  "w": 3
+                  "w": 3,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1246,7 +1239,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(133,200,26,1)",
                   "rgba(245,79,71,1)"
@@ -1268,7 +1260,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1300,8 +1291,8 @@
                 "dashboardLayout": {
                   "x": 6,
                   "y": 0,
-                  "h": 4,
-                  "w": 3
+                  "w": 3,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1330,7 +1321,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(133,200,26,1)",
                   "rgba(245,79,71,1)"
@@ -1352,7 +1342,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1384,8 +1373,8 @@
                 "dashboardLayout": {
                   "x": 9,
                   "y": 0,
-                  "h": 4,
-                  "w": 3
+                  "w": 3,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1418,7 +1407,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [
                   "team",
@@ -1431,11 +1419,9 @@
                 "showHosts": false,
                 "groupBySource": false,
                 "windowing": "full",
-                "defaultSortColumn": null,
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "table",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -1447,6 +1433,7 @@
                 ],
                 "autoColumnTags": false,
                 "numTags": 4,
+                "defaultSortColumn": null,
                 "sparklineDisplayColor": null,
                 "sparklineLineColor": null,
                 "sparklineFillColor": null
@@ -1458,8 +1445,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 4,
-                  "h": 5,
-                  "w": 12
+                  "w": 12,
+                  "h": 5
                 }
               },
               "sources": [
@@ -1482,10 +1469,10 @@
           ],
           "heightFactor": 100
         }
-      ],
-      "name": "Builds"
+      ]
     },
     {
+      "name": "Database",
       "rows": [
         {
           "charts": [
@@ -1526,8 +1513,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 8,
-                  "w": 4
+                  "w": 4,
+                  "h": 8
                 }
               },
               "sources": [
@@ -1550,7 +1537,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(73,175,217,1)",
                   "rgba(73,175,217,1)"
@@ -1572,7 +1558,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1605,8 +1590,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 0,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1635,7 +1620,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(73,175,217,1)",
                   "rgba(73,175,217,1)"
@@ -1657,7 +1641,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1690,8 +1673,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 0,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1725,7 +1708,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(73,175,217,1)",
                   "rgba(73,175,217,1)"
@@ -1747,7 +1729,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -1780,8 +1761,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 4,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 },
                 "y0ScaleDecimal": false
               },
@@ -1810,7 +1791,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -1821,7 +1801,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "stacked-area",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -1845,8 +1824,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 4,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 }
               },
               "sources": [
@@ -1869,10 +1848,10 @@
           ],
           "heightFactor": 80
         }
-      ],
-      "name": "Database"
+      ]
     },
     {
+      "name": "Workers",
       "rows": [
         {
           "charts": [
@@ -1884,7 +1863,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "BOTTOM",
                 "customTags": [],
                 "showRawValues": false,
@@ -1895,7 +1873,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -1919,8 +1896,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -1948,7 +1925,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -1959,7 +1935,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -1983,8 +1958,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 0,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2011,7 +1986,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -2022,7 +1996,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -2046,8 +2019,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 0,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2079,7 +2052,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": true,
@@ -2090,7 +2062,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": false,
@@ -2114,8 +2085,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 5,
-                  "h": 5,
-                  "w": 12
+                  "w": 12,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2156,10 +2127,10 @@
           ],
           "heightFactor": 100
         }
-      ],
-      "name": "Workers"
+      ]
     },
     {
+      "name": "Checks",
       "rows": [
         {
           "charts": [
@@ -2172,7 +2143,6 @@
                 "sparklineDisplayFontSize": "150",
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(73,175,217,1)",
                   "rgba(73,175,217,1)"
@@ -2193,7 +2163,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -2227,8 +2196,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 },
                 "y0ScaleDecimal": true
               },
@@ -2257,7 +2226,6 @@
                 "y0ScaleSIBy1024": false,
                 "sparklineDisplayFontSize": "150",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "sparklineValueColorMapColors": [
                   "rgba(133,200,26,1)",
                   "rgba(245,79,71,1)"
@@ -2278,7 +2246,6 @@
                 ],
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "sparklineDisplayValueType": "VALUE",
                 "type": "sparkline",
                 "y1UnitAutoscaling": false,
@@ -2313,8 +2280,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 0,
-                  "h": 4,
-                  "w": 4
+                  "w": 4,
+                  "h": 4
                 },
                 "y0ScaleDecimal": true
               },
@@ -2338,10 +2305,10 @@
           ],
           "heightFactor": 80
         }
-      ],
-      "name": "Checks"
+      ]
     },
     {
+      "name": "Process",
       "rows": [
         {
           "charts": [
@@ -2388,8 +2355,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 10,
-                  "w": 4
+                  "w": 4,
+                  "h": 10
                 }
               },
               "sources": [
@@ -2411,7 +2378,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -2422,7 +2388,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "stacked-area",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -2447,8 +2412,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 0,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2470,7 +2435,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": true,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -2481,7 +2445,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -2510,8 +2473,8 @@
                 "dashboardLayout": {
                   "x": 8,
                   "y": 0,
-                  "h": 5,
-                  "w": 4
+                  "w": 4,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2547,7 +2510,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": true,
@@ -2558,7 +2520,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -2588,8 +2549,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 5,
-                  "h": 5,
-                  "w": 8
+                  "w": 8,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2632,10 +2593,10 @@
           ],
           "heightFactor": 100
         }
-      ],
-      "name": "Process"
+      ]
     },
     {
+      "name": "HTTP",
       "rows": [
         {
           "charts": [
@@ -2676,8 +2637,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 10,
-                  "w": 4
+                  "w": 4,
+                  "h": 10
                 }
               },
               "sources": [
@@ -2733,8 +2694,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 0,
-                  "h": 5,
-                  "w": 8
+                  "w": 8,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2812,8 +2773,8 @@
                 "dashboardLayout": {
                   "x": 4,
                   "y": 5,
-                  "h": 5,
-                  "w": 8
+                  "w": 8,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2840,7 +2801,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [
                   "route",
@@ -2851,11 +2811,9 @@
                 "showHosts": false,
                 "groupBySource": false,
                 "windowing": "full",
-                "defaultSortColumn": null,
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "table",
                 "y1UnitAutoscaling": false,
                 "showLabels": false,
@@ -2867,6 +2825,7 @@
                 ],
                 "autoColumnTags": false,
                 "numTags": 4,
+                "defaultSortColumn": null,
                 "sparklineDisplayColor": null,
                 "sparklineLineColor": null,
                 "sparklineFillColor": null
@@ -2901,8 +2860,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 10,
-                  "h": 5,
-                  "w": 6
+                  "w": 6,
+                  "h": 5
                 }
               },
               "sources": [
@@ -2933,7 +2892,6 @@
                 "fixedLegendFilterField": "CURRENT",
                 "y0ScaleSIBy1024": false,
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [
                   "route",
@@ -2944,11 +2902,9 @@
                 "showHosts": false,
                 "groupBySource": false,
                 "windowing": "full",
-                "defaultSortColumn": null,
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "table",
                 "y1UnitAutoscaling": false,
                 "showLabels": false,
@@ -2960,6 +2916,7 @@
                 ],
                 "autoColumnTags": false,
                 "numTags": 4,
+                "defaultSortColumn": null,
                 "sparklineDisplayColor": null,
                 "sparklineLineColor": null,
                 "sparklineFillColor": null
@@ -2994,8 +2951,8 @@
                 "dashboardLayout": {
                   "x": 6,
                   "y": 10,
-                  "h": 5,
-                  "w": 6
+                  "w": 6,
+                  "h": 5
                 }
               },
               "sources": [
@@ -3021,10 +2978,10 @@
           ],
           "heightFactor": 100
         }
-      ],
-      "name": "HTTP"
+      ]
     },
     {
+      "name": "GO",
       "rows": [
         {
           "charts": [
@@ -3036,7 +2993,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -3047,7 +3003,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "stacked-area",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -3071,8 +3026,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 0,
-                  "h": 6,
-                  "w": 6
+                  "w": 6,
+                  "h": 6
                 }
               },
               "sources": [
@@ -3094,7 +3049,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -3105,7 +3059,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "stacked-area",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -3129,8 +3082,8 @@
                 "dashboardLayout": {
                   "x": 6,
                   "y": 0,
-                  "h": 6,
-                  "w": 6
+                  "w": 6,
+                  "h": 6
                 }
               },
               "sources": [
@@ -3197,8 +3150,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 6,
-                  "h": 10,
-                  "w": 5
+                  "w": 5,
+                  "h": 10
                 }
               },
               "sources": [
@@ -3223,7 +3176,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -3234,7 +3186,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -3263,8 +3214,8 @@
                 "dashboardLayout": {
                   "x": 5,
                   "y": 6,
-                  "h": 5,
-                  "w": 7
+                  "w": 7,
+                  "h": 5
                 }
               },
               "sources": [
@@ -3306,7 +3257,6 @@
                 "y0ScaleSIBy1024": false,
                 "stackType": "zero",
                 "fixedLegendFilterLimit": 5,
-                "fixedLegendShowSourceName": true,
                 "fixedLegendPosition": "RIGHT",
                 "customTags": [],
                 "showRawValues": false,
@@ -3317,7 +3267,6 @@
                 "fixedLegendFilterSort": "TOP",
                 "y1Units": "",
                 "sortValuesDescending": true,
-                "fixedLegendShowMetricName": false,
                 "type": "line",
                 "y1UnitAutoscaling": false,
                 "showLabels": true,
@@ -3342,8 +3291,8 @@
                 "dashboardLayout": {
                   "x": 5,
                   "y": 11,
-                  "h": 5,
-                  "w": 7
+                  "w": 7,
+                  "h": 5
                 }
               },
               "sources": [
@@ -3399,8 +3348,8 @@
                 "dashboardLayout": {
                   "x": 0,
                   "y": 16,
-                  "h": 3,
-                  "w": 12
+                  "w": 12,
+                  "h": 3
                 }
               },
               "sources": [
@@ -3418,8 +3367,7 @@
           ],
           "heightFactor": 50
         }
-      ],
-      "name": "GO"
+      ]
     }
   ],
   "parameterDetails": {
@@ -3428,7 +3376,7 @@
       "valueOrdering": [
         "default"
       ],
-      "order": 9,
+      "order": 4,
       "defaultValue": "default",
       "hideFromView": true,
       "label": "aggregated-filters",
@@ -3443,7 +3391,7 @@
         "Detailed View",
         "Summarized View"
       ],
-      "order": 8,
+      "order": 3,
       "defaultValue": "Summarized View",
       "hideFromView": false,
       "label": "view",
@@ -3453,133 +3401,156 @@
       },
       "allowAll": false
     },
-    "url": {
-      "tagsBlackListRegex": "",
-      "parameterType": "DYNAMIC",
-      "tagKey": "url",
-      "queryValue": "ts(\"concourse.concourse.builds.running\")",
-      "order": 2,
-      "defaultValue": "Label",
-      "hideFromView": false,
-      "value": "ci.concourse-ci.org",
-      "label": "Server",
-      "dynamicFieldType": "TAG_KEY",
-      "valuesToReadableStrings": {
-        "Label": "ci.concourse-ci.org"
-      },
-      "allowAll": false,
-      "selectedLabel": "Label"
-    },
     "application": {
+      "tagsBlackListRegex": "",
       "parameterType": "DYNAMIC",
       "tagKey": "application",
       "queryValue": "sum(ts(~component.heartbeat, not \"_synthetic\"=\"true\"), application)",
-      "order": 1,
-      "defaultValue": "Label_6",
-      "hideFromView": false,
+      "order": 6,
+      "defaultValue": "Label_7",
+      "hideFromView": true,
       "value": "Concourse",
       "label": "application",
       "dynamicFieldType": "TAG_KEY",
       "valuesToReadableStrings": {
-        "Label_70": "sourcedata-transform",
-        "Label_60": "petclinic-e2e-workshop-w01-s206",
-        "Label_71": "spring-petclinic-k8s",
-        "Label_61": "petclinic-e2e-workshop-w01-s209",
-        "Label_72": "tanzu-gitops",
-        "Label_50": "liiv-demo",
-        "Label_62": "petclinic-e2e-workshop-w01-s211",
-        "Label_2": "COAPPS-dev",
-        "Label_40": "crdant-petclinic",
-        "Label_51": "petclinic-e2e-workshop-w01-s194",
-        "Label_63": "resource-group-service",
-        "Label_3": "COAPPS-dev￢ﾀﾋ￢ﾀﾋ￢ﾀﾋ￢ﾀﾋ￢ﾀﾋ￢ﾀﾋ￢ﾀﾋ",
-        "Label_30": "SkylineApp",
-        "Label_41": "demo-dib",
-        "Label_52": "petclinic-e2e-workshop-w01-s195",
-        "Label_64": "resource-groups-service",
+        "Label_90": "petclinic-e2e-workshop-w01-s053",
+        "Label_80": "petclinic-e2e-workshop-w01-s032",
+        "Label_91": "petclinic-e2e-workshop-w01-s058",
+        "Label_70": "petclinic-e2e-workshop-w01-s021",
+        "Label_81": "petclinic-e2e-workshop-w01-s035",
+        "Label_92": "petclinic-e2e-workshop-w01-s060",
+        "Label_60": "petclinic-e2e-workshop-w01-s005",
+        "Label_71": "petclinic-e2e-workshop-w01-s022",
+        "Label_82": "petclinic-e2e-workshop-w01-s039",
+        "Label_93": "petclinic-e2e-workshop-w01-s062",
+        "Label_110": "support-labs-reservations",
+        "Label_61": "petclinic-e2e-workshop-w01-s008",
+        "Label_72": "petclinic-e2e-workshop-w01-s023",
+        "Label_83": "petclinic-e2e-workshop-w01-s040",
+        "Label_94": "petclinic-e2e-workshop-w01-s063",
+        "Label_100": "petclinic-e2e-workshop-w01-s079",
+        "Label_111": "tanzu-gitops",
+        "Label_50": "edge-pos-txn-receiver",
+        "Label_62": "petclinic-e2e-workshop-w01-s010",
+        "Label_73": "petclinic-e2e-workshop-w01-s024",
+        "Label_84": "petclinic-e2e-workshop-w01-s042",
+        "Label_95": "petclinic-e2e-workshop-w01-s064",
+        "Label_2": "Blockchain",
+        "Label_101": "petclinic-e2e-workshop-w01-s081",
+        "Label_112": "unnamed_application",
+        "Label_40": "atlas",
+        "Label_51": "edge-pos-txn-sender",
+        "Label_63": "petclinic-e2e-workshop-w01-s011",
+        "Label_74": "petclinic-e2e-workshop-w01-s025",
+        "Label_85": "petclinic-e2e-workshop-w01-s045",
+        "Label_96": "petclinic-e2e-workshop-w01-s065",
+        "Label_3": "COAPPS-dev",
+        "Label_102": "petclinic-e2e-workshop-w01-s086",
+        "Label_30": "SaasUserServiceTest",
+        "Label_41": "backend",
+        "Label_52": "edge-pos-ui",
+        "Label_64": "petclinic-e2e-workshop-w01-s012",
+        "Label_75": "petclinic-e2e-workshop-w01-s026",
+        "Label_86": "petclinic-e2e-workshop-w01-s046",
+        "Label_97": "petclinic-e2e-workshop-w01-s070",
         "Label_4": "COAPPS-local",
-        "Label_20": "MyVMware-Login",
-        "Label_31": "SkylineIT",
-        "Label_42": "derrick-wavefront-demo",
-        "Label_53": "petclinic-e2e-workshop-w01-s196",
-        "Label_65": "rs-petclinic",
-        "Label_5": "COAPPS-uat",
-        "Label_10": "Jaeger",
-        "Label_21": "MyVMware-Support",
-        "Label_32": "SupportHub",
-        "Label_43": "diego-petclinic",
-        "Label_54": "petclinic-e2e-workshop-w01-s197",
-        "Label_66": "saas-platform-apps",
-        "Label_6": "Concourse",
-        "Label_11": "Kong-CSP",
-        "Label_22": "MyVMware-User-Management",
-        "Label_33": "Tesseract",
-        "Label_44": "dpfeffer-petclinic",
-        "Label_55": "petclinic-e2e-workshop-w01-s198",
-        "Label_67": "sap-connector-sink",
-        "Label_7": "CpHub",
-        "Label_12": "Kong-NonCsp",
-        "Label_23": "MyVMware-User_Permissions",
-        "Label_34": "Wavefront-test-app",
-        "Label_45": "edge-pos-txn-receiver",
-        "Label_56": "petclinic-e2e-workshop-w01-s201",
-        "Label_68": "sharadgu-spring-demo",
-        "Label_8": "Demo",
-        "Label_13": "License",
-        "Label_24": "Notification-Service",
-        "Label_35": "Zipkin",
-        "Label_46": "edge-pos-txn-sender",
-        "Label_57": "petclinic-e2e-workshop-w01-s202",
-        "Label_69": "smart2invest",
-        "Label_9": "Fortune Demo",
-        "Label_14": "Midas",
-        "Label_25": "SaaSEdgeServiceTest1",
-        "Label_36": "atlas",
-        "Label_47": "edge-pos-ui",
-        "Label_58": "petclinic-e2e-workshop-w01-s203",
-        "Label_15": "MyVMware-Alerts-and-Audits",
-        "Label_26": "SaasUserServiceTest",
-        "Label_37": "backend",
-        "Label_48": "jgalvin-petclinic",
-        "Label_59": "petclinic-e2e-workshop-w01-s205",
-        "Label_16": "MyVMware-Common-Services",
-        "Label_27": "Sample11",
-        "Label_38": "bet-spring-petclinic",
-        "Label_49": "k8s-demo-app",
-        "Label_17": "MyVMware-Entitlements",
-        "Label_28": "Shepherd",
-        "Label_39": "ce-smokescreen",
-        "Label_18": "MyVMware-Fund-Management",
-        "Label_29": "Skyline",
-        "Label_19": "MyVMware-License",
-        "Label": "Blockchain"
+        "Label_103": "petclinic-e2e-workshop-w01-s087",
+        "Label_20": "MyVMware-Entitlements",
+        "Label_31": "Sample11",
+        "Label_42": "bet-spring-petclinic",
+        "Label_53": "giancolajo-todos",
+        "Label_65": "petclinic-e2e-workshop-w01-s014",
+        "Label_76": "petclinic-e2e-workshop-w01-s027",
+        "Label_87": "petclinic-e2e-workshop-w01-s050",
+        "Label_98": "petclinic-e2e-workshop-w01-s074",
+        "Label_5": "COAPPS-stg",
+        "Label_104": "resource-groups-service",
+        "Label_10": "Dodd's Todos Application",
+        "Label_21": "MyVMware-Fund-Management",
+        "Label_32": "Shepherd",
+        "Label_43": "ce-smokescreen",
+        "Label_54": "giancolajo-todos-local",
+        "Label_66": "petclinic-e2e-workshop-w01-s016",
+        "Label_77": "petclinic-e2e-workshop-w01-s029",
+        "Label_88": "petclinic-e2e-workshop-w01-s051",
+        "Label_99": "petclinic-e2e-workshop-w01-s078",
+        "Label_6": "COAPPS-uat",
+        "Label_105": "rs-petclinic",
+        "Label_11": "Dodds Todos Application",
+        "Label_22": "MyVMware-License",
+        "Label_33": "Skyline",
+        "Label_44": "demo-dib",
+        "Label_55": "jgonzalezagu-petclinic",
+        "Label_67": "petclinic-e2e-workshop-w01-s017",
+        "Label_78": "petclinic-e2e-workshop-w01-s030",
+        "Label_89": "petclinic-e2e-workshop-w01-s052",
+        "Label_7": "Concourse",
+        "Label_106": "saas-platform-apps",
+        "Label_12": "Fortune Demo",
+        "Label_23": "MyVMware-Login",
+        "Label_34": "SkylineApp",
+        "Label_45": "derrick-wavefront-demo",
+        "Label_56": "k8s-demo-app",
+        "Label_68": "petclinic-e2e-workshop-w01-s019",
+        "Label_79": "petclinic-e2e-workshop-w01-s031",
+        "Label_8": "CpHub",
+        "Label_107": "sap-connector-sink",
+        "Label_13": "Jaeger",
+        "Label_24": "MyVMware-Support",
+        "Label_35": "SkylineIT",
+        "Label_46": "dib-petclinic",
+        "Label_57": "kn-hello-app",
+        "Label_69": "petclinic-e2e-workshop-w01-s020",
+        "Label_9": "Demo",
+        "Label_108": "sharadgu-spring-demo",
+        "Label_14": "Kong-CSP",
+        "Label_25": "MyVMware-User-Management",
+        "Label_36": "SupportHub",
+        "Label_47": "diego-petclinic",
+        "Label_58": "liiv-demo",
+        "Label_109": "sourcedata-transform",
+        "Label_15": "Kong-NonCsp",
+        "Label_26": "MyVMware-User_Permissions",
+        "Label_37": "Tesseract",
+        "Label_48": "dodds-Todos",
+        "Label_59": "petclinic-e2e-workshop-w01-s003",
+        "Label_16": "License",
+        "Label_27": "MyVMware_Support",
+        "Label_38": "Wavefront-test-app",
+        "Label_49": "dpfeffer-petclinic",
+        "Label_17": "Midas",
+        "Label_28": "Notification-Service",
+        "Label_39": "Zipkin",
+        "Label_18": "MyVMware-Alerts-and-Audits",
+        "Label_29": "SaaSEdgeServiceTest1",
+        "Label_19": "MyVMware-Common-Services",
+        "Label": "${spring.application.name}-${spring.profiles.active}"
       },
       "allowAll": false,
-      "selectedLabel": "Label_6"
+      "selectedLabel": "Label_7"
     },
     "service": {
       "parameterType": "DYNAMIC",
       "tagKey": "service",
       "queryValue": "sum(ts(~component.heartbeat, application=\"${application}\" and not \"_synthetic\"=\"true\"), service)",
-      "order": 3,
-      "defaultValue": "Label_2",
+      "order": 1,
+      "defaultValue": "Label",
       "hideFromView": false,
       "value": "web",
       "label": "service",
       "dynamicFieldType": "TAG_KEY",
       "valuesToReadableStrings": {
-        "Label": "concourse-web",
-        "Label_2": "web"
+        "Label": "web"
       },
       "allowAll": false,
-      "selectedLabel": "Label_2"
+      "selectedLabel": "Label"
     },
     "overview_filters": {
       "parameterType": "LIST",
       "valueOrdering": [
         "default"
       ],
-      "order": 11,
+      "order": 8,
       "defaultValue": "default",
       "hideFromView": true,
       "label": "overview-filters",
@@ -3590,39 +3561,44 @@
     },
     "filter": {
       "parameterType": "SIMPLE",
-      "order": 12,
+      "order": 7,
       "defaultValue": "Label",
       "hideFromView": true,
+      "value": " and url=\"${cluster}\"",
       "label": "filter",
       "valuesToReadableStrings": {
-        "Label": " and url=\"${url}\""
+        "Label": " and url=\"${cluster}\""
       },
       "allowAll": false
     },
     "cluster": {
+      "tagsBlackListRegex": "",
       "parameterType": "DYNAMIC",
-      "tagKey": "cluster",
-      "queryValue": "collect(sum(ts(~component.heartbeat, application=\"${application}\" and service=\"${service}\" and not \"_synthetic\"=\"true\"), cluster), taggify(1, \"cluster\", \"*\"))",
-      "order": 4,
-      "defaultValue": "Label",
+      "tagKey": "url",
+      "queryValue": "collect(sum(ts(concourse.go.info and not \"_synthetic\"=\"true\"), url), taggify(1, \"url\", \"*\"))",
+      "order": 2,
+      "defaultValue": "Label_3",
       "hideFromView": false,
-      "value": "*",
-      "label": "cluster",
+      "value": "ci.concourse-ci.org",
+      "label": "deployment",
       "dynamicFieldType": "TAG_KEY",
       "valuesToReadableStrings": {
         "Label": "*",
-        "Label_2": "ci.concourse-ci.org",
-        "Label_3": "none"
+        "Label_2": "ci-test.concourse-ci.org",
+        "Label_3": "ci.concourse-ci.org",
+        "Label_4": "hush-house.pivotal.io"
       },
       "allowAll": false,
-      "selectedLabel": "Label"
+      "selectedLabel": "Label_3"
     },
     "source": {
+      "tagsBlackListRegex": "",
       "parameterType": "DYNAMIC",
+      "tagKey": "",
       "queryValue": "collect(sum(ts(~component.heartbeat, application=\"${application}\" and service=\"${service}\" and cluster=\"${cluster}\" and shard=\"${shard}\" and not \"_synthetic\"=\"true\"), sources), aliasSource(1, \"*\"))",
-      "order": 6,
+      "order": 10,
       "defaultValue": "Label",
-      "hideFromView": false,
+      "hideFromView": true,
       "value": "*",
       "label": "source",
       "dynamicFieldType": "SOURCE",
@@ -3638,7 +3614,7 @@
       "valueOrdering": [
         "default"
       ],
-      "order": 10,
+      "order": 5,
       "defaultValue": "default",
       "hideFromView": true,
       "label": "filters",
@@ -3648,12 +3624,13 @@
       "allowAll": false
     },
     "spanKind": {
+      "tagsBlackListRegex": "",
       "parameterType": "DYNAMIC",
       "tagKey": "span.kind",
       "queryValue": "collect(sum(ts(~component.heartbeat, application=\"${application}\" and service=\"${service}\" and cluster=\"${cluster}\" and shard=\"${shard}\" and not \"_synthetic\"=\"true\"), \"span.kind\"), taggify(1, \"span.kind\", \"*\"))",
-      "order": 7,
+      "order": 11,
       "defaultValue": "Label",
-      "hideFromView": false,
+      "hideFromView": true,
       "value": "*",
       "label": "spanKind",
       "dynamicFieldType": "TAG_KEY",
@@ -3665,12 +3642,13 @@
       "selectedLabel": "Label"
     },
     "shard": {
+      "tagsBlackListRegex": "",
       "parameterType": "DYNAMIC",
       "tagKey": "shard",
       "queryValue": "collect(sum(ts(~component.heartbeat, application=\"${application}\" and service=\"${service}\" and cluster=\"${cluster}\" and not \"_synthetic\"=\"true\"), shard), taggify(1, \"shard\", \"*\"))",
-      "order": 5,
+      "order": 9,
       "defaultValue": "Label",
-      "hideFromView": false,
+      "hideFromView": true,
       "value": "*",
       "label": "shard",
       "dynamicFieldType": "TAG_KEY",
