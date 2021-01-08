@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse-dev
-  imageDigest: sha256:0b3f5e3c7bec3b56927088ddfd9a9af7c5eb1c6bcfad61796264f578a361ce55
+  imageDigest: sha256:ce6dbca9dc25837d698a9c397f3d7c3cfe507460a6bc166c57f35407f23528da
 
   secrets:
     teamAuthorizedKeys:
@@ -24,6 +24,9 @@ concourse:
     env:
     - name: CONCOURSE_X_FRAME_OPTIONS
       value: ""
+    # TODO: use concourse.concourse.web.enablePipelineInstances instead once the chart is released
+    - name: CONCOURSE_ENABLE_PIPELINE_INSTANCES
+      value: "true"
       # The OTLP tracing stuff aren't on the latest chart yet so we're stting them as env vars
     - name: CONCOURSE_TRACING_SERVICE_NAME
       value: web
