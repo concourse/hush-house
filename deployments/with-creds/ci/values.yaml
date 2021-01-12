@@ -54,6 +54,9 @@ concourse:
             mountPath: /etc/config
       - name: prom-storage-adapter
         image: wavefronthq/prometheus-storage-adapter
+        resources:
+          limits:
+            memory: 100Mi
         args:
           - -proxy=127.0.0.1
           - -proxy-port=2878
@@ -61,6 +64,9 @@ concourse:
           - -convert-paths=true
       - name: wavefront-proxy
         image: wavefronthq/proxy:9.2
+        resources:
+          limits:
+            memory: 500Mi
         env:
         - name: WAVEFRONT_URL
           value: "https://vmware.wavefront.com/api/"
