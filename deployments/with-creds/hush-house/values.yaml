@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageTag: "6.7.2"
+  imageTag: "6.7.3"
 
   secrets:
     teamAuthorizedKeys:
@@ -138,8 +138,6 @@ concourse:
       clusterName: hush-house
       containerPlacementStrategy: random
       defaultDaysToRetainBuildLogs: 30
-      # TODO: remove this after job scheduling slowness gone
-      backendMaxConns: 100
       enableLidar: true
       enableBuildAuditing: true
       enableContainerAuditing: true
