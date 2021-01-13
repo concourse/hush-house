@@ -7,6 +7,8 @@ concourse:
 
   secrets:
     teamAuthorizedKeys:
+    - team: cf-volume-services
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDV1A/gb0tTceKynSBDums8HeCxlZ3sTjL7jLnn+WDIv7Cy9/sTFAR5zS8luV/aV7W3D5GOlleqcotGe+ju9d3NUXwmBlx3dC97U+dc0zT8Z56nAn+eokMwyuyGrh1BaFrGxtezZ0nGhlf9jYXVS8glc1ZxcAxY4nOBIApqap/t4Ya4j5cwxCQPzM/aR8N8EQoSInF0g9F3y2Rsae4mkrcl8oSRt1neZ5SCHYd+nEFdoqAIeZWoDIyyx6Acm//jJrjSD7roYmVymnxLpRWc+NkiSOZW2SLm8WIk40JWOL7uITWVAHEMSmvJO8d1J1Tbmtcf5QW68ncB6AyI9DJ/8xJ4tgI1toQwifDLWwo1wFaH8pxTvGnKYmL9G3rjMVBpntagzzyv6ZeasQUPpAIGGszG5drAC9+z3vdGnaAYyOIkWrQk2X7ebjXE+BP/0Bs9xlfo6AxTCKlc7cG8mMJ4tKY6NhP8E2tC+dNG6kcbZ5ir5aimpvUDYGASG6F+uaUhwSU= lisaburns@lisaburns-a01.vmware.com'
     - team: diego
       key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPVX0dq1paSLmoLH8kJCu2XswVyYkyJUXNtncxM2R/sQwgrAK+LIDkKMU1vBkHK8HtuFZnutU6ZU3RD1Zmnwdnn01TP1fgeAJOEYfTi0lgyAwq5466MqFY1OVHg8ueOS54ejNU3k+Hw58Hy0W9FNZb3KshieOdqSlyvIzjoL2WQSOEZIZkh0ZihOAVaVvPITonFpfKI8VIwmbBiQAR0RhZwd8aF0tVpNjt45yVxREDgAhaPowqsoZjMGvFDkKFfLB6y0OVmhgKjCYQXlGJwQU9u2k0L5EImpX/40ZPW7wj20en5DRprizzqzo94aoDO6gpg/PZJnedB2NHzTLL373V'
     - team: toolsmiths
