@@ -45,6 +45,7 @@ concourse:
               matchLabels:
                 app: ci-web
                 release: ci
+    # NOTE: If you add sidecars make sure you set resources to maintain the QoS class of "guaranteed"
     sidecarContainers:
       - name: otel-collector
         image: otel/opentelemetry-collector-contrib:0.15.0

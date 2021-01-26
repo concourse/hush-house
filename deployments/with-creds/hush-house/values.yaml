@@ -65,10 +65,18 @@ concourse:
       initialDelaySeconds: 600
     readinessProbe:
       initialDelaySeconds: 600
+    # NOTE: If you add sidecars make sure you set resources to maintain the QoS class of "guaranteed"
     sidecarContainers:
       - name: otel-collector
         image: otel/opentelemetry-collector-contrib:0.15.0
         args: ['--config=/etc/config/otelcol.yml']
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 500m
+          requests:
+            memory: 100Mi
+            cpu: 500m
         volumeMounts:
           - name: otelcol-config
             mountPath: /etc/config
@@ -77,6 +85,10 @@ concourse:
         resources:
           limits:
             memory: 100Mi
+            cpu: 500m
+          requests:
+            memory: 100Mi
+            cpu: 500m
         args:
           - -proxy=127.0.0.1
           - -proxy-port=2878
@@ -87,6 +99,10 @@ concourse:
         resources:
           limits:
             memory: 500Mi
+            cpu: 500m
+          requests:
+            memory: 500Mi
+            cpu: 500m
         env:
         - name: WAVEFRONT_URL
           value: "https://vmware.wavefront.com/api/"
