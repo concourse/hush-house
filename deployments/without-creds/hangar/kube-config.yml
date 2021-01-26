@@ -1,0 +1,15 @@
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+
+minimumRequiredVersion: 0.23.0
+
+rebaseRules:
+- paths:
+    - [metadata, annotations, ingress.kubernetes.io/backends]
+    - [metadata, annotations, ingress.kubernetes.io/forwarding-rule]
+    - [metadata, annotations, ingress.kubernetes.io/target-proxy]
+    - [metadata, annotations, ingress.kubernetes.io/url-map]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: extensions/v1beta1, kind: Ingress}

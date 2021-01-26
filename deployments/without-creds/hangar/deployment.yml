@@ -17,8 +17,10 @@ spec:
       containers:
         - name: hangar
           image: nginx
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
+              protocol: TCP
           volumeMounts:
             - mountPath: /etc/nginx/
               name: nginx-config
