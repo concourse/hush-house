@@ -43,13 +43,17 @@ concourse:
       rollingUpdate: "3"
     replicas: 2
     env:
-      # The OTLP tracing stuff aren't on the latest chart yet so we're stting them as env vars
-    - name: CONCOURSE_TRACING_SERVICE_NAME
+    - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
+      value: http://127.0.0.1:14268/api/traces
+    - name: CONCOURSE_TRACING_JAEGER_SERVICE
       value: web
-    - name: CONCOURSE_TRACING_OTLP_ADDRESS
-      value: 127.0.0.1:55680
-    - name: CONCOURSE_TRACING_OTLP_USE_TLS
-      value: "false"
+      # # The OTLP tracing stuff aren't on the latest chart yet so we're stting them as env vars
+    # - name: CONCOURSE_TRACING_SERVICE_NAME
+      # value: web
+    # - name: CONCOURSE_TRACING_OTLP_ADDRESS
+      # value: 127.0.0.1:55680
+    # - name: CONCOURSE_TRACING_OTLP_USE_TLS
+      # value: "false"
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
