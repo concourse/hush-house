@@ -14,7 +14,27 @@ kind: Config
 minimumRequiredVersion: 0.23.0
 
 rebaseRules:
+# You can only update spec.template, spec.replicas, and spec.updateStrategy on a StatefulSet
+# First, copy over the old spec
 - path: [spec]
+  type: copy
+  sources: [existing, new]  # use the existing values
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: apps/v1, kind: StatefulSet}
+# Then, use the new spec.template
+- path: [spec, template]
+  type: copy
+  sources: [new, existing]  # copy new into existing
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: apps/v1, kind: StatefulSet}
+# Then, use the new spec.replicas
+- path: [spec, replicas]
+  type: copy
+  sources: [new, existing]  # copy new into existing
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: apps/v1, kind: StatefulSet}
+# Then, use the new spec.updateStrategy
+- path: [spec, updateStrategy]
   type: copy
   sources: [new, existing]  # copy new into existing
   resourceMatchers:
