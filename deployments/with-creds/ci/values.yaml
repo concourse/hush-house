@@ -78,7 +78,7 @@ concourse:
         image: wavefronthq/proxy:9.2
         resources:
           limits:
-            memory: 500Mi
+            memory: 1Gi
             cpu: 500m
           requests:
             memory: 500Mi
@@ -111,11 +111,11 @@ concourse:
         loadBalancerIP: 34.69.51.78
     resources:
       requests:
-        cpu: 1500m
         memory: 1Gi
+        cpu: 1500m
       limits:
+        memory: 2Gi
         cpu: 1500m
-        memory: 1Gi
 
   persistence:
     worker:
