@@ -135,7 +135,7 @@ concourse:
         memory: 2Gi
       limits:
         cpu: 5000m
-        memory: 4Gi
+        memory: 6Gi
     strategy:
       strategy:
         type: RollingUpdate
