@@ -1,6 +1,0 @@
-dependencies:
-- name: concourse
-  repository: https://concourse-charts.storage.googleapis.com/
-  version: 14.5.1
-digest: sha256:0d35c99e38743e270e4210a8bee18e67015b93cf7cb17f301c49a2adc349b80c
-generated: "2020-12-04T10:41:50.026725-05:00"

@@ -1,8 +1,0 @@
-name: ci
-apiVersion: v1
-version: 0.1.1
-appVersion: 0.0.139
-description: A Concourse worker deployment for team `monitoring-hush-house`
-maintainers:
-- name: ryang
-  email: ryang@pivotal.io

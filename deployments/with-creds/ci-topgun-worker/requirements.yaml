@@ -1,5 +1,0 @@
----
-dependencies:
-- name: concourse
-  version: 14.5.1
-  repository: https://concourse-charts.storage.googleapis.com/
