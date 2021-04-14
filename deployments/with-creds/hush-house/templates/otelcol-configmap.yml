@@ -10,9 +10,9 @@ metadata:
 data:
   otelcol.yml: |
     receivers:
-      jaeger:
-        protocols:
-          thrift_http:
+      # jaeger:
+      #   protocols:
+      #     thrift_http:
       otlp:
         protocols:
           grpc:
@@ -63,8 +63,8 @@ data:
       pipelines:
         traces:
           receivers:
-          # - otlp
-          - jaeger
+          - otlp
+          # - jaeger
           processors:
           - attributes/strip_tags
           - attributes/insert_cluster

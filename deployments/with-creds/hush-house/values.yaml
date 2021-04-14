@@ -43,18 +43,6 @@ concourse:
     annotations:
       rollingUpdate: "3"
     replicas: 2
-    env:
-    - name: CONCOURSE_TRACING_JAEGER_ENDPOINT
-      value: http://127.0.0.1:14268/api/traces
-    - name: CONCOURSE_TRACING_JAEGER_SERVICE
-      value: web
-      # # The OTLP tracing stuff aren't on the latest chart yet so we're stting them as env vars
-    # - name: CONCOURSE_TRACING_SERVICE_NAME
-      # value: web
-    # - name: CONCOURSE_TRACING_OTLP_ADDRESS
-      # value: 127.0.0.1:55680
-    # - name: CONCOURSE_TRACING_OTLP_USE_TLS
-      # value: "false"
     nodeSelector: { cloud.google.com/gke-nodepool: generic-1 }
     affinity:
       podAntiAffinity:
@@ -178,12 +166,13 @@ concourse:
       tls: { enabled: true, bindPort: 443 }
       prometheus:
         enabled: true
-      # datadog:
-      #   enabled: true
+      tracing:
+        serviceName: web
+        # jaegerEndpoint: http://127.0.0.1:14268/api/traces
+        # jaegerService: web
+        otlpAddress: 127.0.0.1:55680
+        otlpUseTls: false
 
-      #   # horrible hack; we need a proper way to configure unix sockets
-      #   agentHost: unix
-      #   agentPort: ///var/run/datadog/dsd.socket
       postgres:
         host: 173.255.117.168
         database: atc
