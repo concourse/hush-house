@@ -60,7 +60,7 @@ concourse:
         args: ['--config=/etc/config/otelcol.yml']
         resources:
           limits:
-            memory: 100Mi
+            memory: 200Mi
             cpu: 500m
           requests:
             memory: 100Mi
