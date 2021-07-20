@@ -49,7 +49,7 @@ spec:
           # https://github.com/wavefrontHQ/wavefront-proxy/blob/master/pkg/etc/wavefront/wavefront-proxy/wavefront.conf.default
           value: |
             --prefix concourse
-            --hostname ci.concourse-ci.org
+            --hostname hush-house.pivotal.io
         - name: WAVEFRONT_TOKEN
           valueFrom:
             secretKeyRef:
