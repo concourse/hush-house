@@ -100,7 +100,7 @@ concourse:
             --prefix concourse
             --hostname=hush-house.pivotal.io
             --traceJaegerGrpcListenerPorts 14250
-            --traceJaegerApplicationName Concourse
+            --traceJaegerApplicationName concourse
         - name: WAVEFRONT_TOKEN
           valueFrom:
             secretKeyRef:
