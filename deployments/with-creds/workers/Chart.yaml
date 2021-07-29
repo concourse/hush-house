@@ -6,3 +6,7 @@ description: The deployment of a modified hush-house worker with tracing enabled
 maintainers:
 - name: cirocosta
   email: cscosta@pivotal.io
+dependencies:
+- name: concourse
+  version: v15.6.0
+  repository: https://concourse-charts.storage.googleapis.com/

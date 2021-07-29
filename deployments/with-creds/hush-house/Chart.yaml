@@ -6,3 +6,7 @@ description: A Concourse deployments
 maintainers:
 - name: cirocosta
   email: cscosta@pivotal.io
+dependencies:
+- name: concourse
+  version: 15.6.0
+  repository: https://concourse-charts.storage.googleapis.com/

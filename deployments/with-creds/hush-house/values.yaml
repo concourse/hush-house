@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageTag: "7.3.2"
+  imageTag: "7.4.0"
 
   secrets:
     teamAuthorizedKeys:
@@ -145,6 +145,8 @@ concourse:
       containerPlacementStrategy: random
       defaultDaysToRetainBuildLogs: 30
       enableLidar: true
+      enableAcrossStep: true
+      enablePipelineInstances: true
       enableBuildAuditing: true
       enableContainerAuditing: true
       enableGlobalResources: true

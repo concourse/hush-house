@@ -51,6 +51,7 @@ deploy-%: | template-%
 			--file .template.yaml \
 			--file ../kapp-config.yaml \
 			--diff-changes \
+			--wait-timeout 2h \
 			$(KAPP_FLAGS)
 
 

@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageTag: "7.3.0"
+  imageTag: "7.4.0"
   # imageDigest: sha256:bd615c69261179fe99aa39640c2f28c550e8306e025641489485effce65e7f6a
 
   postgresql:
