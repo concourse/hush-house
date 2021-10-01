@@ -137,7 +137,7 @@ concourse:
         mainTeam:
           localUser: admin
           github:
-            team: concourse:maintainers
+            team: concourse:infrastructure
         github:
           enabled: true
       bindPort: 80
