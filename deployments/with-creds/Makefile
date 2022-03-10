@@ -25,7 +25,6 @@ save-creds-%:
 diff-%: | ensure-creds-file-exists-% deps-%
 	cd ./$* && \
 		helm diff upgrade \
-			--tls \
 			--namespace=$* \
 			--detailed-exitcode \
 			--values=./.values.yaml \
