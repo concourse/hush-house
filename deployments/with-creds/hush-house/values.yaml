@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageTag: "7.7.0"
+  imageTag: "7.7.1"
 
   secrets:
     teamAuthorizedKeys:
@@ -155,6 +155,8 @@ concourse:
       enableTeamAuditing: true
       enableVolumeAuditing: true
       enableWorkerAuditing: true
+      enableCacheStreamedVolumes: true
+      enableResourceCausality: true
       baggageclaimResponseHeaderTimeout: 10m
       encryption: { enabled: true }
       externalUrl: https://hush-house.pivotal.io
