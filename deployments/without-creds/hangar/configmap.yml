@@ -16,10 +16,10 @@ data:
     }
   redirect.html: |
     <head>
-      <meta http-equiv="Refresh" content="0; URL=https://vmware.zoom.us/j/95020320288">
+      <meta http-equiv="Refresh" content="0; URL=https://VMware.zoom.us/j/7924368104">
     </head>
     <body>
-      <a href="https://vmware.zoom.us/j/95020320288">https://vmware.zoom.us/j/95020320288</a>
+      <a href="https://VMware.zoom.us/j/7924368104">https://VMware.zoom.us/j/7924368104</a>
     </body>
 metadata:
   name: nginx-conf
