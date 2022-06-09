@@ -7,26 +7,6 @@ resource "google_compute_address" "hush-house" {
   name = "hush-house"
 }
 
-# Reserves an address for `ci.concourse-ci.org` and ties it
-# to the given domain.
-#
-module "concourse-ci-address" {
-  source = "./address"
-
-  dns-zone  = "${var.dns-zone}"
-  subdomain = "ci"
-}
-
-# Reserves an address for `tracing.concourse-ci.org` and ties it
-# to the given domain.
-#
-module "tracing-address" {
-  source = "./address"
-
-  dns-zone  = "${var.dns-zone}"
-  subdomain = "tracing"
-}
-
 # Instantiates the GKE Kubernetes cluster.
 #
 module "cluster" {
@@ -44,11 +24,11 @@ module "cluster" {
       disk-type    = "pd-ssd"
       image        = "COS"
       local-ssds   = 0
-      machine-type = "n1-standard-8"
+      machine-type = "e2-standard-8"
       max          = 6
       min          = 1
       preemptible  = false
-      version      = "1.12.5-gke.5"
+      version      = "1.18.20-gke.901"
     },
 
     "workers-3" = {
@@ -57,50 +37,11 @@ module "cluster" {
       disk-type    = "pd-ssd"
       image        = "UBUNTU"
       local-ssds   = 0
-      machine-type = "custom-8-16384"
+      machine-type = "e2-standard-4"
       max          = 25
       min          = 1
       preemptible  = false
-      version      = "1.14.7-gke.14 "
-    },
-
-    "ci-workers" = {
-      auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
-      image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "custom-8-16384"
-      max          = 10
-      min          = 1
-      preemptible  = false
-      version      = "1.14.7-gke.14 "
-    },
-
-    "ci-workers-pr" = {
-      auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
-      image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "custom-8-16384"
-      max          = 10
-      min          = 1
-      preemptible  = false
-      version      = "1.14.7-gke.14 "
-    },
-
-    "ci-workers-monitoring" = {
-      auto-upgrade = false
-      disk-size    = "50"
-      disk-type    = "pd-ssd"
-      image        = "UBUNTU"
-      local-ssds   = 0
-      machine-type = "n1-standard-1"
-      max          = 2
-      min          = 1
-      preemptible  = false
-      version      = "1.14.7-gke.14 "
+      version      = "1.18.20-gke.901"
     },
   }
 }
@@ -117,21 +58,6 @@ module "database" {
   region          = "${var.region}"
   zone            = "${var.zone}"
   max_connections = "300"
-}
-
-# Creates the CloudSQL Postgres database to be used by the `ci`
-# Concourse deployment.
-#
-module "ci-database" {
-  source = "./database"
-
-  name            = "ci"
-  cpus            = "4"
-  disk_size_gb    = "20"
-  memory_mb       = "5120"
-  region          = "${var.region}"
-  zone            = "${var.zone}"
-  max_connections = "100"
 }
 
 # gkms key for vault unseal
