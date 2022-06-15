@@ -18,7 +18,7 @@ concourse:
     enabled: false
 
   worker:
-    replicas: 20
+    replicas: 15
     annotations:
       manual-update-revision: "1"
     terminationGracePeriodSeconds: 3600
@@ -29,7 +29,7 @@ concourse:
     nodeSelector: { cloud.google.com/gke-nodepool: workers-3 }
     hardAntiAffinity: true
     resources:
-      limits:   { cpu: 7500m, memory: 14Gi }
+      limits:   { cpu: 3500m, memory: 29Gi }
       requests: { cpu: 0m,    memory: 0Gi  }
 
   concourse:
