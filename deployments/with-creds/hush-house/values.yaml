@@ -3,7 +3,7 @@ postgresql:
 
 concourse:
   image: concourse/concourse
-  imageTag: "7.8.0"
+  imageTag: "7.8.1"
 
   secrets:
     teamAuthorizedKeys:
@@ -58,11 +58,11 @@ concourse:
         args: ['--config=/etc/config/otelcol.yml']
         resources:
           limits:
-            memory: 500Mi
+            memory: 1Gi
             cpu: 500m
           requests:
-            memory: 100Mi
-            cpu: 500m
+            memory: 1Gi
+            cpu: 200m
         volumeMounts:
           - name: otelcol-config
             mountPath: /etc/config
@@ -70,11 +70,11 @@ concourse:
         image: wavefronthq/prometheus-storage-adapter
         resources:
           limits:
-            memory: 200Mi
+            memory: 750Mi
             cpu: 500m
           requests:
             memory: 100Mi
-            cpu: 500m
+            cpu: 100m
         args:
           - -proxy=127.0.0.1
           - -proxy-port=2878
@@ -87,8 +87,8 @@ concourse:
             memory: 1Gi
             cpu: 500m
           requests:
-            memory: 500Mi
-            cpu: 500m
+            memory: 1Gi
+            cpu: 200m
         env:
         - name: WAVEFRONT_URL
           value: "https://vmware.wavefront.com/api/"
