@@ -27,7 +27,8 @@ data:
     exporters:
       jaeger:
         endpoint: localhost:14250
-        insecure: true
+        tls:
+          insecure: true
       logging:
         loglevel: debug
       prometheusremotewrite:

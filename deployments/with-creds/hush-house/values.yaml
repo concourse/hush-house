@@ -54,7 +54,7 @@ concourse:
     # NOTE: If you add sidecars make sure you set resources to maintain the QoS class of "guaranteed"
     sidecarContainers:
       - name: otel-collector
-        image: otel/opentelemetry-collector-contrib:0.15.0
+        image: otel/opentelemetry-collector-contrib
         args: ['--config=/etc/config/otelcol.yml']
         resources:
           limits:
@@ -81,7 +81,7 @@ concourse:
           - -listen=9000
           - -convert-paths=true
       - name: wavefront-proxy
-        image: wavefronthq/proxy:9.2
+        image: wavefronthq/proxy
         resources:
           limits:
             memory: 1Gi
