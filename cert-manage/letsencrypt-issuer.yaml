@@ -1,4 +1,4 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-production
@@ -10,7 +10,7 @@ spec:
       name: letsencrypt-production-acct-key
     solvers:
       - dns01:
-          clouddns:
+          cloudDNS:
             project: cf-concourse-production
             serviceAccountSecretRef:
               name: clouddns-dns01-solver-svc-acct

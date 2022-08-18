@@ -18,12 +18,14 @@ spec:
       containers:
       - name: prometheus
         image: prom/prometheus
-        args: ['--config=/etc/config/prometheus.yml']
+        args:
+        - '--config=/etc/config/prometheus.yml'
+        - '--web.config.file=/etc/config/web_config.yml'
         volumeMounts:
         - name: prometheus-config
           mountPath: /etc/config
           readOnly: true
-        - name: tls
+        - name: prometheus-mtls
           mountPath: /etc/config/certs
           readOnly: true
       volumes:
