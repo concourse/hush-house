@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: cluster-metrics
+spec:
+  type: LoadBalancer
+  selector:
+    app: prometheus
+  ports:
+  - name: prometheus-scrape
+    protocol: TCP
+    port: 9090
