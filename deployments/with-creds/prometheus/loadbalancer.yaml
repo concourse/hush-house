@@ -5,6 +5,7 @@ metadata:
   namespace: cluster-metrics
 spec:
   type: LoadBalancer
+  loadBalancerIP: 104.155.133.171
   selector:
     app: prometheus
   ports:

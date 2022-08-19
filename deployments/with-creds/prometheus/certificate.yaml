@@ -10,8 +10,8 @@ spec:
   usages:
     - server auth
     - client auth
-  ipAddresses:
-  - 34.136.169.13
+  dnsNames:
+  - metrics.hush-house.pivotal.io
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
