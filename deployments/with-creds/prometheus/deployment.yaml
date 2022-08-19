@@ -19,7 +19,7 @@ spec:
       - name: prometheus
         image: prom/prometheus
         args:
-        - '--config=/etc/config/prometheus.yml'
+        - '--config.file=/etc/config/prometheus.yml'
         - '--web.config.file=/etc/config/web_config.yml'
         volumeMounts:
         - name: prometheus-config
