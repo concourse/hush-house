@@ -8,5 +8,5 @@ maintainers:
   email: cscosta@pivotal.io
 dependencies:
 - name: concourse
-  version: 16.1.21
+  version: 17.1.0
   repository: https://concourse-charts.storage.googleapis.com/
