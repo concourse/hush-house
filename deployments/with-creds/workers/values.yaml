@@ -27,6 +27,9 @@ concourse:
       timeoutSeconds: 45
     nodeSelector: { cloud.google.com/gke-nodepool: workers-3 }
     hardAntiAffinity: true
+    resources:
+      limits:   { cpu: 7500m, memory: 7Gi }
+      requests: { cpu: 0m,    memory: 0Gi  }
 
   concourse:
     worker:
