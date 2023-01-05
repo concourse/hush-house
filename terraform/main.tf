@@ -37,7 +37,7 @@ module "cluster" {
       disk-type    = "pd-ssd"
       image        = "UBUNTU"
       local-ssds   = 0
-      machine-type = "e2-highcpu-8"
+      machine-type = "e2-highmem-4"
       max          = 25
       min          = 1
       preemptible  = false
