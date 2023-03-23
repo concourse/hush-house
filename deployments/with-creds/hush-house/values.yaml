@@ -96,6 +96,7 @@ concourse:
       enableWorkerAuditing: true
       enableCacheStreamedVolumes: true
       enableResourceCausality: true
+      enableRedactSecrets: true
       baggageclaimResponseHeaderTimeout: 10m
       encryption: { enabled: true }
       externalUrl: https://hush-house.pivotal.io
