@@ -17,7 +17,7 @@ concourse:
     enabled: false
 
   worker:
-    replicas: 15
+    replicas: 8
     annotations:
       manual-update-revision: "1"
     terminationGracePeriodSeconds: 3600
